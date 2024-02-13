@@ -1,28 +1,30 @@
- import jwt from 'jsonwebtoken'
- import Usuario from '../models/Usuario.js'
- const checkAuth = async (req, res, next)=>{
+import jwt from 'jsonwebtoken'
+import Usuario from '../models/Usuarios.js'
+
+
+const checkAuth = async (req,res,next)=>{
     let token
-    if (
-        req.headers.authorization && 
-        req.headers.authorization.startsWith("Bearer")
-        ){
-            try{
-                token = req.headers.authorization.split(' ')[1]
-                const decoded = jwt.verify(token, process.env.JWT_SECRET)
-                req.usuario = await Usuario.findById(decoded.id).select(
-                    "-password -confirmado -token -createAt -updateAt -__V"
-                    )
-                return next()
-
-            } catch (error){
-                return res.status(404).json({msg: 'Hubo un error'})
-            }
+    if (req.headers.authorization && 
+        req.headers.authorization.startsWith("Bearer"))
+    {
+        try {
+            token = req.headers.authorization.split(' ')[1]
+            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+             req.Usuario = await Usuario.findById(decoded.id).select(
+                "-password -confirmado -token -createdAt -updateAt -__v"
+           )
+            return next()
+         
+        } catch (error) {
+            return res.status(404).json({msg:'hubo un error'})
         }
-        if (!token){
-            const error = new Error ("Token no Valido")
-            return res.status(401).json({msg: error.message})
-        }
-        next()
- }
+    }
+    if(!token){
+        const error = new Error("token no válido")
+        return res.status(401).json({msg:error.message}) 
+    }
+    next()
 
- export default checkAuth
+
+}
+export default checkAuth

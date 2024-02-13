@@ -1,7 +1,7 @@
 import { mongoose } from "mongoose";
 
 const tematicaSchema =mongoose.Schema({
-    nombre:{
+    tematica:{
         type:String,
         trim:true,
         require:true,
