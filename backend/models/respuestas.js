@@ -11,14 +11,11 @@ const respuestaSchema =mongoose.Schema({
             
     [{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"encuesta",
+        ref:"detalleEncuesta",
     }],
-    opcionUnica:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"opcionUnica",
-    }],
+  
 }
 
 )
-const respuesta =mongoose.model("respuesta",tematicaSchema)
+const respuesta =mongoose.model("respuesta",respuestaSchema)
 export default respuesta

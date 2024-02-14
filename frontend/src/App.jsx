@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import AuthLayout from "./layouts/Authlayout";
+import AuthLayout from "./layouts/AuthLayout";
 
 import Login from "./paginas/Login";
 import Registrar from "./paginas/Registrar";
 import OlvidePassword from "./paginas/OlvidePassword";
 import NuevoPassword from "./paginas/NuevoPassword";
 import ConfirmarCuenta from "./paginas/ConfirmarCuenta";
+
 function App() {
   return (
     <BrowserRouter>

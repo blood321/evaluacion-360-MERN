@@ -7,17 +7,16 @@ const detalleEncuestaSchema=mongoose.Schema({
         trim:true,
         required:true
     },
-    preguntas:     
+    pregunta:     
     [{
         type:mongoose.Schema.Types.ObjectId,
         ref:"preguntas",
     }],
-    encuesta:     
-    [{
+    responde:     
+    {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"encuesta",
-    }],
+        ref:"Usuario",
+    },
 })
-
 const detalleEncuesta =mongoose.model('detalleEncuesta',detalleEncuestaSchema)
 export default detalleEncuesta

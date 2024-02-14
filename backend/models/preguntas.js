@@ -7,17 +7,20 @@ const preguntaSchema=mongoose.Schema({
         trim:true,
         required:true
     },  
-    tipoPregunta:{
-        type:String,
-        requered:true,
-        enum:['Abierta','Cerrada','Multiple'],
+    tipoPregunta:     
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"tipoPregunta",
+        require:true
     },
-      tematica:{
-        type:String,
-        requered:true,
-        enum:['Pedagogica','Tecnica','Profecional'],
-    },
-})
+    tematica:     
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"tematica",
+        require:true
+    }
+    }
+)
 
 const preguntas =mongoose.model('pregunta',preguntaSchema)
 export default preguntas
