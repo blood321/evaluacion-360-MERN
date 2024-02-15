@@ -14,6 +14,7 @@ const respuestaSchema =mongoose.Schema({
   escala:{
     type:String,
         enum:["1","2","3"],
+        
   }
 }
 
