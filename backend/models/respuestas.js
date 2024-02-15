@@ -4,21 +4,19 @@ const respuestaSchema =mongoose.Schema({
     Respuesta:{
         type:String,
         trim:true,
-        require:true,
+        
     }, 
-   
-    encuesta:
-            
-    [{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"encuesta",
-    }],
-    opcionUnica:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"opcionUnica",
-    }],
+   Multiple:     
+    {
+        type:String,
+        enum:["Si","No","talves","no se "],
+    },
+  escala:{
+    type:String,
+        enum:["1","2","3"],
+  }
 }
 
 )
-const respuesta =mongoose.model("respuesta",tematicaSchema)
+const respuesta =mongoose.model("respuesta",respuestaSchema)
 export default respuesta
