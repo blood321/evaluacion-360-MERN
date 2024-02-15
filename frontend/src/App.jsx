@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import AuthLayout from "./layouts/Authlayout";
-
 import Login from "./paginas/Login";
 import Registrar from "./paginas/Registrar";
 import OlvidePassword from "./paginas/OlvidePassword";
@@ -22,5 +20,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
