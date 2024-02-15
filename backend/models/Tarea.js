@@ -1,15 +1,15 @@
-import { mongoose } from "mongoose";
+import mongoose from "mongoose";
 
-const tareaSchema =mongoose.Schema({
+const tareaSchema = mongoose.Schema({
     nombre:{
         type:String,
         trim:true,
-        require:true,
+        required:true,
     },
     descripcion:{
         type:String,
         trim:true,
-        require:true,
+        required:true,
     },
     estado:{
         type:Boolean,
@@ -22,17 +22,16 @@ const tareaSchema =mongoose.Schema({
     },
     prioridad:{
         type:String,
-        requered:true,
+        required:true,
         enum:['baja','Media','Alta'],
     },
     Proyecto:{
-        type:mongoose.Schema.Types.objectId,
-        ref:"proyecto",
-
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Proyecto",
     },
 },{
     timestamps:true
-    }
-)
-const Tarea =mongoose.model("Tarea",tareaSchema)
-export default Tarea
+});
+
+const Tarea = mongoose.model("Tarea",tareaSchema);
+export default Tarea;

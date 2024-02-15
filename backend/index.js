@@ -19,7 +19,7 @@ app.use('/api/proyectos', proyectoRouter)
 app.use("/api/tareas", tareaRouter);
 
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 7070;
 app.listen(4000, () => { 
     console.log(`Server is running on port ${PORT}`)
 });

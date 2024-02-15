@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 
+
 const encuestaSchema=mongoose.Schema({
     fecha:{
         type: Date,
