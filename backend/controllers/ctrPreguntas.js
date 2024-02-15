@@ -35,7 +35,7 @@ const nuevaPregunta = async (req, res) => {
         const tematica = await tematicas.findById(tematicaId);
 
         // Verifica si tanto el tipo de pregunta como la temática existen
-        if (!tipoPregunta|| !tematica) {
+        if (!tipoPregunta || !tematica) {
             return res.status(400).json({ mensaje: 'Tipo de pregunta o temática no encontrados' });
         }
 

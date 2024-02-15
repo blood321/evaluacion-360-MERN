@@ -85,9 +85,7 @@ const obtenerProyecto =async (req,res)=>{
         const error =new Error("No tiene los permisos")
         return res.status(401).json({msg:error.message})
 
-    }
-    res.json(proyecto)
- }
+    }res.json(proyecto)}
 const agregarColaboradores =async (req,res)=>{  }
 const eliminarCoaborador =async (req,res)=>{  } 
 const obtenerTareas =async (req,res)=>{}
