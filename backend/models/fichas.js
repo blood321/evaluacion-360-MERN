@@ -22,8 +22,7 @@ const fichasSchema=mongoose.Schema({
         trim:true,
         required:true
     },
-    aprendices:     
-    [{
+    aprendices:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"aprendiz",
     }],

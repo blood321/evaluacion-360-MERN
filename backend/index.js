@@ -1,25 +1,43 @@
-//const express = require("express");
+
 import express from "express";
-import conectarDB from "./config/db.js";
 import dotenv from "dotenv";
-import usuarioRoutes from './routes/usuarioRoutes.js'
-import proyectoRouter from './routes/proyectoRouter.js'
-import tareaRouter from './routes/tareaRoutes.js'
+import aprendizRouter from './routers/aprendizRouter.js'
+import usuarioRouters from './routers/usuariosRouters.js';
+import proyectoRouters from './routers/proyectoRouters.js';
+import fichasRouters from './routers/fichaRouter.js';
+import encuestasRouters from './routers/encuestasRouter.js';
+import  preguntaRouters  from "./routers/preguntaRouter.js";
+import conectarDB from "./config/db.js";
+import  tareaRouters  from "./routers/tareRouters.js";
+import  respuestasRouter  from "./routers/respuestasRouter.js";
+import  detalleEncuesta from "./routers/detalleEncuesta.js";
+import  tematicaRouters  from "./routers/tematicaRouters.js";
+import  tipoPreguntaRouters  from "./routers/tipoPreguntaRouter.js";
+import { perfil } from "./controllers/usuarioCtls.js";
 
 
-const app = express();
-app.use(express.json())
-
+const app=express();
+app.use(express.json());
 dotenv.config();
 conectarDB();
 
-//routing
-app.use('/api/usuarios', usuarioRoutes)
-app.use('/api/proyectos', proyectoRouter)
-app.use("/api/tareas", tareaRouter);
+//ROuting
+app.use('/api/usuarios',usuarioRouters)
+app.use('/api/detalleEncuesta',detalleEncuesta)
+app.use('/api/tipoPregunta',tipoPreguntaRouters)
+app.use('/api/tematica',tematicaRouters)
+app.use('/api/respuesta',respuestasRouter)
+app.use('/api/fichas',fichasRouters)
+app.use('/api/encuesta',encuestasRouters)
+app.use('/api/aprendiz',aprendizRouter,)
+app.use('/api/proyectos',proyectoRouters)
+app.use('/api/usuarios',usuarioRouters)
+app.use('/api/tarea',tareaRouters)
+app.use('/api/pregunta',preguntaRouters)
 
+const PORT = process.env.PORT || 5000;
 
-const PORT = process.env.PORT || 7070;
-app.listen(4000, () => { 
-    console.log(`Server is running on port ${PORT}`)
+app.listen(5000, () =>{
+    console.log(`https//localhost:5500 ${PORT}`);
 });
+

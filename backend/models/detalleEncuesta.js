@@ -2,22 +2,22 @@ import mongoose from "mongoose";
 
 
 const detalleEncuestaSchema=mongoose.Schema({
-    Nombre:{
-        type: String,
-        trim:true,
-        required:true
+    encuesta:     
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"encuesta",
     },
-    preguntas:     
+    pregunta:     
     [{
         type:mongoose.Schema.Types.ObjectId,
         ref:"preguntas",
     }],
-    encuesta:     
-    [{
+    
+     responde:     
+     {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"encuesta",
-    }],
+        ref:"Usuario",
+    },
 })
-
 const detalleEncuesta =mongoose.model('detalleEncuesta',detalleEncuestaSchema)
 export default detalleEncuesta
