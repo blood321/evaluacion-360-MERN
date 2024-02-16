@@ -1,6 +1,7 @@
 import Usuario from "../models/Usuario.js";
 import generarID from "../helpers/generarId.js";
 import generarJWT from "../helpers/generarJWT.js";
+import { emailRegistro, emailOlvidePassword } from "../helpers/email.js";
 
 const register = async (req, res) => {
   // Evitar registros duplicados
@@ -14,8 +15,14 @@ const register = async (req, res) => {
   try {
     const usuario = new Usuario(req.body);
     usuario.token = generarID();
-    const usuarioAlmacen = await usuario.save();
-    res.json(usuarioAlmacen);
+    await usuario.save();
+    //Enviar email de confirmación
+    emailRegistro({
+      email: usuario.email,
+      nombre: usuario.nombre,
+      token: usuario.token
+    })
+    res.json({msg: 'Usuario creado correctamente, revisa tu correo para confirmar tu cuenta'});
   } catch (error) {
     console.error(error);
   }
@@ -56,7 +63,7 @@ const confirmar = async (req, res) => {
   const usuarioConfirmar = await Usuario.findOne({ token });
   if (!usuarioConfirmar) {
     const error = new Error("token no valido");
-    return res.status(404).json({ msg: error.message });
+    return res.status(403).json({ msg: error.message });
   }
 
   try {
@@ -80,6 +87,12 @@ const olvidePassword = async (req, res) => {
   try {
     usuario.token = generarID();
     await usuario.save();
+    // Enviar el email de nueva confirmación
+    emailOlvidePassword({
+      email: usuario.email,
+      nombre: usuario.nombre,
+      token: usuario.token
+    })
     res.json({ msg: "Hemos enviado un email con las instrucciones" });
   } catch (error) {
     console.log(error);
