@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Alerta from "../components/Alerta";
-import axios from "axios";
+import clienteAxios from "../config/clienteAxios";
 
 const Registrar = () => {
   const [nombre, setNombre] = useState("");
@@ -39,7 +39,7 @@ const Registrar = () => {
 
     try {
       //TODO: Mover hacia un cliente Axios
-      const { data } = await axios.post("http://localhost:3000/api/usuarios", {
+      const { data } = await clienteAxios.post("/usuarios", {
         nombre,
         password,
         email,
