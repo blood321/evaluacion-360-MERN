@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ['./public/**/*.html', './src/**/*.{js,jsx}'],
+    content: ['./public/**/*index.html', './src/**/*.{js,jsx}'],
     theme: {
         // FONST
         fontFamily: {
@@ -18,10 +18,9 @@ module.exports = {
             },
             // IMAGENES OFICIALES
             backgroundImage: theme => ({
-                logo1Principal: "url('/public/img/logo1Principal.png')",
-                logo2Principal: "url('/public/img/1-removebg-preview.png')",
-                logoSena: "url('/public/img/logoSena.png')",
-                Fondo: "url('/public/img/fondo.jpg')",
+                logo1Principal: "url('./src/assets/img/logo1Principal.png')",
+                logo2Principal: "url('./src/assets/img/logo2Principal.png)",
+                logoSena: "url('./src/assets/img/logoSena.png')",
             }),
         },
     },
