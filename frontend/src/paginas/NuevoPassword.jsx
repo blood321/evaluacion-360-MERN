@@ -2,16 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Alerta from "../components/Alerta";
-
 const NewPassword = () => {
   const [password, setPassword] = useState("");
   const [tokenValido, setTokenValido] = useState(false);
   const [alerta, setAlerta] = useState({});
   const [passwordModificado, setPasswordModificado] = useState(false);
-
   const params = useParams();
   const { token } = params;
-
   useEffect(() => {
     const comprobarToken = async () => {
       try {
@@ -29,10 +26,8 @@ const NewPassword = () => {
     };
     comprobarToken();
   }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (password.length < 6) {
       setAlerta({
         msg: "El password debe ser mínimo de 6 caracteres",
@@ -40,7 +35,6 @@ const NewPassword = () => {
       });
       return;
     }
-
     try {
       const url = `http://localhost:3000/api/usuarios/olvide-password/${token}`;
       const { data } = await axios.post(url, { password });
@@ -57,7 +51,6 @@ const NewPassword = () => {
     }
   };
   const { msg } = alerta;
-
   return (
     <>
       <h1 className="text-sky-600 font-black text-6xl capitalize">
@@ -86,7 +79,6 @@ const NewPassword = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
           <input
             type="submit"
             value="Confirm Password"
@@ -105,5 +97,4 @@ const NewPassword = () => {
     </>
   );
 };
-
 export default NewPassword;
