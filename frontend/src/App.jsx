@@ -5,6 +5,7 @@ import RutaProtegida from "./layouts/RutaProtegida";
 import CoorLayout from "./layouts/CoorLayout";
 
 import Login from "./paginas/Login";
+import LoginAdmin from "./paginas/LoginAdmin.jsx";
 import Registrar from "./paginas/Registrar";
 import OlvidePassword from "./paginas/OlvidePassword";
 import NuevoPassword from "./paginas/NuevoPassword";
@@ -26,21 +27,23 @@ function App() {
       <AuthProvider>
         <ProyectosProvider>
           <Routes>
+            {/* Páginas para el inicio de la encuesta */}
             <Route path="/" element={<Authlayout />}>
               <Route index element={<Aloguin />} />
             </Route>
             <Route path="/aviso" element={<Aviso />} />
+            {/* Páginas de la ruta del Coordinador */}
             <Route path="/" element={<CoorLayout />}>
-              <Route path="Prueba" element={<Pruebas />} />;
+              <Route path="/prueba" element={<Pruebas />} />;
+              <Route path="/login-admin" element={<LoginAdmin />} />;
               <Route path="/login-coordinador" element={<Login />} />
               <Route path="registrar" element={<Registrar />} />
               <Route path="olvide-password" element={<OlvidePassword />} />
-              <Route
-                path="olvide-password/:token"
-                element={<NuevoPassword />}
+              <Route path="olvide-password/:token" element={<NuevoPassword />}
               />
               <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
             </Route>
+            {/* Páginas con ruta protegida para la creación de encuestas por el Coordinador */}
             <Route path="/proyectos" element={<RutaProtegida />}>
               <Route index element={<Proyectos />} />
               <Route path="crear-proyecto" element={<NuevoProyecto />} />

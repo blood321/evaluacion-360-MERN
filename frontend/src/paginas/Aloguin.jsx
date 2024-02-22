@@ -9,9 +9,9 @@ function Aloguin() {
                     </div>
                     <h2 className="text-Principal_3 text-[19px] font-bold  ">
                         Obtén una visión completa de tu institución con
-                        <span className="text-[21px] text-Principal_1 font-extrabold"> SENA 360 </span>
+                        <span className="text-[21px] text-Principal_1 font-bold"> SENA 360° </span>
                         la herramienta de Valoraciones
-                        <span className="text-[21px]  text-Principal_1 font-extrabold"> 360 </span>
+                        <span className="text-[21px]  text-Principal_1 font-bold"> 360° </span>
                     </h2>
                     <button className="flex items-center justify-center mx-auto mb-8 mt-8 md:mt15 md:mb-4 bg-gradient-to-r from-Principal_1 to-Principal_2 rounded-full w-10 h-10  hover:transform hover:scale-110 transition-transform duration-400 ease-in-out">
                         <svg
