@@ -34,9 +34,9 @@ function App() {
                             <Route path="LoginAdm" element={<LoginAdmin />} />
                         </Route> 
                         
-                        <Route path="/aviso" element={<Aviso />} />
+                        <Route path="aviso" element={<Aviso />} />
                         <Route path="/" element={<CoorLayout />}>
-                            <Route path="/login-coordinador" element={<Login />} />
+                            <Route path="login-coordinador" element={<Login />} />
                             <Route path="registrar" element={<Registrar />} />
                             <Route path="olvide-password" element={<OlvidePassword />} />
                             <Route path="olvide-password/:token" element={<NuevoPassword />} />
@@ -44,7 +44,7 @@ function App() {
 
                         </Route>
 
-                        <Route path="/proyectos" element={<RutaProtegida />}>
+                        <Route path="proyectos" element={<RutaProtegida />}>
                             <Route index element={<Proyectos />} />
                             <Route path="crear-proyecto" element={<NuevoProyecto />} />
                             <Route path=":id" element={<Proyecto />} />
