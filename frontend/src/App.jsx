@@ -34,8 +34,8 @@ function App() {
             <Route path="/aviso" element={<Aviso />} />
             {/* Páginas de la ruta del Coordinador */}
             <Route path="/" element={<CoorLayout />}>
-              <Route path="/prueba" element={<Pruebas />} />;
-              <Route path="/login-admin" element={<LoginAdmin />} />;
+              <Route path="/prueba" element={<Pruebas />} />
+              <Route path="/login-admin" element={<LoginAdmin />} />
               <Route path="/login-coordinador" element={<Login />} />
               <Route path="registrar" element={<Registrar />} />
               <Route path="olvide-password" element={<OlvidePassword />} />

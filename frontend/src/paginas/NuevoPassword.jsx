@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import clienteAxios from "../config/clienteAxios";
 import Alerta from "../components/Alerta";
+
 const NewPassword = () => {
   const [password, setPassword] = useState("");
   const [tokenValido, setTokenValido] = useState(false);
@@ -53,19 +54,19 @@ const NewPassword = () => {
   const { msg } = alerta;
   return (
     <>
-      <h1 className="text-sky-600 font-black text-6xl capitalize">
+      <h1 className="text-sky-600 mb-7 font-black text-6xl capitalize">
         Reestablecer password y no pierdas tus{" "}
         <span className="text-slate-700">Proyectos</span>
       </h1>
       {msg && <Alerta alerta={alerta} />}
       {tokenValido && (
         <form
-          className="my-10 bg-white shadow rounded-lg p-10"
+          className="my-5 bg-white shadow rounded-lg py-3 px-7"
           onSubmit={handleSubmit}
         >
           <div className="my-5">
             <label
-              className="uppercase text-gray-600 block text-xl font-bold"
+              className="capitalize text-gray-600 block text-xl font-bold"
               htmlFor="password"
             >
               New Password
@@ -82,14 +83,14 @@ const NewPassword = () => {
           <input
             type="submit"
             value="Confirm Password"
-            className="bg-sky-700 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-color"
+            className="bg-sky-700 mb-5 w-full py-3 text-white capitalize font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-color"
           />
         </form>
       )}
       {passwordModificado && (
         <Link
           to="/"
-          className="block text-center my-5 text-slate-500 uppercase text-sm"
+          className="block text-center my-5 text-slate-500 capitalize text-sm"
         >
           Inicia Sesión
         </Link>
