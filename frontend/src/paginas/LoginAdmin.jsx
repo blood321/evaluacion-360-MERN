@@ -6,12 +6,12 @@ const LoginAdmin = () => {
       <div className="flex flex-col items-center justify-center">
         <div>
           <img
-            src="src/assets/img/logo-black.png"
+            src="src/assets/img/logo2Principal.png"
             alt="Imagen de logotipo"
-            className="w-[370px] h-[210px]"
+            className="w-[380px] h-[230px]"
           />
         </div>
-        <form className="bg-white rounded-3xl p-8 border-Principal_1 border-4">
+        <form className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4">
 
           <div className="my-1 flex items-center justify-center">
             <box-icon name='cog' animation='spin' rotate='90' className="mr-1 "></box-icon>
@@ -23,7 +23,7 @@ const LoginAdmin = () => {
               id="email"
               type="text"
               placeholder="Cedula"
-              className="text-center w-full mt-2 p-2 border-2 rounded-full border-Principal_1 bg-gray-50"
+              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-50"
             />
           </div>
 
@@ -32,13 +32,13 @@ const LoginAdmin = () => {
               id="password"
               type="password"
               placeholder="Contraseña"
-              className="text-center w-full mt-2 p-2 border-2 rounded-full border-Principal_1 bg-gray-50 mb-7"
+              className="text-center  w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-50 mb-7"
             />
           </div>
           <input
             type="submit"
             value="Ingresar"
-            className="bg-Principal_3 p-2  w-[100px] text-Textcolor_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer ancho-personalizado"
+            className="bg-Principal_3 p-1 text-center w-full text-Textcolor_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer ancho-personalizado"
             />
         </form>
       </div>
