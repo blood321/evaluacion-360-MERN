@@ -3,7 +3,7 @@ import {
   register,
   auth,
   confirmar,
-  olvidePassword,
+  autenticar,
   comprobarToken,
   nuevoPassword,
   perfil,
@@ -15,7 +15,7 @@ const router = express.Router();
 router.post("/", register);
 router.post("/login", auth);
 router.get("/confirmar/:token", confirmar);
-router.post("/olvide-password", olvidePassword);
+router.post("/autenticar", autenticar);
 // router.get('/olvide-password/:token', comprobarToken);
 // router.post('/olvide-password/:token', nuevoPassword);
 

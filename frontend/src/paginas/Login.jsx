@@ -38,7 +38,6 @@ const Login = () => {
         error: true
       })
     }
-
   }
 
   const { msg } = alerta;
@@ -86,7 +85,7 @@ const Login = () => {
         <input
           type="submit"
           value="Iniciar Sesión"
-          className="bg-sky-700 mb-3 w-full p-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-color"
+          className="bg-sky-700 mb-3 w-full p-3 text-white capitalize font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-color"
         />
       </form>
       <nav className="lg:flex lg:justify-between">

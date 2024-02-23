@@ -17,7 +17,7 @@ import Aviso from './paginas/Aviso'
 import { AuthProvider } from './context/AuthProvider'
 import { ProyectosProvider } from './context/ProyectosProvider'
 import LoginAdmin from './paginas/LoginAdmin.jsx'
-import IniAdmin from './paginas/IniAdmin.jsx'
+
 
 function App() {
  
@@ -32,7 +32,6 @@ function App() {
                        
                         <Route path="/" element={<LayoutSe />}>
                             <Route path="LoginAdm" element={<LoginAdmin />} />
-                            <Route path="InicioAdmin" element={<IniAdmin />} />
                         </Route> 
                         
                         <Route path="/aviso" element={<Aviso />} />
