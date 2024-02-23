@@ -6,7 +6,7 @@ const Tematicas = () => {
   return (
     <aside
       className="
-    flex 
+    
     flex-col 
     items-center 
     h-max  
