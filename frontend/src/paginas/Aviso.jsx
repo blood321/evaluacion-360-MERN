@@ -18,7 +18,7 @@ function Aviso() {
                     <div className="p-5 h-[380px] flex flex-col items-center justify-center mb-2 rounded-b-3xl bg-Principal_3 md:w-[650px] md:py-4">
                         <img src={logo2Principal} className="w-[180px] h-[100px] md:mt-4" alt="Logo 2" />
                         <div className="">
-                            <p className="mb-4 mt-2 text-[16px] font-semibold justify-center text-justify">j
+                            <p className="mb-4 mt-2 text-[16px] font-semibold justify-center text-justify">
                                 Queremos asegurar que sus respuestas son completamente anónimas y no tendrán ningún
                                 impacto en el desarrollo de tu formación. Tu opinión es sumamente valiosa para nosotros
                                 y nos esforzamos por garantizar la confidencialidad de tus respuestas. ¡Gracias por
