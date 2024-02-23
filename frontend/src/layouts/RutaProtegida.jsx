@@ -2,6 +2,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import Tematicas from "../components/Tematicas";
 
 function RutaProtegida() {
   const { auth, cargando } = useAuth();
@@ -13,9 +14,12 @@ function RutaProtegida() {
           <Header />
           <div className="md:flex md:min-h-screen">
             <Sidebar />
-            <main className="py-5 pr-10 flex-1">
-              <Outlet />
-            </main>
+              <div className="flex items-center">
+                <Tematicas/>
+                <main className="py-5 pr-10 flex-1">
+                  <Outlet />
+              </main>
+            </div>
           </div>
         </div>
       ) : (

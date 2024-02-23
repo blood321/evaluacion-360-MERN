@@ -6,7 +6,7 @@ const LoginAdmin = () => {
       <div className="flex flex-col items-center justify-center">
         <div>
           <img
-            src="src/assets/img/logo-black.png"
+            src="src/assets/img/logo2Principal.png"
             alt="Imagen de logotipo"
             className="w-[370px] h-[210px]"
           />
