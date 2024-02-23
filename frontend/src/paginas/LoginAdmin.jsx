@@ -34,7 +34,7 @@ const LoginAdmin = () => {
               id="email"
               type="text"
               placeholder="Cedula"
-              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-50"
+              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-500"
             />
           </div>
 
