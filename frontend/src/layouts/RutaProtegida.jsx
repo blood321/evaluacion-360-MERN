@@ -14,7 +14,7 @@ function RutaProtegida() {
           <Header />
           <div className="md:flex md:min-h-screen">
             <Sidebar />
-              <div className="flex items-center">
+              <div className="items-center">
                 <Tematicas/>
                 <main className="py-5 pr-10 flex-1">
                   <Outlet />
