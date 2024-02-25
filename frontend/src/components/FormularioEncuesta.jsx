@@ -6,10 +6,8 @@ import Alerta from "./Alerta";
 const FormularioProyecto = () => {
   const [id, setId] = useState(null)
   const [nombre, setNombre] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [fechaEntrega, setFechaEntrega] = useState("");
-  const [cliente, setCliente] = useState("");
-
+  const [fechaCreada, setFechaCreada] = useState("");
+ const [tiempoResponder, settiempoResponder]=useState("")
   const params = useParams()
   const { mostrarAlerta, alerta, submitProyecto, proyecto } = useProyectos();
   
@@ -54,7 +52,7 @@ const FormularioProyecto = () => {
           className="text-gray-700 capitalize font-bold text-md"
           htmlFor="nombre"
         >
-          Nombre Proyecto
+          Nombre encuesta
         </label>
         <input
           id="nombre"
@@ -66,22 +64,7 @@ const FormularioProyecto = () => {
         />
       </div>
       <div className="mb-5">
-        <label
-          className="text-gray-700 capitalize font-bold text-md"
-          htmlFor="descripcion"
-        >
-          Descripción
-        </label>
-        <textarea
-          id="descripcion"
-          className="border-2 w-full p-2 mt-2
-          placeholder-gray-400 rounded-md"
-          placeholder="Descripción del Proyecto"
-          value={descripcion}
-          onChange={e => setDescripcion(e.target.value)}
-        ></textarea>
-      </div>
-      <div className="mb-5">
+     
         <label
           className="text-gray-700 capitalize font-bold text-md"
           htmlFor="fecha-entrega"
@@ -98,21 +81,32 @@ const FormularioProyecto = () => {
         ></input>
       </div>
       <div className="mb-5">
+
+
+
         <label
           className="text-gray-700 capitalize font-bold text-md"
-          htmlFor="cliente"
+          htmlFor="fecha-entrega"
         >
-          Nombre Cliente
+          tiempo responder
         </label>
-        <input
-          id="cliente"
-          type="text"
-          className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-          placeholder="Nombre del Cliente"
-          value={cliente}
-          onChange={e => setCliente(e.target.value)}
-        />
+
+
+
+          <input
+          id="fecha-entrega"
+          type="number"
+          className="border-2 w-full p-2 mt-2
+          placeholder-gray-400 rounded-md"
+          value={fechaEntrega}
+          onChange={e => setFechaEntrega(e.target.value)}
+        ></input>
+
+
+
+
       </div>
+      
 
       <input
         type="submit"
