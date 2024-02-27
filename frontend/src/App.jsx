@@ -15,6 +15,7 @@ import Proyecto from './paginas/Proyecto'
 import EditarProyecto from './paginas/EditarProyecto'
 import Aloguin from './paginas/Aloguin'
 import Aviso from './paginas/Aviso'
+import Respoder from './paginas/Respoder'
 
 import { AuthProvider } from './context/AuthProvider'
 import { ProyectosProvider } from './context/ProyectosProvider'
@@ -29,8 +30,9 @@ function App() {
                             <Route index element={<Aloguin />} />
                         </Route>
                         <Route path="/aviso" element={<Aviso />} />
+                        <Route path="/Responder" element={<Respoder />} />
                         <Route path="/" element={<CoorLayout />}>
-                            <Route path="/login-coordinador" element={<Login />} />
+                            <Route path="login-coordinador" element={<Login />} />
                             <Route path="registrar" element={<Registrar />} />
                             <Route path="olvide-password" element={<OlvidePassword />} />
                             <Route path="olvide-password/:token" element={<NuevoPassword />} />

@@ -26,7 +26,7 @@ function Aviso() {
                             </p>
                             <button className="rounded-2xl w-full py-2 mt-4 bg-gradient-to-r from-Secundario_1 to-Secundario_2 border-white border-spacing-1 text-white">
                                 INICIAR ENCUESTA
-                            </button>
+                            </button> 
                         </div>
                     </div>
                 </section>

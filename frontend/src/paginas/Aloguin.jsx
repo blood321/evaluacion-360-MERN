@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 function Aloguin() {
     return (
         <div className="font-roboto md:fixed md:h-full ">
@@ -13,22 +14,24 @@ function Aloguin() {
                         la herramienta de Valoraciones
                         <span className="text-[21px]  text-Principal_1 font-extrabold"> 360 </span>
                     </h2>
-                    <button className="flex items-center justify-center mx-auto mb-8 mt-8 md:mt15 md:mb-4 bg-gradient-to-r from-Principal_1 to-Principal_2 rounded-full w-10 h-10  hover:transform hover:scale-110 transition-transform duration-400 ease-in-out">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="white"
-                            className="w-8 h-8"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                            />
-                        </svg>
-                    </button>
+                    <Link to="/login-coordinador">
+                        <button className="flex items-center justify-center mx-auto mb-8 mt-8 md:mt15 md:mb-4 bg-gradient-to-r from-Principal_1 to-Principal_2 rounded-full w-10 h-10  hover:transform hover:scale-110 transition-transform duration-400 ease-in-out">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="white"
+                                className="w-8 h-8"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                                />
+                            </svg>
+                        </button>
+                    </Link>
                 </div>
                 {/* formulario */}
                 <div className="p-4 h-[380px] flex flex-col items-center justify-center mb-2 rounded-b-3xl bg-Principal_3 md:w-[650px] md:py-2">
