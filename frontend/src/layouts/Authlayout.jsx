@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
+
 const Authlayout = () => {
     return (
         <>
@@ -13,3 +14,4 @@ const Authlayout = () => {
 }
 
 export default Authlayout
+

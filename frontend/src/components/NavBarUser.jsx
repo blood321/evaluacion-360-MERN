@@ -18,3 +18,4 @@ export const NavBarUser = () => {
         </>
     )
 }
+export default NavBarUser;

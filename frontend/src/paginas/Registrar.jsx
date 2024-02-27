@@ -9,7 +9,6 @@ const Registrar = () => {
   const [password, setPassword] = useState("");
   const [repetirPassword, setRepetirPassword] = useState("");
   const [alerta, setAlerta] = useState({});
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if ([nombre, email, password, repetirPassword].includes("")) {
@@ -34,9 +33,7 @@ const Registrar = () => {
       return;
     }
     setAlerta({});
-
     // Crear el usuario en la API
-
     try {
       //TODO: Mover hacia un cliente Axios
       const { data } = await clienteAxios.post("/usuarios", {
@@ -54,16 +51,13 @@ const Registrar = () => {
     }
   };
   const { msg } = alerta;
-
   return (
     <>
       <h1 className="text-sky-600 font-black text-6xl capitalize">
         Crear Cuenta Y Administra tus{" "}
         <span className="text-slate-700">Proyectos</span>
       </h1>
-
       {msg && <Alerta alerta={alerta} />}
-
       <form
         className="my-10 bg-white shadow rounded-lg p-10"
         onSubmit={handleSubmit}
@@ -132,7 +126,6 @@ const Registrar = () => {
             onChange={(e) => setRepetirPassword(e.target.value)}
           />
         </div>
-
         <input
           type="submit"
           value="Iniciar Sesión"
@@ -156,5 +149,4 @@ const Registrar = () => {
     </>
   );
 };
-
 export default Registrar;

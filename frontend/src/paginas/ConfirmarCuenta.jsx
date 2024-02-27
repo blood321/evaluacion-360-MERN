@@ -6,7 +6,6 @@ import Alerta from "../components/Alerta";
 const ConfirmarCuenta = () => {
   const [alerta, setAlerta] = useState({});
   const [cuentaConfirmada, setcuentaConfirmada] = useState(false);
-
   const params = useParams();
   const { id } = params;
   useEffect(() => {
@@ -28,9 +27,7 @@ const ConfirmarCuenta = () => {
     };
     confirmarCuenta();
   }, []);
-
   const { msg } = alerta;
-
   return (
     <>
       <h1 className="text-sky-600 font-black text-6xl capitalize">
@@ -51,5 +48,4 @@ const ConfirmarCuenta = () => {
     </>
   );
 };
-
 export default ConfirmarCuenta;
