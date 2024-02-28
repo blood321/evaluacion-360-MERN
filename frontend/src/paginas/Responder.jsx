@@ -1,11 +1,11 @@
 import { NavBarUser } from '../components/NavBarUser'
 import { Preguntas } from '../components/Preguntas'
 import { Respuestas } from '../components/Respuestas'
-function Respoder() {
+function Responder() {
     return (
         <>
             <header className="flex justify-between items-center fixed top-0 left-0 right-0 p-5 md:px-10 md:w-full md:mx-auto md:mt-4">
-                <div className="bg-logoSena w-10 h-10 bg-cover"></div>
+                <div className="bg-logosena w-10 h-10 bg-cover"></div>
                 <NavBarUser />
             </header>
             <div className="mx-auto mt-20 md:mt-20 p-3 px-5 md:flex ">
@@ -43,4 +43,4 @@ function Respoder() {
     )
 }
 
-export default Respoder
+export default Responder

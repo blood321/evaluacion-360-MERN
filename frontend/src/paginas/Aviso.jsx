@@ -3,6 +3,8 @@ import logo2Principal from '../assets/img/logo2Principal.png'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import clienteAxios from '../config/clienteAxios.jsx'
+import logoSena from '../assets/img/logoSena.png'
+
 
 
 const Aviso = () => {
@@ -20,7 +22,7 @@ const Aviso = () => {
     return (
         <>
             <header className="flex justify-between items-center fixed top-0 left-0 right-0  p-5  md:w-full md:max-w-[700px] md:mx-auto md:mt-5 ">
-                <div className="bg-logoSena w-10 h-10 bg-cover"></div>
+                <img src={logoSena} className="w-10 h-10 bg-cover"/>
                 <NavBarUser />
             </header>
             <div className="container mx-auto mt-10 md:mt-20 p-5 md:flex md:flex-col md:items-center ">
@@ -41,7 +43,7 @@ const Aviso = () => {
                             </p>
                             <button className="rounded-2xl w-full py-2 mt-4 bg-gradient-to-r from-Secundario_1 to-Secundario_2 border-white border-spacing-1 text-white">
                                 INICIAR ENCUESTA
-                            </button> 
+                            </button>
                         </div>
                     </div>
                 </section>
