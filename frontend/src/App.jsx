@@ -17,7 +17,6 @@ import Aviso from "./paginas/Aviso";
 import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
 import LoginAdmin from "./paginas/LoginAdmin.jsx";
-import Componer from "./paginas/PrvComponents.jsx";
 import LayoutSe from "./layouts/LayoutSe.jsx";
 
 function App() {
@@ -33,9 +32,8 @@ function App() {
             <Route path="/" element={<LayoutSe />}>
               <Route path="InicioAdmin" element={<IniAdmin />} />
             </Route>
-            <Route path="/aviso" element={<Aviso />} />
-              <Route path="/Login" element={<LoginAdmin />} />
-
+            <Route path="/aviso/:email" element={<Aviso />} />
+            <Route path="/login-adm" element={<LoginAdmin />} />
 
             <Route path="/" element={<CoorLayout />}>
               <Route path="registrar" element={<Registrar />} />
@@ -47,17 +45,16 @@ function App() {
               <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
             </Route>
 
-                        <Route path="proyectos" element={<RutaProtegida />}>
-                            <Route index element={<Proyectos />} />
-                            <Route path="crear-proyecto" element={<NuevoProyecto />} />
-                            <Route path=":id" element={<Proyecto />} />
-                            <Route path="editar/:id" element={<EditarProyecto />} />
-                        </Route>
-
-                    </Routes>
-                </ProyectosProvider>
-            </AuthProvider>
-        </BrowserRouter>
-    )
+            <Route path="proyectos" element={<RutaProtegida />}>
+              <Route index element={<Proyectos />} />
+              <Route path="crear-proyecto" element={<NuevoProyecto />} />
+              <Route path=":id" element={<Proyecto />} />
+              <Route path="editar/:id" element={<EditarProyecto />} />
+            </Route>
+          </Routes>
+        </ProyectosProvider>
+      </AuthProvider>
+    </BrowserRouter>
+  );
 }
 export default App;
