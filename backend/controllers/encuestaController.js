@@ -15,6 +15,10 @@ const nuevaEncuesta =async (req,res)=>{
     }
    
 }
+const obtenerEncuestas=async(req,res)=>{
+    const encuestas = await encuesta.find()
+    res.json(encuestas)
+}
 const editarEncuesta =async(req,res)=>{
     // el id de la encuesta que se quiere editar 
     const { id } = req.params
@@ -65,4 +69,4 @@ const eliminarEncuesta =async(req,res)=>{
         console.log(error)
     }
 }
-export {nuevaEncuesta,editarEncuesta,eliminarEncuesta}
+export {nuevaEncuesta,editarEncuesta,eliminarEncuesta,obtenerEncuestas}

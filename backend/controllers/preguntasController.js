@@ -5,48 +5,28 @@ import respuesta from "../models/respuestas.js"
 
 
 const nuevaPregunta = async (req, res) => {
-    const { pregunta,  tematicaId, tipoId,respuestaG} = req.body;
+    const { pregunta,  tematicaId} = req.body;
 
     try {
         const tematica = await tematicas.findById(tematicaId);
-        const tipoPregunta = await tipoPreguntas.findById(tipoId);
         const nuevaPregunta = new preguntas({
             pregunta,
             tematica: [tematica._id],
-            tipo: [tipoPregunta._id]
         
         });
-        nuevaPregunta.save()
-            .then(async objetoCreado => {
-                 const nuevoId = objetoCreado._id;
-    // Ahora puedes usar nuevoId como necesites
-      const nuevarespuesta = new respuesta({
-            pregunta:[nuevoId]
-        });
-        const respuestaAlmacenada=  await nuevarespuesta.save()
+//         nuevaPregunta.save().then(async objetoCreado => {
+//                  const nuevoId = objetoCreado._id;
+//                     // Ahora puedes usar nuevoId como necesites
+//                     const nuevarespuesta = new respuesta({
+//                     pregunta:[nuevoId]
+//         });
+//         const respuestaAlmacenada=  await nuevarespuesta.save()
 
-            console.log(respuestaAlmacenada)
+//             console.log(respuestaAlmacenada)
             
  
-})
-     // Guarda la pregunta en la base de datos
-      //  const preguntaGuardada = await nuevaPregunta.save();
-       // res.json(nuevaPregunta)
+// })
         console.log(nuevaPregunta)
-
-  
-        
-      
-       
-
-
-
-
-        // Modificar el enum del esquema
-    
-        // Guardar el esquema modificado
- 
-
     } catch (error) {
         console.error(error);
         res.status(500).json({ mensaje: 'Error al crear la pregunta' });
