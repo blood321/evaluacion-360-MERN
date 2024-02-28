@@ -1,6 +1,48 @@
-import "boxicons";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Alerta from "../components/Alerta";
+import clienteAxios from "../config/clienteAxios";
+import useAuth from "../hooks/useAuth";
 
 const LoginAdmin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alerta, setAlerta] = useState({});
+
+  const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if ([email, password].includes("")) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      return;
+    }
+
+    try {
+      const { data } = await clienteAxios.post("/usuarios/login", {
+        email,
+        password,
+      });
+      setAlerta({});
+      localStorage.setItem("token", data.token);
+      setAuth(data);
+      navigate("/InicioAdmin");
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+      });
+    }
+  };
+
+  const { msg } = alerta;
+
   return (
     <>
       <div className="flex flex-col items-center justify-center">
@@ -9,9 +51,10 @@ const LoginAdmin = () => {
             src="src/assets/img/logo2Principal.png"
             alt="Imagen de logotipo"
             className="w-[380px] h-[230px]"
-          />
+            />
         </div>
-        <form className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4">
+        <form className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4" onSubmit={handleSubmit}>
+            {msg && <Alerta alerta={alerta} />}
           <div className="my-1 flex items-center justify-center ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +75,11 @@ const LoginAdmin = () => {
           <div className="my-2 mt-4 flex items-center relative">
             <input
               id="email"
-              type="text"
-              placeholder="Cedula"
-              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-500"
+              type="amail"
+              placeholder="Correo"
+              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-50"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -44,15 +89,23 @@ const LoginAdmin = () => {
               type="password"
               placeholder="Contraseña"
               className="text-center  w-full mt-1 p-1 border-2 rounded-full border-Principal_1 bg-gray-50 mb-7"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="flex items-center justify-center drop-shadow-lg  ">
-          <input
-            type="submit"
-            value="Ingresar"
-            className="bg-Principal_3 mt-2 p-1 w-[120px] text-center text-Textcolor_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer shadow-lg shadow-Principal_1 "
-          />
+            <input
+              type="submit"
+              value="Ingresar"
+              className="bg-Principal_3 mt-1 p-1 w-[120px] text-center text-Textcolor_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer shadow-lg shadow-Principal_1 "
+            />
           </div>
+          <Link
+            className="block text-center my-5 text-slate-500 capitalize text-sm"
+            to="/olvide-password"
+          >
+            Olvide mi contraseña
+          </Link>
         </form>
       </div>
       <div>
