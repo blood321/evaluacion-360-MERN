@@ -33,8 +33,8 @@ const LoginAdmin = () => {
             <input
               id="email"
               type="text"
-              placeholder="Cedula"
-              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-500"
+              placeholder="Correo"
+              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-50 focus:ring-Principal_1"
             />
           </div>
 

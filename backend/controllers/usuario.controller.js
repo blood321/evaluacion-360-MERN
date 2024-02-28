@@ -20,9 +20,11 @@ const register = async (req, res) => {
     emailRegistro({
       email: usuario.email,
       nombre: usuario.nombre,
-      token: usuario.token
-    })
-    res.json({msg: 'Usuario creado correctamente, revisa tu correo para confirmar tu cuenta'});
+      token: usuario.token,
+    });
+    res.json({
+      msg: "Usuario creado correctamente, revisa tu correo para confirmar tu cuenta",
+    });
   } catch (error) {
     console.error(error);
   }
@@ -80,6 +82,31 @@ const autenticar = async (req, res) => {
   const { email } = req.body;
   const usuario = await Usuario.findOne({ email });
   if (!usuario) {
+    const error = new Error("El correo no existe");
+    return res.status(404).json({ msg: error.message });
+  }
+
+  try {
+    usuario.token = generarID();
+    await usuario.save();
+    // Enviar el email de nueva confirmación
+    emailAutenticar({
+      email: usuario.email,
+      nombre: usuario.nombre,
+      token: usuario.token,
+    });
+    res.json({
+      msg: "Hemos enviado un enlace de acceso a su correo electrónico",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const olvidePassword = async (req, res) => {
+  const { email } = req.body;
+  const usuario = await Usuario.findOne({ email });
+  if (!usuario) {
     const error = new Error("El usuario no existe");
     return res.status(404).json({ msg: error.message });
   }
@@ -91,9 +118,11 @@ const autenticar = async (req, res) => {
     emailAutenticar({
       email: usuario.email,
       nombre: usuario.nombre,
-      token: usuario.token
-    })
-    res.json({ msg: "Hemos enviado un enlace de acceso a su correo electrónico" });
+      token: usuario.token,
+    });
+    res.json({
+      msg: "Hemos enviado un enlace de acceso a su correo electrónico",
+    });
   } catch (error) {
     console.log(error);
   }
@@ -132,17 +161,31 @@ const nuevoPassword = async (req, res) => {
 };
 
 const perfil = async (req, res) => {
-    const { usuario } = req
+  const { usuario } = req.body;
 
-    res.json(usuario)
-}
+  res.json(usuario);
+};
+
+const obtenerUsuario = async (req, res) => {
+  const data = req.params.email;
+  const email = data;
+  const usuario = await Usuario.findOne({ email });
+  if (!usuario) {
+    const error = new Error("El usuario no existe");
+    return res.status(404).json({ msg: error.message });
+  } else {
+    res.json(usuario.nombre);
+  }
+};
 
 export {
   register,
   auth,
   confirmar,
   autenticar,
+  olvidePassword,
   comprobarToken,
   nuevoPassword,
   perfil,
+  obtenerUsuario,
 };
