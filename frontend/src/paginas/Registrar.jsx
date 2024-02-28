@@ -134,7 +134,7 @@ const Registrar = () => {
       </form>
       <nav className="lg:flex lg:justify-between">
         <Link
-          to="/"
+          to="/login-coordinador"
           className="block text-center my-5 text-slate-500 uppercase text-sm"
         >
           ¿Ya tienes una cuenta? Inicia Sesion
