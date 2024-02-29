@@ -34,6 +34,7 @@ function App() {
               <Route path="InicioAdmin" element={<IniAdmin />} />
             </Route>
             <Route path="/aviso/:email" element={<Aviso />} />
+            <Route path="responder" element={<Respoder />} />
             <Route path="/login-adm" element={<LoginAdmin />} />
 
             <Route path="/" element={<CoorLayout />}>
