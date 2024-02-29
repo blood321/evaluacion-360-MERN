@@ -70,7 +70,7 @@ const OlvidePassword = () => {
       </form>
       <nav className="lg:flex p-4 justify-center">
         <Link
-          to="/LoginAdmin"
+          to="/login-adm"
           className="block text-center text-slate-500 capitalize text-sm"
         >
           ¿Ya tienes una cuenta? Inicia Sesión

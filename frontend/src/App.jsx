@@ -14,7 +14,7 @@ import Proyecto from "./paginas/Proyecto";
 import EditarProyecto from "./paginas/EditarProyecto";
 import Aloguin from "./paginas/Aloguin";
 import Aviso from "./paginas/Aviso";
-import Respoder from './paginas/Respoder'
+import Respoder from "./paginas/Respoder";
 import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
 import LoginAdmin from "./paginas/LoginAdmin.jsx";
@@ -28,11 +28,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Authlayout />}>
               <Route index element={<Aloguin />} />
+              <Route path="login" element={<Login />}/>
             </Route>
 
-            <Route path="/" element={<LayoutSe />}>
-              <Route path="InicioAdmin" element={<IniAdmin />} />
-            </Route>
+            <Route path="InicioAdmin" element={<IniAdmin />} />
+            <Route path="/" element={<LayoutSe />}></Route>
             <Route path="/aviso/:email" element={<Aviso />} />
             <Route path="responder" element={<Respoder />} />
             <Route path="/login-adm" element={<LoginAdmin />} />
