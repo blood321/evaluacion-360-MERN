@@ -1,38 +1,30 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Alerta from "../components/Alerta";
+
 import clienteAxios from "../config/clienteAxios";
-import useAuth from "../hooks/useAuth";
 
-const LoginAdmin = () => {
+const OlvidePassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [alerta, setAlerta] = useState({});
-
-  const { setAuth } = useAuth();
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if ([email, password].includes("")) {
+    if (email === "" || email.length < 6) {
       setAlerta({
-        msg: "Todos los campos son obligatorios",
+        msg: "El email es obligatorio",
         error: true,
       });
       return;
     }
-
     try {
-      const { data } = await clienteAxios.post("/usuarios/login", {
+      const { data } = await clienteAxios.post("/usuarios/olvide-password", {
         email,
-        password,
       });
-      setAlerta({});
-      localStorage.setItem("token", data.token);
-      setAuth(data);
-      navigate("/InicioAdmin");
+      setAlerta({
+        msg: data.msg,
+        error: false,
+      });
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,
@@ -40,81 +32,51 @@ const LoginAdmin = () => {
       });
     }
   };
-
   const { msg } = alerta;
-
   return (
     <>
-      <div className="flex flex-col items-center justify-center">
-        <div>
-          <img
-            src="src/assets/img/logo2Principal.png"
-            alt="Imagen de logotipo"
-            className="w-[380px] h-[230px]"
-            />
-        </div>
-        <form className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4" onSubmit={handleSubmit}>
-            {msg && <Alerta alerta={alerta} />}
-          <div className="my-1 flex items-center justify-center ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-14 h-14 "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z"
-              />
-            </svg>
-          </div>
-
-          <div className="my-2 mt-4 flex items-center relative">
-            <input
-              id="email"
-              type="amail"
-              placeholder="Correo"
-              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-50"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-
-          <div className="my-5">
-            <input
-              id="password"
-              type="password"
-              placeholder="Contraseña"
-              className="text-center  w-full mt-1 p-1 border-2 rounded-full border-Principal_1 bg-gray-50 mb-7"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center justify-center drop-shadow-lg  ">
-            <input
-              type="submit"
-              value="Ingresar"
-              className="bg-Principal_3 mt-1 p-1 w-[120px] text-center text-Textcolor_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer shadow-lg shadow-Principal_1 "
-            />
-          </div>
-          <Link
-            className="block text-center my-5 text-slate-500 capitalize text-sm"
-            to="/olvide-password"
+      <h1 className="text-Secundario_2 font-black mb-7 text-3xl capitalize">
+        Recuperar cuenta
+      </h1>
+      <form
+        className="rounded-3xl  p-6 border-Principal_1 border-4"
+        onSubmit={handleSubmit}
+      >
+        {msg && <Alerta alerta={alerta} />}
+        <div className="my-1">
+          <label
+            className="capitalize text-Secundario_2 block text-xl font-bold"
+            htmlFor="email"
           >
-            Olvide mi contraseña
-          </Link>
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email De Recuperacion"
+            className="w-full my-7 p-3 border rounded-xl "
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <form className=" flex items-center justify-center">
+          <input
+            type="submit"
+            value="Enviar Instrucciones"
+            className="bg-Principal_3 w-full md:w-4/12 text-black capitalize font-bold  text-center rounded-full border border-Secundario_2 hover:bg-Principal_1 hover:text-white hover:border-Principal_1 hover:border-2 md:mx-1"
+          />
         </form>
-      </div>
-      <div>
-        <footer className="text-center bg-Principal_1 text-Principal_3 p-3 md:fixed bottom-0 inset-x-0">
-          © 2024 SENA Centro Agropecuario
-        </footer>
-      </div>
+      </form>
+      <nav className="lg:flex p-4 justify-center">
+        <Link
+          to="/LoginAdmin"
+          className="block text-center text-slate-500 capitalize text-sm"
+        >
+          ¿Ya tienes una cuenta? Inicia Sesión
+        </Link>
+      </nav>
     </>
   );
 };
-
-export default LoginAdmin;
+export default OlvidePassword;
