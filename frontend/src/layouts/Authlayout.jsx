@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 
 const AuthLayout = () => {
   return (
@@ -11,4 +11,5 @@ const AuthLayout = () => {
     </>
   );
 };
+
 export default AuthLayout;
