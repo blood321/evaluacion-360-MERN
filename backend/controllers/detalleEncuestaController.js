@@ -39,6 +39,9 @@ const nuevoDetalleEncuesta = async (req, res) => {
     }
 };
 const obtenerDetallesEcuestas= async (req,res)=>{
+
+    console.log()
+
 try {
     //Busca la ficha del usuario cual inicio sesión 
     const ficheUsuario = await fichas.find().where('aprendices').equals(req.usuario).select("-aprendices -numeroFicha  -__v")
@@ -46,49 +49,57 @@ try {
     const instructoresResponder=await programacion.find().where('fichas').equals(ficheUsuario).select("-_id -fichas -__v")
    //busca la encuesta ligada a la ficha 
     const buscarEncuesta = await detalleEncuesta.find().where('fichas').equals(ficheUsuario).select("-fichas -__v -_id ")
- //console.log(buscarEncuesta)
     //trasforma el buscar Enccuesta a String 
-    const resultadoJSON = JSON.stringify(instructoresResponder);
-    const resultadoArray = JSON.parse(resultadoJSON); // Convertir la cadena JSON a un array de objetos
-    const numeros = resultadoArray.map(item => item.encuesta); // Extraer solo los valores de la propiedad "encuesta"
-    //Muestra las preguntas de la encuesta 
-    const mostrarPregunta= await encuesta.find({activa:true}).where('_id').equals(numeros).select("-_id  -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa")
-    //console.log(resultadoArray)
+    const encuestaString = JSON.stringify(buscarEncuesta);
+    const encuestaArray = JSON.parse(encuestaString); // Convertir la cadena JSON a un array de objetos
+    const encuestasID = encuestaArray.map(item => item.encuesta);
+    //Muestra las preguntas de la encuesta y tambien se encuetre activa ya que pueden exister varias encuestas a la ves pero una sola se responde 
+    const mostrarPregunta= await encuesta.find({activa:true}).where('_id').equals(encuestasID).select("-_id  -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa")
     const resultadoJSON2 = JSON.stringify(mostrarPregunta);
-     const resultadoArray2 = JSON.parse(resultadoJSON2);
-    // const nuevaRespuesta = await new respuesta({ "pregunta": [ resultadoArray2 ] });
+    const resultadoArray2 = JSON.parse(resultadoJSON2);
+
+    console.log(encuestasID)
+    
+    //console.log(buscarEncuesta)
+   
+    console.log(instructoresResponder)
+
+
+
     resultadoArray2.forEach(async objeto => {
      try {
         objeto.preguntas.forEach(async preguntaId => {
             // Crear una nueva instancia de respuesta con el identificador de pregunta
-            const nuevaRespuesta = new respuesta({ pregunta: preguntaId,  aprendiz:req.Usuario});
-      
+           
+            const nuevaRespuesta = new respuesta(req.body)
+            nuevaRespuesta.pregunta=preguntaId
+            nuevaRespuesta.aprendiz=req.Usuario._id
             // Guardar la nueva respuesta en la base de datos
-            await nuevaRespuesta.save()})
-     } catch (error) {
-        console.error('Error al crear la respuesta:', error);
-
-     }
-          // Iterar sobre cada identificador de pregunta en el objeto
-       
-        
+            const respug=  await nuevaRespuesta.save()
+          //  console.log(respug)
         })
-    instructoresResponder.forEach(async objeto => {
-            try {
-               objeto.instructor.forEach(async instructorId => {
-                   // Crear una nueva instancia de respuesta con el identificador de pregunta
-                   const nuevaRespuesta = new respuesta({  instructor:instructorId });
+        } catch (error) {
+            console.error('Error al crear la respuesta:', error);
+            
+        }
+    })
+
+    // instructoresResponder.forEach(async objeto => {
+    //         try {
+    //            objeto.instructor.forEach(async instructorId => {
+    //                // Crear una nueva instancia de respuesta con el identificador de pregunta
+    //                const nuevaRespuesta = new respuesta({  instructor:instructorId });
              
-                   // Guardar la nueva respuesta en la base de datos
-                   await nuevaRespuesta.save()})
-            } catch (error) {
-               console.error('Error al meter al instructor :', error);
+    //                // Guardar la nueva respuesta en la base de datos
+    //                await nuevaRespuesta.save()})
+    //         } catch (error) {
+    //            console.error('Error al meter al instructor :', error);
        
-            }
-                 // Iterar sobre cada identificador de pregunta en el objeto
+    //         }
+    //              // Iterar sobre cada identificador de pregunta en el objeto
               
                
-            })
+    //         })
 
 
 

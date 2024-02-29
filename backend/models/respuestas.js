@@ -10,6 +10,15 @@ const respuestaSchema =mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"pregunta"
     }
+    ,
+    aprendiz:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Usuario"
+    },
+    instructor:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"instructor"
+    }
 
 })
 const respuesta =mongoose.model("respuesta",respuestaSchema)
