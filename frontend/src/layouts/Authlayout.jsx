@@ -1,6 +1,6 @@
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom"
 
-const AuthLayout = () => {
+const Authlayout = () => {
   return (
     <>
       <main className="container mx-auto mt-5 md:mt-20 p-5 md:flex md:justify-center">
@@ -9,7 +9,7 @@ const AuthLayout = () => {
         </div>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default AuthLayout;
+export default Authlayout

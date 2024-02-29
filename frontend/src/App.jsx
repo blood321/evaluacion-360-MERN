@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Authlayout from "./layouts/Authlayout";
 import RutaProtegida from "./layouts/RutaProtegida";
-import AuthLayout from "./layouts/AuthLayout";
 
 import Login from "./paginas/Login";
 import Registrar from "./paginas/Registrar";
@@ -22,7 +22,7 @@ function App() {
       <AuthProvider>
         <ProyectosProvider>
           <Routes>
-            <Route path="/" element={<AuthLayout />}>
+            <Route path="/" element={<Authlayout />}>
               <Route index element={<Login />} />
               <Route path="registrar" element={<Registrar />} />
               <Route path="olvide-password" element={<OlvidePassword />} />
