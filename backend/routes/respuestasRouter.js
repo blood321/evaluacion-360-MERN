@@ -1,16 +1,14 @@
 import Express  from "express";
-import {
-    obtenerRespuestas,nuevaRespuesta
-} from '../controllers/respuestaController.js'
+import { respuestaUsuario
+} from '../controllers/respuesta.js'
 import checkAuth from '../middleware/checkAuth.js'
 
 const router = Express.Router()
 router.route('/')
-    .get(obtenerRespuestas)
-    .post(checkAuth,obtenerRespuestas)
+    .put(checkAuth,respuestaUsuario)
+
    
     router.route('/nueva-respuesta')
-    .post(nuevaRespuesta)
 
 
 export default router

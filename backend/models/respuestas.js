@@ -1,7 +1,7 @@
 import { mongoose } from "mongoose";
 
 const respuestaSchema =mongoose.Schema({
-   Multiple:     
+   respuesta:     
     {
         type:String,
         enum:["Si","No","talves","no se "],
