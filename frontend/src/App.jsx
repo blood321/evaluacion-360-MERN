@@ -36,7 +36,7 @@ function App() {
                         </Route> 
                         
                         <Route path="aviso" element={<Aviso />} />
-                        <Route path="/Responder" element={<Respoder />} />
+                        <Route path="responder" element={<Respoder />} />
                         <Route path="/" element={<CoorLayout />}>
                             <Route path="login-coordinador" element={<Login />} />
                             <Route path="registrar" element={<Registrar />} />

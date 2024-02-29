@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { NavBarUser } from '../components/NavBarUser'
 import Preguntas from '../components/Preguntas'
 import Respuestas from '../components/Respuestas'
 import Modal from '../components/Modal' // Importa tu componente Modal aquí
 
-const Respoder = () => {
+const Responder = () => {
     const [preguntaActual, setPreguntaActual] = useState(0)
     const [respuestas, setRespuestas] = useState({})
     const [todasRespondidas, setTodasRespondidas] = useState(false)
@@ -133,4 +133,4 @@ const Respoder = () => {
     )
 }
 
-export default Respoder
+export default Responder
