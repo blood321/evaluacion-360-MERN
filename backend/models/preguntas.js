@@ -13,24 +13,11 @@ const preguntaSchema=mongoose.Schema({
         ref:"tematica",
         require:true
     },
-    tipo:     
-    {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"tipoPregunta",
-        require:true
+    encuestado: {
+        type: String,
+        enum: ["Aprendiz", "Jefes", "Compañeros"],
     },
-    encuestado:     
-    {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"encuestado",
-        require:true
-    },
-    respuesta:     
-    {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"respuesta",
-        require:true
-    },
+  
 }
 )
 

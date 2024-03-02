@@ -8,10 +8,14 @@ const equipoEjecutorSchema=mongoose.Schema({
         required:true
     }, 
     lider:   
-    [{
+    {
         type:mongoose.Schema.Types.ObjectId,
         ref:"instructor",
-    }],
+    },
+    miembros:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"instructor"
+    }]
 })
 
 const  equipoEjecutor=mongoose.model('equipoEjecutor',equipoEjecutorSchema)

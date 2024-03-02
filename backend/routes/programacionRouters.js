@@ -1,15 +1,14 @@
 import Express  from "express";
 import {
-    nuevoTipoPregunta
-} from '../controllers/tipoPreguntaController.js'
+    crearProgramacion
+} from '../controllers/programacionController.js'
 
 
 const router = Express.Router()
 router.route('/')
     
-    .post(nuevoTipoPregunta)
-
-
+    .post(crearProgramacion)
+   
     
 
 

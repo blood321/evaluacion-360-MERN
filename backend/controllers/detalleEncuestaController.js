@@ -43,9 +43,11 @@ const obtenerDetallesEcuestas= async (req,res)=>{
 
 try {
     //Busca la ficha del usuario cual inicio sesión 
-    const ficheUsuario = await fichas.find().where('aprendices').equals(req.usuario).select("-aprendices -numeroFicha  -__v")
-    //Busca los instructores que le dieron clase en la programacion de la ficha 
-    const instructoresResponder=await programacion.find().where('fichas').equals(ficheUsuario).select("-_id -fichas -__v")
+    const ficheUsuario = await fichas.find({aprendices:req.usuario._id},'_id')
+    console.log(ficheUsuario)
+      //Busca los instructores que le dieron clase en la programacion de la ficha 
+    const instructoresResponder=await programacion.find({fichas:ficheUsuario},'instructores')
+    console.log(instructoresResponder)
    //busca la encuesta ligada a la ficha 
     const buscarEncuesta = await detalleEncuesta.find().where('fichas').equals(ficheUsuario).select("-fichas -__v -_id ")
     //trasforma el buscar Enccuesta a String 
@@ -60,7 +62,7 @@ try {
     const resultadoInstructores = JSON.stringify(instructoresResponder);
     const resultadoI = JSON.parse(resultadoInstructores);
     //console.log(resultadoI)
-    console.log(buscarEncuestaParaGuardarEnRespuestas)
+   // console.log(buscarEncuestaParaGuardarEnRespuestas)
    // console.log(resultadoArray2)
      resultadoI.forEach(async objeto => {
              try {

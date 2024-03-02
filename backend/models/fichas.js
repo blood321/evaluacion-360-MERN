@@ -12,12 +12,9 @@ const fichasSchema=mongoose.Schema({
     }, 
     fichaFin:{
         type: Date,
-        trim:true,
     }, 
     fichaFinETP:{
         type: Date,
-        
-       
     },
     aprendices:[{
         type:mongoose.Schema.Types.ObjectId,

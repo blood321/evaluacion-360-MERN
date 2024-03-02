@@ -1,32 +1,22 @@
 import preguntas from "../models/preguntas.js"
 import tematicas from"../models/tematica.js"
-import tipoPreguntas from"../models/tipoPregunta.js"
-import respuesta from "../models/respuestas.js"
+
 
 
 const nuevaPregunta = async (req, res) => {
-    const { pregunta,  tematicaId} = req.body;
-
+    const { pregunta,  tematicaId,encuestado} = req.body;
     try {
         const tematica = await tematicas.findById(tematicaId);
+
         const nuevaPregunta = new preguntas({
             pregunta,
             tematica: [tematica._id],
-        
+            encuestado,
         });
-//         nuevaPregunta.save().then(async objetoCreado => {
-//                  const nuevoId = objetoCreado._id;
-//                     // Ahora puedes usar nuevoId como necesites
-//                     const nuevarespuesta = new respuesta({
-//                     pregunta:[nuevoId]
-//         });
-//         const respuestaAlmacenada=  await nuevarespuesta.save()
-
-//             console.log(respuestaAlmacenada)
-            
- 
-// })
+        
         console.log(nuevaPregunta)
+
+       res.json(nuevaPregunta)
     } catch (error) {
         console.error(error);
         res.status(500).json({ mensaje: 'Error al crear la pregunta' });
@@ -35,16 +25,13 @@ const nuevaPregunta = async (req, res) => {
 const editarPregunta =async (req,res)=>{
     const { id } = req.params
     const preguntaEdit = await preguntas.findById(id)
-    
     if (!preguntaEdit) {
         const error = new Error("no encontrado")
         return res.status(404).json({ msg: error.message})
     }
-
-   
     preguntaEdit.pregunta = req.body.pregunta || preguntaEdit.pregunta
     preguntaEdit.tematica=req.body.tematica|| preguntaEdit.tematica
-    preguntaEdit.tipo=req.body.tipo||preguntaEdit.tipo
+    preguntaEdit.encuestado=req.body.encuestado||preguntaEdit.encuestado
 
     try {
         const proyectoAlmacenado = await preguntaEdit.save()
@@ -82,11 +69,18 @@ try {
     console.log(error)
 }
 }
-
-const obtenerPreguntas =async (req,res)=>{
+const obtenerPreguntasParaAprendiz =async (req,res)=>{
  const preguntasObtenidas=await preguntas.find();
  res.json(preguntasObtenidas)
 }
+const obtenerPreguntasParaJefes =async (req,res)=>{
+    const preguntasObtenidas=await preguntas.find({encuestado:"Jefes"});
+    res.json(preguntasObtenidas)
+}
+const obtenerPreguntasParaCompañeros  =async (req,res)=>{
+    const preguntasObtenidas=await preguntas.find({encuestado:"Compañeros"});
+    res.json(preguntasObtenidas)
+}
 
 
-export {nuevaPregunta,editarPregunta,eliminarPregunta,obtenerPregunta,obtenerPreguntas}
+export {obtenerPreguntasParaCompañeros,nuevaPregunta,editarPregunta,eliminarPregunta,obtenerPregunta,obtenerPreguntasParaAprendiz,obtenerPreguntasParaJefes}
