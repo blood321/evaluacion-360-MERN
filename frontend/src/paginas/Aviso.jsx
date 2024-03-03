@@ -1,7 +1,7 @@
 import { NavBarUser } from '../components/NavBarUser'
 import logo2Principal from '../assets/img/logo2Principal.png'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import clienteAxios from '../config/clienteAxios.jsx'
 import logoSena from '../assets/img/logoSena.png'
 
@@ -41,9 +41,9 @@ const Aviso = () => {
                                 y nos esforzamos por garantizar la confidencialidad de tus respuestas. ¡Gracias por
                                 contribuir!
                             </p>
-                            <button className="rounded-2xl w-full py-2 mt-4 bg-gradient-to-r from-Secundario_1 to-Secundario_2 border-white border-spacing-1 text-white">
-                                INICIAR ENCUESTA
-                            </button>
+                            <Link to={'/responder'} className="rounded-2xl w-full py-2 mt-4 flex justify-center bg-gradient-to-r from-Secundario_1 to-Secundario_2 border-white border-spacing-1 text-white">
+                                Iniciar Encuesta
+                            </Link>
                         </div>
                     </div>
                 </section>

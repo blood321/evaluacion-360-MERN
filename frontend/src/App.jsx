@@ -32,22 +32,18 @@ function App() {
             </Route>
 
             <Route path="InicioAdmin" element={<IniAdmin />} />
-            <Route path="/" element={<LayoutSe />}></Route>
             <Route path="/aviso/:email" element={<Aviso />} />
             <Route path="responder" element={<Respoder />} />
             <Route path="/login-adm" element={<LoginAdmin />} />
 
             <Route path="/" element={<CoorLayout />}>
-              <Route path="registrar" element={<Registrar />} />
               <Route path="olvide-password" element={<OlvidePassword />} />
-              <Route
-                path="olvide-password/:token"
-                element={<NuevoPassword />}
-              />
+              <Route path="olvide-password/:token" element={<NuevoPassword />} />
+              <Route path="registrar" element={<Registrar />} />
               <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
             </Route>
 
-            <Route path="proyectos" element={<RutaProtegida />}>
+            <Route path="/proyectos" element={<RutaProtegida />}>
               <Route index element={<Proyectos />} />
               <Route path="crear-proyecto" element={<NuevoProyecto />} />
               <Route path=":id" element={<Proyecto />} />

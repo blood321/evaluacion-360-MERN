@@ -31,7 +31,7 @@ const NewPassword = () => {
     e.preventDefault();
     if (password.length < 6) {
       setAlerta({
-        msg: "El password debe ser mínimo de 6 caracteres",
+        msg: "La contraseña debe contener mínimo de 6 caracteres",
         error: true,
       });
       return;
@@ -43,6 +43,9 @@ const NewPassword = () => {
         msg: data.msg,
         error: false,
       });
+      setTimeout(() => {
+        setAlerta({})
+      }, 3000)
       setPasswordModificado(true);
     } catch (error) {
       setAlerta({
@@ -54,19 +57,19 @@ const NewPassword = () => {
   const { msg } = alerta;
   return (
     <>
-      <h1 className="text-sky-600 mb-7 font-black text-6xl capitalize">
-        Reestablecer password y no pierdas tus{" "}
-        <span className="text-slate-700">Proyectos</span>
+      <h1 className="text-Secundario_1 mb-7 text-center font-black text-5xl capitalize">
+        Reestablecer{" "}
+        <span className="text-Principal_1">Contraseña</span>
       </h1>
       {msg && <Alerta alerta={alerta} />}
       {tokenValido && (
         <form
-          className="my-5 bg-white shadow rounded-lg py-3 px-7"
+          className="my-5 bg-white shadow rounded-3xl border-Principal_1 border-4 py-3 px-7"
           onSubmit={handleSubmit}
         >
           <div className="my-5">
             <label
-              className="capitalize text-gray-600 block text-xl font-bold"
+              className="text-Principal_1 block text-xl font-bold"
               htmlFor="password"
             >
               New Password
@@ -75,7 +78,7 @@ const NewPassword = () => {
               id="password"
               type="password"
               placeholder="write your new password"
-              className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+              className="w-full my-5 block rounded-xl border-2 border-Principal_1 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-lg"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -83,15 +86,16 @@ const NewPassword = () => {
           <input
             type="submit"
             value="Confirm Password"
-            className="bg-sky-700 mb-5 w-full py-3 text-white capitalize font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-color"
+            className="bg-white mb-5 w-full py-3 text-Secundario_1 border-2 border-Principal_1 font-bold rounded-full hover:cursor-pointer hover:bg-Principal_1 hover:text-white hover:border-Principal_3"
           />
         </form>
       )}
       {passwordModificado && (
         <Link
-          to="/"
-          className="block text-center my-5 text-slate-500 capitalize text-sm"
+        to="/login-adm"
+        className="block text-center my-5 font-bold text-Principal_1 text-xl"
         >
+          <p>Ahora puedes</p>
           Inicia Sesión
         </Link>
       )}

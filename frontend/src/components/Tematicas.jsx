@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+
 
 const Tematicas = () => {
-  const { auth } = useAuth();
+
   return (
-    <aside
+    <div
       className="
     flex
     flex-col 
@@ -12,7 +12,7 @@ const Tematicas = () => {
     h-max  
     w-[220px] 
     mx-9  
-    my-9 
+    my-3 
     min-4
     bg-white 
     border-Principal_1 
@@ -50,7 +50,7 @@ const Tematicas = () => {
       >
         Profesional
       </Link>
-    </aside>
+    </div>
   );
 };
 
