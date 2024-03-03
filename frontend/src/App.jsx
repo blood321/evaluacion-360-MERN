@@ -18,13 +18,16 @@ import Respoder from "./paginas/Respoder";
 import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
 import LoginAdmin from "./paginas/LoginAdmin.jsx";
+import { RespuestasProvider } from "./context/RespuestasProviser.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <ProyectosProvider>
-          <Routes>
+         <RespuestasProvider>
+           
+         <Routes>
             <Route path="/" element={<Authlayout />}>
               <Route index element={<Aloguin />} />
             </Route>
@@ -53,6 +56,7 @@ function App() {
               <Route path="editar/:id" element={<EditarProyecto />} />
             </Route>
           </Routes>
+         </RespuestasProvider>
         </ProyectosProvider>
       </AuthProvider>
     </BrowserRouter>

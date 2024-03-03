@@ -26,7 +26,7 @@ export const emailRegistro = async (datos) => {
   });
 };
 
-export const emailAutenticar = async (datos) => {
+export const emailOlvidePassword = async (datos) => {
   const { email, nombre, token } = datos;
 
   const transport = nodemailer.createTransport({
@@ -40,13 +40,13 @@ export const emailAutenticar = async (datos) => {
 
   //   Información del email
   const info = await transport.sendMail({
-    from: '"Evaluación 360° - Autentica tu usuario" <cuentas@evaluacion360.com>',
+    from: '"Encuestas - Comprueba tu cuenta" <cuentas@encuestas.com>',
     to: email,
-    subject: "Evaluación 360° - Autentica tu usuario",
-    text: "Autentica tu correo para realizar la encuesta",
-    html: `<p>Hola: ${nombre} has solicitado la autenticación de tu correo</p>
-        <p>Dar click en el siguiente enlace para ingresar a la encuesta:</p>
-        <a href="http://localhost:5173/aviso">Entra a la encuesta aquí</a>
-        <p style="font-size: 12px">Si tú no solicitaste este email, puedes ignorar el mensaje</p>`,
+    subject: "Encuestas - Restablece tu Password",
+    text: "Restablece tu Password de tu cuenta en Encuestas",
+    html: `<p>Hola: ${nombre} has solicitado restablecer tu password</p>
+        <p>Dar click en el siguiente enlace para generar un nuevo password:</p>
+        <a href="http://localhost:5173/olvide-password/${token}">Restablecer Password</a>
+        <p>Si tú no solicitaste este email, puedes ignorar el mensaje</p>`,
   });
 };

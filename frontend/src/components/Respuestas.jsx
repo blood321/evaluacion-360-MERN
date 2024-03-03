@@ -1,62 +1,85 @@
-import React from 'react'
-import Instructor from '../assets/img/instructor1.jpg'
+import React, { useState } from 'react';
+import Instructor from '../assets/img/instructor1.jpg';
+import useRespuestas from '../hooks/useRespuestas';
+import { FormGroup, Label, Input } from 'reactstrap';
 
-const Respuestas = ({
-    instructor,
-    opciones = ['Excelente', 'Muy Bueno', 'Bueno', 'Regular', 'Malo'],
-    respuestas,
-    setRespuestas,
-}) => {
-    const selectedOption = respuestas[instructor] || ''
+const Respuestas = () => {
+    const { respuestas } = useRespuestas();
+    const [seleccion, setSeleccion] = useState('');
 
-    const handleOptionChange = event => {
-        const { value } = event.target
-        setRespuestas(prevRespuestas => ({
-            ...prevRespuestas,
-            [instructor]: value,
-        }))
-    }
+    const caja = respuestas.map(respuesta => ({ instructor: respuesta.instructor.nombre, id: respuesta.instructor._id }));
+    console.log(caja)
+    const nombres = [...new Set(caja.map(instructor => instructor.instructor))];
+    const ids = [...new Set(caja.map(instructor => instructor.id))];
 
     return (
-        <div className="flex md:flex-row p-3">
-            <div className="mb-4 mt-4 flex items-center p-2 md:shadow-lg shadow-2xl shadow-green-800 rounded-2xl overflow-hidden border-2 border-Principal_1 border-x-Principal_2">
-                <img
-                    src={Instructor}
-                    alt="Instructor 1"
-                    className="instructor__photo max-w-[70px] h-[70px] rounded-full"
-                />
-                <h2 className="font-bold text-lg ml-4">{instructor}</h2>
-                <div className="flex flex-col ml-2 text-[15px]">
-                    {opciones.map((opcion, index) => (
-                        <React.Fragment key={index}>
-                            <input
-                                type="radio"
-                                id={`rating-${instructor}-${index}`}
-                                name={`rating-${instructor}`}
-                                value={opcion}
-                                className="hidden"
-                                checked={selectedOption === opcion}
-                                onChange={handleOptionChange}
-                            />
-                            <label
-                                htmlFor={`rating-${instructor}-${index}`}
-                                className={`cursor-pointer flex items-center mb-2 ${
-                                    selectedOption === opcion ? 'text-Principal_1' : 'text-gray-600'
-                                }`}
-                            >
-                                <span
-                                    className={`radio-button mr-2 w-4 h-4 rounded-full bg-gray-500 ${
-                                        selectedOption === opcion ? 'bg-green-600' : ''
-                                    }`}
-                                />
-                                {opcion}
-                            </label>
-                        </React.Fragment>
-                    ))}
+        nombres.length ? (
+            nombres.map((nombre) => (
+                <div key={nombre}>
+                    {ids.length ? (
+                        ids.map((id) => (
+                            <div className="flex md:flex-row p-3" key={id + nombre}>
+                                <div className="mb-4 mt-4 flex items-center p-2 md:shadow-lg shadow-2xl shadow-green-800 rounded-2xl overflow-hidden border-2 border-Principal_1 border-x-Principal_2">
+                                    <img
+                                        src={Instructor}
+                                        alt="Instructor 1"
+                                        className="instructor__photo max-w-[70px] h-[70px] rounded-full"
+                                    />
+                                    <h2 className="font-bold text-lg ml-4">{nombre}</h2>
+                                    <div className="flex flex-col ml-2 text-[15px]">
+                                        <FormGroup className="formGroupRadios">
+                                            <FormGroup>
+                                                <Input
+                                                    id={`${id}`}
+                                                    type="radio"
+                                                    value="Si"
+                                                    checked={seleccion === "Si"}
+                                                    onChange={() => setSeleccion("Si")}
+                                                />
+                                                <Label for={`si-${id}`}>Si{id}</Label>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Input
+                                                    id={`${id}`}
+                                                    type="radio"
+                                                    value="No"
+                                                    checked={seleccion === "No"}
+                                                    onChange={() => setSeleccion("No")}
+                                                />
+                                                <Label for={`no-${id}`}>No</Label>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Input
+                                                    id={`${id}`}
+                                                    type="radio"
+                                                    value="Tal vez"
+                                                    checked={seleccion === "Tal vez"}
+                                                    onChange={() => setSeleccion("Tal vez")}
+                                                />
+                                                <Label for={`talvez-${id}`}>Tal vez</Label>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Input
+                                                    id={`${id}`}
+                                                    type="radio"
+                                                    value="No sé"
+                                                    checked={seleccion === "No sé"}
+                                                    onChange={() => setSeleccion("No sé")}
+                                                />
+                                                <Label for={`nose-${id}`}>No sé</Label>
+                                            </FormGroup>
+                                        </FormGroup>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center text-gray-600 uppercase p-5">No hay proyectos</p>
+                    )}
                 </div>
-            </div>
-        </div>
-    )
-}
+            ))
+        ) : null
+    );
+};
 
-export default Respuestas
+export default Respuestas;
