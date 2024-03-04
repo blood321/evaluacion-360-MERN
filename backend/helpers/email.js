@@ -65,12 +65,12 @@ export const emailOlvidePassword = async (datos) => {
 
   //   Información del email
   const info = await transport.sendMail({
-    from: '"Evaluación 360° - Restablecer la contraseña" <cuentas@evaluacion360.com>',
+    from: '"Evaluación 360° - Recuperar la contraseña" <recuperarcontraseña@evaluacion360.com>',
     to: email,
-    subject: "Evaluación 360° - Restablecer la contraseña",
-    html: `<p>Hola ${nombre}: Has solicitado restablecer la contraseña</p>
+    subject: "Evaluación 360° - Recuperar la contraseña",
+    html: `<p>Hola ${nombre}: Has solicitado recuperar la contraseña</p>
         <p>Presiona click en el siguiente enlace para ingresar una nueva contraseña:</p>
-        <a href="http://localhost:5173/olvide-password/${token}">Restablece tu contraseña aquí</a>
-        <p style="font-size: 12px">Si tú no solicitaste este enlace, ignorar este mensaje</p>`,
+        <a href="http://localhost:5173/olvide-password/${token}">Recupera tu contraseña aquí</a>
+        <p style="font-size: 12px">Si tú no solicitaste este enlace, ignorar el mensaje</p>`,
   });
 };

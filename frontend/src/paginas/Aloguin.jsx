@@ -47,14 +47,14 @@ function Aloguin() {
   const { msg } = alerta;
 
   return (
-    <div className="font-roboto md:fixed md:h-full ">
-      <section className="mx-auto w-full rounded-lg shadow-lg shadow-green-900 overflow-hidden md:flex md:w-[700px] md:h-[400px] md:rounded-3xl md:mx-auto md:fixed bottom-15 inset-x-0  ">
+    <div className="font-roboto md:fixed md:h-full">
+      <section className="mx-auto w-full rounded-lg shadow-lg shadow-green-900 overflow-hidden md:flex md:w-[700px] md:h-[400px] md:rounded-3xl md:mx-auto md:fixed bottom-15 inset-x-0 animate-fade-down animate-duration-[3000ms]">
         {/* logo y eslogan */}
         <div className="bg-gradient-to-r from-Secundario_1 to-Secundario_2 h-[356px] pt-8 px-10 text-center rounded-b-3xl md:w-[900px] md:h-full md:rounded-3xl md:mb-6 ">
           <div className="flex items-center justify-center mb-2 md:mb-7 md:mt-5">
             <img
               src={logo1Principal}
-              className="w-[240px] h-[120px]"
+              className="w-[240px] h-[120px] animate-fade-down animate-duration-[3000ms]"
               alt="Logo 2"
             />
           </div>
@@ -92,7 +92,7 @@ function Aloguin() {
         </div>
         {/* formulario */}
         <div className="p-4 h-[400px] flex flex-col items-center justify-center rounded-xl bg-Principal_3 md:w-[650px] md:py-2">
-          <img src={logoSena} className="w-10 h-10 bg-cover" />
+          <img src={logoSena} className="w-10 h-10 bg-cover animate-fade-down animate-duration-[3000ms]" />
           <form htmlFor="email" onSubmit={handleSubmit}>
             <h2 className="my-3 text-[16px] font-semibold justify-center text-justify">
               Se enviará un código de verificación a tu correo electrónico
@@ -119,7 +119,7 @@ function Aloguin() {
         </div>
       </section>
       <div>
-        <footer className="text-center text-Principal_1 p-3 w-full mt-5 md:bg-Principal_1 md:text-Principal_3 md:fixed bottom-0 inset-x-0">
+        <footer className="text-center text-Principal_1 p-3 w-full mt-5 md:bg-Principal_1 md:text-Principal_3 md:fixed bottom-0 inset-x-0 animate-fade-right animate-duration-[4000ms]">
           &copy; 2024 SENA Centro Agropecuario
         </footer>
       </div>

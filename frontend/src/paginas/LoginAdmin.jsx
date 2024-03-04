@@ -56,11 +56,11 @@ const LoginAdmin = () => {
           <img
             src="src/assets/img/logo2Principal.png"
             alt="Imagen de logotipo"
-            className="w-[380px] h-[230px]"
+            className="w-[380px] h-[230px] animate-fade-right animate-duration-[3000ms]"
           />
         </div>
         <form
-          className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4 shadow-xl"
+          className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4 shadow-xl animate-fade-right animate-duration-[2000ms]"
           onSubmit={handleSubmit}
         >
           <div className="my-1 flex items-center justify-center ">
@@ -85,7 +85,7 @@ const LoginAdmin = () => {
               id="email"
               type="email"
               placeholder="Correo"
-              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-white focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-md"
+              className="text-center w-full mt-2 p-1 border-2 rounded-full focus:outline-none border-Principal_1 bg-white focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-md"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -96,7 +96,7 @@ const LoginAdmin = () => {
               id="password"
               type="password"
               placeholder="Contraseña"
-              className="text-center w-full mt-1 p-1 border-2 rounded-full border-Principal_1 bg-white mb-5 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-md"
+              className="text-center w-full mt-1 p-1 border-2 rounded-full focus:outline-none border-Principal_1 bg-white mb-5 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-md"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -105,7 +105,7 @@ const LoginAdmin = () => {
             <input
               type="submit"
               value="Ingresar"
-              className="bg-Principal_3 mt-1 p-1 w-[120px] text-center text-Textcolor_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer shadow-md shadow-Principal_1 "
+              className="bg-Principal_3 mt-1 p-1 w-[120px] text-center text-Principal_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer shadow-md shadow-Principal_1 "
             />
           </div>
           <Link

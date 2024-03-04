@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import clienteAxios from "../config/clienteAxios";
 import Alerta from "../components/Alerta";
+import Footer from "../components/Footer";
 
 const NewPassword = () => {
   const [password, setPassword] = useState("");
@@ -31,7 +32,7 @@ const NewPassword = () => {
     e.preventDefault();
     if (password.length < 6) {
       setAlerta({
-        msg: "La contraseña debe contener mínimo de 6 caracteres",
+        msg: "La contraseña debe contener mínimo 6 caracteres",
         error: true,
       });
       return;
@@ -57,14 +58,14 @@ const NewPassword = () => {
   const { msg } = alerta;
   return (
     <>
-      <h1 className="text-Secundario_1 mb-7 text-center font-black text-5xl capitalize">
+      <h1 className="text-Secundario_1 mb-7 text-center font-black text-5xl capitalize animate-fade-left animate-duration-[3000ms]">
         Reestablecer{" "}
         <span className="text-Principal_1">Contraseña</span>
       </h1>
       {msg && <Alerta alerta={alerta} />}
       {tokenValido && (
         <form
-          className="my-5 bg-white shadow rounded-3xl border-Principal_1 border-4 py-3 px-7"
+          className="my-5 bg-white shadow rounded-3xl border-Principal_1 border-4 py-3 px-7 animate-fade-right animate-duration-[3000ms]"
           onSubmit={handleSubmit}
         >
           <div className="my-5">
@@ -72,20 +73,20 @@ const NewPassword = () => {
               className="text-Principal_1 block text-xl font-bold"
               htmlFor="password"
             >
-              New Password
+              Nueva Contraseña
             </label>
             <input
               id="password"
               type="password"
-              placeholder="write your new password"
-              className="w-full my-5 block rounded-xl border-2 border-Principal_1 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-lg"
+              placeholder="Escribe tu nueva contraseña"
+              className="w-full my-5 block rounded-xl border-2 p-2.5 focus:outline-none border-Principal_1 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-lg"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <input
             type="submit"
-            value="Confirm Password"
+            value="Confirmar contraseña"
             className="bg-white mb-5 w-full py-3 text-Secundario_1 border-2 border-Principal_1 font-bold rounded-full hover:cursor-pointer hover:bg-Principal_1 hover:text-white hover:border-Principal_3"
           />
         </form>
@@ -93,12 +94,13 @@ const NewPassword = () => {
       {passwordModificado && (
         <Link
         to="/login-adm"
-        className="block text-center my-5 font-bold text-Principal_1 text-xl"
+        className="block text-center my-5 font-bold text-Principal_1 text-xl animate-fade-down animate-duration-[3000ms]"
         >
-          <p>Ahora puedes</p>
+          <p className="text-Secundario_1">Ahora puedes</p>
           Inicia Sesión
         </Link>
       )}
+      <Footer />
     </>
   );
 };

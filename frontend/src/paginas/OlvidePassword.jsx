@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Alerta from "../components/Alerta";
+import Footer from "../components/Footer";
 
 import clienteAxios from "../config/clienteAxios";
 
@@ -44,12 +45,12 @@ const OlvidePassword = () => {
   const { msg } = alerta;
   return (
     <>
-      <h1 className="text-Secundario_1 font-black text-center mb-7 text-5xl capitalize">
-        Recuperar{' '}<span className="text-Principal_1">Cuenta</span>
+      <h1 className="text-Secundario_1 font-black text-center mb-7 text-5xl capitalize animate-fade-right animate-duration-[3000ms]">
+        Recuperar <span className="text-Principal_1">Cuenta</span>
       </h1>
       {msg && <Alerta alerta={alerta} />}
       <form
-        className="rounded-3xl p-6 border-Principal_1 border-4 shadow-xl"
+        className="rounded-3xl p-6 border-Principal_1 border-4 shadow-xl animate-fade-left animate-duration-[3000ms]"
         onSubmit={handleSubmit}
       >
         <label
@@ -75,7 +76,7 @@ const OlvidePassword = () => {
             id="email"
             type="email"
             placeholder="Correo de Recuperación"
-            className="w-full my-5 ps-10 p-2.5 block rounded-xl border-2 border-Principal_1 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-lg"
+            className="w-full my-5 ps-10 p-2.5 block rounded-xl border-2 focus:outline-none border-Principal_1 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-lg"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -84,19 +85,20 @@ const OlvidePassword = () => {
           <input
             type="submit"
             value="Enviar Instrucciones"
-            className="bg-Principal_3 w-full py-3 text-Secundario_2 font-bold text-center rounded-full border-2 border-Principal_1 hover:bg-Principal_1 hover:text-white hover:border-Principal_1 shadow-lg cursor-pointer"
+            className="bg-Principal_3 w-full py-3 text-Principal_1 font-bold text-center rounded-full border-2 border-Principal_1 hover:bg-Principal_1 hover:text-white hover:border-Principal_1 shadow-lg cursor-pointer"
           />
         </div>
       </form>
       <nav className="lg:flex p-4 justify-center">
         <Link
           to="/login-adm"
-          className="block text-center font-semibold mt-3 text-slate-500 text-md"
+          className="block text-center font-semibold mt-3 text-slate-500 text-md animate-fade-right animate-duration-[3000ms]"
         >
           ¿Ya tienes una cuenta?{" "}
           <span className="text-Principal_1 font-bold">Inicia Sesión</span>
         </Link>
       </nav>
+      <Footer />
     </>
   );
 };
