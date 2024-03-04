@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useRespuestas from '../hooks/useRespuestas';
 
 const Preguntas = () => {
@@ -14,9 +14,9 @@ const Preguntas = () => {
     // Función para obtener el ID de la pregunta actual
     const obtenerIDPreguntaActual = () => {
         const preguntaActual = preguntasConID.find(pregunta => pregunta.pregunta === preguntasUnicas[indice]);
-        return preguntaActual ? preguntaActual._id : null;
+        return  preguntaActual ? preguntaActual._id : null
     };
-
+    
     const cambiarPalabra = (direccion) => {
         if (direccion === 'adelante') {
             // Incrementar el índice si no se ha alcanzado el límite máximo
