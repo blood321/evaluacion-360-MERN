@@ -1,5 +1,4 @@
 import express from 'express';
-import conectarDB from './config/db.js';
 import dotenv from "dotenv";
 import cors from 'cors'
 import usuarioRoutes from "./routes/usuario.routes.js";
@@ -22,5 +21,5 @@ app.use('/api/instructor', instructorRoutes)
 const PORT = process.env.PORT || 3000;
 
 app.listen(3000, () => {
-    console.log(`listening on port ${PORT}`);
+  console.log(`listening on port ${PORT}`);
 });

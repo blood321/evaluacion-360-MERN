@@ -1,17 +1,68 @@
-import "boxicons";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Alerta from "../components/Alerta";
+import clienteAxios from "../config/clienteAxios";
+import useAuth from "../hooks/useAuth";
+import Footer from "../components/Footer";
 
 const LoginAdmin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alerta, setAlerta] = useState({});
+
+  const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if ([email, password].includes("")) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
+    }
+
+    try {
+      const { data } = await clienteAxios.post("/usuarios/login", {
+        email,
+        password,
+      });
+      localStorage.setItem("token", data.token);
+      setAuth(data);
+      navigate("/proyectos");
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+    }
+  };
+
+  const { msg } = alerta;
+
   return (
     <>
       <div className="flex flex-col items-center justify-center">
-        <div>
+        <div className="mt-3">
           <img
             src="src/assets/img/logo2Principal.png"
             alt="Imagen de logotipo"
-            className="w-[380px] h-[230px]"
+            className="w-[380px] h-[230px] animate-fade-right animate-duration-[3000ms]"
           />
         </div>
-        <form className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4">
+        <form
+          className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4 shadow-xl animate-fade-right animate-duration-[2000ms]"
+          onSubmit={handleSubmit}
+        >
           <div className="my-1 flex items-center justify-center ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +83,11 @@ const LoginAdmin = () => {
           <div className="my-2 mt-4 flex items-center relative">
             <input
               id="email"
-              type="text"
-              placeholder="Cedula"
-              className="text-center w-full mt-2 p-1 border-2 rounded-full border-Principal_1 bg-gray-500"
+              type="email"
+              placeholder="Correo"
+              className="text-center w-full mt-2 p-1 border-2 rounded-full focus:outline-none border-Principal_1 bg-white focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-md"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -43,23 +96,28 @@ const LoginAdmin = () => {
               id="password"
               type="password"
               placeholder="Contraseña"
-              className="text-center  w-full mt-1 p-1 border-2 rounded-full border-Principal_1 bg-gray-50 mb-7"
+              className="text-center w-full mt-1 p-1 border-2 rounded-full focus:outline-none border-Principal_1 bg-white mb-5 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-md"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="flex items-center justify-center drop-shadow-lg  ">
-          <input
-            type="submit"
-            value="Ingresar"
-            className="bg-Principal_3 mt-2 p-1 w-[120px] text-center text-Textcolor_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer shadow-lg shadow-Principal_1 "
-          />
+          <div className="flex items-center justify-center">
+            <input
+              type="submit"
+              value="Ingresar"
+              className="bg-Principal_3 mt-1 p-1 w-[120px] text-center text-Principal_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer shadow-md shadow-Principal_1 "
+            />
           </div>
+          <Link
+            className="block text-center font-bold my-5 text-Principal_1 capitalize text-sm"
+            to="/olvide-password"
+          >
+            Olvide mi contraseña
+          </Link>
         </form>
+        {msg && <Alerta alerta={alerta} />}
       </div>
-      <div>
-        <footer className="text-center bg-Principal_1 text-Principal_3 p-3 md:fixed bottom-0 inset-x-0">
-          © 2024 SENA Centro Agropecuario
-        </footer>
-      </div>
+      <Footer />
     </>
   );
 };
