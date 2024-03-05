@@ -14,7 +14,7 @@ const AprendizSchema=mongoose.Schema({
     },   
     activo:{
         type:Boolean,
-        default:true,
+        default:false,
     }
 },{
     timestamps:true,
