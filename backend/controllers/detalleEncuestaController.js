@@ -2,7 +2,7 @@ import preguntas from "../models/preguntas.js";
 import encuesta  from "../models/encuesta.js";
 import detalleEncuesta from "../models/detalleEncuesta.js";
 import fichas from "../models/fichas.js";
-import Usuario from "../models/Usuarios.js";
+import Usuario from "../models/Usuario.js";
 import programacion from "../models/programacionMov3.js"
 import Respuesta from "../models/respuestas.js";
 

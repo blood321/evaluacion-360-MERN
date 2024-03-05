@@ -11,10 +11,7 @@ const AprendizSchema=mongoose.Schema({
         type: String,
         required:true,
         trim:true
-    }, 
-
-    activo:{
-   
+    },   
     activo:{
         type:Boolean,
         default:true,
@@ -23,5 +20,5 @@ const AprendizSchema=mongoose.Schema({
     timestamps:true,
 })
 
-const Aprendiz =mongoose.model('Aprendiz',AprendizSchema)
+const Aprendiz =mongoose.model('Aprendiz', AprendizSchema)
 export default Aprendiz

@@ -13,7 +13,7 @@ const Aviso = () => {
     
     useEffect(() => {
         async function loadName() {
-            const nombre = await clienteAxios(`/usuarios/aviso/${params.email}`)
+            const nombre = await clienteAxios(`/aprendiz/aviso/${params.email}`)
             setNombre(nombre.data)
         }
         loadName()
