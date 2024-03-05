@@ -4,33 +4,23 @@ import mongoose from "mongoose";
 const fichasSchema=mongoose.Schema({
     numeroFicha:{
         type:String,
-        trim:true,
-        required:true
+      
     },
-    fichaInico:{
+    fichaInicio:{
         type: Date,
-        trim:true,
-        required:true
+     
     }, 
     fichaFin:{
         type: Date,
-        trim:true,
-        required:true
     }, 
     fichaFinETP:{
         type: Date,
-        trim:true,
-        required:true
     },
     aprendices:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"aprendiz",
+        ref:"Usuario",
     }],
-    instructores:     
-    [{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"instructor",
-    }],
+
 })
 
 const  fichas=mongoose.model('fichas',fichasSchema)

@@ -23,7 +23,7 @@ function Aloguin() {
     }
 
     try {
-      const { data } = await clienteAxios.post("/usuarios/autenticar", {
+      const { data } = await clienteAxios.post("/aprendiz/autenticar", {
         email,
       });
       setAlerta({
