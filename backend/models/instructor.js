@@ -5,25 +5,18 @@ const instructorSchema=mongoose.Schema({
     nombre:{
         type: String,
         required:true,
-        trim:true
+      
+    },
+    cedula:{
+        type:String,
+        required:true,
+     
     },
   
-    email:{
-        type: String,
-        required:true,
-        trim:true,
-        unique:true
-    },
-    token:{
-        type: String,
-        
-    },
+
    
-    equipoEjecutor:     
-    [{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"equipoEjecutor",
-    }]
+    
+  
 
 })
 
