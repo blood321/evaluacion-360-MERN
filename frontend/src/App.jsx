@@ -19,6 +19,7 @@ import { ProyectosProvider } from "./context/ProyectosProvider";
 import LoginAdmin from "./paginas/LoginAdmin.jsx";
 import Componer from "./paginas/PrvComponents.jsx";
 import LayoutSe from "./layouts/LayoutSe.jsx";
+import Encuestas from "./paginas/Encuestas.jsx";
 
 function App() {
   return (
@@ -31,14 +32,13 @@ function App() {
             </Route>
 
             <Route path="/" element={<LayoutSe />}>
-              <Route path="InicioAdmin" element={<IniAdmin />} />
             </Route>
+              <Route path="InicioAdmin" element={<IniAdmin />} />
+              <Route path="Encuestas" element={<Encuestas />} />
 
-            
             <Route path="Componer" element={<Componer />} />
             <Route path="/aviso" element={<Aviso />} />
-              <Route path="/Login" element={<LoginAdmin />} />
-
+            <Route path="/Login" element={<LoginAdmin />} />
 
             <Route path="/" element={<CoorLayout />}>
               <Route path="registrar" element={<Registrar />} />
@@ -50,17 +50,16 @@ function App() {
               <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
             </Route>
 
-                        <Route path="proyectos" element={<RutaProtegida />}>
-                            <Route index element={<Proyectos />} />
-                            <Route path="crear-proyecto" element={<NuevoProyecto />} />
-                            <Route path=":id" element={<Proyecto />} />
-                            <Route path="editar/:id" element={<EditarProyecto />} />
-                        </Route>
-
-                    </Routes>
-                </ProyectosProvider>
-            </AuthProvider>
-        </BrowserRouter>
-    )
+            <Route path="proyectos" element={<RutaProtegida />}>
+              <Route index element={<Proyectos />} />
+              <Route path="crear-proyecto" element={<NuevoProyecto />} />
+              <Route path=":id" element={<Proyecto />} />
+              <Route path="editar/:id" element={<EditarProyecto />} />
+            </Route>
+          </Routes>
+        </ProyectosProvider>
+      </AuthProvider>
+    </BrowserRouter>
+  );
 }
 export default App;

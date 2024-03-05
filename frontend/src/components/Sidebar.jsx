@@ -6,7 +6,7 @@ const Sidebar = () => {
   return (
     <aside
       className="
-    flex flex-col items-center h-max px-1 pt-6 w-[280px] mx-9  my-9 bg-white border-Principal_1 border-solid border-[4.442px] rounded-[33.695px] 
+    flex flex-col items-center h-max px-1 pt-8 w-[400px] mx-9  my-9 bg-white border-Principal_1 border-solid border-[4.442px] rounded-[33.695px] 
     "
     >
       <div className="flex flex-col mb-4 ">
