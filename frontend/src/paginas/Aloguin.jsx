@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import clienteAxios from "../config/clienteAxios";
 import Alerta from "../components/Alerta";
+import logoSena from "../assets/img/logoSena.png";
+import logo1Principal from '../assets/img/logo1Principal.png'
 
 function Aloguin() {
   const [email, setEmail] = useState("");
@@ -10,8 +12,16 @@ function Aloguin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (email === "" || email.length < 6) {
+      setAlerta({
+        msg: "El correo es obligatorio",
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4500);
       return;
     }
+
     try {
       const { data } = await clienteAxios.post("/usuarios/autenticar", {
         email,
@@ -33,16 +43,20 @@ function Aloguin() {
       }, 2500);
     }
   };
-  
+
   const { msg } = alerta;
 
   return (
-    <div className="font-roboto md:fixed md:h-full ">
-      <section className="mx-auto w-full rounded-lg shadow-lg shadow-green-900 overflow-hidden md:flex md:w-[700px] md:h-[400px] md:rounded-3xl md:mx-auto md:fixed bottom-15 inset-x-0  ">
+    <div className="font-roboto md:fixed md:h-full">
+      <section className="mx-auto w-full rounded-lg shadow-lg shadow-green-900 overflow-hidden md:flex md:w-[700px] md:h-[400px] md:rounded-3xl md:mx-auto md:fixed bottom-15 inset-x-0 animate-fade-down animate-duration-[3000ms]">
         {/* logo y eslogan */}
         <div className="bg-gradient-to-r from-Secundario_1 to-Secundario_2 h-[356px] pt-8 px-10 text-center rounded-b-3xl md:w-[900px] md:h-full md:rounded-3xl md:mb-6 ">
           <div className="flex items-center justify-center mb-2 md:mb-7 md:mt-5">
-            <div className="bg-logo1Principal bg-cover w-[250px] h-[110px] "></div>
+            <img
+              src={logo1Principal}
+              className="w-[240px] h-[120px] animate-fade-down animate-duration-[3000ms]"
+              alt="Logo 2"
+            />
           </div>
           <h2 className="text-Principal_3 text-[19px] font-bold  ">
             Obtén una visión completa de tu institución con
@@ -56,7 +70,10 @@ function Aloguin() {
               360°{" "}
             </span>
           </h2>
-          <Link to={"/login-adm"} className="flex items-center justify-center mx-auto mb-8 mt-8 md:mt15 md:mb-4 bg-gradient-to-r from-Principal_1 to-Principal_2 rounded-full w-10 h-10 hover:transform hover:scale-110 transition-transform duration-400 ease-in-out">
+          <Link
+            to={"/login-adm"}
+            className="flex items-center justify-center mx-auto my-8 md:mt15 md:mb-4 bg-gradient-to-r from-Principal_1 to-Principal_2 rounded-full w-10 h-10 hover:transform hover:scale-110 transition-transform duration-400 ease-in-out"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -74,8 +91,8 @@ function Aloguin() {
           </Link>
         </div>
         {/* formulario */}
-        <div className="p-4 h-[380px] flex flex-col items-center justify-center rounded-b-3xl bg-Principal_3 md:w-[650px] md:py-2">
-          <div className="bg-logoSena w-12 h-12 bg-cover"></div>
+        <div className="p-4 h-[400px] flex flex-col items-center justify-center rounded-xl bg-Principal_3 md:w-[650px] md:py-2">
+          <img src={logoSena} className="w-10 h-10 bg-cover animate-fade-down animate-duration-[3000ms]" />
           <form htmlFor="email" onSubmit={handleSubmit}>
             <h2 className="my-3 text-[16px] font-semibold justify-center text-justify">
               Se enviará un código de verificación a tu correo electrónico
@@ -95,14 +112,14 @@ function Aloguin() {
             </p>
             <input
               type="submit"
-              className="rounded-2xl w-full p-2 mt-4 text-center text-white bg-gradient-to-r from-Principal_1 to-Principal_2 hover:cursor-pointer"
+              className="rounded-2xl w-full p-2 mt-4 text-center font-bold text-white bg-gradient-to-r from-Principal_1 to-Principal_2 hover:cursor-pointer hover:transform hover:scale-105 transition-transform duration-400 ease-in-out"
               value="Enviar Enlace"
             />
           </form>
         </div>
       </section>
       <div>
-        <footer className="text-center text-Principal_1 p-3 w-full mt-5 md:bg-Principal_1 md:text-Principal_3 md:fixed bottom-0 inset-x-0">
+        <footer className="text-center text-Principal_1 p-3 w-full mt-5 md:bg-Principal_1 md:text-Principal_3 md:fixed bottom-0 inset-x-0 animate-fade-right animate-duration-[4000ms]">
           &copy; 2024 SENA Centro Agropecuario
         </footer>
       </div>

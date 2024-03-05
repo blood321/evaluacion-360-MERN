@@ -1,7 +1,7 @@
 import Usuario from "../models/Usuario.js";
 import generarID from "../helpers/generarId.js";
 import generarJWT from "../helpers/generarJWT.js";
-import { emailRegistro, emailAutenticar } from "../helpers/email.js";
+import { emailRegistro, emailAutenticar, emailOlvidePassword } from "../helpers/email.js";
 
 const register = async (req, res) => {
   // Evitar registros duplicados
@@ -115,7 +115,7 @@ const olvidePassword = async (req, res) => {
     usuario.token = generarID();
     await usuario.save();
     // Enviar el email de nueva confirmación
-    emailAutenticar({
+    emailOlvidePassword({
       email: usuario.email,
       nombre: usuario.nombre,
       token: usuario.token,
@@ -161,8 +161,7 @@ const nuevoPassword = async (req, res) => {
 };
 
 const perfil = async (req, res) => {
-  const { usuario } = req.body;
-
+  const usuario = new Usuario(req.body);
   res.json(usuario);
 };
 
