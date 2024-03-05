@@ -2,16 +2,20 @@ import mongoose from "mongoose";
 
 
 const equipoEjecutorSchema=mongoose.Schema({
-    NombreEquipo:{
+    nombreEquipo:{
         type: String,
         trim:true,
         required:true
     }, 
-    Lider:   
-    [{
+    lider:   
+    {
         type:mongoose.Schema.Types.ObjectId,
         ref:"instructor",
-    }],
+    },
+    miembros:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"instructor"
+    }]
 })
 
 const  equipoEjecutor=mongoose.model('equipoEjecutor',equipoEjecutorSchema)
