@@ -51,7 +51,7 @@ const FormularioProyecto = () => {
       {msg && <Alerta alerta={alerta} />}
       <div className="mb-5">
         <label
-          className="text-gray-700 capitalize font-bold text-md"
+          className="text-red-700 capitalize font-bold text-md"
           htmlFor="nombre"
         >
           Nombre Proyecto

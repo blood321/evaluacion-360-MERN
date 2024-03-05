@@ -3,7 +3,6 @@ import useAuth from "../hooks/useAuth";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Tematicas from "../components/Tematicas";
-import Footer from "../components/Footer";
 
 function RutaProtegida() {
   const { auth, cargando } = useAuth();
@@ -15,12 +14,13 @@ function RutaProtegida() {
           <Header />
           <div className="md:flex md:min-h-screen">
             <Sidebar />
-              <main className="py-5 pr-10 flex-1">
-                <Tematicas />
-                <Outlet />
+              <div className="items-center">
+                <Tematicas/>
+                <main className="py-5 pr-10 flex-1">
+                  <Outlet />
               </main>
+            </div>
           </div>
-          <Footer />
         </div>
       ) : (
         <Navigate to="/" />
