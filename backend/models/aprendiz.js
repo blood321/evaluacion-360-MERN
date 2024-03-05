@@ -12,14 +12,17 @@ const aprendizSchema=mongoose.Schema({
         required:true,
         trim:true
     }, 
-
-    activo:{
+    token:{
+        type: String,
+        
+    },
+    confirmado:{
         type:Boolean,
-        default:true,
+        default:false,
     }
 },{
     timestamps:true,
 })
 
-const Aprendiz =mongoose.model('Aprendiz', aprendizSchema)
-export default Aprendiz
+const aprendiz =mongoose.model('aprendiz',aprendizSchema)
+export default aprendiz
