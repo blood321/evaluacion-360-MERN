@@ -27,7 +27,7 @@ const Sidebar_A = () => {
     }
 
     return (
-        <div className="h-screen px-[25px] overflow-auto">
+        <div className="h-screen px-[25px] overflow-auto bg-white">
             <div className="px-[15px] py-[10px] flex items-center justify-center border-b-[3px] border-Principal_1/[0.3]">
                 <img src={logoSena} className="w-[50px] h-[50px] md:mt-4 mb-4" alt="Logo sena" />
             </div>
