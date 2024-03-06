@@ -16,16 +16,7 @@ const obtenerAprendiz = async (req, res) => {
     res.json(aprendiz.nombre);
   }
 };
-  const data = req.params.email;
-  const email = data;
-  const aprendiz = await Aprendiz.findOne({ email });
-  if (!aprendiz) {
-    const error = new Error("El usuario no existe");
-    return res.status(404).json({ msg: error.message });
-  } else {
-    res.json(aprendiz.nombre);
-  }
-};
+
 
 const autenticar = async (req, res) => {
   const { email } = req.body;
