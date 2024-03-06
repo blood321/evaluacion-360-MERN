@@ -11,9 +11,13 @@ const Responder = () => {
 
     const nombreEncuesta = respuestas.map(respuesta => ( respuesta.encuesta.nombre ));
     const soloMostrarUno = [...new Set(nombreEncuesta)];
+    const[id,setId]=useState('')
 
-        
-
+        const addmensaje=(mensaje)=>{
+            setId(mensaje)
+            console.log(mensaje)
+        }
+  console.log(id)
     return (
         <>
             <header className="flex justify-between items-center fixed top-0 left-0 right-0 p-5 md:px-10 md:w-full md:mx-auto md:mt-4">
@@ -37,7 +41,7 @@ const Responder = () => {
 
                       
                         
-                        <Preguntas  />
+                        <Preguntas  addmensaje={addmensaje}/>
 
                            
                            
@@ -53,6 +57,7 @@ const Responder = () => {
                     </div>
                    
 
+                    <p>preguntaID de la  actual: {id}</p> 
 
 
 
