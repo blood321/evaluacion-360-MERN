@@ -1,30 +1,35 @@
-import Express  from "express";
+import Express from "express";
 import {
-   nuevaPregunta,editarPregunta,eliminarPregunta,obtenerPregunta,obtenerPreguntasParaAprendiz,obtenerPreguntasParaCompañeros,obtenerPreguntasParaJefes
-} from '../controllers/preguntasController.js'
+  editarPregunta,
+  eliminarPregunta,
+  obtenerPregunta,
+  obtenerPreguntasParaAprendiz,
+  obtenerPreguntasParaCompañeros,
+  obtenerPreguntasParaJefes,
+  nuevaPreguntaParaAprendices,
+  nuevaPreguntaParaCompaneros,
+  nuevaPreguntaParaJefes,
+} from "../controllers/preguntasController.js";
 
+const router = Express.Router();
+router.route("/").get(obtenerPregunta);
 
-const router = Express.Router()
-router.route('/')
-    
-    .post(nuevaPregunta)
-    
-    .get(obtenerPregunta)
-    router.route('/:id')
-    .get(obtenerPregunta)
-    .put(editarPregunta)
-    .delete(eliminarPregunta)
-    
-    router.route('/preguntas-jefes/')
-    .get(obtenerPreguntasParaJefes)
+router.route("/crear-preguntas-jefes/").post(nuevaPreguntaParaJefes);
 
-    router.route('/preguntas-Compañeros')
-    .get(obtenerPreguntasParaCompañeros)
+router.route("/crear-preguntas-Compañeros").post(nuevaPreguntaParaCompaneros);
 
-    router.route('/preguntas-Aprendices')
-    .get(obtenerPreguntasParaAprendiz)
-  
-    
-   
+router.route("/crear-preguntas-Aprendices").post(nuevaPreguntaParaAprendices);
 
-export default router
+router.route("/listar-preguntas-jefes/").get(obtenerPreguntasParaJefes);
+
+router.route("/listar-preguntas-Compañeros").get(obtenerPreguntasParaCompañeros);
+
+router.route("/listar-preguntas-Aprendices").get(obtenerPreguntasParaAprendiz);
+
+router
+  .route("/:id")
+  .get(obtenerPregunta)
+  .put(editarPregunta)
+  .delete(eliminarPregunta);
+
+export default router;
