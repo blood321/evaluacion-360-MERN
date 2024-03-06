@@ -1,9 +1,9 @@
-import PrevisualizarEncu from "../components/PrevisualizarEncu"
+import GraficaPie from "../components/GraficaPie"
 function Componer() {
   return (
-    <div className="flex flex-col items-center justify-center">
-        <PrevisualizarEncu/>
-    </div>
+      <div className="flex items-center justify-center ">
+        <GraficaPie/>
+        </div>
   )
 }
 

@@ -1,19 +1,17 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 
-
 const IniAdmin = () => {
   return (
     <div className="flex flex-col   ">
       <div className="flex mt-6 flex-col items-center justify-center  ">
         <div className="flex gap-5  max-md:flex-col max-md:gap-0 max-md: ">
-          
-        <Sidebar>
-        </Sidebar>
+          <Sidebar></Sidebar>
           <div className="flex flex-col md-2 justify-center items-center">
+          
             <div>
               <img
-            src="src/assets/img/logo2Principal.png"
+                src="src/assets/img/logo2Principal.png"
                 alt="Imagen de logotipo"
                 className="w-[340px] h-[190px]  "
               />
