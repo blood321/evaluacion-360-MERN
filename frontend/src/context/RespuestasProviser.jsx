@@ -31,6 +31,35 @@ const RespuestasProvider = ({ children }) => {
       setAlerta({});
     }, 5000);
   };
+  const editarRespuesta = async (proyecto) => {
+    try {
+    
+      const { data } = await clienteAxios.put(
+        `/proyectos/${proyecto.id}`,
+        proyecto,
+        config
+      );
+
+      // Sincronizar el state
+      const proyectosActualizados = respuestas.map((proyectoState) =>
+        proyectoState._id === data._id ? data : proyectoState
+      );
+      setRespuestas(proyectosActualizados);
+
+      // Mostrar la Alerta de proyecto actualizado
+      setAlerta({
+        msg: "Proyecto Actualizado correctamente",
+        error: false,
+      });
+
+      setTimeout(() => {
+        setAlerta({});
+        navigate("/proyectos");
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   return (
