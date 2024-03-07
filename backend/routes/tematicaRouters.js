@@ -1,16 +1,8 @@
 import Express  from "express";
 import {
  nuevaTematica
-} from '../controllers/tematicaController.js'
-
-
+} from '../controllers/tematicaContoller.js'
 const router = Express.Router()
 router.route('/')
-    
     .post(nuevaTematica)
-
-
-    
-
-
 export default router
