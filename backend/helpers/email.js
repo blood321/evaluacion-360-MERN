@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+// import google from "googleapis";
 
 export const emailRegistro = async (datos) => {
   const { email, nombre, token } = datos;
@@ -27,7 +28,7 @@ export const emailRegistro = async (datos) => {
 };
 
 export const emailAutenticar = async (datos) => {
-  const { email, nombre, token } = datos;
+  const { id, nombre, email } = datos;
 
   const transport = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -46,7 +47,7 @@ export const emailAutenticar = async (datos) => {
     text: "Autentica tu correo para realizar la encuesta",
     html: `<p>Hola: ${nombre} has solicitado la autenticación de tu correo</p>
         <p>Dar click en el siguiente enlace para ingresar a la encuesta:</p>
-        <a href="http://localhost:5173/aviso/${email}">Entra a la encuesta aquí</a>
+        <a href="http://localhost:5173/aviso/${id}">Entra a la encuesta aquí</a>
         <p style="font-size: 12px">Si tú no solicitaste este email, puedes ignorar el mensaje</p>`,
   });
 };
