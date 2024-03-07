@@ -10,8 +10,11 @@ const detalleEncuestaSchema=mongoose.Schema({
     fichas:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"fichas"
+    },
+    activa:{
+        type:Boolean,
+        default:false
     }
-
    
 
 })

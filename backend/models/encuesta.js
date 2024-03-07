@@ -24,11 +24,6 @@ const encuestaSchema=mongoose.Schema({
     encuestado: {
         type: String,
         enum: ["Aprendiz", "Jefes", "Compañeros"],
-    },
-    
-    activa:{
-        type:Boolean,
-        default:false
     }
     
 

@@ -1,6 +1,5 @@
 import Express from "express";
 import {
-  nuevaEncuesta,
   editarEncuesta,
   eliminarEncuesta,
   nuevaEncuestaParaAprendices,

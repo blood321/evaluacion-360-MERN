@@ -12,14 +12,8 @@ const aprendizSchema=mongoose.Schema({
         required:true,
         trim:true
     }, 
-    token:{
-        type: String,
-        
-    },
-    confirmado:{
-        type:Boolean,
-        default:false,
-    }
+    
+   
 },{
     timestamps:true,
 })

@@ -11,7 +11,7 @@ import  detalleEncuesta from "./routes/detalleEncuesta.js";
 import  tematicaRouters  from "./routes/tematicaRouters.js";
 import  intructorRouters  from "./routes/intructorRouter.js";
 import programacionRouters from "./routes/programacionRouters.js";
-
+import aprendzRouter from "./routes/aprendizRouters.js"
 
 
 const app = express();
@@ -29,7 +29,7 @@ app.use('/api/programacion',programacionRouters)
 app.use('/api/pregunta',preguntaRouters)
 app.use('/api/tematica',tematicaRouters)
 
-
+app.use('/api/aprendiz',aprendzRouter)
 app.use('/api/usuarios',usuarioRouters)
 app.use('/api/instructor',intructorRouters)
 app.use('/api/fichas',fichasRouters)
