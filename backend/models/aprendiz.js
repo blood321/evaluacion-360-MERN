@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const aprendizSchema=mongoose.Schema({
+const AprendizSchema=mongoose.Schema({
     nombre:{
         type: String,
         required:true,
@@ -11,12 +11,8 @@ const aprendizSchema=mongoose.Schema({
         type: String,
         required:true,
         trim:true
-    }, 
-    token:{
-        type: String,
-        
-    },
-    confirmado:{
+    },   
+    activo:{
         type:Boolean,
         default:false,
     }
@@ -24,5 +20,5 @@ const aprendizSchema=mongoose.Schema({
     timestamps:true,
 })
 
-const aprendiz =mongoose.model('aprendiz',aprendizSchema)
-export default aprendiz
+const Aprendiz =mongoose.model('Aprendiz', AprendizSchema)
+export default Aprendiz

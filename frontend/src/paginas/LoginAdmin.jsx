@@ -35,7 +35,7 @@ const LoginAdmin = () => {
       });
       localStorage.setItem("token", data.token);
       setAuth(data);
-      navigate("/proyectos");
+      navigate("/Inicio-Administrador");
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,
