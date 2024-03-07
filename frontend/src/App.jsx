@@ -44,7 +44,7 @@ function App() {
             <Route path="/" element={<LayoutSe />}></Route>
 
             <Route path="login-adm" element={<LoginAdmin />} />
-            <Route path="aviso" element={<Aviso />} />
+            <Route path="aviso/:id" element={<Aviso />} />
             <Route path="responder" element={<Respoder />} />
             <Route path="/login-adm" element={<LoginAdmin />} />
             <Route path="componer" element={<Componer />} />
