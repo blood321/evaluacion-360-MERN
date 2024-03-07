@@ -51,8 +51,31 @@ const LoginAdmin = () => {
 
   return (
     <>
+    <div className="flex items-end justify-end animate-fade-right animate-duration-[3000ms] mx-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+              />
+            </svg>
+            <img
+            src="src/assets/img/logoSena.png"
+            alt="Imagen de logotipo"
+            className="w-[25px] h-[25px] "
+          />
+      </div>
       <div className="flex flex-col items-center justify-center">
-        <div className="mt-3">
+        
+        <div>
+          
           <img
             src="src/assets/img/logo2Principal.png"
             alt="Imagen de logotipo"
@@ -118,6 +141,7 @@ const LoginAdmin = () => {
         {msg && <Alerta alerta={alerta} />}
       </div>
       <Footer />
+      
     </>
   );
 };

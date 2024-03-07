@@ -4,7 +4,7 @@ import { obtenerAprendiz, autenticar } from "../controllers/aprendiz.controller.
 
 const router = express.Router();
 
-router.get("/aviso/:email", obtenerAprendiz);
+router.get("/aviso/:id", obtenerAprendiz);
 router.post("/autenticar", autenticar);
 
 export default router;
