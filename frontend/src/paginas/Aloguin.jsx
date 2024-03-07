@@ -9,6 +9,7 @@ function Aloguin() {
   const [email, setEmail] = useState("");
   const [alerta, setAlerta] = useState({});
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (email === "" || email.length < 6) {
@@ -19,6 +20,7 @@ function Aloguin() {
       setTimeout(() => {
         setAlerta({});
       }, 4500);
+      
       return;
     }
 
@@ -33,6 +35,7 @@ function Aloguin() {
       setTimeout(() => {
         setAlerta({});
       }, 4500);
+      
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,

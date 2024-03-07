@@ -18,6 +18,7 @@ import Respoder from "./paginas/Respoder";
 import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
 import LoginAdmin from "./paginas/LoginAdmin.jsx";
+import Admin from "./paginas/Admin.jsx";
 
 function App() {
   return (
@@ -29,12 +30,28 @@ function App() {
               <Route index element={<Aloguin />} />
             </Route>
 
-            <Route path="/" element={<LayoutSe />}>
-              <Route path="LoginAdm" element={<LoginAdmin />} />
-            </Route>
 
-            <Route path="aviso" element={<Aviso />} />
+            <Route path="/" element={<LayoutSe />}>
+            </Route>
+              <Route path="InicioAdmin" element={<IniAdmin />} />
+              <Route path="Encuestas" element={<Encuestas />} />
+
+            <Route path="/aviso" element={<Aviso />} />
+            <Route path="/Login" element={<LoginAdmin />} />
+
+            <Route path="InicioAdmin" element={<IniAdmin />} />
+            <Route path="/aviso/:email" element={<Aviso />} />
+            <Route path="/" element={<LayoutSe />}></Route>
+
+            <Route path="login-adm" element={<LoginAdmin />} />
+            <Route path="aviso/:id" element={<Aviso />} />
             <Route path="responder" element={<Respoder />} />
+            <Route path="/login-adm" element={<LoginAdmin />} />
+            <Route path="componer" element={<Componer />} />
+
+
+
+            <Route path="Inicio-Administrador" element={<Admin />}></Route>
             <Route path="/" element={<CoorLayout />}>
               <Route path="login-coordinador" element={<Login />} />
               <Route path="registrar" element={<Registrar />} />
@@ -45,6 +62,8 @@ function App() {
               />
               <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
             </Route>
+
+
 
             <Route path="proyectos" element={<RutaProtegida />}>
               <Route index element={<Proyectos />} />
@@ -58,4 +77,4 @@ function App() {
     </BrowserRouter>
   );
 }
-export default App
+export default App;

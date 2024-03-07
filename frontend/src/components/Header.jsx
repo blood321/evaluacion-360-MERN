@@ -1,6 +1,6 @@
 function Header() {
     return (
-        <header className="px-4 py-3 bg-white border-b">
+        <header className="px-4 py-3 bg-white border-b ">
             <div className="md:flex md:justify-between">
                 <h2 className="text-4xl  font-black text-center">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-Principal_1 to-Principal_2">

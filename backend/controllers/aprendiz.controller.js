@@ -6,9 +6,9 @@ import {
 } from "../helpers/email.js";
 
 const obtenerAprendiz = async (req, res) => {
-  const data = req.params.email;
-  const email = data;
-  const aprendiz = await Aprendiz.findOne({ email });
+  const data = req.params.id;
+  const id = data;
+  const aprendiz = await Aprendiz.findOne({ _id: id});
   if (!aprendiz) {
     const error = new Error("El usuario no existe");
     return res.status(404).json({ msg: error.message });
@@ -16,7 +16,6 @@ const obtenerAprendiz = async (req, res) => {
     res.json(aprendiz.nombre);
   }
 };
-
 
 const autenticar = async (req, res) => {
   const { email } = req.body;
@@ -31,9 +30,9 @@ const autenticar = async (req, res) => {
     // await usuario.save();
     // Enviar el email de nueva confirmación
     emailAutenticar({
-      email: aprendiz.email,
+      id: aprendiz._id,
       nombre: aprendiz.nombre,
-      token: aprendiz.token,
+      email: aprendiz.email,
     });
     res.json({
       msg: "Hemos enviado un enlace de acceso a su correo electrónico",

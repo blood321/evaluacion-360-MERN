@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import usuarioRoutes from "./routes/usuario.routes.js";
+import proyectoRoutes from "./routes/proyecto.routes.js";
+import tareaRoutes from "./routes/tarea.routes.js";
 import fichasRouters from "./routes/fichaRouter.js";
 import encuestasRouters from "./routes/encuestasRouter.js";
 import preguntaRouters from "./routes/preguntaRouter.js";
@@ -21,6 +23,9 @@ dotenv.config();
 conectarDB();
 app.use(cors());
 
+app.use('/api/usuarios', usuarioRoutes)
+app.use('/api/proyectos', proyectoRoutes)
+app.use('/api/tareas', tareaRoutes)
 app.use("/api/detalleEncuesta", detalleEncuesta);
 app.use("/api/encuesta", encuestasRouters);
 app.use("/api/programacion", programacionRouters);
