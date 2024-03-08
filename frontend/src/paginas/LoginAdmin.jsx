@@ -51,14 +51,14 @@ const LoginAdmin = () => {
 
   return (
     <>
-    <div className="flex items-end justify-end animate-fade-right animate-duration-[3000ms] mx-2">
+    <Link to={'/'} className="flex items-end justify-end animate-fade-right animate-duration-[3000ms]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-6 h-6 my-1 mx-1"
             >
               <path
                 strokeLinecap="round"
@@ -66,12 +66,7 @@ const LoginAdmin = () => {
                 d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
               />
             </svg>
-            <img
-            src="src/assets/img/logoSena.png"
-            alt="Imagen de logotipo"
-            className="w-[25px] h-[25px] "
-          />
-      </div>
+      </Link>
       <div className="flex flex-col items-center justify-center">
         
         <div>
@@ -83,7 +78,7 @@ const LoginAdmin = () => {
           />
         </div>
         <form
-          className=" rounded-3xl md:h-[350px] p-6 border-Principal_1 border-4 shadow-xl animate-fade-right animate-duration-[2000ms]"
+          className=" rounded-3xl md:h-[340px] p-6 border-Principal_1 border-4 shadow-xl animate-fade-right animate-duration-[2000ms]"
           onSubmit={handleSubmit}
         >
           <div className="my-1 flex items-center justify-center ">
@@ -114,7 +109,7 @@ const LoginAdmin = () => {
             />
           </div>
 
-          <div className="my-5">
+          <div className="my-4">
             <input
               id="password"
               type="password"
@@ -128,7 +123,7 @@ const LoginAdmin = () => {
             <input
               type="submit"
               value="Ingresar"
-              className="bg-Principal_3 mt-1 p-1 w-[120px] text-center text-Principal_1 border-2 border-Principal_1 capitalize font-bold rounded-full hover:cursor-pointer shadow-md shadow-Principal_1 "
+              className="bg-Principal_3 mt-1 p-1 w-[120px] text-center text-Principal_1 border-2 border-Principal_1 font-bold rounded-full hover:cursor-pointer shadow-md shadow-Principal_1 "
             />
           </div>
           <Link
