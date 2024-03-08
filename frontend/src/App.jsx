@@ -33,13 +33,10 @@ function App() {
 
             <Route path="/" element={<LayoutSe />}>
             </Route>
-              <Route path="InicioAdmin" element={<IniAdmin />} />
-              <Route path="Encuestas" element={<Encuestas />} />
 
             <Route path="/aviso" element={<Aviso />} />
             <Route path="/Login" element={<LoginAdmin />} />
 
-            <Route path="InicioAdmin" element={<IniAdmin />} />
             <Route path="/aviso/:email" element={<Aviso />} />
             <Route path="/" element={<LayoutSe />}></Route>
 
@@ -47,11 +44,10 @@ function App() {
             <Route path="aviso/:id" element={<Aviso />} />
             <Route path="responder" element={<Respoder />} />
             <Route path="/login-adm" element={<LoginAdmin />} />
-            <Route path="componer" element={<Componer />} />
 
 
 
-            <Route path="Inicio-Administrador" element={<Admin />}></Route>
+            <Route path="Inicio-Administrador" element={<Admin />}> </Route>
             <Route path="/" element={<CoorLayout />}>
               <Route path="login-coordinador" element={<Login />} />
               <Route path="registrar" element={<Registrar />} />
