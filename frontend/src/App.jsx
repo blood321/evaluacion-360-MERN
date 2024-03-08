@@ -56,6 +56,7 @@ function App() {
 
 
 
+
             <Route path="Inicio-Administrador" element={<RutanoProtegida />}>
               <Route index element={<Inicio/> } />
 
