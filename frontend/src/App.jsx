@@ -27,7 +27,6 @@ import CrearPreguntasCompaneros from "./paginas/Crear-preguntas-compañeros.jsx"
 import CrearPreguntasJefes from "./paginas/Crear-preguntas-jefes.jsx";
 import Resultados from "./paginas/Resultados.jsx";
 import ListarEncuestas from "./paginas/Listar-encuestas.jsx";
-import IniAdmin from "./paginas/IniAdmin.jsx";
 
 import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
@@ -46,7 +45,6 @@ function App() {
             <Route path="admin" element={<Admin />} />
 
             <Route path="/Login" element={<LoginAdmin />} />
-            <Route path="InicioAdmin" element={<IniAdmin />} />
             <Route path="login-adm" element={<LoginAdmin />} />
             <Route path="aviso/:id" element={<Aviso />} />
             <Route path="responder" element={<Respoder />} />
