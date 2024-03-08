@@ -1,11 +1,20 @@
+import useAuth from "../hooks/useAuth";
+import { Outlet } from "react-router-dom";
 import Sidebar_A from '../components/Sidebar_A'
 import Header from '../components/Header'
 import Inicio from '../components/inicio'
 import Footer from '../components/Footer'
 
-const Admin = () => {
+
+
+function RutanoProtegida() {
     document.body.style.overflowY = 'hidden'
-    return (
+  const { auth, cargando } = useAuth();
+  if (cargando) return "cargando...";
+  return (
+    <>
+      
+ 
         <>
             <div className="flex">
                 <div className="basis-[15%] h-full border">
@@ -14,7 +23,7 @@ const Admin = () => {
                 <div className="basis-[85%] border">
                     <Header />
                     <div>
-                        <Inicio />
+                        <Outlet></Outlet>
                     </div>
                 </div>
             </div>
@@ -22,6 +31,9 @@ const Admin = () => {
                 <Footer />
             </div>
         </>
-    )
+     
+    </>
+  );
 }
-export default Admin
+
+export default RutanoProtegida;
