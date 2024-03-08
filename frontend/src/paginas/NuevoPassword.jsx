@@ -11,6 +11,7 @@ const NewPassword = () => {
   const [passwordModificado, setPasswordModificado] = useState(false);
   const params = useParams();
   const { token } = params;
+  
   useEffect(() => {
     const comprobarToken = async () => {
       try {

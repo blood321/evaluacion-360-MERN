@@ -15,8 +15,6 @@ import EditarProyecto from "./paginas/EditarProyecto";
 import Aloguin from "./paginas/Aloguin";
 import Aviso from "./paginas/Aviso";
 import Respoder from "./paginas/Respoder";
-import { AuthProvider } from "./context/AuthProvider";
-import { ProyectosProvider } from "./context/ProyectosProvider";
 import LoginAdmin from "./paginas/LoginAdmin.jsx";
 import Admin from "./paginas/Admin.jsx";
 import CrearEncuestasAprendices from "./paginas/Crear-encuestas-aprendices.jsx";
@@ -29,6 +27,11 @@ import CrearPreguntasCompaneros from "./paginas/Crear-preguntas-compañeros.jsx"
 import CrearPreguntasJefes from "./paginas/Crear-preguntas-jefes.jsx";
 import Resultados from "./paginas/Resultados.jsx";
 import ListarEncuestas from "./paginas/Listar-encuestas.jsx";
+import IniAdmin from "./paginas/IniAdmin.jsx";
+
+import { AuthProvider } from "./context/AuthProvider";
+import { ProyectosProvider } from "./context/ProyectosProvider";
+
 function App() {
   return (
     <BrowserRouter>
@@ -37,31 +40,27 @@ function App() {
           <Routes>
             <Route path="/" element={<Authlayout />}>
               <Route index element={<Aloguin />} />
+              <Route path="olvide-password" element={<OlvidePassword />} />
+            <Route path="olvide-password/:id" element={<NuevoPassword />} />
             </Route>
+            <Route path="admin" element={<Admin />} />
 
             <Route path="/Login" element={<LoginAdmin />} />
+            <Route path="InicioAdmin" element={<IniAdmin />} />
             <Route path="login-adm" element={<LoginAdmin />} />
             <Route path="aviso/:id" element={<Aviso />} />
             <Route path="responder" element={<Respoder />} />
-            <Route path="/login-adm" element={<LoginAdmin />} />
-
-
-
 
             <Route path="Inicio-Administrador" element={<RutanoProtegida />}>
               <Route index element={<Inicio/> } />
-
               <Route path="Crear-encuestas-aprendices" element={<CrearEncuestasAprendices />} />
               <Route path="Crear-encuestas-compañeros" element={<CrearEncuestasCompaneros/>} />
               <Route path="Crear-encuestas-jefes" element={<CrearEncuestasjefes />} />
-
               <Route path="Crear-preguntas-aprendices" element={<CrearPreguntasAprendices />} />
               <Route path="Crear-preguntas-compañeros" element={<CrearPreguntasCompaneros/>} />
               <Route path="Crear-preguntas-jefes" element={<CrearPreguntasJefes />} />
-
               <Route path="Listar-encuestas" element={<ListarEncuestas />} />
               <Route path="Resultados" element={<Resultados />} />
-
             </Route>
 
             <Route path="proyectos" element={<RutaProtegida />}>
