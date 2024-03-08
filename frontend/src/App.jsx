@@ -44,7 +44,6 @@ function App() {
             </Route>
             <Route path="admin" element={<Admin />} />
 
-            <Route path="/aviso" element={<Aviso />} />
             <Route path="/Login" element={<LoginAdmin />} />
             <Route path="login-adm" element={<LoginAdmin />} />
             <Route path="aviso/:id" element={<Aviso />} />
