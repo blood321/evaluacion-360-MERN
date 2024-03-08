@@ -39,16 +39,7 @@ function App() {
               <Route index element={<Aloguin />} />
             </Route>
 
-
-            <Route path="/" element={<LayoutSe />}>
-            </Route>
-
-            <Route path="/aviso" element={<Aviso />} />
             <Route path="/Login" element={<LoginAdmin />} />
-
-            <Route path="/aviso/:email" element={<Aviso />} />
-            <Route path="/" element={<LayoutSe />}></Route>
-
             <Route path="login-adm" element={<LoginAdmin />} />
             <Route path="aviso/:id" element={<Aviso />} />
             <Route path="responder" element={<Respoder />} />
@@ -72,8 +63,6 @@ function App() {
               <Route path="Resultados" element={<Resultados />} />
 
             </Route>
-
-
 
             <Route path="proyectos" element={<RutaProtegida />}>
               <Route index element={<Proyectos />} />
