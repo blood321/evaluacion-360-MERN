@@ -45,6 +45,7 @@ function App() {
             </Route>
             <Route path="admin" element={<Admin />} />
 
+            <Route path="/aviso" element={<Aviso />} />
             <Route path="/Login" element={<LoginAdmin />} />
             <Route path="InicioAdmin" element={<IniAdmin />} />
             <Route path="login-adm" element={<LoginAdmin />} />
@@ -62,6 +63,8 @@ function App() {
               <Route path="Listar-encuestas" element={<ListarEncuestas />} />
               <Route path="Resultados" element={<Resultados />} />
             </Route>
+
+
 
             <Route path="proyectos" element={<RutaProtegida />}>
               <Route index element={<Proyectos />} />
