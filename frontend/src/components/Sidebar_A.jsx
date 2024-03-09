@@ -15,17 +15,18 @@ import { Link } from 'react-router-dom'
 const Sidebar_A = () => {
     const [evaluacionVisible, setEvaluacionVisible] = useState(false)
     const [crearPreguntasVisible, setCrearPreguntasVisible] = useState(false)
-    const [flechaAbajo, setFlechaAbajo] = useState(false)
+    const [flechaAbajoEncuestas, setFlechaAbajoEncuestas] = useState(false)
+    const [flechaAbajoPreguntas, setFlechaAbajoPreguntas] = useState(false)
     const [menuVisible, setMenuVisible] = useState(false) // Nuevo estado para controlar la visibilidad del menú hamburguesa
 
     const toggleEvaluacion = () => {
         setEvaluacionVisible(!evaluacionVisible)
-        setFlechaAbajo(!flechaAbajo)
+        setFlechaAbajoEncuestas(!flechaAbajoEncuestas)
     }
 
     const togglePreguntas = () => {
         setCrearPreguntasVisible(!crearPreguntasVisible)
-        setFlechaAbajo(!flechaAbajo)
+        setFlechaAbajoPreguntas(!flechaAbajoPreguntas)
     }
 
     const toggleMenu = () => {
@@ -52,9 +53,9 @@ const Sidebar_A = () => {
                     >
                         <div className="flex items-center gap-[10px]">
                             <FaClipboardList color="green" />
-                            <h2 className="font-normal text-[14px] leading-[20px]">Evaluacion-360°</h2>
+                            <h2 className="font-normal text-[14px] leading-[20px]">Crear Encuestas</h2>
                         </div>
-                        {flechaAbajo ? <FaChevronDown color="green" /> : <FaChevronRight color="green" />}
+                        {flechaAbajoEncuestas ? <FaChevronDown color="green" /> : <FaChevronRight color="green" />}
                     </div>
                     {evaluacionVisible && (
                         <ul className="list-disc pl-6 py-[4px] ">
@@ -93,7 +94,7 @@ const Sidebar_A = () => {
                             <FaSpellCheck color="green" />
                             <h2 className=" font-normal text-[14px] leading-[20px]">Crear Preguntas</h2>
                         </div>
-                        {flechaAbajo ? <FaChevronDown color="green" /> : <FaChevronRight color="green" />}
+                        {flechaAbajoPreguntas ? <FaChevronDown color="green" /> : <FaChevronRight color="green" />}
                     </div>
                     {crearPreguntasVisible && (
                         <ul className="list-disc pl-6 py-[4px] ">

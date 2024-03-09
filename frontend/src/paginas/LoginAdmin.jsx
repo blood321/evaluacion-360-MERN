@@ -35,7 +35,7 @@ const LoginAdmin = () => {
       });
       localStorage.setItem("token", data.token);
       setAuth(data);
-      navigate("/Inicio-Administrador");
+      navigate("/inicio-admin");
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,
@@ -51,7 +51,7 @@ const LoginAdmin = () => {
 
   return (
     <>
-    <Link to={'/'} className="flex items-end justify-end animate-fade-right animate-duration-[3000ms]">
+    <Link to={'/'} className="flex items-end justify-end animate-fade-right animate-duration-[2000ms]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -74,7 +74,7 @@ const LoginAdmin = () => {
           <img
             src="src/assets/img/logo2Principal.png"
             alt="Imagen de logotipo"
-            className="w-[380px] h-[230px] animate-fade-right animate-duration-[3000ms]"
+            className="w-[380px] h-[230px] animate-fade-right animate-duration-[2000ms]"
           />
         </div>
         <form
