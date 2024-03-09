@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Tematicas from "../components/Tematicas";
 import Footer from "../components/Footer";
+import Sidebar_A from "../components/Sidebar_A";
 
 function RutaProtegida() {
   const { auth, cargando } = useAuth();
@@ -11,19 +12,20 @@ function RutaProtegida() {
   return (
     <>
       {auth._id ? (
-        <div className="bg-gray-100">
-          <Header />
-          <div className="md:flex md:min-h-screen">
-            <Sidebar />
-              <main className="py-5 pr-10 flex-1">
-                <Tematicas />
-                <Outlet />
-              </main>
+        <div className="flex">
+          <div className="basis-[15%] h-full border">
+            <Sidebar_A />
+          </div>
+          <div className="basis-[85%] border">
+            <Header />
+            <div>
+              <Outlet></Outlet>
+            </div>
           </div>
           <Footer />
         </div>
       ) : (
-        <Navigate to="/" />
+        <Navigate to="/login-adm" />
       )}
     </>
   );
