@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const instructorSchema = mongoose.Schema({
+const instructorSchema=mongoose.Schema({
     nombre:{
         type: String,
         required:true,
@@ -20,5 +20,5 @@ const instructorSchema = mongoose.Schema({
 
 })
 
-const Instructor = mongoose.model('Instructor', instructorSchema)
-export default Instructor
+const instructor =mongoose.model('instructor',instructorSchema)
+export default instructor

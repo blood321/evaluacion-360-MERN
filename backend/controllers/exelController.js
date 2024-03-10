@@ -1,19 +1,19 @@
 import XlsPopulate from 'xlsx-populate';
 import preguntas from '../models/preguntas.js';
+import encuestas from '../models/encuesta.js'
 
 const nuevoExcel = async (req, res) => {
-    const encuestas = await preguntas.find({},'pregunta -_id')
-    console.log(encuestas)
-    try {
-let celdadas=0
+    const Encuestas = await encuestas.find({}, 'preguntas').populate('preguntas');
 
-Object.entries(encuestas).forEach(async([key, value]) => {
-const workbook = await XlsPopulate.fromBlankAsync();
+    
+    console.log(Encuestas)
+    try {
+
+    //    const workbook = await XlsPopulate.fromBlankAsync();
             
-            workbook.sheet(0).cell("A3").value(value.pregunta);
-            console.log(value.pregunta)
-        });
-        await workbook.toFileAsync('./salida.xlsx');
+    //         workbook.sheet(0).cell("A1").value([  encuestas   ]   );
+        
+    //     await workbook.toFileAsync('./salida.xlsx');
         res.send('Archivo de Excel creado correctamente.');
     } catch (error) {
         console.error('Error al crear el archivo de Excel:', error);

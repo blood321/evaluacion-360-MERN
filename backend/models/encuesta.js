@@ -22,9 +22,8 @@ const encuestaSchema=mongoose.Schema({
        
     }], 
      encuestado:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"encuestado",
-       
+        type: String,
+        enum: ["Aprendiz", "Jefes", "Compañeros"],
     },
     
     activa:{
