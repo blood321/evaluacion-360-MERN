@@ -29,9 +29,9 @@ Este proyecto está diseñado para llevar a cabo encuestas dirigidas a los apren
 **Base de datos:** MongoDB
 ## Autores
 
-- [@Andrés Guzman](https://www.github.com/blood321)
+- [@Andrés Guzmán](https://www.github.com/blood321)
 - [@Eider Daza](https://www.github.com/Eider-Polar)
-- [@Sebatian Campo](https://www.github.com/sebas313313313)
+- [@Sebastian Campo](https://www.github.com/sebas313313313)
 - [@Juan Castillo](https://www.github.com/blood321)
 
 
