@@ -1,13 +1,12 @@
 import XlsPopulate from 'xlsx-populate';
-import preguntas from '../models/preguntas.js';
-import encuestas from '../models/encuesta.js'
+import encuesta from '../models/encuesta.js'
 
 const nuevoExcel = async (req, res) => {
-    const Encuestas = await encuestas.find({}, 'preguntas').populate('preguntas');
-
-    
-    console.log(Encuestas)
     try {
+        const Encuestas = await encuesta.find({activa:true});
+        const idPreguntas = encuesta.map(pregunta => pregunta.pregunta);
+
+        console.log(idPreguntas)
 
     //    const workbook = await XlsPopulate.fromBlankAsync();
             
