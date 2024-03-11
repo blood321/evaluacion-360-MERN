@@ -1,21 +1,81 @@
+// import { Resend } from 'resend';
+
+// const resend = new Resend('re_AejyxbTU_2TAb75NsXA1NR2aaxWS7yYkY');
+
 import nodemailer from "nodemailer";
-// import google from "googleapis";
+import { google } from "googleapis";
+
+export const emailAutenticar = async (datos) => {
+  const { id, nombre, email } = datos;
+  const CLIENT_ID = process.env.EMAIL_ID
+  const CLIENT_SECRET = process.env.EMAIL_SECRET
+  const REDIRECT_URI = process.env.REDIRECT_URI
+  const REFRESH_TOKEN = process.env.REFRESH_TOKEN
+  
+  const oAuth2Client = new google.auth.OAuth2(
+    CLIENT_ID,
+    CLIENT_SECRET,
+    REDIRECT_URI
+  );
+  
+  oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+  
+  const accessToken = oAuth2Client.getAccessToken();
+  const transport = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user: "encuestassena360@gmail.com",
+      pass: "EncuestasSENA",
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      refreshToken: REFRESH_TOKEN,
+      accessToken: accessToken,
+    },
+  });
+  const info = await transport.sendMail({
+    from: "Encuestas 360° <encuestassena360@gmail.com>",
+    to: email,
+    subject: `Bienvenido, querido aprendiz ${nombre}`,
+    html: `<p>Hola ${nombre}, has solicitado ingresar mediante tu correo electrónico.</p>
+      <p>Presiona click <a href="http://localhost:5173/aviso/${id}">aquí</a> para ingresar a la encuesta.</p>
+      <p style="font-size: 12px">Si tú no solicitaste este correo, puedes ignorar el mensaje</p>`,
+  });
+ 
+};
 
 export const emailRegistro = async (datos) => {
   const { email, nombre, token } = datos;
 
+  const CLIENT_ID = process.env.EMAIL_ID
+  const CLIENT_SECRET = process.env.EMAIL_SECRET
+  const REDIRECT_URI = process.env.REDIRECT_URI
+  const REFRESH_TOKEN = process.env.REFRESH_TOKEN
+  
+  const oAuth2Client = new google.auth.OAuth2(
+    CLIENT_ID,
+    CLIENT_SECRET,
+    REDIRECT_URI
+  );
+  
+  oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+  
+  const accessToken = oAuth2Client.getAccessToken();
   const transport = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
+    service: "gmail",
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      type: "OAuth2",
+      user: "encuestassena360@gmail.com",
+      pass: "EncuestasSENA",
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      refreshToken: REFRESH_TOKEN,
+      accessToken: accessToken,
     },
   });
-
   //   Información del email
   const info = await transport.sendMail({
-    from: '"Encuestas - Administrador de proyectos" <cuentas@encuestas.com>',
+    from: "Encuestas 360° <encuestassena360@gmail.com>",
     to: email,
     subject: "Encuestas - Comprueba tu cuenta",
     text: "Comprueba tu cuenta en Encuestas",
@@ -27,51 +87,43 @@ export const emailRegistro = async (datos) => {
   });
 };
 
-export const emailAutenticar = async (datos) => {
-  const { id, nombre, email } = datos;
-
-  const transport = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-
-  //   Información del email
-  const info = await transport.sendMail({
-    from: '"Evaluación 360° - Autentica tu usuario" <cuentas@evaluacion360.com>',
-    to: email,
-    subject: "Evaluación 360° - Autentica tu usuario",
-    text: "Autentica tu correo para realizar la encuesta",
-    html: `<p>Hola: ${nombre} has solicitado la autenticación de tu correo</p>
-        <p>Dar click en el siguiente enlace para ingresar a la encuesta:</p>
-        <a href="http://localhost:5173/aviso/${id}">Entra a la encuesta aquí</a>
-        <p style="font-size: 12px">Si tú no solicitaste este email, puedes ignorar el mensaje</p>`,
-  });
-};
-
 export const emailOlvidePassword = async (datos) => {
   const { email, nombre, token } = datos;
 
+  const CLIENT_ID = process.env.EMAIL_ID
+  const CLIENT_SECRET = process.env.EMAIL_SECRET
+  const REDIRECT_URI = process.env.REDIRECT_URI
+  const REFRESH_TOKEN = process.env.REFRESH_TOKEN
+  
+  const oAuth2Client = new google.auth.OAuth2(
+    CLIENT_ID,
+    CLIENT_SECRET,
+    REDIRECT_URI
+  );
+  
+  oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+  
+  const accessToken = oAuth2Client.getAccessToken();
   const transport = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
+    service: "gmail",
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      type: "OAuth2",
+      user: "encuestassena360@gmail.com",
+      pass: "EncuestasSENA",
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      refreshToken: REFRESH_TOKEN,
+      accessToken: accessToken,
     },
   });
 
   //   Información del email
   const info = await transport.sendMail({
-    from: '"Evaluación 360° - Recuperar la contraseña" <recuperarcontraseña@evaluacion360.com>',
+    from: 'Encuestas 360° <encuestassena360@gmail.com>',
     to: email,
     subject: "Evaluación 360° - Recuperar la contraseña",
-    html: `<p>Hola ${nombre}: Has solicitado recuperar la contraseña</p>
-        <p>Presiona click en el siguiente enlace para ingresar una nueva contraseña:</p>
-        <a href="http://localhost:5173/olvide-password/${token}">Recupera tu contraseña aquí</a>
+    html: `<p>Hola ${nombre}, Has solicitado recuperar la contraseña</p>
+        <p>Presiona click <a href="http://localhost:5173/olvide-password/${token}">aquí</a> para ingresar una nueva contraseña</p>
         <p style="font-size: 12px">Si tú no solicitaste este enlace, ignorar el mensaje</p>`,
   });
 };

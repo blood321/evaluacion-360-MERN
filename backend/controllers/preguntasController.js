@@ -13,7 +13,7 @@ const nuevaPregunta = async (req, res) => {
             tematica: [tematica._id],
             encuestado,
         });
-        
+        nuevaPregunta.save()
         console.log(nuevaPregunta)
 
        res.json(nuevaPregunta)
