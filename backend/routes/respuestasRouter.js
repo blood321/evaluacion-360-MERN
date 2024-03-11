@@ -7,7 +7,7 @@ import checkAuth from '../middleware/checkAuth.js'
 
 const router = Express.Router()
 router.route('/')
-    router.put(respuestaUsuario)
+    router.put(checkAuth,respuestaUsuario)
    
 
 
