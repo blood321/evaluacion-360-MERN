@@ -20,6 +20,10 @@ const respuestaSchema = mongoose.Schema({
     encuesta: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "encuesta"
+    },
+    respondio:{
+        type:Boolean,
+        default:false
     }
 });
 

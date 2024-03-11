@@ -5,6 +5,8 @@ const respuestaUsuario=async (req,res)=>{
     const{id}=req.params
 
     try {
+        const respondio = await respuesta.find({respondio:false})
+                console.log(respondio)
         const respuestasubir = await respuesta.findOne({instructor:instructor, pregunta:pregunta, aprendiz:id})
         if (!respuestasubir) {
             const error = new Error("no encontrado")
