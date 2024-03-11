@@ -67,18 +67,18 @@ const LoginAdmin = () => {
               />
             </svg>
       </Link>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center mt-14 md:mt-0">
         
         <div>
           
           <img
             src="src/assets/img/logo2Principal.png"
             alt="Imagen de logotipo"
-            className="w-[380px] h-[230px] animate-fade-right animate-duration-[2000ms]"
+            className="w-[380px] h-[230px] animate-fade-down lg:animate-fade-right animate-duration-[2000ms]"
           />
         </div>
         <form
-          className=" rounded-3xl md:h-[340px] p-6 border-Principal_1 border-4 shadow-xl animate-fade-right animate-duration-[2000ms]"
+          className=" rounded-3xl md:h-[340px] w-[350px] md:w-[270px] animate-fade-up p-6 border-Principal_1 border-4 shadow-xl lg:animate-fade-right animate-duration-[2000ms]"
           onSubmit={handleSubmit}
         >
           <div className="my-1 flex items-center justify-center ">
