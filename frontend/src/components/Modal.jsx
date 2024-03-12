@@ -38,14 +38,14 @@ const Modal = ({ title, message, onConfirm, onCancel }) => {
                     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                         <button
                             type="button"
-                            className="inline-flex w-full justify-center rounded-md bg-Principal_1 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                            className="inline-flex w-full justify-center rounded-md bg-Principal_1 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 sm:ml-3 sm:w-auto"
                             onClick={onConfirm}
                         >
                             Confirmar
                         </button>
                         <button
                             type="button"
-                            className="mt-3 inline-flex w-full justify-center rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset hover:bg-red-500 sm:mt-0 sm:w-auto"
+                            className="mt-3 inline-flex w-full justify-center rounded-md bg-red-700 px-3 py-2 text-sm text-white font-semibold shadow-sm ring-1 ring-inset hover:bg-red-500 sm:mt-0 sm:w-auto"
                             onClick={onCancel}
                         >
                             Cancelar

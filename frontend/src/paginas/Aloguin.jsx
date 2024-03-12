@@ -106,7 +106,7 @@ function Aloguin() {
             <input
               id="email"
               type="email"
-              className="border-2 border-green-600 w-full px-3 py-2 rounded-md focus:outline-none focus:ring-Principal_1 invalid:focus:ring-red-400 peer"
+              className="border-2 border-green-600 w-full px-3 py-2 rounded-md focus:outline-none focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 invalid:focus:ring-red-400 peer"
               placeholder="Ingresa tu Correo Electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
