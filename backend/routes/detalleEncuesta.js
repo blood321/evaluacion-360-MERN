@@ -8,9 +8,9 @@ const router = Express.Router()
 router.route('/')
     
     .post(nuevoDetalleEncuesta)
-    router.route('/responde2')
+    router.route('/responde/:id')
     
-    .get(checkAuth,obtenerDetallesEcuestas)
+    .get(obtenerDetallesEcuestas)
     
 
 

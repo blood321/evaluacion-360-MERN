@@ -18,7 +18,7 @@ const nuevoDetalleEncuesta = async (req, res) => {
         }
         //busca la ficha por su id 
         const ficha =await fichas.findById(fichasG);
-
+        console.log(ficha._id)
 
         // Crea la nueva pregunta con los datos proporcionados
         const nuevaPregunta = new detalleEncuesta({
@@ -38,11 +38,11 @@ const nuevoDetalleEncuesta = async (req, res) => {
     }
 };
 const obtenerDetallesEcuestas= async (req,res)=>{
- const {email} = req.params
- console.log(email)
+ const {id} = req.params
+ console.log(id)
  try{ 
         
-    const usuario = await Usuario.findOne({email:email})
+    const usuario = await Usuario.findOne({_id:id})
     console.log(usuario)
     //Busca la ficha del usuario cual inicio sesión 
     const fichaUsuario  = await fichas.find({aprendices:usuario},'_id')
@@ -99,7 +99,7 @@ const mostrasRespuestas =async (req,res)=>{
     try {
         const usuario = await Usuario.findOne({email:email})
         console.log(usuario)
-         const inpuestoss = await Respuesta.find({aprendiz:usuario}).populate('pregunta instructor encuesta')
+         const inpuestoss = await Respuesta.find({aprendiz:usuario,respondio:false}).populate('pregunta instructor encuesta')
          res.json(inpuestoss)
     } catch (error) {
         console.log(error)
