@@ -99,7 +99,7 @@ const mostrasRespuestas =async (req,res)=>{
     try {
         const usuario = await Usuario.findOne({email:email})
         console.log(usuario)
-         const inpuestoss = await Respuesta.find({aprendiz:usuario}).populate('pregunta instructor encuesta')
+         const inpuestoss = await Respuesta.find({aprendiz:usuario,respondio:false}).populate('pregunta instructor encuesta')
          res.json(inpuestoss)
     } catch (error) {
         console.log(error)
