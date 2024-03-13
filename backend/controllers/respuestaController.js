@@ -11,6 +11,8 @@ const respuestaUsuario=async (req,res)=>{
             return res.status(404).json({ msg: error.message})
         }
         respuestasubir.respuesta=req.body.respuesta
+        respuestasubir.respondio=true
+        
 console.log(respuestasubir)
         const a= await respuestasubir.save()
          res.json(a)

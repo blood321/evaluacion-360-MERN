@@ -36,12 +36,9 @@ const Sidebar_A = () => {
     return (
         <div className="h-screen px-[25px] overflow-auto bg-white">
             <FaBars className="md:hidden" onClick={toggleMenu} /> {/* Menú hamburguesa */}
-            <Link>
             <div className="px-[15px] py-[10px] flex items-center justify-center border-b-[3px] border-Principal_1/[0.3]">
                 <img src={logoSena} className="w-[50px] h-[50px] md:mt-4 mb-4" alt="Logo sena" />
             </div>
-            </Link>
-
             <div className={menuVisible ? 'md:hidden' : 'hidden md:block'}>
                 <div className="pt-[15px] border-b-[3px] border-Principal_1/[0.2] ">
                     <p className="text-[10px] font-extrabold leading-[16px] text-Secundario_2/[0.5]">
@@ -79,10 +76,6 @@ const Sidebar_A = () => {
                                 <h2 className="font-bold text-sm leading-5 text-Secundario_2">Jefes</h2>
                             </li>
                             </Link>
-                            <li className="flex items-center gap-2 pb-2  py-1 cursor-pointer  hover:border-b animate-fade-down animate-once animate-duration-[350ms] animate-ease-linear animate-normal hover:border-Principal_1">
-                                <FaChevronRight color="green" />
-                                <h2 className="font-bold text-sm leading-5 text-Secundario_2">AutoEvaluacion</h2>
-                            </li>
                         </ul>
                     )}
 
@@ -116,11 +109,6 @@ const Sidebar_A = () => {
                                 <h2 className="font-bold text-sm leading-5 text-Secundario_2">Jefes</h2>
                             </li>
                             </Link>
-                             
-                            <li className="flex items-center gap-2 pb-2  py-1 cursor-pointer  hover:border-b animate-fade-down animate-once animate-duration-[350ms] animate-ease-linear animate-normal hover:border-Principal_1">
-                                <FaChevronRight color="green" />
-                                <h2 className="font-bold text-sm leading-5 text-Secundario_2">AutoEvaluacion</h2>
-                            </li>
                         </ul>
                     )}
                 </div>

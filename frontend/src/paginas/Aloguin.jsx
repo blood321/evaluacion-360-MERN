@@ -52,13 +52,13 @@ function Aloguin() {
 
   return (
     <div className="font-roboto md:fixed md:h-full">
-      <section className="mx-auto w-full rounded-lg shadow-lg shadow-green-900 overflow-hidden md:flex md:w-[700px] md:h-[400px] md:rounded-3xl md:mx-auto md:fixed bottom-15 inset-x-0 animate-fade-down animate-duration-[2000ms]">
+      <section className="mx-auto w-full rounded-lg shadow-lg shadow-green-900 overflow-hidden md:flex md:w-[700px] md:h-[400px] md:rounded-3xl md:mx-auto md:fixed bottom-15 inset-x-0 animate-fade-down animate-duration-[1000ms]">
         {/* logo y eslogan */}
         <div className="bg-gradient-to-r from-Secundario_1 to-Secundario_2 h-[356px] pt-8 px-10 text-center rounded-b-3xl md:w-[900px] md:h-full md:rounded-3xl md:mb-6 ">
           <div className="flex items-center justify-center mb-2 md:mb-7 md:mt-5">
             <img
               src={logo1Principal}
-              className="w-[240px] h-[120px] animate-fade-down animate-duration-[2000ms]"
+              className="w-[240px] h-[120px] animate-fade-down animate-duration-[1000ms]"
               alt="Logo 2"
             />
           </div>
@@ -96,7 +96,7 @@ function Aloguin() {
         </div>
         {/* formulario */}
         <div className="p-4 h-[400px] flex flex-col items-center justify-center rounded-xl bg-Principal_3 md:w-[650px] md:py-2">
-          <img src={logoSena} className="w-10 h-10 bg-cover animate-fade-down animate-duration-[3000ms]" />
+          <img src={logoSena} className="w-10 h-10 bg-cover animate-fade-down animate-duration-[1000ms]" />
           <form htmlFor="email" onSubmit={handleSubmit}>
             <h2 className="my-3 text-[16px] font-semibold justify-center text-justify">
               Se enviará un código de verificación a tu correo electrónico
@@ -106,7 +106,7 @@ function Aloguin() {
             <input
               id="email"
               type="email"
-              className="border-2 border-green-600 w-full px-3 py-2 rounded-md focus:outline-none focus:ring-Principal_1 invalid:focus:ring-red-400 peer"
+              className="border-2 border-green-600 w-full px-3 py-2 rounded-md focus:outline-none focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 invalid:focus:ring-red-400 peer"
               placeholder="Ingresa tu Correo Electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
