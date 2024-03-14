@@ -4,6 +4,10 @@ import ListarPreguntas from "../components/ListarPreguntas";
 import FormularioProyecto from "../components/FormularioProyecto";
 import Identificador from "../components/IdentificadorEncuesta";
 const CrearEncuestasAprendices = () => {
+const addMensaje=(mensaje)=>{
+    console.log(mensaje)
+}
+    
   const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null);
   return (
     <div className="px-auto px-3">
@@ -32,7 +36,7 @@ const CrearEncuestasAprendices = () => {
         {/* Componente ListarPreguntas */}
         <div className="w-full mt-4 mx-auto md:pl-2">
         
-                <ListarPreguntas   />
+                <ListarPreguntas  addMensaje={addMensaje} />
           
         </div>
         <div className="w-full py-auto">

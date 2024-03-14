@@ -2,18 +2,21 @@ import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import usePreguntas from "../hooks/usePreguntas";
 
-const Listarp = (tematica,encuestado ) => {
-    const { preguntas } = usePreguntas();
-    const { auth } = useAuth()
-    console.log(preguntas)
+const Listarp = ({addMensaje}) => {
     var a =0
-    
-    // Estado para mantener los elementos seleccionados
+    const { preguntas } = usePreguntas();
     const [selectedItems, setSelectedItems] = useState([]) 
+   
     for (const key in selectedItems) {
        a++
     }
-    console.log(a)
+        addMensaje(a)
+    
+    const { auth } = useAuth()
+    console.log(preguntas)
+    
+    
+    // Estado para mantener los elementos seleccionados
     // Función para manejar el clic en un elemento
     const handleItemClick = (itemId) => {
         // Verificar si el elemento ya está seleccionado
