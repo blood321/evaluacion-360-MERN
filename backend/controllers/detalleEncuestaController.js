@@ -37,7 +37,7 @@ const nuevoDetalleEncuesta = async (req, res) => {
         res.status(500).json({ mensaje: 'Error al crear el borrador de la encuesta' });
     }
 };
-const obtenerDetallesEcuestas= async (req,res)=>{
+const obtenerDetallesEncuestas= async (req,res)=>{
  const {id} = req.params
  console.log(id)
  try{ 
@@ -109,4 +109,4 @@ const mostrasRespuestas =async (req,res)=>{
 
 
 
-export {nuevoDetalleEncuesta,obtenerDetallesEcuestas,mostrasRespuestas }
+export {nuevoDetalleEncuesta,obtenerDetallesEncuestas,mostrasRespuestas }

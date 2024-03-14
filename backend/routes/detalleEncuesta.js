@@ -1,6 +1,6 @@
 import Express  from "express";
 import {
- nuevoDetalleEncuesta,obtenerDetallesEcuestas,mostrasRespuestas
+ nuevoDetalleEncuesta,obtenerDetallesEncuestas,mostrasRespuestas
 } from '../controllers/detalleEncuestaController.js'
 import checkAuth from '../middleware/checkAuth.js'
 
@@ -10,7 +10,7 @@ router.route('/')
     .post(nuevoDetalleEncuesta)
     router.route('/crearRespuestas/:id')
     
-    .get(obtenerDetallesEcuestas)
+    .get(obtenerDetallesEncuestas)
     
     router.route('/responde/:id')
     
