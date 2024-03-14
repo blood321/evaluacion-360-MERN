@@ -8,8 +8,7 @@ import Footer from "../components/Footer";
 import useProyectos from "../hooks/useProyectos";
 
 const Responder = () => {
-  const {obtenerPreguntas} = useProyectos();
-  console.log(obtenerPreguntas)
+
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [respuestas, setRespuestas] = useState({});
   const [todasRespondidas, setTodasRespondidas] = useState(false);

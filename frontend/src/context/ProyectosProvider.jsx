@@ -155,17 +155,17 @@ const ProyectosProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const obtenerPreguntas = async () => {
-      try {
-        const { data } = await clienteAxios('/pregunta')
-        setPreguntas(data)
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    obtenerPreguntas()
-  },[])
+  // useEffect(() => {
+  //   const obtenerPreguntas = async (id) => {
+  //     try {
+  //       const { data } = await clienteAxios(`/responde/${id}`);
+  //       setPreguntas(data)
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   obtenerPreguntas()
+  // },[])
 
   return (
     <ProyectosContext.Provider

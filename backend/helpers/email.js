@@ -9,7 +9,7 @@ export const emailAutenticar = async (datos) => {
   const { id, nombre, email } = datos;
   const CLIENT_ID = process.env.EMAIL_ID
   const CLIENT_SECRET = process.env.EMAIL_SECRET
-  const REDIRECT_URI = process.env.REDIRECT_URI
+  const REDIRECT_URI = process.env.EMAIL_URL
   const REFRESH_TOKEN = process.env.REFRESH_TOKEN
   
   const oAuth2Client = new google.auth.OAuth2(
