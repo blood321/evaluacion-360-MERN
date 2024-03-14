@@ -1,3 +1,5 @@
+import Tematicas from "../components/Tematicas";
+import FormularioProyecto from "../components/FormularioProyecto";
 
 const CrearEncuestasAprendices = () => {
     return (

@@ -93,13 +93,12 @@ const obtenerDetallesEcuestas= async (req,res)=>{
 }    
  }
 const mostrasRespuestas =async (req,res)=>{
-    const {email} = req.params
-    console.log(email)
+    const {id} = req.params
+    console.log(id)
 
     try {
-        const usuario = await Usuario.findOne({email:email})
-        console.log(usuario)
-         const inpuestoss = await Respuesta.find({aprendiz:usuario,respondio:false}).populate('pregunta instructor encuesta')
+       
+         const inpuestoss = await Respuesta.find({aprendiz:id}).populate('pregunta instructor encuesta')
          res.json(inpuestoss)
     } catch (error) {
         console.log(error)
