@@ -1,8 +1,15 @@
+import GraficaColum from '../components/GraficaColum'
+import GraficaPie from '../components/GraficaPie'
 
 const Resultados = () => {
     return (
       <>
-      se listaran los resultados 
+      <div className='flex items-center '>
+      <GraficaColum></GraficaColum>
+      </div>
+      <div className='flex items-center justify-center'>
+      <GraficaPie></GraficaPie>
+      </div>
       </>
     );
   };
