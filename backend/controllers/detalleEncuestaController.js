@@ -4,7 +4,7 @@ import detalleEncuesta from "../models/detalleEncuesta.js";
 import fichas from "../models/fichas.js";
 import Usuario from "../models/Usuario.js";
 import programacion from "../models/programacionMov3.js"
-import respuesta from "../models/respuestas.js";
+import Respuesta from "../models/respuestas.js";
 
 const nuevoDetalleEncuesta = async (req, res) => {
     //en postman se deben poner estas constates en ves de las del modelo 
@@ -93,12 +93,12 @@ const obtenerDetallesEcuestas= async (req,res)=>{
 }    
  }
 const mostrasRespuestas =async (req,res)=>{
-    const {email} = req.params
-    console.log(email)
+    const {id} = req.params
+    console.log(id)
 
     try {
        
-         const inpuestoss = await respuesta.find()//.populate('pregunta instructor encuesta')
+         const inpuestoss = await Respuesta.find({aprendiz:id}).populate('pregunta instructor encuesta')
          res.json(inpuestoss)
     } catch (error) {
         console.log(error)
