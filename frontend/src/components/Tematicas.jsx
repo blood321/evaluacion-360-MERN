@@ -1,57 +1,33 @@
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
 
+const Tematicas = ({ onTematicaSeleccionada }) => {
+    const [tematicaSeleccionada, setTematicaSeleccionada] = useState('')
 
-const Tematicas = () => {
+    const handleSeleccionarTematica = tematica => {
+        setTematicaSeleccionada(tematica)
+        onTematicaSeleccionada(tematica) // Llama a la función onTematicaSeleccionada con la temática seleccionada
+    }
 
-  return (
-    <div
-      className="
-    flex
-    flex-col 
-    items-center 
-    h-max  
-    w-[220px] 
-    mx-9  
-    my-3 
-    min-4
-    bg-white 
-    border-Principal_1 
-    border-solid 
-    border-[2.442px] 
-    rounded-[33.695px] 
-    "
-    >
-      <p className="text-xl font-bold">TEMATICA</p>
+    return (
+        <div className="flex flex-col px-4">
+            <p className="font-extrabold text-[30px] text-Principal_2/[0.9]">Selecciona la temática</p>
+            <div className="flex items-center justify-between gap-[10px] py-2">
+                <select
+                    className="bg-Principal_3 w-[300px] p-2 text-Principal_1 capitalize font-semibold block mt-1 text-center rounded-lg border border-Secundario_2 hover:text-Principal_1"
+                    value={tematicaSeleccionada}
+                    onChange={e => handleSeleccionarTematica(e.target.value)}
+                >
+                    <option value="" disabled>
+                        Temáticas
+                    </option>
+                    <option value="pedagogica">Pedagógica</option>
+                    <option value="tecnica">Técnica</option>
+                    <option value="blandas">H-Blandas</option>
+                    <option value="profesional">Profesional</option>
+                </select>
+            </div>
+        </div>
+    )
+}
 
-      <Link
-        to="#"
-        className="bg-Principal_3 w-9/12 p-2 text-black capitalize font-bold block mt-1 text-center rounded-full border border-Secundario_2 hover:bg-Principal_1 hover:text-white hover:border-Principal_1 hover:border-2"
-      >
-        Pedagógica
-      </Link>
-
-      <Link
-        to="#"
-        className="bg-Principal_3 w-9/12 p-2 text-black capitalize font-bold block mt-1 text-center rounded-full border border-Secundario_2 hover:bg-Principal_1 hover:text-white hover:border-Principal_1 hover:border-2"
-      >
-        Tecnica
-      </Link>
-
-      <Link
-        to="#"
-        className="bg-Principal_3 w-9/12 p-2 text-black capitalize font-bold block mt-1 text-center rounded-full border border-Secundario_2 hover:bg-Principal_1 hover:text-white hover:border-Principal_1 hover:border-2"
-      >
-        H-Blandas
-      </Link>
-
-      <Link
-        to="crear-proyecto"
-        className="bg-Principal_3 w-9/12 p-2 text-black mb-4 capitalize font-bold block mt-1 text-center rounded-full border border-Secundario_2 hover:bg-Principal_1 hover:text-white hover:border-Principal_1  hover:border-2"
-      >
-        Profesional
-      </Link>
-    </div>
-  );
-};
-
-export default Tematicas;
+export default Tematicas
