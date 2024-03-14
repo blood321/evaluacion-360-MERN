@@ -4,8 +4,12 @@ import Preguntas from "../components/Preguntas";
 import Respuestas from "../components/Respuestas";
 import Modal from "../components/Modal"; // Importa tu componente Modal aquí
 import logoSena from '../assets/img/logoSena.png'
+import Footer from "../components/Footer";
+import useProyectos from "../hooks/useProyectos";
 
 const Responder = () => {
+  const {obtenerPreguntas} = useProyectos();
+  console.log(obtenerPreguntas)
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [respuestas, setRespuestas] = useState({});
   const [todasRespondidas, setTodasRespondidas] = useState(false);
@@ -142,9 +146,7 @@ const Responder = () => {
           onCancel={handleCloseModal}
         />
       )}
-      <footer className="text-center  text-Principal_1 p-3 w-full mt-5 md:bg-Principal_1 md:text-Principal_3 md:fixed bottom-0 inset-x-0">
-        &copy; 2024 SENA Centro Agropecuario
-      </footer>
+      <Footer />
     </>
   );
 };

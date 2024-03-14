@@ -9,6 +9,7 @@ const ProyectosProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [proyecto, setProyecto] = useState({});
   const [cargando, setCargando] = useState(false);
+  const [preguntas, setPreguntas] = useState([]);
 
   const navigate = useNavigate();
 
@@ -154,6 +155,18 @@ const ProyectosProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const obtenerPreguntas = async () => {
+      try {
+        const { data } = await clienteAxios('/pregunta')
+        setPreguntas(data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    obtenerPreguntas()
+  },[])
+
   return (
     <ProyectosContext.Provider
       value={{
@@ -165,6 +178,7 @@ const ProyectosProvider = ({ children }) => {
         proyecto,
         cargando,
         eliminarProyecto,
+        preguntas,
       }}
     >
       {children}

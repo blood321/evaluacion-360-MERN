@@ -32,7 +32,7 @@ const Sidebar_A = () => {
     const toggleMenu = () => {
         setMenuVisible(!menuVisible) // Cambia el estado del menú hamburguesa
     }
-
+    document.body.style.overflowY = 'hidden'
     return (
         <div className="h-screen px-[25px] overflow-auto bg-white">
             <FaBars className="md:hidden" onClick={toggleMenu} /> {/* Menú hamburguesa */}

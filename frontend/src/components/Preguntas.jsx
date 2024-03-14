@@ -7,7 +7,7 @@ const Preguntas = ({ pregunta, onPrevious, onNext }) => {
             <div className="mt-2 flex justify-center items-center">
                 <button
                     onClick={onPrevious}
-                    className="bg-Principal_2 rounded-lg p-2 text-sm  items-center justify-center text-white"
+                    className="bg-Principal_2 rounded-lg p-2 text-sm mr-2 items-center justify-center text-white"
                 >
                     &larr; Pregunta Anterior
                 </button>
