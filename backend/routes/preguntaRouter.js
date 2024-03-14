@@ -1,6 +1,6 @@
 import Express  from "express";
 import {
-   nuevaPregunta,editarPregunta,eliminarPregunta,obtenerPregunta,obtenerPreguntasParaAprendiz,obtenerPreguntasParaCompañeros,obtenerPreguntasParaJefes
+   nuevaPregunta,editarPregunta,eliminarPregunta,obtenerPreguntas,obtenerPreguntasParaAprendiz,obtenerPreguntasParaCompañeros,obtenerPreguntasParaJefes
 } from '../controllers/preguntasController.js'
 
 
@@ -8,10 +8,8 @@ const router = Express.Router()
 router.route('/')
     
     .post(nuevaPregunta)
-    
-    .get(obtenerPregunta)
+    .get(obtenerPreguntas)
     router.route('/:id')
-    .get(obtenerPregunta)
     .put(editarPregunta)
     .delete(eliminarPregunta)
     

@@ -30,11 +30,14 @@ import ListarEncuestas from "./paginas/Listar-encuestas.jsx";
 
 import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
+import { PreguntasProvider } from "./context/preguntasProvider.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+      <PreguntasProvider>
+
         <ProyectosProvider>
           <Routes>
             <Route path="/" element={<Authlayout />}>
@@ -68,6 +71,8 @@ function App() {
             </Route>
           </Routes>
         </ProyectosProvider>
+        </PreguntasProvider>
+
       </AuthProvider>
     </BrowserRouter>
   );

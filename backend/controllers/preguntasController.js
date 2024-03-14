@@ -57,18 +57,7 @@ const eliminarPregunta =async(req,res)=>{
         console.log(error)
     }
 }
-const obtenerPregunta =async (req,res)=>{
-const {id}=req.body;
 
-try {
-    
-    const pregunta= await preguntas.findById(id);
-    res.json(pregunta)
-    
-} catch (error) {
-    console.log(error)
-}
-}
 const obtenerPreguntasParaAprendiz =async (req,res)=>{
  const preguntasObtenidas=await preguntas.find();
  res.json(preguntasObtenidas)
@@ -82,5 +71,9 @@ const obtenerPreguntasParaCompañeros  =async (req,res)=>{
     res.json(preguntasObtenidas)
 }
 
+const obtenerPreguntas =async (req,res)=>{
+    const preguntasObtenidas=await preguntas.find();
+    res.json(preguntasObtenidas)
+}
 
-export {obtenerPreguntasParaCompañeros,nuevaPregunta,editarPregunta,eliminarPregunta,obtenerPregunta,obtenerPreguntasParaAprendiz,obtenerPreguntasParaJefes}
+export {obtenerPreguntasParaCompañeros,nuevaPregunta,editarPregunta,eliminarPregunta,obtenerPreguntas,obtenerPreguntasParaAprendiz,obtenerPreguntasParaJefes}
