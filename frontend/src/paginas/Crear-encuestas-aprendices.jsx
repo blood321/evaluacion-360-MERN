@@ -36,7 +36,7 @@ const CrearEncuestasAprendices = () => {
                     {tematicaSeleccionada && <ListarPreguntas tipo="aprendiz" />}
                 </div>
                 <div className="w-full py-auto">
-                 {/* Componente FormularioProyecto */}
+                    {/* Componente FormularioProyecto */}
                     <FormularioProyecto />
                 </div>
             </div>
