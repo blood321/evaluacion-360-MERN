@@ -4,6 +4,8 @@ import ListarPreguntas from '../components/ListarPreguntas'
 import FormularioProyecto from '../components/FormularioProyecto'
 import Identificador from '../components/IdentificadorEncuesta'
 const CrearEncuestasjefes = () => {
+    const addMensaje=(mensaje)=>{
+        console.log(mensaje)}
     const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null)
 
     return (
@@ -32,7 +34,8 @@ const CrearEncuestasjefes = () => {
             <div className="md:flex md:justify-between md:items-start mt-4">
                 {/* Componente ListarPreguntas */}
                 <div className="w-full mt-4 mx-auto md:pl-2">
-                    {tematicaSeleccionada && <ListarPreguntas tipo="aprendiz" />}
+                <ListarPreguntas  addMensaje={addMensaje} />
+
                 </div>
                 <div className="w-full py-auto">
                     {/* Componente FormularioProyecto */}

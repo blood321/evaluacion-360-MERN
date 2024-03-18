@@ -12,6 +12,10 @@ const encuestaSchema=mongoose.Schema({
         required:true
     },
     tiempoResponder:{
+        type: Date,
+        required:true
+    },
+    descripcion:{
         type: Number,
         required:true
     },

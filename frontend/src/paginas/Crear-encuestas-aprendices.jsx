@@ -3,12 +3,36 @@ import Tematicas from "../components/Tematicas";
 import ListarPreguntas from "../components/ListarPreguntas";
 import FormularioProyecto from "../components/FormularioProyecto";
 import Identificador from "../components/IdentificadorEncuesta";
+
 const CrearEncuestasAprendices = () => {
-const addMensaje=(mensaje)=>{
-    console.log(mensaje)
-}
-    
+  const [id, setId] = useState("");//arreglo de las preguntas seleccionadas 
+  
+  const [nombre,setNombre]=useState()//nombre de la encuesta 
+  
+  console.log("este es el contenido a guardar"+nombre)
+  const[descripcion,setDescripcion]=useState()
+  
+  console.log("este es el contenido a guardar"+descripcion)
+  const[fechaEntrega,setFechaEntrega]=useState()
+  console.log("este es el contenido a guardar"+fechaEntrega)
+  const addMensaje = (mensaje) => {
+    setId(mensaje);
+  };
+  const nombreG =(mensaje)=>{
+    setNombre(mensaje)
+  }
+
+  const descripcionG=(mensaje)=>{
+    setDescripcion(mensaje)
+  }
+  const fechaEntregaG =(mensaje)=>{
+    setFechaEntrega(mensaje)
+  }
+ console.log(id)
   const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null);
+  const handleTematicaSeleccionada = (tematica) => {
+    setTematicaSeleccionada(tematica);
+  };
   return (
     <div className="px-auto px-3">
       <div className="md:flex md:justify-between mt-2">
@@ -27,21 +51,19 @@ const addMensaje=(mensaje)=>{
       </div>
       {/* Componente Tematicas */}
       <div className="md:flex md:justify-between md:items-start mt-9">
-        <Tematicas onTematicaSeleccionada={setTematicaSeleccionada} />
+        <Tematicas tematica={handleTematicaSeleccionada} />
         <div className=" px-auto pr-56 ">
-          <Identificador />
+          <Identificador addMensaje={id}/>
         </div>
       </div>
       <div className="md:flex md:justify-between md:items-start mt-4">
         {/* Componente ListarPreguntas */}
         <div className="w-full mt-4 mx-auto md:pl-2">
-        
-                <ListarPreguntas  addMensaje={addMensaje} />
-          
+          <ListarPreguntas addMensaje={addMensaje}  tematicaSeleccionada={tematicaSeleccionada} />
         </div>
         <div className="w-full py-auto">
           {/* Componente FormularioProyecto */}
-          <FormularioProyecto />
+          <FormularioProyecto nombreG={nombreG} descripcionG={descripcionG} fechaEntregaG={fechaEntregaG}/>
         </div>
       </div>
     </div>

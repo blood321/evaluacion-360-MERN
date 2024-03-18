@@ -4,6 +4,8 @@ import ListarPreguntas from '../components/ListarPreguntas'
 import FormularioProyecto from '../components/FormularioProyecto'
 import Identificador from '../components/IdentificadorEncuesta'
 const CrearEncuestasCompaneros = () => {
+    const addMensaje=(mensaje)=>{
+        console.log(mensaje)}
     const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null)
     return (
         <div className="px-auto px-3">

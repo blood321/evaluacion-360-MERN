@@ -1,6 +1,6 @@
 import useAuth from '../hooks/useAuth'
 
-const Identificador = () => {
+const Identificador = ({addMensaje}) => {
     const { auth } = useAuth()
     return (
         <aside
@@ -22,7 +22,7 @@ const Identificador = () => {
             <div className="text-xl font-semibold">
                 <div className="flex items-center justify-between">
                     <span>Total Preguntas</span>
-                    <span className=" text-Secundario_1">3</span>
+                    <span className=" text-Secundario_1">{addMensaje.length}</span>
                 </div>
             </div>
             <div className="text-xl font-semibold">
