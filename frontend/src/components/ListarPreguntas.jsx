@@ -1,20 +1,33 @@
 import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
+import usePreguntas from "../hooks/usePreguntas";
 
-const Listarp = () => {
-    const { auth } = useAuth()
-
-    // Estado para mantener los elementos seleccionados
-    const [selectedItems, setSelectedItems] = useState([])
-
-    // Función para manejar el clic en un elemento
-    const handleItemClick = item => {
-        if (selectedItems.includes(item)) {
-            setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== item))
-        } else {
-            setSelectedItems([...selectedItems, item])
-        }
+const Listarp = ({addMensaje}) => {
+    var a =0
+    const { preguntas } = usePreguntas();
+    const [selectedItems, setSelectedItems] = useState([]) 
+   
+    for (const key in selectedItems) {
+       a++
     }
+        addMensaje(a)
+    
+    const { auth } = useAuth()
+    console.log(preguntas)
+    
+    
+    // Estado para mantener los elementos seleccionados
+    // Función para manejar el clic en un elemento
+    const handleItemClick = (itemId) => {
+        // Verificar si el elemento ya está seleccionado
+        if (selectedItems.includes(itemId)) {
+          // Si está seleccionado, lo quitamos de la lista de seleccionados
+          setSelectedItems(selectedItems.filter(id => id !== itemId));
+        } else {
+          // Si no está seleccionado, lo agregamos a la lista de seleccionados
+          setSelectedItems([...selectedItems, itemId]);
+        }
+      };
 
     // Función para manejar el clic en "Seleccionar Todo"
     const handleSelectAll = () => {
@@ -25,41 +38,19 @@ const Listarp = () => {
         <aside className=" flex  flex-col   p-4 h-[260px]  max-h-full  overflow-y-auto  w-full md:w-[570px]  bg-gray-200   rounded-lg relative  ">
             <div className="font-semibol w-full mt-2 relative mb-4">
                 <div className="flex flex-col ">
+                {preguntas.length ? (
+            preguntas.map((pregunta) => (
                     <Item
-                        selected={selectedItems.includes(1)}
-                        onClick={() => handleItemClick(1)}
-                        text="ESTO ES UNA PREGUNTA DE PRUEBA PARA COMPROBACIN DE CAMPO"
-                    />
-                    <Item
-                        selected={selectedItems.includes(3)}
-                        onClick={() => handleItemClick(3)}
-                        text="ESTO ES UNA PREGUNTA DE PRUEBA PARA COMPROBACIN DE CAMPO"
-                    />
-                    <Item
-                        selected={selectedItems.includes(4)}
-                        onClick={() => handleItemClick(4)}
-                        text="ESTO ES UNA PREGUNTA DE PRUEBA PARA COMPROBACIN DE CAMPO"
-                    />
-                    <Item
-                        selected={selectedItems.includes(5)}
-                        onClick={() => handleItemClick(5)}
-                        text="ESTO ES UNA PREGUNTA DE PRUEBA PARA COMPROBACIN DE CAMPO"
-                    />
-                    <Item
-                        selected={selectedItems.includes(6)}
-                        onClick={() => handleItemClick(6)}
-                        text="ESTO ES UNA PREGUNTA DE PRUEBA PARA COMPROBACIN DE CAMPO"
-                    />
-                    <Item
-                        selected={selectedItems.includes(7)}
-                        onClick={() => handleItemClick(7)}
-                        text="ESTO ES UNA PREGUNTA DE PRUEBA PARA COMPROBACIN DE CAMPO"
-                    />
-                    <Item
-                        selected={selectedItems.includes(8)}
-                        onClick={() => handleItemClick(9)}
-                        text="ESTO ES UNA PREGUNTA DE PRUEBA PARA COMPROBACIN DE CAMPO"
-                    />
+                    key={pregunta._id}
+                        selected={selectedItems.includes(pregunta._id)}
+                        onClick={() => handleItemClick(pregunta._id)}
+                        text={pregunta.pregunta}                  />  ))
+                    ) : (
+                      <p className="text-center text-gray-600 uppercase p-5">
+                        No hay proyectos
+                      </p>
+                    )}
+               
                 </div>
             </div>
         </aside>

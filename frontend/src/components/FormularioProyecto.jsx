@@ -4,12 +4,12 @@ import useProyectos from '../hooks/useProyectos'
 import Alerta from './Alerta'
 import ModalConfirmar from './ModalConfirmacion'
 
-const FormularioProyecto = () => {
+const FormularioProyecto = ({ onCrearEncuestas }) => {
     const [id, setId] = useState(null)
     const [nombre, setNombre] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [fechaEntrega, setFechaEntrega] = useState('')
-    const [mostrarModal, setMostrarModal] = useState(false)
+    const [mostrarModal, setMostrarModal] = useState(false) // Nuevo estado para controlar la visibilidad del modal
 
     const params = useParams()
     const { mostrarAlerta, alerta, submitProyecto, proyecto } = useProyectos()
@@ -39,15 +39,17 @@ const FormularioProyecto = () => {
         setNombre('')
         setDescripcion('')
         setFechaEntrega('')
-        setMostrarModal(true) // Mostrar el modal al enviar el formulario
+        onCrearEncuestas() // Llamar a la función para mostrar el modal
     }
 
     const { msg } = alerta
+
     return (
         <>
-            <form className="bg-white/[0.2] rounded-md  px-10 w-[400px] md:w-[480px]" onSubmit={handleSubmit}>
+            <form className="bg-white/[0.7] rounded-md py-3 px-6 w-[380px] md:w-[450px]" onSubmit={handleSubmit}>
+                {msg && <Alerta alerta={alerta} className="absolute bottom-0 left-0 right-0" />}
                 <div className="">
-                    <label className="text-gray-700 capitalize font-bold text-md" htmlFor="nombre">
+                    <label className="text-gray-700 capitalize font-extrabold text-md " htmlFor="nombre">
                         Nombre Encuesta
                     </label>
                     <input
@@ -60,27 +62,25 @@ const FormularioProyecto = () => {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="text-gray-700 capitalize font-bold text-md" htmlFor="descripcion">
+                    <label className="text-gray-700 capitalize font-extrabold text-md" htmlFor="descripcion">
                         Descripción
                     </label>
                     <textarea
                         id="descripcion"
-                        className="border-2 w-full p-2 mt-2
-            placeholder-gray-400 rounded-md"
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         placeholder="Descripción dela Encuesta"
                         value={descripcion}
                         onChange={e => setDescripcion(e.target.value)}
                     ></textarea>
                 </div>
                 <div className="mb-3">
-                    <label className="text-gray-700 capitalize font-bold text-md" htmlFor="fecha-entrega">
+                    <label className="text-gray-700 capitalize font-extrabold text-md" htmlFor="fecha-entrega">
                         Fecha Limite
                     </label>
                     <input
                         id="fecha-entrega"
                         type="datetime-local"
-                        className="border-2 w-full p-2 mt-2
-                  placeholder-gray-400 rounded-md"
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={fechaEntrega}
                         onChange={e => setFechaEntrega(e.target.value)}
                     ></input>
@@ -91,8 +91,6 @@ const FormularioProyecto = () => {
                     value={id ? 'Actualizar Proyecto' : 'Crear Encuesta'}
                     className="bg-gradient-to-r from-Principal_1 to-Principal_2 w-full p-3 capitalize font-bold text-white rounded cursor-pointer "
                 />
-
-                {msg && <Alerta alerta={alerta} className="absolute bottom-0 left-0 right-0" />}
             </form>
             {/* Modal */}
             {mostrarModal && <ModalConfirmar onClose={() => setMostrarModal(false)} />}

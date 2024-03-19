@@ -1,18 +1,22 @@
 import mongoose from "mongoose";
 
 
-const aprendizSchema=mongoose.Schema({
+const aprendizSchema=mongoose.Schema({ 
     nombre:{
         type: String,
         required:true,
         trim:true
     },
     email:{
-        type: String,
+        type: String,  
         required:true,
         trim:true
     }, 
-    token:{
+    tipoDocumento:{
+        type: String,
+        
+    },
+    numeroDocumento:{
         type: String,
         
     },

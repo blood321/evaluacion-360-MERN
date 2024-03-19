@@ -5,6 +5,7 @@ import fichas from "../models/fichas.js";
 import Usuario from "../models/Usuario.js";
 import programacion from "../models/programacionMov3.js"
 import Respuesta from "../models/respuestas.js";
+import aprendiz from "../models/aprendiz.js"
 
 const nuevoDetalleEncuesta = async (req, res) => {
     //en postman se deben poner estas constates en ves de las del modelo 
@@ -38,59 +39,46 @@ const nuevoDetalleEncuesta = async (req, res) => {
     }
 };
 const obtenerDetallesEncuestas= async (req,res)=>{
- const {id} = req.params
- console.log(id)
- try{ 
+    const { id } = req.params;
+
+try {
+    const respuestasExistentes = await Respuesta.findOne({ aprendiz: id });
+    if (respuestasExistentes) {
+        const error = new Error("El usuario ya tiene respuestas creadas");
+        return res.status(404).json({ msg: error.message });
+    } 
+        const usuario = await Usuario.findOne({ _id: id });
+        console.log(usuario)
+        const fichaUsuario = await fichas.find({ aprendices: usuario }, '_id');
+        console.log(fichaUsuario)
+
+        const instructoresResponder = await programacion.find({ fichas: fichaUsuario }, 'instructores');
+        console.log(instructoresResponder)
+
+        const encuestasID = await detalleEncuesta.find({ fichas: fichaUsuario }).distinct('encuesta');
         
-    const usuario = await Usuario.findOne({_id:id})
-    console.log(usuario)
-    //Busca la ficha del usuario cual inicio sesión 
-    const fichaUsuario  = await fichas.find({aprendices:usuario},'_id')
-    console.log(fichaUsuario)
-      //Busca los instructores que le dieron clase en la programacion de la ficha 
-    const instructoresResponder=await programacion.find({fichas:fichaUsuario},'instructores')
-    console.log(instructoresResponder)
-   //busca la encuesta ligada a la ficha 
-    const buscarEncuesta = await detalleEncuesta.find().where('fichas').equals(fichaUsuario).select("-fichas -__v -_id ")
-    //trasforma el buscar Enccuesta a String 
-    const encuestaString = JSON.stringify(buscarEncuesta);
-    const encuestaArray = JSON.parse(encuestaString); // Convertir la cadena JSON a un array de objetos
-    const encuestasID = encuestaArray.map(item => item.encuesta);
-    const buscarEncuestaParaGuardarEnRespuestas=await encuesta.findById().where('_id').equals(encuestasID).select("-nombre -fechaCreado -tiempoResponder -preuntas -encuestado -activa -__v")
-    //Muestra las preguntas de la encuesta y tambien se encuetre activa ya que pueden exister varias encuestas a la ves pero una sola se responde 
-    const mostrarPregunta= await encuesta.find({activa:true}).where('_id').equals(encuestasID).select("-_id  -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa")
-    const resultadoJSON2 = JSON.stringify(mostrarPregunta);
-    const resultadoArray2 = JSON.parse(resultadoJSON2);
-    const resultadoInstructores = JSON.stringify(instructoresResponder);
-    const resultadoI = JSON.parse(resultadoInstructores);
-    
-     resultadoI.forEach(async objeto => {
-             try {
-                 console.log(objeto.instructores)
-                objeto.instructores.forEach(async instructorId => {
-                    console.log(typeof(instructorId))
-                    resultadoArray2.forEach(async objeto => {
-                            try {
-                               objeto.preguntas.forEach(async preguntaId => {
-                                    //Crear una nueva instancia de respuesta con el identificador de pregunta
-                                   const nuevaRespuesta = new Respuesta({pregunta:preguntaId,aprendiz:usuario,instructor:instructorId, encuesta:buscarEncuestaParaGuardarEnRespuestas })
-                                   // Guardar la nueva respuesta en la base de datos
-                                   const respug=  await nuevaRespuesta.save()
-                                  console.log(respug)
-                               })
-                               } catch (error) {
-                                   console.error('Error al crear la respuesta:', error); 
-                               }
-                           })
-                   })
-         } catch (error) {
-              console.error('Error al meter al instructor :', error);
+        const buscarEncuestaParaGuardarEnRespuestas = await encuesta.find({ _id: { $in: encuestasID } }).select("-nombre -fechaCreado -tiempoResponder -preuntas -encuestado -activa -__v");
+        
+        const mostrarPregunta = await encuesta.find({ activa: true, _id: { $in: encuestasID } }).select("-_id -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa");
+        
+        for (const instruccion of instructoresResponder) {
+            for (const instructorId of instruccion.instructores) {
+                for (const pregunta of mostrarPregunta) {
+                    for (const preguntaId of pregunta.preguntas) {
+                        const nuevaRespuesta = new Respuesta({ pregunta: preguntaId, aprendiz: usuario, instructor: instructorId, encuesta: buscarEncuestaParaGuardarEnRespuestas[0] });
+                        const respug = await nuevaRespuesta.save();
+                        console.log(respug);
+                    }
+                }
             }
-             })
-             
+        }
+
 } catch (error) {
-     console.log(error)
-}    
+    console.error('Error:', error);
+    return res.status(500).json({ msg: 'Error interno del servidor' });
+}
+
+  
  }
 const mostrasRespuestas =async (req,res)=>{
     const {id} = req.params

@@ -2,10 +2,9 @@ import { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from "react-router-dom";
 
-const ProyectosContext = createContext();
+const PreguntasContext = createContext();
 
-const ProyectosProvider = ({ children }) => {
-  const [proyectos, setProyectos] = useState([]);
+const PreguntasProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [proyecto, setProyecto] = useState({});
   const [cargando, setCargando] = useState(false);
@@ -13,25 +12,19 @@ const ProyectosProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const obtenerProyectos = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       if (!token) return;
-  //       const config = {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       };
-  //       const { data } = await clienteAxios("/proyectos", config);
-  //       setProyectos(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   obtenerProyectos();
-  // }, []);
+  useEffect(() => {
+    const obtenerPreguntas = async () => {
+      try {
+       
+        const { data } = await clienteAxios("/pregunta");
+        console.log(data)
+        setPreguntas(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    obtenerPreguntas();
+  }, []);
 
   const mostrarAlerta = (alerta) => {
     setAlerta(alerta);
@@ -155,22 +148,12 @@ const ProyectosProvider = ({ children }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const obtenerPreguntas = async (id) => {
-  //     try {
-  //       const { data } = await clienteAxios(`/responde/${id}`);
-  //       setPreguntas(data)
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   obtenerPreguntas()
-  // },[])
+ 
 
   return (
-    <ProyectosContext.Provider
+    <PreguntasContext.Provider
       value={{
-        proyectos,
+        preguntas,
         mostrarAlerta,
         alerta,
         submitProyecto,
@@ -182,9 +165,9 @@ const ProyectosProvider = ({ children }) => {
       }}
     >
       {children}
-    </ProyectosContext.Provider>
+    </PreguntasContext.Provider>
   );
 };
-export { ProyectosProvider };
+export { PreguntasProvider };
 
-export default ProyectosContext;
+export default PreguntasContext;

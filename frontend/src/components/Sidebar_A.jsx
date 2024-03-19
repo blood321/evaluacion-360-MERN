@@ -35,7 +35,7 @@ const Sidebar_A = () => {
     document.body.style.overflowY = 'hidden'
     return (
         <div
-            className={`h-[300px] md:h-screen px-[25px] overflow-auto bg-white ${
+            className={`h-[300px] md:h-screen px-[25px] overflow-auto bg-white/[0.9] ${
                 menuVisible ? 'fixed md:top-0 md:left-0 w-full ' : ''
             }`}
         >

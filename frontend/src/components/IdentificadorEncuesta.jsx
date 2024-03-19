@@ -13,19 +13,19 @@ const Identificador = () => {
         text-Principal_1
       "
         >
-            <div className="text-xl font-semibold">
+            <div className="text-xl font-bold">
                 <div className="flex items-center justify-between">
                     <span className="">ID 360</span>
                     <span className=" font-semibold  text-Secundario_2/[0.5]">12312435</span>
                 </div>
             </div>
-            <div className="text-xl font-semibold">
+            <div className="text-xl font-bold">
                 <div className="flex items-center justify-between">
                     <span>Total Preguntas</span>
                     <span className=" text-Secundario_1">3</span>
                 </div>
             </div>
-            <div className="text-xl font-semibold">
+            <div className="text-xl font-bold">
                 <div className="flex items-center justify-between">
                     <span>Tematicas</span>
                     <span className="text-Secundario_1">2</span>

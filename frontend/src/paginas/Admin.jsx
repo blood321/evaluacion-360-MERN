@@ -15,7 +15,7 @@ const Admin = () => {
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
-    
+
     return (
         <div className="flex flex-col mx-auto">
             <div className="w-full border">

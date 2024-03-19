@@ -6,6 +6,10 @@ const fichasSchema=mongoose.Schema({
         type:String,
       
     },
+    nombreDelPrograma:{
+        type:String,
+      
+    },
     fichaInicio:{
         type: Date,
      
