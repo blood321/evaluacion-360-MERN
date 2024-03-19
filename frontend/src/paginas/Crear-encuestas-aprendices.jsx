@@ -54,4 +54,4 @@ const CrearEncuestasAprendices = () => {
     )
 }
 
-export default CrearEncuestasAprendices
+export default CrearEncuestasAprendices;
