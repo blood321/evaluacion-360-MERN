@@ -26,7 +26,7 @@ const CrearEncuestasAprendices = () => {
                     </span>
                 </p>
                 <h2 className="text-4xl font-black text-center mt-2">
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-Principal_1 to-Principal_2 pr-8">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-Principal_1 to-Principal_2 pr-8 animate-fade-right animate-duration-[1700ms]">
                         Aprendices
                     </span>
                 </h2>

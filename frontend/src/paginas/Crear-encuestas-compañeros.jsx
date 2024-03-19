@@ -22,7 +22,7 @@ const CrearEncuestasCompaneros = () => {
                     </span>
                 </p>
                 <h2 className="text-4xl  font-black text-center mt-[10px]">
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-Principal_1 to-Principal_2 pr-6">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-Principal_1 to-Principal_2 pr-6 animate-fade-right animate-duration-[1700ms]">
                         Compañeros
                     </span>
                 </h2>
