@@ -8,7 +8,7 @@ const Tematicas = ({tematica}) => {
   useEffect(() => {
     async function loadTematicas() {
       try {
-        const response = await clienteAxios.get('/tematica/listar-tematicas');
+        const response = await clienteAxios('/tematica/listar-tematicas');
         setTematicas(response.data);
       } catch (error) {
         console.error('Error fetching tematicas:', error);
@@ -16,7 +16,7 @@ const Tematicas = ({tematica}) => {
     }
     loadTematicas();
   }, []);
-
+console.log(tematicas+"aqui")
   const handleTematicaChange = (event) => {
     setTematicaSeleccionada(event.target.value);
   };

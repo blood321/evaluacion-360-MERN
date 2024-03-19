@@ -4,6 +4,7 @@ import usePreguntas from "../hooks/usePreguntas";
 
 const Listarp = ({ addMensaje, tematicaSeleccionada}) => {
   const { preguntas } = usePreguntas();
+  console.log(preguntas)
   const [selectedItems, setSelectedItems] = useState([]);
   const { auth } = useAuth();
   // Filtrar preguntas por temática seleccionada
@@ -22,7 +23,6 @@ const Listarp = ({ addMensaje, tematicaSeleccionada}) => {
       setSelectedItems([...selectedItems, itemId]);
     }
   };
-
   useEffect(() => {
     // Obtener la cantidad de elementos seleccionados
     addMensaje(selectedItems);

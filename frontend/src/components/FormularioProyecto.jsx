@@ -3,36 +3,35 @@ import { useParams } from "react-router-dom";
 import useProyectos from "../hooks/useProyectos";
 import Alerta from "./Alerta";
 import ModalConfirmar from "./ModalConfirmacion";
+import useEncuestas from "../hooks/useEncuesta";
 
-const FormularioProyecto = ({ nombreG, descripcionG, fechaEntregaG }) => {
+const FormularioProyecto = ({ preguntas }) => {
   const [id, setId] = useState(null);
-  const [nombre, setNombre] = useState("");
+  const [nombre, setNombre] = useState("hola");
   const [descripcion, setDescripcion] = useState("");
   const [fechaEntrega, setFechaEntrega] = useState("");
   const [mostrarModal, setMostrarModal] = useState(false);
+  console.log("este es el contenido a guardar"+nombre)
+  console.log("este es el contenido a guardar"+descripcion)
+  console.log("este es el contenido a guardar"+fechaEntrega)
+console.log(preguntas)
   
-  useEffect(() => {
-      // Obtener la cantidad de elementos seleccionados
-      nombreG(nombre);
-      descripcionG(descripcion);
-      fechaEntregaG(fechaEntrega);
-  }, [nombre,descripcion,fechaEntrega]);
   const params = useParams();
-  const { mostrarAlerta, alerta, submitProyecto, proyecto } = useProyectos();
+  const { mostrarAlerta, alerta, submitEncuesta, encuesta } = useEncuestas();
 
   useEffect(() => {
     if (params.id) {
-      setId(proyecto._id);
-      setNombre(proyecto.nombre);
-      setDescripcion(proyecto.descripcion);
-      setFechaEntrega(proyecto.fechaEntrega?.split("T")[0]);
+      setId(encuesta._id);
+      setNombre(encuesta.nombre);
+      setDescripcion(encuesta.descripcion);
+      setFechaEntrega(encuesta.fechaEntrega?.split("T")[0]);
     }
   }, [params]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if ([nombre, descripcion, fechaEntrega].includes("")) {
+    if ([nombre, descripcion,preguntas].includes("")) {
       mostrarAlerta({
         msg: "Todos los campos son obligatorios",
         error: true,
@@ -40,7 +39,8 @@ const FormularioProyecto = ({ nombreG, descripcionG, fechaEntregaG }) => {
       return;
     }
     // Pasar los datos hacia el provider
-    await submitProyecto({ id, nombre, descripcion, fechaEntrega });
+    await submitEncuesta({ id, nombre, descripcion,preguntas });
+
     setId(null);
     setNombre("");
     setDescripcion("");

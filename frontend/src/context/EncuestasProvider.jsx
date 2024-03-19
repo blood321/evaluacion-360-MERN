@@ -1,23 +1,17 @@
-import { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
-import { useNavigate } from "react-router-dom";
 
-const PreguntasContext = createContext();
+const EncuestasContext = createContext();
 
-const PreguntasProvider = ({ children }) => {
+const EncuestasProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
-  const [proyecto, setProyecto] = useState({});
   const [cargando, setCargando] = useState(false);
-  const [preguntas, setPreguntas] = useState([]);
-
-  const navigate = useNavigate();
+  const [encuesta, setEncuesta] = useState([]);
 
   useEffect(() => {
     const obtenerPreguntas = async () => {
       try {
-       
         const { data } = await clienteAxios("/pregunta");
-        console.log(data)
         setPreguntas(data);
       } catch (error) {
         console.log(error);
@@ -33,14 +27,16 @@ const PreguntasProvider = ({ children }) => {
     }, 5000);
   };
 
-  const submitProyecto = async (proyecto) => {
-    if (proyecto.id) {
-      await editarProyecto(proyecto);
+  const submitEncuesta = async (encuesta) => {
+    console.log("esto en escuesta Provider" + encuesta);
+    if (encuesta.id) {
+      await editarEncuesta(encuesta);
     } else {
-      await nuevoProyecto(proyecto);
+      await nuevaEncuesta(encuesta);
     }
   };
-  const editarProyecto = async (proyecto) => {
+
+  const editarEncuesta = async (encuesta) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -51,20 +47,17 @@ const PreguntasProvider = ({ children }) => {
         },
       };
       const { data } = await clienteAxios.put(
-        `/proyectos/${proyecto.id}`,
-        proyecto,
+        `/encuesta/${encuesta.id}`,
+        encuesta,
         config
       );
 
-      // Sincronizar el state
-      const proyectosActualizados = proyectos.map((proyectoState) =>
-        proyectoState._id === data._id ? data : proyectoState
-      );
-      setProyectos(proyectosActualizados);
+      // Actualizar el estado de la encuesta
+      setEncuesta(data);
 
-      // Mostrar la Alerta de proyecto actualizado
+      // Mostrar la Alerta de encuesta actualizada
       setAlerta({
-        msg: "Proyecto Actualizado correctamente",
+        msg: "Encuesta Actualizada correctamente",
         error: false,
       });
 
@@ -76,18 +69,11 @@ const PreguntasProvider = ({ children }) => {
       console.log(error);
     }
   };
-  const nuevoProyecto = async (proyecto) => {
+
+  const nuevaEncuesta = async (encuesta) => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await clienteAxios.post("/proyectos", proyecto, config);
-      setProyectos([...proyectos, data]);
+      const { data } = await clienteAxios.post("/encuesta", encuesta);
+      setEncuesta([...encuesta, data]);
       setAlerta({
         msg: "Proyecto creado correctamente",
         error: false,
@@ -101,6 +87,7 @@ const PreguntasProvider = ({ children }) => {
       console.log(error);
     }
   };
+
   const obtenerProyecto = async (id) => {
     setCargando(true);
     try {
@@ -120,6 +107,7 @@ const PreguntasProvider = ({ children }) => {
       setCargando(false);
     }
   };
+
   const eliminarProyecto = async (id) => {
     try {
       const token = localStorage.getItem("token");
@@ -132,8 +120,10 @@ const PreguntasProvider = ({ children }) => {
       };
       const { data } = await clienteAxios.delete(`/proyectos/${id}`, config);
       // Sincronizar el State
-      const proyectosActualizados = proyectos.filter(proyectoState => proyectoState._id !== id)
-      setProyectos(proyectosActualizados)
+      const proyectosActualizados = proyectos.filter(
+        (proyectoState) => proyectoState._id !== id
+      );
+      setProyectos(proyectosActualizados);
       setAlerta({
         msg: data.msg,
         error: false,
@@ -147,26 +137,22 @@ const PreguntasProvider = ({ children }) => {
     }
   };
 
- 
-
   return (
-    <PreguntasContext.Provider
+    <EncuestasContext.Provider
       value={{
-        preguntas,
+        encuesta,
         mostrarAlerta,
         alerta,
-        submitProyecto,
+        submitEncuesta,
         obtenerProyecto,
-        proyecto,
         cargando,
         eliminarProyecto,
-      
       }}
     >
       {children}
-    </PreguntasContext.Provider>
+    </EncuestasContext.Provider>
   );
 };
-export { PreguntasProvider };
 
-export default PreguntasContext;
+export { EncuestasProvider };
+export default EncuestasContext;

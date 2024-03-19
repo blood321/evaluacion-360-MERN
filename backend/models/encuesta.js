@@ -11,15 +11,10 @@ const encuestaSchema=mongoose.Schema({
         default:Date.now(),
         required:true
     },
-    tiempoResponder:{
-        type: Date,
-        required:true
-    },
     descripcion:{
-        type: Number,
+        type: String,
         required:true
     },
-    
     preguntas:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"preguntas",

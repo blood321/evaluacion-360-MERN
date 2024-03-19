@@ -5,30 +5,14 @@ import FormularioProyecto from "../components/FormularioProyecto";
 import Identificador from "../components/IdentificadorEncuesta";
 
 const CrearEncuestasAprendices = () => {
-  const [id, setId] = useState("");//arreglo de las preguntas seleccionadas 
+  const [preguntas, setPreguntas] = useState("");//arreglo de las preguntas seleccionadas 
   
-  const [nombre,setNombre]=useState()//nombre de la encuesta 
   
-  console.log("este es el contenido a guardar"+nombre)
-  const[descripcion,setDescripcion]=useState()
   
-  console.log("este es el contenido a guardar"+descripcion)
-  const[fechaEntrega,setFechaEntrega]=useState()
-  console.log("este es el contenido a guardar"+fechaEntrega)
   const addMensaje = (mensaje) => {
-    setId(mensaje);
+    setPreguntas(mensaje);
   };
-  const nombreG =(mensaje)=>{
-    setNombre(mensaje)
-  }
 
-  const descripcionG=(mensaje)=>{
-    setDescripcion(mensaje)
-  }
-  const fechaEntregaG =(mensaje)=>{
-    setFechaEntrega(mensaje)
-  }
- console.log(id)
   const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null);
   const handleTematicaSeleccionada = (tematica) => {
     setTematicaSeleccionada(tematica);
@@ -53,7 +37,7 @@ const CrearEncuestasAprendices = () => {
       <div className="md:flex md:justify-between md:items-start mt-9">
         <Tematicas tematica={handleTematicaSeleccionada} />
         <div className=" px-auto pr-56 ">
-          <Identificador addMensaje={id}/>
+          <Identificador addMensaje={preguntas}/>
         </div>
       </div>
       <div className="md:flex md:justify-between md:items-start mt-4">
@@ -63,7 +47,7 @@ const CrearEncuestasAprendices = () => {
         </div>
         <div className="w-full py-auto">
           {/* Componente FormularioProyecto */}
-          <FormularioProyecto nombreG={nombreG} descripcionG={descripcionG} fechaEntregaG={fechaEntregaG}/>
+          <FormularioProyecto preguntas={preguntas}  />
         </div>
       </div>
     </div>
