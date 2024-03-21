@@ -9,29 +9,28 @@ const ProyectosProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [proyecto, setProyecto] = useState({});
   const [cargando, setCargando] = useState(false);
-  const [preguntas, setPreguntas] = useState([]);
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const obtenerProyectos = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       if (!token) return;
-  //       const config = {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       };
-  //       const { data } = await clienteAxios("/proyectos", config);
-  //       setProyectos(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   obtenerProyectos();
-  // }, []);
+  useEffect(() => {
+    const obtenerProyectos = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await clienteAxios("/proyectos", config);
+        setProyectos(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    obtenerProyectos();
+  }, []);
 
   const mostrarAlerta = (alerta) => {
     setAlerta(alerta);
@@ -155,18 +154,6 @@ const ProyectosProvider = ({ children }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const obtenerPreguntas = async (id) => {
-  //     try {
-  //       const { data } = await clienteAxios(`/responde/${id}`);
-  //       setPreguntas(data)
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   obtenerPreguntas()
-  // },[])
-
   return (
     <ProyectosContext.Provider
       value={{
@@ -178,7 +165,6 @@ const ProyectosProvider = ({ children }) => {
         proyecto,
         cargando,
         eliminarProyecto,
-        preguntas,
       }}
     >
       {children}
