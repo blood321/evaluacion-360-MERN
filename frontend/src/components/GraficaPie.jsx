@@ -129,7 +129,7 @@ function GraficaPie() {
     option && myChart.setOption(option);
   }, []); 
 
-  return <div id="main" style={{  width: '600px', height: '400px'}} />;
+  return <div id="main" style={{display: 'flex', width: '300px', height: '300px'}} />;
 }
 
 export default GraficaPie;

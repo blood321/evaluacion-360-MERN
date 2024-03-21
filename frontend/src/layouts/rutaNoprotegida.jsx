@@ -2,7 +2,6 @@ import useAuth from "../hooks/useAuth";
 import { Outlet } from "react-router-dom";
 import Sidebar_A from "../components/Sidebar_A";
 import Header from "../components/Header";
-import Inicio from "../components/inicio";
 import Footer from "../components/Footer";
 
 function RutanoProtegida() {
