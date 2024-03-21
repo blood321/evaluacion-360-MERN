@@ -131,27 +131,9 @@ console.log(location.pathname)
             {/* Modal */}
             {mostrarModal && <ModalConfirmar onClose={() => setMostrarModal(false)} />}
         </>
-    )
-}
-        <input
-          type="submit"
-          value={id ? "Actualizar Proyecto" : "Crear Encuesta"}
-          className="bg-gradient-to-r from-Principal_1 to-Principal_2 w-full p-3 capitalize font-bold text-white rounded cursor-pointer "
-        />
+  )
+  
 
-        {msg && (
-          <Alerta
-            alerta={alerta}
-            className="absolute bottom-0 left-0 right-0"
-          />
-        )}
-      </form>
-      {/* Modal */}
-      {mostrarModal && (
-        <ModalConfirmar onClose={() => setMostrarModal(false)} />
-      )}
-    </>
-  );
 };
 
 export default FormularioProyecto;

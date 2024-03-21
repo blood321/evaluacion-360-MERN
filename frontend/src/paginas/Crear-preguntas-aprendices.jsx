@@ -4,6 +4,11 @@ import CrearPreguntas from '../components/CrearPreguntas'
 import PreguntaEditable from '../components/EditarPreguntas' // Corregido el import
 
 const CrearPreguntasAprendices = () => {
+    const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null)
+
+    const handleTematicaSeleccionada = tematica => {
+        setTematicaSeleccionada(tematica)
+    }
     const [preguntas, setPreguntas] = useState([])
 
     // Función para agregar una nueva pregunta
@@ -47,7 +52,7 @@ const CrearPreguntasAprendices = () => {
                 <div className="md:flex md:justify-between md:items-start mt-7">
                     {/* Tematicas a la izquierda */}
                     <div className="mr-4">
-                        <Tematicas />
+                        <Tematicas tematica={handleTematicaSeleccionada} />
                     </div>
                     {/* Componente CrearPreguntas */}
                     <div className="animate-fade-down animate-duration-[700ms]">

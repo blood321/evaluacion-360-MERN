@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useLocation } from 'react';
 import clienteAxios from '../config/clienteAxios';
 
 const Tematicas = ({tematica}) => {
   const [tematicas, setTematicas] = useState([]);
   const [tematicaSeleccionada, setTematicaSeleccionada] = useState("");
-
+  
   useEffect(() => {
+
+
     async function loadTematicas() {
       try {
         const response = await clienteAxios('/tematica/listar-tematicas');
@@ -16,7 +18,6 @@ const Tematicas = ({tematica}) => {
     }
     loadTematicas();
   }, []);
-console.log(tematicas+"aqui")
   const handleTematicaChange = (event) => {
     setTematicaSeleccionada(event.target.value);
   };
