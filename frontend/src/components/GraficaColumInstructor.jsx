@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import * as echarts from 'echarts';
 
-function GraficaColumn() {
+function GraficaColumInstructor() {
   useEffect(() => {
     const chartDom = document.getElementById('main');
     const myChart = echarts.init(chartDom);
@@ -21,7 +21,7 @@ function GraficaColumn() {
       xAxis: [
         {
           type: 'category',
-          data: ['Bueno', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: ['si', 'no', 'nose', 'aja', 'xd'],
           axisTick: {
             alignWithLabel: true
           }
@@ -37,7 +37,7 @@ function GraficaColumn() {
           name: 'Direct',
           type: 'bar',
           barWidth: '60%',
-          data: [10, 52, 200, 334, 390, 330, 220]
+          data: [10, 52, 200, 334, 390  ]
         }
       ]
     };
@@ -50,7 +50,7 @@ function GraficaColumn() {
     };
   }, []);
 
-  return <div id="main" style={{ display: 'flex', width: '300px', height: '200px' }} />;
+  return <div id="main" style={{ width: '400px', height: '300px' }} />;
 }
 
-export default GraficaColumn;
+export default GraficaColumInstructor;

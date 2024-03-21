@@ -23,7 +23,7 @@ const Tematicas = ({ onTematicaSeleccionada }) => {
                     <option value="pedagogica">Pedagógica</option>
                     <option value="tecnica">Técnica</option>
                     <option value="blandas">H-Blandas</option>
-                    <option value="profesional">Profesional</option>
+                    <option value="profesional">Profesiona7l</option>
                 </select>
             </div>
         </div>
