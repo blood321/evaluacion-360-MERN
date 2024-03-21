@@ -2,15 +2,26 @@ import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import usePreguntas from "../hooks/usePreguntas";
 
-const Listarp = ({ addMensaje, tematicaSeleccionada}) => {
+const Listarp = ({ addMensaje, tematicaSeleccionada }) => {
   const { preguntas } = usePreguntas();
-  console.log(preguntas)
+  console.log(preguntas);
   const [selectedItems, setSelectedItems] = useState([]);
   const { auth } = useAuth();
   // Filtrar preguntas por temática seleccionada
-  const preguntasFiltradas = preguntas.filter(
-    (pregunta) => pregunta.tematica === tematicaSeleccionada
-  );
+  const preguntasFiltradas = preguntas.filter((pregunta) => {
+    // Verificar si la pregunta tiene la temática seleccionada
+    const tieneTematica = pregunta.tematica === tematicaSeleccionada;
+
+    // Verificar si la página actual es "/inicio-admin/Crear-encuestas-aprendices"
+    const esPaginaAprendices =
+      location.pathname === "/inicio-admin/Crear-encuestas-jefes";
+
+    // Filtrar las preguntas que cumplan con ambos criterios
+    return (
+      tieneTematica &&
+      (esPaginaAprendices ? pregunta.encuestado === "Jefes" : true)
+    );
+  });
 
   // Función para manejar el clic en un elemento
   const handleItemClick = (itemId) => {

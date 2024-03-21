@@ -20,7 +20,7 @@ import Admin from "./paginas/Admin.jsx";
 import CrearEncuestasAprendices from "./paginas/Crear-encuestas-aprendices.jsx";
 import RutanoProtegida from "./layouts/rutaNoprotegida.jsx";
 import Inicio from "./components/inicio.jsx";
-import CrearEncuestasCompaneros from "./paginas/Crear-encuestas-compañeros.jsx";
+import CrearEncuestasCompaneros from "./paginas/Crear-encuestas-companeros.jsx";
 import CrearEncuestasjefes from "./paginas/Crear-encuestas-jefes.jsx";
 import CrearPreguntasAprendices from "./paginas/Crear-preguntas-aprendices.jsx";
 import CrearPreguntasCompaneros from "./paginas/Crear-preguntas-compañeros.jsx";
@@ -68,7 +68,7 @@ function App() {
                     element={<CrearEncuestasAprendices />}
                   />
                   <Route
-                    path="crear-encuestas-compañeros"
+                    path="crear-encuestas-companeros"
                     element={<CrearEncuestasCompaneros />}
                   />
                   <Route

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useProyectos from "../hooks/useProyectos";
+import useEncuestas from "../hooks/useEncuesta";
+import { useLocation } from "react-router-dom";
 import Alerta from "./Alerta";
 import ModalConfirmar from "./ModalConfirmacion";
-import useEncuestas from "../hooks/useEncuesta";
 
 const FormularioProyecto = ({ preguntas }) => {
   const [id, setId] = useState(null);
@@ -11,11 +11,29 @@ const FormularioProyecto = ({ preguntas }) => {
   const [descripcion, setDescripcion] = useState("");
   const [fechaEntrega, setFechaEntrega] = useState("");
   const [mostrarModal, setMostrarModal] = useState(false);
-  console.log("este es el contenido a guardar"+nombre)
-  console.log("este es el contenido a guardar"+descripcion)
-  console.log("este es el contenido a guardar"+fechaEntrega)
-console.log(preguntas)
+  const [encuestado, setEncuestado] = useState(""); // Estado para guardar el valor de 'encuestado'
+
+  // Utiliza useLocation para obtener la ruta actual
+  const location = useLocation();
+
+
+  console.log(encuestado);
+console.log(location.pathname)
+  // Establece 'encuestado' basado en la ruta actual
+  useEffect(() => {
+    if (location.pathname === "/inicio-admin/Crear-encuestas-aprendices") {
+      setEncuestado("Aprendiz");
+    } 
+     if (location.pathname === "/inicio-admin/Crear-encuestas-companeros") {
+      setEncuestado("Compañeros");
+    }
+    if (location.pathname === "/inicio-admin/Crear-encuestas-jefes") {
+      setEncuestado("jefes");
+    }
+    
+  }, [location]);
   
+
   const params = useParams();
   const { mostrarAlerta, alerta, submitEncuesta, encuesta } = useEncuestas();
 
@@ -31,7 +49,7 @@ console.log(preguntas)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if ([nombre, descripcion,preguntas].includes("")) {
+    if ([nombre, descripcion, preguntas].includes("")) {
       mostrarAlerta({
         msg: "Todos los campos son obligatorios",
         error: true,
@@ -39,7 +57,7 @@ console.log(preguntas)
       return;
     }
     // Pasar los datos hacia el provider
-    await submitEncuesta({ id, nombre, descripcion,preguntas });
+    await submitEncuesta({ id, nombre, descripcion, preguntas, encuestado });
 
     setId(null);
     setNombre("");
