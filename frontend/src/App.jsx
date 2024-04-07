@@ -14,7 +14,7 @@ import Proyecto from "./paginas/Proyecto";
 import EditarProyecto from "./paginas/EditarProyecto";
 import Aloguin from "./paginas/Aloguin";
 import Aviso from "./paginas/Aviso";
-import Respoder from "./paginas/Respoder";
+import Responder from "./paginas/Respoder";
 import LoginAdmin from "./paginas/LoginAdmin.jsx";
 import Admin from "./paginas/Admin.jsx";
 import CrearEncuestasAprendices from "./paginas/Crear-encuestas-aprendices.jsx";
@@ -49,10 +49,10 @@ function App() {
                   />
                 </Route>
 
-                <Route path="/Login" element={<LoginAdmin />} />
-                <Route path="login-adm" element={<LoginAdmin />} />
-                <Route path="aviso/:id" element={<Aviso />} />
-                <Route path="responder" element={<Respoder />} />
+            <Route path="/Login" element={<LoginAdmin />} />
+            <Route path="login-adm" element={<LoginAdmin />} />
+            <Route path="aviso/:id" element={<Aviso />} />
+            <Route path="responder/:id" element={<Responder />} />
 
                 <Route
                   path="inicio-administrador"

@@ -7,22 +7,23 @@ import logo1Principal from '../assets/img/logo1Principal.png'
 import Footer from '../components/Footer'
 
 function Aloguin() {
-    const [email, setEmail] = useState('')
-    const [alerta, setAlerta] = useState({})
+  const [email, setEmail] = useState("");
+  const [alerta, setAlerta] = useState({});
 
-    const handleSubmit = async e => {
-        e.preventDefault()
-        if (email === '' || email.length < 6) {
-            setAlerta({
-                msg: 'El correo es obligatorio',
-                error: true,
-            })
-            setTimeout(() => {
-                setAlerta({})
-            }, 4500)
 
-            return
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (email === "" || email.length < 6) {
+      setAlerta({
+        msg: "El correo es obligatorio",
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      
+      return;
+    }
 
         try {
             const { data } = await clienteAxios.post('/aprendiz/autenticar', {
