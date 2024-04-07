@@ -7,12 +7,15 @@ import logoSena from "../assets/img/logoSena.png";
 
 const Aviso = () => {
   const id = useParams();
+  console.log(id);
   const [nombre, setNombre] = useState("");
+  const [iden, setIden] = useState("");
 
   useEffect(() => {
     async function loadName() {
-     const nombre = await clienteAxios(`/aprendiz/aviso/${id.id}`);
-      setNombre(nombre.data);
+      const nombre = await clienteAxios(`/aprendiz/aviso/${id.id}`);
+      setNombre(nombre.data.nombre);
+      setIden(nombre.data._id);
     }
     loadName();
   }, []);
@@ -47,7 +50,7 @@ const Aviso = () => {
                 contribuir!
               </p>
               <Link
-                to={"/responder"}
+                to={`/responder/${iden}`}
                 className="rounded-2xl w-full py-2 mt-4 flex justify-center bg-gradient-to-r from-Secundario_1 to-Secundario_2 border-white border-spacing-1 text-white"
               >
                 Iniciar Encuesta

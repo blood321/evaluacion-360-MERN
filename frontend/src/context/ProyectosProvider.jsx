@@ -9,7 +9,7 @@ const ProyectosProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [proyecto, setProyecto] = useState({});
   const [cargando, setCargando] = useState(false);
-  const [preguntas, setPreguntas] = useState([]);
+ 
 
   const navigate = useNavigate();
 
@@ -140,8 +140,10 @@ const ProyectosProvider = ({ children }) => {
       };
       const { data } = await clienteAxios.delete(`/proyectos/${id}`, config);
       // Sincronizar el State
-      const proyectosActualizados = proyectos.filter(proyectoState => proyectoState._id !== id)
-      setProyectos(proyectosActualizados)
+      const proyectosActualizados = proyectos.filter(
+        (proyectoState) => proyectoState._id !== id
+      );
+      setProyectos(proyectosActualizados);
       setAlerta({
         msg: data.msg,
         error: false,
@@ -155,18 +157,6 @@ const ProyectosProvider = ({ children }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const obtenerPreguntas = async (id) => {
-  //     try {
-  //       const { data } = await clienteAxios(`/responde/${id}`);
-  //       setPreguntas(data)
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   obtenerPreguntas()
-  // },[])
-
   return (
     <ProyectosContext.Provider
       value={{
@@ -178,7 +168,6 @@ const ProyectosProvider = ({ children }) => {
         proyecto,
         cargando,
         eliminarProyecto,
-        preguntas,
       }}
     >
       {children}

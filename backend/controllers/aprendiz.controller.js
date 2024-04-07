@@ -1,4 +1,5 @@
 import Aprendiz from "../models/aprendiz.js";
+import Usuario from "../models/Usuario.js";
 import {
   emailRegistro,
   emailAutenticar,
@@ -8,18 +9,19 @@ import {
 const obtenerAprendiz = async (req, res) => {
   const data = req.params.id;
   const id = data;
-  const aprendiz = await Aprendiz.findOne({ _id: id});
+  const aprendiz = await Usuario.findById({ _id: id});
   if (!aprendiz) {
     const error = new Error("El usuario no existe");
     return res.status(404).json({ msg: error.message });
   } else {
-    res.json(aprendiz.nombre);
+    
+    res.json(aprendiz);
   }
 };
 
 const autenticar = async (req, res) => {
   const { email } = req.body;
-  const aprendiz = await Aprendiz.findOne({ email });
+  const aprendiz = await Usuario.findOne({ email });
   if (!aprendiz) {
     const error = new Error("El correo no existe");
     return res.status(404).json({ msg: error.message });

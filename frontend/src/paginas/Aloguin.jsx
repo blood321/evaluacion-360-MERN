@@ -20,7 +20,7 @@ function Aloguin() {
       });
       setTimeout(() => {
         setAlerta({});
-      }, 4500);
+      }, 4000);
       
       return;
     }

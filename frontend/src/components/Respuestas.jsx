@@ -1,20 +1,39 @@
-import React from "react";
+import React, { useReducer } from "react";
 import Instructor from "../assets/img/instructor1.jpg";
 
-const Respuestas = ({
-  instructor,
-  opciones = ["Excelente", "Muy Bueno", "Bueno", "Regular", "Malo"],
-  respuestas,
-  setRespuestas,
-}) => {
-  const selectedOption = respuestas[instructor] || "";
 
-  const handleOptionChange = (event) => {
+const initialState = {
+  respuestas: {},
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SET_RESPUESTAS":
+      return {
+        ...state,
+        respuestas: {
+          ...state.respuestas,
+          [action.instructor]: action.respuestas,
+        },
+      };
+    default:
+      return state;
+  }
+}
+
+const Respuestas = ({instructor, opciones, respuestas}) => {
+  const selectedOption = respuestas || "";
+  console.log(selectedOption);
+  
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const handleOptionChange = (event, instructor) => {
     const { value } = event.target;
-    setRespuestas((prevRespuestas) => ({
-      ...prevRespuestas,
-      [instructor]: value,
-    }));
+    dispatch({
+      type: "SET_RESPUESTAS",
+      instructor: instructor,
+      respuestas: value
+    });
   };
 
   return (
@@ -35,7 +54,7 @@ const Respuestas = ({
                 name={`rating-${instructor}`}
                 value={opcion}
                 className="hidden"
-                checked={selectedOption === opcion}
+                checked={selectedOption}
                 onChange={handleOptionChange}
               />
               <label
