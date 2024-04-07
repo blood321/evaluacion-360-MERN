@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Eliminar from "./Eliminar"; // Importa el componente Eliminar
 import Enviar from "./Enviar";
+import clienteAxios from '../config/clienteAxios';
 
-const PrevisualizarEncu = () => {
+
+const PrevisualizarEncu = (nombre) => {
   const [mostrarEliminar, setMostrarEliminar] = useState(false); // Estado para controlar la visibilidad del modal de eliminar
   const [mostrarEnviar, setMostrarEnviar] = useState(false); // Estado para controlar la visibilidad del modal de enviar
 
@@ -28,13 +30,13 @@ const PrevisualizarEncu = () => {
                     <th className="p-3 text-left"></th>
                   </tr>
                 </thead>
+
               <tbody>
                 <tr className="bg-gray-800">
                   <td className="p-3">123456</td>
-                  <td className="p-3">camilos acosta</td>
+                  <td className="p-3">{nombre.nombre}</td>
                   <td className="p-3">10/12/2020</td>
                   <td className="p-3">Aprendices</td>
-
                   <td className="p-3">
                     <div className="flex">
                       <button className="flex" type="button" title="Enviar">
@@ -107,37 +109,31 @@ const PrevisualizarEncu = () => {
                   </td>
                 </tr>
               </tbody>
-             
+
             </table>
           </div>
       </div>
-
       {mostrarEliminar && (
         <Eliminar onClose={() => setMostrarEliminar(false)} />
       )}
       {mostrarEnviar &&(
         <Enviar onClose={() => setMostrarEnviar(false)}/>
       )}
-
       <style>
         {`
           .table {
             border-spacing: 0 3px;
           }
-
           i {
             font-size: 1rem !important;
           }
-
           .table tr {
             border-radius: 50px;
           }
-
           tr td:nth-child(n+5),
           tr th:nth-child(n+5) {
             border-radius: 0 2rem 2rem 0;
           }
-
           tr td:nth-child(1),
           tr th:nth-child(1) {
             border-radius: 3rem 0 0 3rem;
@@ -147,5 +143,4 @@ const PrevisualizarEncu = () => {
     </div>
   );
 };
-
 export default PrevisualizarEncu;

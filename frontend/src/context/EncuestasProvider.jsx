@@ -11,8 +11,8 @@ const EncuestasProvider = ({ children }) => {
   useEffect(() => {
     const obtenerPreguntas = async () => {
       try {
-        const { data } = await clienteAxios("/pregunta");
-        setPreguntas(data);
+        const { data } = await clienteAxios("/encuesta/lista");
+        setEncuesta(data);
       } catch (error) {
         console.log(error);
       }

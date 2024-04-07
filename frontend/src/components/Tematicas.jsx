@@ -1,26 +1,26 @@
 import React, { useState, useEffect,useLocation } from 'react';
 import clienteAxios from '../config/clienteAxios';
 
-const Tematicas = ({tematica}) => {
-  const [tematicas, setTematicas] = useState([]);
-  const [tematicaSeleccionada, setTematicaSeleccionada] = useState("");
-  
-  useEffect(() => {
+  const Tematicas = ({tematica}) => {
+    const [tematicas, setTematicas] = useState([]);
+    const [tematicaSeleccionada, setTematicaSeleccionada] = useState("");
+    console.log(tematica)
+    useEffect(() => {
 
 
-    async function loadTematicas() {
-      try {
-        const response = await clienteAxios('/tematica/listar-tematicas');
-        setTematicas(response.data);
-      } catch (error) {
-        console.error('Error fetching tematicas:', error);
+      async function loadTematicas() {
+        try {
+          const response = await clienteAxios('/tematica/listar-tematicas');
+          setTematicas(response.data);
+        } catch (error) {
+          console.error('Error fetching tematicas:', error);
+        }
       }
-    }
-    loadTematicas();
-  }, []);
-  const handleTematicaChange = (event) => {
-    setTematicaSeleccionada(event.target.value);
-  };
+      loadTematicas();
+    }, []);
+    const handleTematicaChange = (event) => {
+      setTematicaSeleccionada(event.target.value);
+    };
  tematica(tematicaSeleccionada)
   return (
     <div className="flex flex-col px-4">
