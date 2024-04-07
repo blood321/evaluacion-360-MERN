@@ -3,8 +3,17 @@ import Tematicas from '../components/Tematicas'
 import ListarPreguntas from '../components/ListarPreguntas'
 import FormularioProyecto from '../components/FormularioProyecto'
 import Identificador from '../components/IdentificadorEncuesta'
+
 const CrearEncuestasjefes = () => {
+    const [preguntas, setPreguntas] = useState('') //arreglo de las preguntas seleccionadas
+
+    const addMensaje = mensaje => {
+        setPreguntas(mensaje)
+    }
     const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null)
+    const handleTematicaSeleccionada = tematica => {
+        setTematicaSeleccionada(tematica)
+    }
 
     return (
         <div className="px-auto px-3">
@@ -24,19 +33,19 @@ const CrearEncuestasjefes = () => {
             </div>
             {/* Componente Tematicas */}
             <div className="md:flex md:justify-between md:items-start mt-9">
-                <Tematicas onTematicaSeleccionada={setTematicaSeleccionada} />
+                <Tematicas tematica={handleTematicaSeleccionada} />
                 <div className=" px-auto pr-56 ">
-                    <Identificador />
+                    <Identificador addMensaje={preguntas} />
                 </div>
             </div>
             <div className="md:flex md:justify-between md:items-start mt-4">
                 {/* Componente ListarPreguntas */}
                 <div className="w-full mt-4 mx-auto md:pl-2">
-                    {tematicaSeleccionada && <ListarPreguntas tipo="aprendiz" />}
+                    <ListarPreguntas addMensaje={addMensaje} tematicaSeleccionada={tematicaSeleccionada} />
                 </div>
                 <div className="w-full py-auto">
                     {/* Componente FormularioProyecto */}
-                    <FormularioProyecto />
+                    <FormularioProyecto preguntas={preguntas} />
                 </div>
             </div>
         </div>

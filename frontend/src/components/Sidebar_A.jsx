@@ -35,7 +35,7 @@ const Sidebar_A = () => {
     document.body.style.overflowY = 'hidden'
     return (
         <div
-            className={`h-[300px] md:h-screen px-[25px] overflow-auto bg-white ${
+            className={`h-[300px] md:h-screen px-[25px] overflow-auto bg-white/[0.9] ${
                 menuVisible ? 'fixed md:top-0 md:left-0 w-full ' : ''
             }`}
         >
@@ -74,7 +74,7 @@ const Sidebar_A = () => {
                                     <h2 className="font-bold text-sm leading-5 text-Secundario_2">Aprendices</h2>
                                 </li>
                             </Link>
-                            <Link to="Crear-encuestas-compañeros">
+                            <Link to="Crear-encuestas-companeros">
                                 <li className="flex items-center gap-2 pb-2 py-1 cursor-pointer  animate-fade-down animate-once animate-duration-[250ms] animate-ease-linear animate-normal hover:border-b hover:border-Principal_1">
                                     <FaChevronRight color="green" />
                                     <h2 className="font-bold text-sm leading-5 text-Secundario_2">Compañeros</h2>

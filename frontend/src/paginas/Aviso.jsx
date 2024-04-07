@@ -1,9 +1,9 @@
-import { NavBarUser } from "../components/NavBarUser";
-import logo2Principal from "../assets/img/logo2Principal.png";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import clienteAxios from "../config/clienteAxios.jsx";
-import logoSena from "../assets/img/logoSena.png";
+import { NavBarUser } from '../components/NavBarUser'
+import logo2Principal from '../assets/img/logo2Principal.png'
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import clienteAxios from '../config/clienteAxios.jsx'
+import logoSena from '../assets/img/logoSena.png'
 
 const Aviso = () => {
   const id = useParams();
@@ -68,4 +68,4 @@ const Aviso = () => {
   );
 };
 
-export default Aviso;
+export default Aviso

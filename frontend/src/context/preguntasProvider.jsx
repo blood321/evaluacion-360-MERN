@@ -2,35 +2,28 @@ import { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from "react-router-dom";
 
-const ProyectosContext = createContext();
+const PreguntasContext = createContext();
 
-const ProyectosProvider = ({ children }) => {
-  const [proyectos, setProyectos] = useState([]);
+const PreguntasProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [proyecto, setProyecto] = useState({});
   const [cargando, setCargando] = useState(false);
- 
+  const [preguntas, setPreguntas] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const obtenerProyectos = async () => {
+    const obtenerPreguntas = async () => {
       try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const { data } = await clienteAxios("/proyectos", config);
-        setProyectos(data);
+       
+        const { data } = await clienteAxios("/pregunta");
+        console.log(data)
+        setPreguntas(data);
       } catch (error) {
         console.log(error);
       }
     };
-    obtenerProyectos();
+    obtenerPreguntas();
   }, []);
 
   const mostrarAlerta = (alerta) => {
@@ -127,7 +120,6 @@ const ProyectosProvider = ({ children }) => {
       setCargando(false);
     }
   };
-
   const eliminarProyecto = async (id) => {
     try {
       const token = localStorage.getItem("token");
@@ -140,10 +132,8 @@ const ProyectosProvider = ({ children }) => {
       };
       const { data } = await clienteAxios.delete(`/proyectos/${id}`, config);
       // Sincronizar el State
-      const proyectosActualizados = proyectos.filter(
-        (proyectoState) => proyectoState._id !== id
-      );
-      setProyectos(proyectosActualizados);
+      const proyectosActualizados = proyectos.filter(proyectoState => proyectoState._id !== id)
+      setProyectos(proyectosActualizados)
       setAlerta({
         msg: data.msg,
         error: false,
@@ -157,10 +147,12 @@ const ProyectosProvider = ({ children }) => {
     }
   };
 
+ 
+
   return (
-    <ProyectosContext.Provider
+    <PreguntasContext.Provider
       value={{
-        proyectos,
+        preguntas,
         mostrarAlerta,
         alerta,
         submitProyecto,
@@ -168,12 +160,13 @@ const ProyectosProvider = ({ children }) => {
         proyecto,
         cargando,
         eliminarProyecto,
+      
       }}
     >
       {children}
-    </ProyectosContext.Provider>
+    </PreguntasContext.Provider>
   );
 };
-export { ProyectosProvider };
+export { PreguntasProvider };
 
-export default ProyectosContext;
+export default PreguntasContext;

@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Encuestas 360°</title>
-  </head>
-  <body class="bg-gray-100 min-h-screen">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="./src/assets/img/logoSena.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Encuestas 360°</title>
+        <style>
+            body {
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+                background-image: url('./src/assets/img/Fondo.png');
+                background-size: cover;
+            }
+            /* Agregar opacidad oscura */
+            body::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.1); /* Color negro con opacidad del 50% */
+                z-index: -1; /* Para asegurar que esté detrás del contenido */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
 </html>
