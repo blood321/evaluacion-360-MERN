@@ -32,7 +32,6 @@ import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
 import { PreguntasProvider } from "./context/preguntasProvider.jsx";
 import { EncuestasProvider } from "./context/EncuestasProvider.jsx";
-import Eliminar from "./components/Eliminar.jsx";
 function App() {
   return (
     <BrowserRouter>

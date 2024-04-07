@@ -1,8 +1,8 @@
-import GraficaPie from "../components/GraficaPie"
+import Editar from "../components/EditarEncuesta"
 function Componer() {
   return (
       <div className="flex items-center justify-center ">
-        <GraficaPie/>
+        <Editar/>
         </div>
   )
 }

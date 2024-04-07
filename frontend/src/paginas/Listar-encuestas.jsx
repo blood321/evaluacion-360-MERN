@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import PrevisualizarEncu from '../components/PrevisualizarEncu'
 import Eliminar from '../components/Eliminar' // Importa el componente Eliminar
 import Enviar from '../components/Enviar' // Importa el component enviar
+import Editar from '../components/EditarEncuesta' //Importar el componet Editar
 
 const ListarEncuestas = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [ShowEditarModal, setShowEditarModal] = useState(false)
     const [showEnviarModal, setShowEnviarModal] = useState(false)
     const [id,setId]=useState()
     console.log("este es el id que busco              "+id)
@@ -19,15 +21,25 @@ const ListarEncuestas = () => {
     const handleCloseDeleteModal = () => {
         setShowDeleteModal(false)
     }
+     //Funcion para mostrar el modal editar
+     const handleShowEditarModal =() => {
+        setShowEditarModal(true)
+    }
+    //Funcion  para cerrar el modal editar
+    const handleCloseEditarModal=()=>{
+        setShowEditarModal(false)
+    }
     // Función para mostrar el modal de Enviar
     const handleShowEnviarModal = () => {
         setShowEnviarModal(true)
     }
 
     // Función para ocultar el modal de Enviar
-    const handleCloseEditarModal = () => {
+    const handleCloseEnviarModal = () => {
         setShowEnviarModal(false)
     }
+    
+   
 
     return (
         <>
@@ -42,11 +54,13 @@ const ListarEncuestas = () => {
             <div className="o mt-4 p-5  animate-fade-down animate-duration-[800ms] 		">
                 <PrevisualizarEncu
                     onShowDeleteModal={handleShowDeleteModal}
+                    onShowEditarModal={handleShowEditarModal}
                     onShowEnviarModal={handleShowEnviarModal}
                 />
             </div>
             {showDeleteModal && <Eliminar onClose={handleCloseDeleteModal} kuko={id} />}
-            {showEnviarModal && <Enviar onClose={handleCloseEditarModal} />}
+            {ShowEditarModal && <Editar onClose={handleCloseEditarModal} />}
+            {showEnviarModal && <Enviar onClose={handleCloseEnviarModal} />}
         </>
     )
 }

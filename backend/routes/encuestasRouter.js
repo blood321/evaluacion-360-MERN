@@ -14,7 +14,7 @@ router.route('/')
     .put(editarEncuesta)
     .delete(eliminarEncuesta)
     router.route('/lista')
-    .get(listarEncuesta)
+    .get(listarEncuestas)
 
    
 
