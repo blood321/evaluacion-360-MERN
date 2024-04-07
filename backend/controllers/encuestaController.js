@@ -69,4 +69,13 @@ const eliminarEncuesta =async(req,res)=>{
         console.log(error)
     }
 }
-export {nuevaEncuesta,editarEncuesta,eliminarEncuesta,obtenerEncuestas}
+const listarEncuestas =async(req,res)=>{
+ 
+    try {
+        const lista= await encuesta.find()
+        res.json(lista)
+    } catch (error) {
+        console.log(error)
+    }
+}
+export {nuevaEncuesta,editarEncuesta,eliminarEncuesta,obtenerEncuestas,listarEncuestas}

@@ -11,8 +11,8 @@ const EncuestasProvider = ({ children }) => {
   useEffect(() => {
     const obtenerPreguntas = async () => {
       try {
-        const { data } = await clienteAxios("/pregunta");
-        setPreguntas(data);
+        const { data } = await clienteAxios("/encuesta");
+        setEncuesta(data);
       } catch (error) {
         console.log(error);
       }
@@ -28,7 +28,6 @@ const EncuestasProvider = ({ children }) => {
   };
 
   const submitEncuesta = async (encuesta) => {
-    console.log("esto en escuesta Provider" + encuesta);
     if (encuesta.id) {
       await editarEncuesta(encuesta);
     } else {
@@ -108,17 +107,10 @@ const EncuestasProvider = ({ children }) => {
     }
   };
 
-  const eliminarProyecto = async (id) => {
+  const eliminarEncuesta = async (id) => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await clienteAxios.delete(`/proyectos/${id}`, config);
+   
+      const { data } = await clienteAxios.delete(`/encuesta/${id}`);
       // Sincronizar el State
       const proyectosActualizados = proyectos.filter(
         (proyectoState) => proyectoState._id !== id
@@ -146,7 +138,7 @@ const EncuestasProvider = ({ children }) => {
         submitEncuesta,
         obtenerProyecto,
         cargando,
-        eliminarProyecto,
+        eliminarEncuesta,
       }}
     >
       {children}
