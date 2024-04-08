@@ -17,8 +17,6 @@ const FormularioProyecto = ({ preguntas }) => {
   const location = useLocation();
 
 
-  console.log(encuestado);
-console.log(location.pathname)
   // Establece 'encuestado' basado en la ruta actual
   useEffect(() => {
     if (location.pathname === "/inicio-admin/Crear-encuestas-aprendices") {

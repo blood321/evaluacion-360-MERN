@@ -1,59 +1,70 @@
 import React, { useState, useEffect } from "react";
 import clienteAxios from "../config/clienteAxios";
+import usePreguntas from "../hooks/usePreguntas";
 
 function Editar({ onClose }) {
+  // Obtener las preguntas usando el hook personalizado usePreguntas
+  const { preguntas } = usePreguntas();
+  
+  // Estado para controlar la visibilidad del modal
   const [showModal, setShowModal] = useState(true);
+  
+  // Estado para almacenar las temáticas disponibles
   const [tematicas, setTematicas] = useState([]);
+  
+  // Estado para almacenar la temática seleccionada
   const [tematicaSeleccionada, setTematicaSeleccionada] = useState("");
-  const [preguntasFiltradas, setPreguntasFiltradas] = useState([]);
+  
+  // Estado para almacenar la pregunta seleccionada
   const [preguntaSeleccionada, setPreguntaSeleccionada] = useState("");
+  
+  // Estado para manejar errores de carga de temáticas
   const [error, setError] = useState(null);
 
+  // Efecto para cargar las temáticas disponibles al montar el componente
   useEffect(() => {
     async function loadTematicas() {
       try {
-        const response = await clienteAxios.get("/tematica/listar-tematicas");
+        // Obtener las temáticas desde el servidor
+        const response = await clienteAxios("/tematica/listar-tematicas");
+        // Actualizar el estado con las temáticas obtenidas
         setTematicas(response.data);
+        console.log(response);
       } catch (error) {
+        // Manejar errores de carga de temáticas
         console.error("Error fetching tematicas:", error);
         setError("Error al cargar las tematicas");
       }
     }
+    // Llamar a la función para cargar las temáticas
     loadTematicas();
   }, []);
 
-  useEffect(() => {
-    async function loadPreguntas() {
-      try {
-        if (tematicaSeleccionada) {
-          const response = await clienteAxios.get(
-            `/preguntas/listar-preguntas/${tematicaSeleccionada}`
-          );
-          setPreguntasFiltradas(response.data);
-          // Si cambia la temática, restablecer la pregunta seleccionada
-          setPreguntaSeleccionada("");
-        } else {
-          setPreguntasFiltradas([]);
-          setPreguntaSeleccionada("");
-        }
-      } catch (error) {
-        console.error("Error fetching preguntas:", error);
-        setError("Error al cargar las preguntas");
-      }
-    }
-    loadPreguntas();
-  }, [tematicaSeleccionada]);
-
+  // Función para manejar el evento de guardado
   const handleSave = () => {
     onClose();
     setShowModal(false);
   };
 
+  // Función para manejar el evento de cancelación
   const handleCancel = () => {
     onClose();
     setShowModal(false);
+  }; 
+
+  // Función para manejar el cambio de la temática seleccionada
+  const handleTematicaChange = (event) => {
+    setTematicaSeleccionada(event.target.value);
   };
 
+  // Filtrar las preguntas según la temática seleccionada
+  const preguntasFiltradas = preguntas.filter((pregunta) => {
+    // Verificar si la pregunta tiene la temática seleccionada
+    const tieneTematica = pregunta.tematica === tematicaSeleccionada;
+    console.log("estamos aquí", tieneTematica);
+    return tieneTematica; // Devolver true o false según si la pregunta tiene la temática seleccionada o no
+  });
+  
   return (
     <>
       {showModal && (
@@ -84,34 +95,31 @@ function Editar({ onClose }) {
                         />
                       </div>
                       <div className="mb-3 space-y-2 w-full text-xs">
-                      <label className="font-semibold text-gray-600 py-2">
-                        Temáticas
-                      </label>
-                      <select
-                        className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                        required="required"
-                        value={tematicaSeleccionada}
-                        onChange={(e) =>
-                          setTematicaSeleccionada(e.target.value)
-                        }
-                      >
-                        <option value="">Selecciona Temática</option>
-                        {tematicas.map((tematica) => (
-                          <option key={tematica._id} value={tematica._id}>
-                            {tematica.tematica}
-                          </option>
-                        ))}
-                      </select>
-                      <p
-                        className="text-sm text-red-500 hidden mt-3"
-                        id="error"
-                      >
-                        Please fill out this field.
-                      </p>
+                        <label className="font-semibold text-gray-600 py-2">
+                          Temáticas
+                        </label>
+                        <select
+                          className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                          required="required"
+                          value={tematicaSeleccionada}
+                          onChange={handleTematicaChange}
+                        >
+                          <option value="">Selecciona Temática</option>
+                          {/* Mapear las temáticas disponibles */}
+                          {tematicas.map((tematica) => (
+                            <option key={tematica._id} value={tematica._id}>
+                              {tematica.tematica}
+                            </option>
+                          ))}
+                        </select>
+                        <p
+                          className="text-sm text-red-500 hidden mt-3"
+                          id="error"
+                        >
+                          Please fill out this field.
+                        </p>
+                      </div>
                     </div>
-                      
-                    </div>
-                    
 
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
@@ -126,6 +134,7 @@ function Editar({ onClose }) {
                         }
                       >
                         <option value="">Selecciona Pregunta</option>
+                        {/* Mapear las preguntas filtradas según la temática seleccionada */}
                         {preguntasFiltradas.map((pregunta) => (
                           <option key={pregunta._id} value={pregunta._id}>
                             {pregunta.pregunta}
@@ -153,16 +162,16 @@ function Editar({ onClose }) {
                       ></textarea>
                     </div>
                     <div className="mb-3 space-y-2 w-full text-xs">
-                        <label className="font-semibold text-gray-600 py-2">
-                          Fecha Limite
-                        </label>
-                        <input
-                          placeholder="fecha actual"
-                          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                          required="required"
-                          type="datetime-local"
-                        />
-                      </div>
+                      <label className="font-semibold text-gray-600 py-2">
+                        Fecha Limite
+                      </label>
+                      <input
+                        placeholder="fecha actual"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        required="required"
+                        type="datetime-local"
+                      />
+                    </div>
 
                     <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                       <button
@@ -172,7 +181,7 @@ function Editar({ onClose }) {
                         Cancelar
                       </button>
                       <button
-                        
+                        onClick={handleSave}
                         className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                       >
                         Guardar

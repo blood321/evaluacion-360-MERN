@@ -17,8 +17,7 @@ const PreguntasProvider = ({ children }) => {
       try {
        
         const { data } = await clienteAxios("/pregunta");
-        console.log(data)
-        setPreguntas(data);
+        setPreguntas(data)
       } catch (error) {
         console.log(error);
       }

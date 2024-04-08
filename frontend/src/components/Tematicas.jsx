@@ -4,7 +4,6 @@ import clienteAxios from '../config/clienteAxios';
   const Tematicas = ({tematica}) => {
     const [tematicas, setTematicas] = useState([]);
     const [tematicaSeleccionada, setTematicaSeleccionada] = useState("");
-    console.log(tematica)
     useEffect(() => {
 
 
