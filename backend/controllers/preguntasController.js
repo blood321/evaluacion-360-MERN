@@ -3,36 +3,33 @@ import tematicas from"../models/tematica.js"
 
 
 
+
+
 const nuevaPregunta = async (req, res) => {
-    const { pregunta,  tematicaId,encuestado} = req.body;
+    
+    const nuevaPregunta =new preguntas(req.body)
+  
     try {
-        const tematica = await tematicas.findById(tematicaId);
+        const preguntaAlmacenada= await nuevaPregunta.save()
 
-        const nuevaPregunta = new preguntas({
-            pregunta,
-            tematica: [tematica._id],
-            encuestado,
-        });
-        nuevaPregunta.save()
-        console.log(nuevaPregunta)
-
-       res.json(nuevaPregunta)
+        res.json(preguntaAlmacenada)
+        
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ mensaje: 'Error al crear la pregunta' });
+        console.log(error)
     }
+   
 };
 const editarPregunta =async (req,res)=>{
     const { id } = req.params
+    console.log(id)
     const preguntaEdit = await preguntas.findById(id)
+    console.log(preguntaEdit)
     if (!preguntaEdit) {
         const error = new Error("no encontrado")
         return res.status(404).json({ msg: error.message})
     }
     preguntaEdit.pregunta = req.body.pregunta || preguntaEdit.pregunta
-    preguntaEdit.tematica=req.body.tematica|| preguntaEdit.tematica
-    preguntaEdit.encuestado=req.body.encuestado||preguntaEdit.encuestado
-
+    console.log(req.body.pregunta)
     try {
         const proyectoAlmacenado = await preguntaEdit.save()
         res.json(proyectoAlmacenado)

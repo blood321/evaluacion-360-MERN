@@ -7,7 +7,7 @@ import ModalConfirmar from "./ModalConfirmacion";
 
 const FormularioProyecto = ({ preguntas }) => {
   const [id, setId] = useState(null);
-  const [nombre, setNombre] = useState("hola");
+  const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [fechaEntrega, setFechaEntrega] = useState("");
   const [mostrarModal, setMostrarModal] = useState(false);
