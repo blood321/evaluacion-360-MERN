@@ -1,23 +1,43 @@
 import React, { useState } from 'react'
-
-const PreguntaEditable = ({ preguntaInicial, onGuardar, onEliminar }) => {
-    const [pregunta, setPregunta] = useState(preguntaInicial)
+import usePreguntas from '../hooks/usePreguntas'
+const PreguntaEditable = ({ id,pregunta2}) => {
+    console.log(id)
     const [editando, setEditando] = useState(false)
+    const [pregunta,setPregunta]=useState(pregunta2)
+    console.log(pregunta)
+    const {   submitPregunta,eliminarPregunta } = usePreguntas();
+
 
     const handleChange = e => {
         setPregunta(e.target.value)
     }
 
-    const handleSubmit = () => {
-        onGuardar(pregunta)
+        // onGuardar(pregunta)
+        // setEditando(false)   
+
+        
+        
+        const handleEliminar = () => {
+        eliminarPregunta(id)   
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         setEditando(false)
-    }
-
-    const handleEliminar = () => {
-        onEliminar() // Llama a la función de eliminación
-    }
-
+        if ([pregunta2].includes("")) {
+            setMostrarAlerta({
+            msg: "Todos los campos son necesarios ",
+            error: true,
+          });
+          return;
+        }
+        // Pasar los datos hacia el provider
+        await submitPregunta({ id,pregunta});
+    
+      };
     return (
+        <form  
+        onSubmit={handleSubmit}>
+
         <div className="p-3 py-1 animate-fade-down animate-duration-[1000ms] ">
             {editando ? (
                 <div className="flex items-center  ">
@@ -42,7 +62,7 @@ const PreguntaEditable = ({ preguntaInicial, onGuardar, onEliminar }) => {
                 </div>
             ) : (
                 <div className="flex flex-col">
-                    <p className="py-2">{pregunta}</p>
+                    <p className="py-2">{pregunta2}</p>
                     <div className="flex">
                         <button
                             className="bg-gradient-to-r from-Principal_1 to-Principal_2 text-white font-bold py-2 px-4 rounded mr-2 text-[16px]"
@@ -60,6 +80,8 @@ const PreguntaEditable = ({ preguntaInicial, onGuardar, onEliminar }) => {
                 </div>
             )}
         </div>
+        </form>
+
     )
 }
 

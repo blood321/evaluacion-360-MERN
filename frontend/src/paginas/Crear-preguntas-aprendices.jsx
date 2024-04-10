@@ -2,32 +2,41 @@ import React, { useState } from 'react'
 import Tematicas from '../components/Tematicas'
 import CrearPreguntas from '../components/CrearPreguntas'
 import PreguntaEditable from '../components/EditarPreguntas' // Corregido el import
+import usePreguntas from '../hooks/usePreguntas'
 
 const CrearPreguntasAprendices = () => {
+    const {preguntas }=usePreguntas()
+    console.log(preguntas+"hiaihihihi")
     const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null)
-
+ console.log(tematicaSeleccionada)
     const handleTematicaSeleccionada = tematica => {
         setTematicaSeleccionada(tematica)
     }
-    const [preguntas, setPreguntas] = useState([])
-
-    // Función para agregar una nueva pregunta
-    const agregarPregunta = nuevaPregunta => {
-        setPreguntas([...preguntas, nuevaPregunta])
-    }
-
-    // Función para editar una pregunta
-    const editarPregunta = (index, preguntaEditada) => {
-        const nuevasPreguntas = [...preguntas]
-        nuevasPreguntas[index] = preguntaEditada
-        setPreguntas(nuevasPreguntas)
-    }
-
-    // Función para eliminar una pregunta
-    const eliminarPregunta = index => {
-        const nuevasPreguntas = preguntas.filter((_, i) => i !== index)
-        setPreguntas(nuevasPreguntas)
-    }
+   
+ 
+       const preguntasFiltradas = preguntas.filter((pregunta) => {
+         // Verificar si la pregunta tiene la temática seleccionada
+        const tieneTematica = pregunta.tematica === tematicaSeleccionada;
+        // Verificar si la página actual es "/inicio-admin/Crear-encuestas-aprendices"
+        const esPaginaAprendices =  location.pathname === "/inicio-admin/Crear-preguntas-aprendices";
+        const esPaginacompañeros =location.pathname==="/inicio-admin/Crear-encuestas-companeros"
+        const espaginaJefes =location.pathname==="/inicio-admin/Crear-encuestas-jefes"
+        // Filtrar las preguntas que cumplan con ambos criterios
+      return(
+        
+          tieneTematica &&
+     
+          (esPaginaAprendices ? pregunta.encuestado === "Aprendiz" : null)
+          ||
+          tieneTematica&&
+          (esPaginacompañeros ? pregunta.encuestado=== "Compañeros": null)
+          ||
+          tieneTematica&&
+          (espaginaJefes ? pregunta.encuestado === "Jefes":null)
+      )
+      });
+    
+console.log(preguntasFiltradas)
 
     return (
         <div className="px-auto px-3 ">
@@ -56,19 +65,18 @@ const CrearPreguntasAprendices = () => {
                     </div>
                     {/* Componente CrearPreguntas */}
                     <div className="animate-fade-down animate-duration-[700ms]">
-                        <CrearPreguntas agregarPregunta={agregarPregunta} />
+                        <CrearPreguntas tematica={tematicaSeleccionada} />
                     </div>
                 </div>
 
                 {/* Lista de preguntas */}
                 <div className="h-[300px] overflow-y-auto mt-6  w-full md:w-570 bg-gray-200/[0.9] font-semibold text-[20px] animate-fade-down animate-duration-[1000ms]">
-                    {preguntas.length > 0 ? (
-                        preguntas.map((pregunta, index) => (
+                    {preguntasFiltradas.length > 0 ? (
+                        preguntasFiltradas.map((pregunta) => (
                             <PreguntaEditable
-                                key={index}
-                                preguntaInicial={pregunta}
-                                onGuardar={preguntaEditada => editarPregunta(index, preguntaEditada)}
-                                onEliminar={() => eliminarPregunta(index)}
+                            key={pregunta._id}
+                                pregunta2={pregunta.pregunta}
+                                id={pregunta._id}
                             />
                         ))
                     ) : (

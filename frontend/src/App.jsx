@@ -80,7 +80,7 @@ function App() {
                     element={<CrearPreguntasAprendices />}
                   />
                   <Route
-                    path="crear-preguntas-compañeros"
+                    path="crear-preguntas-companeros"
                     element={<CrearPreguntasCompaneros />}
                   />
                   <Route

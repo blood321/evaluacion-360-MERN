@@ -107,7 +107,7 @@ const Sidebar_A = () => {
                                     <h2 className="font-bold text-sm leading-5 text-Secundario_2">Aprendices</h2>
                                 </li>
                             </Link>
-                            <Link to="Crear-preguntas-compañeros">
+                            <Link to="Crear-preguntas-companeros">
                                 <li className="flex items-center gap-2 pb-2 py-1 cursor-pointer  animate-fade-down animate-once animate-duration-[250ms] animate-ease-linear animate-normal hover:border-b hover:border-Principal_1">
                                     <FaChevronRight color="green" />
                                     <h2 className="font-bold text-sm leading-5 text-Secundario_2">Compañeros</h2>
