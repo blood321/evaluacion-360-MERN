@@ -1,6 +1,6 @@
 import Express  from "express";
 import {
- nuevaTematica,tematicas
+ nuevaTematica
 } from '../controllers/tematicaController.js'
 const router = Express.Router()
 router.route('/')
