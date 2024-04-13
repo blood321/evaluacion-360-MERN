@@ -4,7 +4,6 @@ import usePreguntas from "../hooks/usePreguntas";
 
 const Listarp = ({ addMensaje, tematicaSeleccionada }) => {
   const { preguntas } = usePreguntas();
-  console.log(preguntas);
   const [selectedItems, setSelectedItems] = useState([]);
   const { auth } = useAuth();
   // Filtrar preguntas por temática seleccionada
@@ -13,16 +12,35 @@ const Listarp = ({ addMensaje, tematicaSeleccionada }) => {
     const tieneTematica = pregunta.tematica === tematicaSeleccionada;
 
     // Verificar si la página actual es "/inicio-admin/Crear-encuestas-aprendices"
-    const esPaginaAprendices =
-      location.pathname === "/inicio-admin/Crear-encuestas-jefes";
-
+    const esPaginaAprendices =  location.pathname === "/inicio-admin/Crear-encuestas-aprendices";
+    const esPaginacompañeros =location.pathname==="/inicio-admin/Crear-encuestas-companeros"
+    const espaginaJefes =location.pathname==="/inicio-admin/Crear-encuestas-jefes"
     // Filtrar las preguntas que cumplan con ambos criterios
-    return (
+  return(
+    
       tieneTematica &&
-      (esPaginaAprendices ? pregunta.encuestado === "Jefes" : true)
-    );
+ 
+      (esPaginaAprendices ? pregunta.encuestado === "Aprendiz" : null)
+      ||
+      tieneTematica&&
+      (esPaginacompañeros ? pregunta.encuestado=== "Compañeros": null)
+      ||
+      tieneTematica&&
+      (espaginaJefes ? pregunta.encuestado === "Jefes":null)
+    
+
+
+  )
+
+
+    
+  
+    
+
+  
   });
 
+  console.log(preguntasFiltradas)
   // Función para manejar el clic en un elemento
   const handleItemClick = (itemId) => {
     // Verificar si el elemento ya está seleccionado

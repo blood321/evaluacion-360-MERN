@@ -74,7 +74,7 @@ const EncuestasProvider = ({ children }) => {
       const { data } = await clienteAxios.post("/encuesta", encuesta);
       setEncuesta([...encuesta, data]);
       setAlerta({
-        msg: "Proyecto creado correctamente",
+        msg: "Encuesta creado correctamente",
         error: false,
       });
 
