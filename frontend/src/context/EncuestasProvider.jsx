@@ -112,18 +112,15 @@ const EncuestasProvider = ({ children }) => {
    
       const { data } = await clienteAxios.delete(`/encuesta/${id}`);
       // Sincronizar el State
-      const proyectosActualizados = proyectos.filter(
+      const proyectosActualizados = encuesta.filter(
         (proyectoState) => proyectoState._id !== id
       );
-      setProyectos(proyectosActualizados);
+      setEncuesta(proyectosActualizados);
       setAlerta({
         msg: data.msg,
         error: false,
       });
-      setTimeout(() => {
-        setAlerta({});
-        navigate("/proyectos");
-      }, 1500);
+ 
     } catch (error) {
       console.log(error);
     }

@@ -1,13 +1,15 @@
-import Express  from "express";
-import { nuevoExcel } from "../controllers/exelController.js";
+import Express from "express";
+import { subirAprendices, subirFichas } from "../controllers/exelController.js";
 
+const router = Express.Router();
+router
+  .route("/aprendices")
 
-const router = Express.Router()
-router.route('/')
-    
-    .post(nuevoExcel)
-   
-   
+  .post(subirAprendices);
 
+router
+  .route("/fichas")
 
-export default router
+  .post(subirFichas);
+
+export default router;

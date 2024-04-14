@@ -11,6 +11,7 @@ import {
     FaBars,
 } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { RiFileExcel2Line } from "react-icons/ri";
 
 const Sidebar_A = () => {
     const [evaluacionVisible, setEvaluacionVisible] = useState(false)
@@ -142,6 +143,17 @@ const Sidebar_A = () => {
                                 <h2 className=" font-normal text-[14px] leading-[20px]">Resultados</h2>
                             </div>
                             <FaChevronRight color="green" />
+                        </div>
+                    </Link>
+                    <Link to="Excel">
+                        <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer transition-transform hover:translate-x-4">
+                            <div className="flex items-center gap-[10px]">
+                            <RiFileExcel2Line color="green" />
+                                <h2 className=" font-normal text-[14px] leading-[20px]">Subir</h2>
+                            </div>
+                            <FaChevronRight color="green" />
+                         
+
                         </div>
                     </Link>
                 </div>
