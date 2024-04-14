@@ -15,8 +15,8 @@ function Editar({ onClose }) {
   // Estado para almacenar la temática seleccionada
   const [tematicaSeleccionada, setTematicaSeleccionada] = useState("");
   
-  // Estado para almacenar la pregunta seleccionada
-  const [preguntaSeleccionada, setPreguntaSeleccionada] = useState("");
+  // Estado para almacenar las preguntas seleccionadas
+  const [preguntasSeleccionadas, setPreguntasSeleccionadas] = useState([]);
   
   // Estado para manejar errores de carga de temáticas
   const [error, setError] = useState(null);
@@ -64,6 +64,15 @@ function Editar({ onClose }) {
     console.log("estamos aquí", tieneTematica);
     return tieneTematica; // Devolver true o false según si la pregunta tiene la temática seleccionada o no
   });
+
+  // Función para manejar el cambio de las preguntas seleccionadas
+  const handlePreguntasChange = (event) => {
+    const selectedPreguntas = Array.from(event.target.options)
+      .filter((option) => option.selected)
+      .map((option) => option.value);
+    setPreguntasSeleccionadas(selectedPreguntas);
+  };
+
   
   return (
     <>
@@ -122,32 +131,33 @@ function Editar({ onClose }) {
                     </div>
 
                     <div className="mb-3 space-y-2 w-full text-xs">
-                      <label className="font-semibold text-gray-600 py-2">
-                        Preguntas
-                      </label>
-                      <select
-                        className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                        required="required"
-                        value={preguntaSeleccionada}
-                        onChange={(e) =>
-                          setPreguntaSeleccionada(e.target.value)
-                        }
-                      >
-                        <option value="">Selecciona Pregunta</option>
-                        {/* Mapear las preguntas filtradas según la temática seleccionada */}
-                        {preguntasFiltradas.map((pregunta) => (
-                          <option key={pregunta._id} value={pregunta._id}>
-                            {pregunta.pregunta}
-                          </option>
-                        ))}
-                      </select>
-                      <p
-                        className="text-sm text-red-500 hidden mt-3"
-                        id="error"
-                      >
-                        Please fill out this field.
-                      </p>
-                    </div>
+                    <label className="font-semibold text-gray-600 py-2">
+                      Preguntas
+                    </label>
+                    <select
+                      className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                      required="required"
+                      multiple
+                      value={preguntasSeleccionadas}
+                      onChange={handlePreguntasChange}
+                    >
+                      <option value="">Selecciona Pregunta</option>
+                      {/* Mapear las preguntas filtradas según la temática seleccionada */}
+                      {preguntasFiltradas.map((pregunta) => (
+                        <option key={pregunta._id} value={pregunta._id}>
+                          {pregunta.pregunta}
+                        </option>
+                      ))}
+                    </select>
+                    <p
+                      className="text-sm text-red-500 hidden mt-3"
+                      id="error"
+                    >
+                      Please fill out this field.
+                    </p>
+                  </div>
+
+
                     <div className="flex-auto w-full mb-1 text-xs space-y-2">
                       <label className="font-semibold text-gray-600 py-2">
                         Descripción
