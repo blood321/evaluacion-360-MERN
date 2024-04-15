@@ -34,7 +34,7 @@ app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/instructor", instructorRoutes);
 app.use("/api/fichas", fichasRouters);
 
-app.use("/api/generarExcel",excelRouters)
+app.use("/api/Excel",excelRouters)
 
 app.use("/api/respuesta", respuestasRouter);
 const PORT = process.env.PORT || 3000;
