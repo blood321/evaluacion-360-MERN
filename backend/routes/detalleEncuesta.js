@@ -5,15 +5,9 @@ import {
 import checkAuth from '../middleware/checkAuth.js'
 
 const router = Express.Router()
-router.route('/')
+    router.route('/').post(nuevoDetalleEncuesta)
+    router.route('/crearRespuestas/:id').get(obtenerDetallesEncuestas)
     
-    .post(nuevoDetalleEncuesta)
-    router.route('/crearRespuestas/:id')
-    
-    .get(obtenerDetallesEncuestas)
-    
-    router.route('/responde/:id')
-    
-    .get(mostrasRespuestas)
+    router.route('/responde/:id').get(mostrasRespuestas)
 
 export default router

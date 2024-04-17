@@ -7,7 +7,7 @@ import ModalConfirmar from "./ModalConfirmacion";
 
 const FormularioProyecto = ({ preguntas }) => {
   const [id, setId] = useState(null);
-  const [nombre, setNombre] = useState("hola");
+  const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [fechaEntrega, setFechaEntrega] = useState("");
   const [mostrarModal, setMostrarModal] = useState(false);
@@ -17,8 +17,6 @@ const FormularioProyecto = ({ preguntas }) => {
   const location = useLocation();
 
 
-  console.log(encuestado);
-console.log(location.pathname)
   // Establece 'encuestado' basado en la ruta actual
   useEffect(() => {
     if (location.pathname === "/inicio-admin/Crear-encuestas-aprendices") {

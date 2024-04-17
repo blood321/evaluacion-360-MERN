@@ -6,7 +6,7 @@ const PreguntasContext = createContext();
 
 const PreguntasProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
-  const [proyecto, setProyecto] = useState({});
+  const [pregunta, setPregunta] = useState({});
   const [cargando, setCargando] = useState(false);
   const [preguntas, setPreguntas] = useState([]);
 
@@ -17,8 +17,7 @@ const PreguntasProvider = ({ children }) => {
       try {
        
         const { data } = await clienteAxios("/pregunta");
-        console.log(data)
-        setPreguntas(data);
+        setPreguntas(data)
       } catch (error) {
         console.log(error);
       }
@@ -33,34 +32,26 @@ const PreguntasProvider = ({ children }) => {
     }, 5000);
   };
 
-  const submitProyecto = async (proyecto) => {
-    if (proyecto.id) {
-      await editarProyecto(proyecto);
+  const submitPregunta = async (pregunta) => {
+    if (pregunta.id) {
+      await editarPregunta(pregunta);
     } else {
-      await nuevoProyecto(proyecto);
+      await nuevaPregunta(pregunta);
     }
   };
-  const editarProyecto = async (proyecto) => {
+  const editarPregunta = async (pregunta) => {
+    console.log(pregunta+"esta es la que edita ")
     try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await clienteAxios.put(
-        `/proyectos/${proyecto.id}`,
-        proyecto,
-        config
+     
+      const { data } = await clienteAxios.put(`/pregunta/${pregunta.id}`,
+        pregunta
       );
 
       // Sincronizar el state
-      const proyectosActualizados = proyectos.map((proyectoState) =>
+      const proyectosActualizados = preguntas.map((proyectoState) =>
         proyectoState._id === data._id ? data : proyectoState
       );
-      setProyectos(proyectosActualizados);
+      setPreguntas(proyectosActualizados);
 
       // Mostrar la Alerta de proyecto actualizado
       setAlerta({
@@ -68,35 +59,23 @@ const PreguntasProvider = ({ children }) => {
         error: false,
       });
 
-      setTimeout(() => {
-        setAlerta({});
-        navigate("/proyectos");
-      }, 2000);
+     
     } catch (error) {
       console.log(error);
     }
   };
-  const nuevoProyecto = async (proyecto) => {
+  const nuevaPregunta = async (pregunta) => {
+    console.log(pregunta+"hola esto envio ")
     try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await clienteAxios.post("/proyectos", proyecto, config);
-      setProyectos([...proyectos, data]);
+     
+      const { data } = await clienteAxios.post("/pregunta", pregunta);
+      setPreguntas([...preguntas, data]);
       setAlerta({
-        msg: "Proyecto creado correctamente",
+        msg: "pregunta creada correctamente",
         error: false,
       });
 
-      setTimeout(() => {
-        setAlerta({});
-        navigate("/proyectos");
-      }, 2000);
+      
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +99,7 @@ const PreguntasProvider = ({ children }) => {
       setCargando(false);
     }
   };
-  const eliminarProyecto = async (id) => {
+  const eliminarPregunta= async (id) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -130,18 +109,15 @@ const PreguntasProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await clienteAxios.delete(`/proyectos/${id}`, config);
+      const { data } = await clienteAxios.delete(`/pregunta/${id}`, config);
       // Sincronizar el State
-      const proyectosActualizados = proyectos.filter(proyectoState => proyectoState._id !== id)
-      setProyectos(proyectosActualizados)
+      const proyectosActualizados = preguntas.filter(proyectoState => proyectoState._id !== id)
+      setPreguntas(proyectosActualizados)
       setAlerta({
         msg: data.msg,
         error: false,
       });
-      setTimeout(() => {
-        setAlerta({});
-        navigate("/proyectos");
-      }, 1500);
+     
     } catch (error) {
       console.log(error);
     }
@@ -155,11 +131,11 @@ const PreguntasProvider = ({ children }) => {
         preguntas,
         mostrarAlerta,
         alerta,
-        submitProyecto,
+        submitPregunta,
         obtenerProyecto,
-        proyecto,
+        
         cargando,
-        eliminarProyecto,
+        eliminarPregunta,
       
       }}
     >

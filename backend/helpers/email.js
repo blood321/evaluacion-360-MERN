@@ -1,9 +1,5 @@
-// import { Resend } from 'resend';
-
-// const resend = new Resend('re_AejyxbTU_2TAb75NsXA1NR2aaxWS7yYkY');
-
-import nodemailer from 'nodemailer'
-import { google } from 'googleapis'
+import nodemailer from "nodemailer";
+import { google } from "googleapis";
 
 export const emailAutenticar = async datos => {
     const { id, nombre, email } = datos

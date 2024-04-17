@@ -46,7 +46,7 @@ const CrearEncuestasjefes = () => {
                 <div className="w-full py-auto">
                     {/* Componente FormularioProyecto */}
                     <FormularioProyecto preguntas={preguntas} />
-                </div>
+                 </div>
             </div>
         </div>
     )

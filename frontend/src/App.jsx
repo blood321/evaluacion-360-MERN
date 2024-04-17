@@ -14,7 +14,7 @@ import Proyecto from "./paginas/Proyecto";
 import EditarProyecto from "./paginas/EditarProyecto";
 import Aloguin from "./paginas/Aloguin";
 import Aviso from "./paginas/Aviso";
-import Respoder from "./paginas/Respoder";
+import Responder from "./paginas/Respoder";
 import LoginAdmin from "./paginas/LoginAdmin.jsx";
 import Admin from "./paginas/Admin.jsx";
 import CrearEncuestasAprendices from "./paginas/Crear-encuestas-aprendices.jsx";
@@ -27,7 +27,7 @@ import CrearPreguntasCompaneros from "./paginas/Crear-preguntas-compañeros.jsx"
 import CrearPreguntasJefes from "./paginas/Crear-preguntas-jefes.jsx";
 import Resultados from "./paginas/Resultados.jsx";
 import ListarEncuestas from "./paginas/Listar-encuestas.jsx";
-
+import Excel from "./paginas/Excel.jsx";
 import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
 import { PreguntasProvider } from "./context/preguntasProvider.jsx";
@@ -49,10 +49,10 @@ function App() {
                   />
                 </Route>
 
-                <Route path="/Login" element={<LoginAdmin />} />
-                <Route path="login-adm" element={<LoginAdmin />} />
-                <Route path="aviso/:id" element={<Aviso />} />
-                <Route path="responder" element={<Respoder />} />
+            <Route path="/Login" element={<LoginAdmin />} />
+            <Route path="login-adm" element={<LoginAdmin />} />
+            <Route path="aviso/:id" element={<Aviso />} />
+            <Route path="responder/:id" element={<Responder />} />
 
                 <Route
                   path="inicio-administrador"
@@ -80,7 +80,7 @@ function App() {
                     element={<CrearPreguntasAprendices />}
                   />
                   <Route
-                    path="crear-preguntas-compañeros"
+                    path="crear-preguntas-companeros"
                     element={<CrearPreguntasCompaneros />}
                   />
                   <Route
@@ -91,10 +91,13 @@ function App() {
                     path="listar-encuestas"
                     element={<ListarEncuestas />}
                   />
+                  <Route
+                  path="Excel"
+                  element={<Excel/>}
+                    />
                   <Route path="resultados" element={<Resultados />} />
                   <Route path="crear-proyecto" element={<NuevoProyecto />} />
-                  <Route path=":id" element={<Proyecto />} />
-                  <Route path="editar/:id" element={<EditarProyecto />} />
+                  <Route path="/inicio-admin/Listar-encuestas/:id" element={<CrearEncuestasAprendices/>} />
                 </Route>
               </Routes>
             </EncuestasProvider>
