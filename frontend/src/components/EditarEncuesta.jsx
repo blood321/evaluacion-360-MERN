@@ -42,21 +42,19 @@ function Editar({ onClose }) {
 
   // Función para manejar el evento de guardado
   const handleSave = () => {
+    // Cerrar el modal y realizar otras acciones de guardado
     onClose();
     setShowModal(false);
   };
-
   // Función para manejar el evento de cancelación
   const handleCancel = () => {
     onClose();
     setShowModal(false);
   }; 
-
   // Función para manejar el cambio de la temática seleccionada
   const handleTematicaChange = (event) => {
     setTematicaSeleccionada(event.target.value);
   };
-
   // Filtrar las preguntas según la temática seleccionada
   const preguntasFiltradas = preguntas.filter((pregunta) => {
     // Verificar si la pregunta tiene la temática seleccionada
@@ -72,6 +70,7 @@ function Editar({ onClose }) {
       .map((option) => option.value);
     setPreguntasSeleccionadas(selectedPreguntas);
   };
+  
 
   
   return (
@@ -184,19 +183,19 @@ function Editar({ onClose }) {
                     </div>
 
                     <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
-                      <button
-                        onClick={handleCancel}
-                        className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
-                      >
-                        Cancelar
-                      </button>
-                      <button
-                        onClick={handleSave}
-                        className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
-                      >
-                        Guardar
-                      </button>
-                    </div>
+      <button
+        onClick={handleCancel}
+        className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
+      >
+        Cancelar
+      </button>
+      <button
+        onClick={handleSave}
+        className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+      >
+        Guardar
+      </button>
+    </div>
                   </div>
                 </div>
               </div>
