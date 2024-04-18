@@ -8,13 +8,12 @@ import preguntas from "../../../backend/models/preguntas";
 const Responder = () => {
   const { respuestas } = useRespuestas();
   const nombreEncuesta = respuestas.map(
-    (respuesta) => respuesta.encuesta.nombre
+    (respuesta) => respuesta.encuesta
   );
   const soloMostrarUno = [...new Set(nombreEncuesta)];
   const [id, setId] = useState("");
   const addmensaje = (mensaje) => {
     setId(mensaje);
-    console.log(mensaje);
   };
   console.log(id);
   return (

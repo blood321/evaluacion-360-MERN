@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useRespuestas from '../hooks/useRespuestas';
 
-const Preguntas = ({addmensaje}) => {
+const Preguntas = ({ addmensaje }) => {
     const { respuestas } = useRespuestas();
 
     const [indice, setIndice] = useState(0); // Estado para el índice de la pregunta actual
@@ -14,15 +14,19 @@ const Preguntas = ({addmensaje}) => {
     // Función para obtener el ID de la pregunta actual
     const obtenerIDPreguntaActual = () => {
         const preguntaActual = preguntasConID.find(pregunta => pregunta.pregunta === preguntasUnicas[indice]);
-         return preguntaActual ? preguntaActual._id : null
-
+        return preguntaActual ? preguntaActual._id : null;
     };
-      addmensaje(obtenerIDPreguntaActual())
+
+    useEffect(() => {
+        const idPreguntaActual = obtenerIDPreguntaActual();
+        addmensaje(idPreguntaActual);
+    }, [indice, addmensaje]);
+
     const cambiarPalabra = (direccion) => {
         if (direccion === 'adelante') {
             // Incrementar el índice si no se ha alcanzado el límite máximo
             if (indice < preguntasUnicas.length - 1) {
-                setIndice(prevIndice => prevIndice + 1);        
+                setIndice(prevIndice => prevIndice + 1);
             }
         } else {
             // Decrementar el índice si no se ha alcanzado el límite mínimo
@@ -49,9 +53,8 @@ const Preguntas = ({addmensaje}) => {
                     Siguiente Pregunta &rarr;
                 </button>
             </div>
-             
         </div>
-    )
-}
+    );
+};
 
 export default Preguntas;

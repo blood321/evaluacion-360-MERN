@@ -117,7 +117,7 @@ const obtenerDetallesEcuestas = async (req, res) => {
 };
 const mostrasRespuestas = async (req, res) => {
   const inpuestoss = await Respuesta.find({
-    aprendiz: "65ccc08ee73c05dbd4ea8763",
+    aprendiz: "65f1cfa4dd3057a4736f6381",
   }).populate("pregunta instructor encuesta");
   res.json(inpuestoss);
 };
