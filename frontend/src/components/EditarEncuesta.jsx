@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import clienteAxios from "../config/clienteAxios";
 import usePreguntas from "../hooks/usePreguntas";
+import SelectMultiple from "./SelectMultiple";
 
 function Editar({ onClose }) {
   // Obtener las preguntas usando el hook personalizado usePreguntas
@@ -120,12 +121,7 @@ function Editar({ onClose }) {
                             </option>
                           ))}
                         </select>
-                        <p
-                          className="text-sm text-red-500 hidden mt-3"
-                          id="error"
-                        >
-                          Please fill out this field.
-                        </p>
+                        
                       </div>
                     </div>
 
@@ -155,6 +151,9 @@ function Editar({ onClose }) {
                       Please fill out this field.
                     </p>
                   </div>
+                  
+
+                  <SelectMultiple/>
 
 
                     <div className="flex-auto w-full mb-1 text-xs space-y-2">
