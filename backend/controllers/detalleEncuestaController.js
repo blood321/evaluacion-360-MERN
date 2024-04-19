@@ -47,8 +47,8 @@ const obtenerDetallesEncuestas = async (req, res) => {
       const error = new Error("El usuario ya tiene respuestas creadas");
       return res.status(404).json({ msg: error.message });
     }
-    const usuario = await Usuario.findOne({ _id: id });
-    console.log(usuario);
+    const usuario = await aprendiz.findOne({ _id: id });
+    console.log(usuario+"ets");
     const fichaUsuario = await fichas.find({ aprendices: usuario }, "_id");
     console.log(fichaUsuario);
 

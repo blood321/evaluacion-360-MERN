@@ -24,13 +24,7 @@ function Responder() {
                     <div className="md:ml-5 md:mr-2">
                         <div className="mx-auto md:w-full h-[250px] md:h-full mb-9 overflow-y-auto ">
                             <Respuestas />
-                            <Respuestas />
-                            <Respuestas />
-                            <Respuestas />
-                            <Respuestas />
-                            <Respuestas />
-                            <Respuestas />
-                            <Respuestas />
+                       
                         </div>
                     </div>
                 </section>

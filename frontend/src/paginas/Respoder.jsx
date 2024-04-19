@@ -8,114 +8,52 @@ import logoSena from "../assets/img/logoSena.png";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import clienteAxios from "../config/clienteAxios";
-
-const initialState = {
-  data: [],
-  respuestasPorInstructor: {},
-  loading: true,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "FETCH_SUCCESS":
-      return {
-        ...state,
-        data: action.payload,
-        loading: false,
-      };
-    case "FETCH_ERROR":
-      return {
-        ...state,
-        loading: false,
-      };
-    case "SET_RESPUESTAS":
-      return {
-        ...state,
-        respuestasPorInstructor: {
-          ...state.respuestasPorInstructor,
-          [action.instructor]: action.respuestas,
-        },
-      };
-    default:
-      return state;
-  }
-}
-
 const Responder = () => {
   const id = useParams();
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
+  const[respuesta]=useRespuesta()
+  const [todo, setTodo] = useState();
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handlePrevious = () => {
-    if (preguntaActual === 0) {
-      return;
-    }
-    setPreguntaActual((prevIndice) => prevIndice - 1);
-  };
+  
+  console.log(respuesta);
+  const [indice, setIndice] = useState(0); // Estado para el índice de la pregunta actual
+  // Mapea las respuestas para obtener un array de objetos { pregunta, _id }
+  const preguntasConID =  todo ? todo.map((respuesta) => ({
+    pregunta: respuesta.pregunta.pregunta,
+    _id: respuesta.pregunta._id,
+  })): [];
 
-  const handleNext = () => {
-    if (preguntaActual === state.data.length - 1) {
-      return;
-    }
-    setPreguntaActual((prevIndice) => prevIndice + 1);
+  // Filtra y mapea solo las preguntas únicas
+  const preguntasUnicas = [
+    ...new Set(preguntasConID.map((pregunta) => pregunta.pregunta)),
+  ];
+
+  // Función para obtener el ID de la pregunta actual
+  const obtenerIDPreguntaActual = () => {
+    const preguntaActual = preguntasConID.find(
+      (pregunta) => pregunta.pregunta === preguntasUnicas[indice]
+    );
+    return preguntaActual ? preguntaActual._id : null;
   };
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await clienteAxios(
-          `/detalleEncuesta/responde/${id.id}`
-        );
-        dispatch({ type: "FETCH_SUCCESS", payload: response.data });
-      } catch (error) {
-        dispatch({ type: "FETCH_ERROR" });
-        console.log(error);
+    const idPreguntaActual = obtenerIDPreguntaActual();
+    addmensaje(idPreguntaActual);
+  }, [indice, addmensaje]);
+
+  const cambiarPalabra = (direccion) => {
+    if (direccion === "adelante") {
+      // Incrementar el índice si no se ha alcanzado el límite máximo
+      if (indice < preguntasUnicas.length - 1) {
+        setIndice((prevIndice) => prevIndice + 1);
+      }
+    } else {
+      // Decrementar el índice si no se ha alcanzado el límite mínimo
+      if (indice > 0) {
+        setIndice((prevIndice) => prevIndice - 1);
       }
     }
-    fetchData();
-  }, [id]);
-
-  if (state.loading) {
-    return <p>Cargando...</p>;
-  }
-
-  const datoActual = state.data[preguntaActual];
-  const arreglo = state.data.map((objeto) => objeto.instructor.nombre);
-  const arregloUnico = arreglo.filter((elemento, indice) => {
-    return arreglo.indexOf(elemento) === indice;
-  });
-  console.log(arreglo)
-
-  // Manejar la actualización de las respuestas
-  const handleOptionChange = (instructor, opcion) => {
-    dispatch({
-      type: "SET_RESPUESTAS",
-      instructor,
-      respuestas: opcion,
-    });
-  };
-
-  // Mostrar el modal de confirmación
-  const handleEnviarEncuestas = async () => {
-    try {
-      console.log("Respuestas enviadas:", state.respuestasPorInstructor);
-      setModalVisible(true);
-    } catch (error) {}
-  };
-
-  // Cerrar el modal de confirmación
-  const handleCloseModal = () => {
-    setModalVisible(false);
-  };
-
-  const handleConfirm = () => {
-    // Aquí puedes implementar la lógica para confirmar el envío de las encuestas
-    // Por ejemplo, enviar los datos al servidor
-    // Una vez que se complete la acción, cierra el modal
-    handleCloseModal();
   };
 
   document.body.style.overflowY = "hidden";
@@ -139,61 +77,20 @@ const Responder = () => {
             </div>
           </div>
           <div className="mx-auto md:w-[370px] md:h-full md:flex md:justify-center md:items-center flex flex-col">
-            {state.data.length > 0 && preguntaActual < state.data.length && (
-              <div className="mb-10">
-                <Preguntas
-                  pregunta={datoActual.pregunta.pregunta}
-                  onPrevious={handlePrevious}
-                  onNext={handleNext}
-                />
-              </div>
-            )}
+            <div className="mb-10">
+              <Preguntas
+              // pregunta={datoActual.pregunta.pregunta}
+              // onPrevious={handlePrevious}
+              // onNext={handleNext}
+              />
+            </div>
+
             <button
               className={`py-2 px-4  mx-auto bg-gray-300 text-gray-600 rounded-md flex-col`}
-              onClick={handleEnviarEncuestas}
+              // onClick={handleEnviarEncuestas}
             >
               Enviar Encuesta
             </button>
-          </div>
-
-          <div className="">
-            {arregloUnico.map((instructor) => (
-              <div key={instructor} className="mb-2 mt-3">
-                <div className="flex items-center p-1.5 w-[340px] md:shadow-lg shadow-2xl shadow-green-800 rounded-2xl overflow-hidden border-2 border-Principal_1 border-x-Principal_2">
-                  <img
-                    src={Instructor}
-                    alt={`Instructor ${instructor}`}
-                    className="instructor__photo max-w-[80px] h-[80px] ml-6 rounded-full"
-                  />
-                  <h3 className="font-bold text-lg ml-5">{instructor}</h3>
-                  <div className="flex flex-col ml-5 text-[15px]">
-                    {["Excelente", "Muy Bueno", "Bueno", "Regular", "Malo"].map(
-                      (opcion) => (
-                        <label
-                          key={opcion}
-                          className="cursor-pointer flex items-center mb-2"
-                        >
-                          <input
-                            type="radio"
-                            value={opcion}
-                            checked={
-                              state.respuestasPorInstructor[instructor] ===
-                              opcion
-                            }
-                            onChange={() =>
-                              handleOptionChange(instructor, opcion)
-                            }
-                          />
-                          <span className="radio-button w-4 h-4 rounded-full bg-gray-500">
-                            {opcion}
-                          </span>
-                        </label>
-                      )
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </section>
       </div>

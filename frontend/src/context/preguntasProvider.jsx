@@ -65,7 +65,6 @@ const PreguntasProvider = ({ children }) => {
     }
   };
   const nuevaPregunta = async (pregunta) => {
-    console.log(pregunta+"hola esto envio ")
     try {
      
       const { data } = await clienteAxios.post("/pregunta", pregunta);
