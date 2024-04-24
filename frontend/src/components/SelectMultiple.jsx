@@ -1,23 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
 
-const options = [
-  { value: "fox", label: "Fox" },
-  { value: "Butterfly", label: "Butterfly" },
-  { value: "Honeybee", label: "Honeybee" },
-  { value: "miel", label: "Miel" },
-  { value: "yuca", label: "Yuca" },
-  { value: "avion", label: "Avión" },
-  { value: "xd", label: "Xd" },
-  { value: "holaaaaa", label: "Holaaaaa" },
-  { value: "mjummmm", label: "Mjummm" },
-];
+const SelectMultiple = ({ preguntas, value, onChange }) => {
+  // Mapear las preguntas en el formato adecuado para las opciones de React-Select
+  const options = preguntas.map((pregunta) => ({
+    value: pregunta._id,
+    label: pregunta.pregunta,
+  }));
 
-const SelectMultiple = ({ value, onChange }) => {
   return (
     <Select
-      value={value}
-      onChange={onChange}
+      value={value.map((id) => ({ value: id, label: id }))}
+      onChange={(selectedOptions) => {
+        const selectedValues = selectedOptions.map((option) => option.value);
+        onChange(selectedValues);
+      }}
       options={options}
       isMulti
       closeMenuOnSelect={false}
