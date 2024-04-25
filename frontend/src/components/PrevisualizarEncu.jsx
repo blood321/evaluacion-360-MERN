@@ -1,12 +1,13 @@
 import React from "react";
 import { FaTrash, FaPencilAlt, FaLocationArrow } from "react-icons/fa";
+import { IoEyeSharp } from "react-icons/io5";
 import useEncuesta from "../hooks/useEncuesta";
-import { Link } from "react-router-dom";
 
 const PrevisualizarEncu = ({
   onShowEnviarModal,
   onShowDeleteModal,
   onShowEditarModal,
+  onShowActividadModal,
 }) => {
   const { encuesta } = useEncuesta();
 
@@ -87,7 +88,7 @@ const PrevisualizarEncu = ({
                   <a
                     onClick={onShowEnviarModal}
                     href="#"
-                    className="font-medium text-Principal_1 dark:text-Principal_2 hover:underline pr-3"
+                    className="font-medium text-Principal_1 dark:text-Principal_1 hover:underline pr-3"
                   >
                     <FaLocationArrow />
                   </a>
@@ -106,6 +107,13 @@ const PrevisualizarEncu = ({
                     className="font-medium text-red-600 dark:text-red-500 hover:underline ms-3 "
                   >
                     <FaTrash />
+                  </a>
+                  <a
+                    onClick={onShowActividadModal}
+                    href="#"
+                    className="font-medium  dark:text-blak hover:underline ms-3 "
+                  >
+                    <IoEyeSharp />
                   </a>
                 </td>
               </tr>
