@@ -9,28 +9,33 @@ import aprendiz from "../models/aprendiz.js";
 
 const nuevoDetalleEncuesta = async (req, res) => {
   //en postman se deben poner estas constates en ves de las del modelo
-  const { encuestaG, fichasG } = req.body;
+  const { encuestaG } = req.body;
 
   try {
+    console.log(encuestaG);
+    const fechaActual = new Date();
+    console.log(fechaActual);
+
     // Busca la encuesta por su id
     const encuestas = await encuesta.findById(encuestaG);
     if (!encuestas) {
       res.json({ msg: " la encuesta no existe " });
     }
-    //busca la ficha por su id
-    const ficha = await fichas.findById(fichasG);
-    console.log(ficha._id);
+    //busca la ficha por su idf
+    const ficha = await fichas.find({ fichaFin: { $lt: new Date() } }, "_id");
+    console.log(ficha);
 
-    // Crea la nueva pregunta con los datos proporcionados
+    // // Crea la nueva pregunta con los datos proporcionados
     const nuevaPregunta = new detalleEncuesta({
-      encuesta: [encuestas._id],
-      fichas: [ficha._id],
-    });
+      encuesta: encuestas,
+      fichas: ficha,
+     });
+    console.log("esta es la nueva pregunta " + nuevaPregunta);
 
     // Guarda la pregunta en la base de datos
     const preguntaGuardada = await nuevaPregunta.save();
 
-    res.status(201).json(preguntaGuardada);
+    // res.status(201).json(preguntaGuardada);
   } catch (error) {
     console.error(error);
     res
@@ -40,7 +45,6 @@ const nuevoDetalleEncuesta = async (req, res) => {
 };
 const obtenerDetallesEncuestas = async (req, res) => {
   const { id } = req.params;
-
   try {
     const respuestasExistentes = await Respuesta.findOne({ aprendiz: id });
     if (respuestasExistentes) {
@@ -48,7 +52,7 @@ const obtenerDetallesEncuestas = async (req, res) => {
       return res.status(404).json({ msg: error.message });
     }
     const usuario = await aprendiz.findOne({ _id: id });
-    console.log(usuario+"ets");
+    console.log(usuario + "ets");
     const fichaUsuario = await fichas.find({ aprendices: usuario }, "_id");
     console.log(fichaUsuario);
 

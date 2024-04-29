@@ -7,10 +7,10 @@ const detalleEncuestaSchema=mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"encuesta",
     },
-    fichas:{
+    fichas:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"fichas"
-    }
+    }]
 
    
 

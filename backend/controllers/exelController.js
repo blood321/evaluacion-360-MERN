@@ -16,11 +16,8 @@ const subirAprendices = async (req, res) => {
       const datosGuardados=  await new aprendiz(datos[index]);
       datosGuardados.save();
     }
-    res.json({
-msg: "Aprendices guardados con exito ",
-});
+    res.json({msg: "Aprendices guardados con exito ",});
     
-    // Utilizar la función para agrupar los nombres por ficha
    
     } catch (error) {
         console.error('Error al crear el archivo de Excel:', error);
@@ -61,11 +58,10 @@ const subirFichas = async (req, res) => {
         res.status(500).send('Error al crear el archivo de Excel.');
     }
 }
-
 const subirProgramacion=async(req,res)=>{
 
 }
 const subirInstructores=async(req,res)=>{
-
+    
 }
 export { subirAprendices,subirFichas,subirInstructores,subirProgramacion};
