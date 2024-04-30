@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from "react";
+import clienteAxios from "../config/clienteAxios";
 import usePreguntas from "../hooks/usePreguntas";
 import SelectMultiple from "./SelectMultiple";
-import Tematicas from "./Tematicas";
-function Editar({ onClose }) {
+import useEncuestas from "../hooks/useEncuesta";
+
+function Editar({ onClose, kuko }) {
+  console.log(kuko)
+  const { mostrarAlerta, alerta, submitEncuesta, obtenerEncuesta ,encuestaedit} = useEncuestas();
+  console.log(encuestaedit+"esto se debe editar ")
+  useEffect(() => {
+    obtenerEncuesta(kuko)
+      .then(resultado => {
+        // Aquí puedes trabajar con el resultado obtenido
+        console.log(resultado+"RESULTADO DE CHAT GPT");
+      })
+  }, [])
+  
+
+
   // Obtener las preguntas usando el hook personalizado usePreguntas
-
   const { preguntas } = usePreguntas();
-
   // Estado para controlar la visibilidad del modal
   const [showModal, setShowModal] = useState(true);
 
   // Estado para almacenar las temáticas disponibles
+  const [tematicas, setTematicas] = useState([]);
 
   // Estado para almacenar la temática seleccionada
   const [tematicaSeleccionada, setTematicaSeleccionada] = useState("");
@@ -22,9 +36,27 @@ function Editar({ onClose }) {
   const [error, setError] = useState(null);
 
   // Estado para almacenar las preguntas filtradas por temática
-  const [preguntasFiltradasPorTematica, setPreguntasFiltradasPorTematica] = useState([]);
+  const [preguntasFiltradasPorTematica, setPreguntasFiltradasPorTematica] =
+    useState([]);
 
-  
+  // Efecto para cargar las temáticas disponibles al montar el componente
+  useEffect(() => {
+    async function loadTematicas() {
+      try {
+        // Obtener las temáticas desde el servidor
+        const response = await clienteAxios("/tematica/listar-tematicas");
+        // Actualizar el estado con las temáticas obtenidas
+        setTematicas(response.data);
+      } catch (error) {
+        // Manejar errores de carga de temáticas
+        console.error("Error fetching tematicas:", error);
+        setError("Error al cargar las tematicas");
+      }
+    }
+    // Llamar a la función para cargar las temáticas
+    loadTematicas();
+  }, []);
+
   // Función para manejar el evento de guardado
   const handleSave = () => {
     // Cerrar el modal y realizar otras acciones de guardado
@@ -49,10 +81,7 @@ function Editar({ onClose }) {
       .filter((option) => option.selected)
       .map((option) => option.value);
     setPreguntasSeleccionadas(selectedPreguntas);
-  };const handleTematicaSeleccionada = tematica => {
-    setTematicaSeleccionada(tematica)
-}
-
+  };
 
   // Efecto para actualizar las preguntas filtradas cuando cambia la temática seleccionada
   useEffect(() => {
@@ -105,8 +134,12 @@ function Editar({ onClose }) {
                         >
                           <option value="">Selecciona Temática</option>
                           {/* Mapear las temáticas disponibles */}
-                          <Tematicas tematica={handleTematicaSeleccionada} />
-                    </select>
+                          {tematicas.map((tematica) => (
+                            <option key={tematica._id} value={tematica._id}>
+                              {tematica.tematica}
+                            </option>
+                          ))}
+                        </select>
                       </div>
                     </div>
 

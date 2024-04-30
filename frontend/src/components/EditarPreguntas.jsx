@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import usePreguntas from "../hooks/usePreguntas";
 const PreguntaEditable = ({ id, pregunta2 }) => {
-  console.log(id);
   const [editando, setEditando] = useState(false);
   const [pregunta, setPregunta] = useState(pregunta2);
-  console.log(pregunta);
   const { submitPregunta, eliminarPregunta } = usePreguntas();
 
   const handleChange = (e) => {

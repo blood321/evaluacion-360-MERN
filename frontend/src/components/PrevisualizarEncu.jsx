@@ -94,7 +94,7 @@ const PrevisualizarEncu = ({
                   </a>
 
                   <a
-                    onClick={onShowEditarModal}
+                    onClick={() => onShowEditarModal(encuestas._id)}
                     href="#"
                     className="font-medium text-Secundario_1 dark:text-Secundario_2 hover:underline"
                   >

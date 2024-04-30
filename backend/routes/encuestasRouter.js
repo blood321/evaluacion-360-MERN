@@ -1,6 +1,7 @@
 import Express  from "express";
 import {
-    nuevaEncuesta,editarEncuesta,eliminarEncuesta,listarEncuestas
+    nuevaEncuesta,editarEncuesta,eliminarEncuesta,listarEncuestas,
+    obtenerEncuesta
 } from '../controllers/encuestaController.js'
 
 
@@ -10,7 +11,7 @@ router.route('/')
     .post(nuevaEncuesta)
    .get(listarEncuestas)
     router.route('/:id')
-    
+    .get(obtenerEncuesta)
     .put(editarEncuesta)
     .delete(eliminarEncuesta)
     router.route('/lista')
