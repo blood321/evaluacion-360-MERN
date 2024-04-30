@@ -72,15 +72,14 @@ const Listarp = ({ addMensaje, tematicaSeleccionada }) => {
 
 const Item = ({ selected, onClick, text }) => (
   <div className="flex items-center">
-  <input
-    type="checkbox"
-    checked={selected}
-    onChange={onClick}
-    className={`${
-      selected ? "accent-green-500" : "accent-green-500"} mr-2`}
-  />
-  <span className={selected ? "mr-4 font-semibold" : "mr-4"}>{text}</span>
-</div>
+    <input
+      type="checkbox"
+      checked={selected}
+      onChange={onClick}
+      className={`${selected ? "accent-green-500" : "accent-green-500"} mr-2`}
+    />
+    <span className={selected ? "mr-4 font-semibold" : "mr-4"}>{text}</span>
+  </div>
 );
 
 export default Listarp;

@@ -2,6 +2,7 @@ import useAuth from '../hooks/useAuth'
 
 const Identificador = ({addMensaje}) => {
     const { auth } = useAuth()
+    console.log(addMensaje.length)
     return (
         <aside className="flex flex-col p-2 h-max w-[300px] text-Principal_1 bg-white/[0.3] rounded-md">
             <div className="text-xl font-bold">

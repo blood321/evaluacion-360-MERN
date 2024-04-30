@@ -5,16 +5,15 @@ import FormularioProyecto from "../components/FormularioProyecto";
 import Identificador from "../components/IdentificadorEncuesta";
 
 const CrearEncuestasAprendices = () => {
-  const [preguntas, setPreguntas] = useState([]); // arreglo de las preguntas seleccionadas
-  const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null);
+  const [preguntas, setPreguntas] = useState(""); //arreglo de las preguntas seleccionadas
 
   const addMensaje = (mensaje) => {
-    setPreguntas((prevPreguntas) => [...prevPreguntas, mensaje]);
+    setPreguntas(mensaje);
   };
-
-  const handleTematicaSeleccionada = (tematica) => {
-    setTematicaSeleccionada(tematica);
-  };
+const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null);
+const handleTematicaSeleccionada = (tematica) => {
+  setTematicaSeleccionada(tematica);
+};
 
   return (
     <div className="px-auto px-3">
@@ -36,7 +35,7 @@ const CrearEncuestasAprendices = () => {
       <div className="md:flex md:justify-between md:items-start mt-9">
         <Tematicas tematica={handleTematicaSeleccionada} />
         <div className="px-auto pr-56">
-          <Identificador addMensaje={addMensaje} />
+        <Identificador addMensaje={preguntas} />
         </div>
       </div>
       <div className="md:flex md:justify-between md:items-start mt-4">
