@@ -2,11 +2,24 @@ import React, { useState, useEffect } from "react";
 import clienteAxios from "../config/clienteAxios";
 import usePreguntas from "../hooks/usePreguntas";
 import SelectMultiple from "./SelectMultiple";
+import useEncuestas from "../hooks/useEncuesta";
 
-function Editar({ onClose }) {
+function Editar({ onClose, kuko }) {
+  console.log(kuko)
+  const { mostrarAlerta, alerta, submitEncuesta, obtenerEncuesta ,encuestaedit} = useEncuestas();
+  console.log(encuestaedit+"esto se debe editar ")
+  useEffect(() => {
+    obtenerEncuesta(kuko)
+      .then(resultado => {
+        // Aquí puedes trabajar con el resultado obtenido
+        console.log(resultado+"RESULTADO DE CHAT GPT");
+      })
+  }, [])
+  
+
+
   // Obtener las preguntas usando el hook personalizado usePreguntas
   const { preguntas } = usePreguntas();
-
   // Estado para controlar la visibilidad del modal
   const [showModal, setShowModal] = useState(true);
 
@@ -23,7 +36,8 @@ function Editar({ onClose }) {
   const [error, setError] = useState(null);
 
   // Estado para almacenar las preguntas filtradas por temática
-  const [preguntasFiltradasPorTematica, setPreguntasFiltradasPorTematica] = useState([]);
+  const [preguntasFiltradasPorTematica, setPreguntasFiltradasPorTematica] =
+    useState([]);
 
   // Efecto para cargar las temáticas disponibles al montar el componente
   useEffect(() => {

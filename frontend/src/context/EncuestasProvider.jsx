@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
+import { redirect } from "react-router-dom";
 
 const EncuestasContext = createContext();
 
@@ -7,6 +8,7 @@ const EncuestasProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [cargando, setCargando] = useState(false);
   const [encuesta, setEncuesta] = useState([]);
+  const[encuestaedit,setEncuestaedit]=useState()
 
   useEffect(() => {
     const obtenerPreguntas = async () => {
@@ -95,19 +97,13 @@ const EncuestasProvider = ({ children }) => {
     
   };
 
-  const obtenerProyecto = async (id) => {
+  const obtenerEncuesta = async (id) => {
     setCargando(true);
     try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await clienteAxios(`/proyectos/${id}`, config);
-      setProyecto(data);
+      
+      const { data } = await clienteAxios(`/encuesta/${id}`, );
+      setEncuestaedit(data);
+      return data
     } catch (error) {
       console.log(error);
     } finally {
@@ -138,10 +134,11 @@ const EncuestasProvider = ({ children }) => {
     <EncuestasContext.Provider
       value={{
         encuesta,
+        encuestaedit,
         mostrarAlerta,
         alerta,
         submitEncuesta,
-        obtenerProyecto,
+        obtenerEncuesta,
         cargando,
         eliminarEncuesta,
       }}
