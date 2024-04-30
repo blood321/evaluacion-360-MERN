@@ -12,35 +12,24 @@ const Listarp = ({ addMensaje, tematicaSeleccionada }) => {
     const tieneTematica = pregunta.tematica === tematicaSeleccionada;
 
     // Verificar si la página actual es "/inicio-admin/Crear-encuestas-aprendices"
-    const esPaginaAprendices =  location.pathname === "/inicio-admin/Crear-encuestas-aprendices";
-    const esPaginacompañeros =location.pathname==="/inicio-admin/Crear-encuestas-companeros"
-    const espaginaJefes =location.pathname==="/inicio-admin/Crear-encuestas-jefes"
+    const esPaginaAprendices =
+      location.pathname === "/inicio-admin/Crear-encuestas-aprendices";
+    const esPaginacompañeros =
+      location.pathname === "/inicio-admin/Crear-encuestas-companeros";
+    const espaginaJefes =
+      location.pathname === "/inicio-admin/Crear-encuestas-jefes";
     // Filtrar las preguntas que cumplan con ambos criterios
-  return(
-    
-      tieneTematica &&
- 
-      (esPaginaAprendices ? pregunta.encuestado === "Aprendiz" : null)
-      ||
-      tieneTematica&&
-      (esPaginacompañeros ? pregunta.encuestado=== "Compañeros": null)
-      ||
-      tieneTematica&&
-      (espaginaJefes ? pregunta.encuestado === "Jefes":null)
-    
-
-
-  )
-
-
-    
-  
-    
-
-  
+    return (
+      (tieneTematica &&
+        (esPaginaAprendices ? pregunta.encuestado === "Aprendiz" : null)) ||
+      (tieneTematica &&
+        (esPaginacompañeros ? pregunta.encuestado === "Compañeros" : null)) ||
+      (tieneTematica &&
+        (espaginaJefes ? pregunta.encuestado === "Jefes" : null))
+    );
   });
 
-  console.log(preguntasFiltradas)
+  console.log(preguntasFiltradas);
   // Función para manejar el clic en un elemento
   const handleItemClick = (itemId) => {
     // Verificar si el elemento ya está seleccionado
@@ -58,7 +47,7 @@ const Listarp = ({ addMensaje, tematicaSeleccionada }) => {
   }, [selectedItems]);
 
   return (
-    <aside className="flex flex-col p-4 h-[260px] max-h-full overflow-y-auto w-full md:w-[570px] bg-gray-200 rounded-lg relative">
+    <aside className="flex flex-col p-4 h-[260px] max-h-full overflow-y-auto w-full md:w-[530px] bg-gray-200 rounded-lg relative">
       <div className="font-semibol w-full mt-2 relative mb-4">
         <div className="flex flex-col">
           {preguntasFiltradas.length ? (
@@ -83,15 +72,15 @@ const Listarp = ({ addMensaje, tematicaSeleccionada }) => {
 
 const Item = ({ selected, onClick, text }) => (
   <div className="flex items-center">
-    <button
-      type="button"
-      onClick={onClick}
-      className={`rounded-full w-5 h-5 mr-2 mt-1 p-1 focus:bg-Principal_1 ${
-        selected ? "bg-Principal_1" : "bg-gray-700"
-      }`}
-    ></button>
-    <span className={selected ? "mr-4 font-semibold" : "mr-4"}>{text}</span>
-  </div>
+  <input
+    type="checkbox"
+    checked={selected}
+    onChange={onClick}
+    className={`${
+      selected ? "accent-green-500" : "accent-green-500"} mr-2`}
+  />
+  <span className={selected ? "mr-4 font-semibold" : "mr-4"}>{text}</span>
+</div>
 );
 
 export default Listarp;

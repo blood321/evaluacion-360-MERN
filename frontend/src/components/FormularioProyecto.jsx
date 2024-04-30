@@ -59,13 +59,14 @@ const FormularioProyecto = ({ preguntas }) => {
   };
 
   const { msg } = alerta;
+
   return (
     <>
       <form
-        className="bg-white/[0.2] rounded-md  px-10 w-[400px] md:w-[480px]"
+        className="bg-white/[0.2] rounded-md p-7 w-[400px] md:w-[480px]"
         onSubmit={handleSubmit}
       >
-        <div className="">
+        <div className="mb-3">
           <label
             className="text-gray-700 capitalize font-bold text-md"
             htmlFor="nombre"
@@ -90,24 +91,26 @@ const FormularioProyecto = ({ preguntas }) => {
           </label>
           <textarea
             id="descripcion"
-            className="border-2 w-full p-2 mt-2
-            placeholder-gray-400 rounded-md"
-            placeholder="Descripción dela Encuesta"
+            className="border-2 w-full p-3 mt-2 placeholder-gray-400 rounded-md"
+            placeholder="Descripción de la Encuesta"
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
           ></textarea>
         </div>
 
-        <input
+        <button
           type="submit"
-          value={id ? "Actualizar Proyecto" : "Crear Encuesta"}
-          className="bg-gradient-to-r from-Principal_1 to-Principal_2 w-full p-3 capitalize font-bold text-white rounded cursor-pointer "
-        />
+          className="bg-gradient-to-r from-Principal_1 to-Principal_2 w-full p-2 capitalize font-bold text-white rounded cursor-pointer"
+        >
+          {id ? "Actualizar Encuesta" : "Crear Encuesta"}
+        </button>
       </form>
-      {/* Modal */}
+
       {mostrarModal && (
         <ModalConfirmar onClose={() => setMostrarModal(false)} />
       )}
+
+      {msg && <Alerta alerta={alerta} />}
     </>
   );
 };

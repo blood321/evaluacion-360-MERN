@@ -3,21 +3,12 @@ import useAuth from '../hooks/useAuth'
 const Identificador = ({addMensaje}) => {
     const { auth } = useAuth()
     return (
-        <aside
-            className="
-        flex 
-        flex-col 
-        p-2
-        h-max  
-        w-[300px] 
-        text-Principal_1
-      "
-        >
+        <aside className="flex flex-col p-2 h-max w-[300px] text-Principal_1 bg-white/[0.3] rounded-md">
             <div className="text-xl font-bold">
                 <div className="flex items-center justify-between">
                     <span className="">ID 360</span>
                     <span className=" font-semibold  text-Secundario_2/[0.5]">12312435</span>
-                </div>
+              </div>
             </div>
             <div className="text-xl font-bold">
                 <div className="flex items-center justify-between">
