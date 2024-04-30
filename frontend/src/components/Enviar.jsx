@@ -1,13 +1,7 @@
 import React from "react";
 
 function Enviar({ onClose }) {
-  const [fechaEntrega, setFechaEntrega] = useState("");
-
-  useEffect(() => {
-    if (params.id) {
-      setFechaEntrega(encuesta.fechaEntrega?.split("T")[0]);
-    }
-  }, [params]);
+ 
 
   return (
     <div className="fixed z-50 inset-0 overflow-y-auto">
@@ -48,9 +42,7 @@ function Enviar({ onClose }) {
                 className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                 required="required"
                 type="datetime-local"
-                value={fechaEntrega}
-                onChange={(e) => setFechaEntrega(e.target.value)}
-              />
+         />
             </div>
             <div className="flex justify-center">
               <button
