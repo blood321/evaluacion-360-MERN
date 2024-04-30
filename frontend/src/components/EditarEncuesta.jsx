@@ -164,7 +164,6 @@ function Editar({ onClose }) {
                         Fecha Limite
                       </label>
                       <input
-                        placeholder="fecha actual"
                         className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                         required="required"
                         type="datetime-local"
