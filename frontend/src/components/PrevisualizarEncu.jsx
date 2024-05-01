@@ -86,7 +86,9 @@ const PrevisualizarEncu = ({
 
                 <td className="flex justify-between px-5 py-4">
                   <a
-                    onClick={onShowEnviarModal}
+                    
+                    onClick={() => onShowEnviarModal(encuestas._id)}
+
                     href="#"
                     className="font-medium text-Principal_1 dark:text-Principal_1 hover:underline pr-3"
                   >

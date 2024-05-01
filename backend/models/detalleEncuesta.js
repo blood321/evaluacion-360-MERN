@@ -10,7 +10,16 @@ const detalleEncuestaSchema=mongoose.Schema({
     fichas:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"fichas"
-    }]
+    }],
+    fechaActivacion:{
+        type: Date,
+        required: true,
+        default: Date.now(),
+    },
+    fechaDesactivar:{
+        type: Date,
+     
+    }
 
    
 

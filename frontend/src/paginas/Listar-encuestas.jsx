@@ -36,8 +36,9 @@ const ListarEncuestas = () => {
   };
 
   // Función para mostrar el modal de Enviar
-  const handleShowEnviarModal = () => {
+  const handleShowEnviarModal = (mensaje) => {
     setShowEnviarModal(true);
+    setId(mensaje)
   };
 
   // Función para ocultar el modal de Enviar
@@ -77,7 +78,7 @@ const ListarEncuestas = () => {
         <Eliminar onClose={handleCloseDeleteModal} kuko={id} />
       )}
       {showEditarModal && <Editar onClose={handleCloseEditarModal} kuko={id} />}
-      {showEnviarModal && <Enviar onClose={handleCloseEnviarModal} />}
+      {showEnviarModal && <Enviar onClose={handleCloseEnviarModal} id={id} />}
       {showActividadModal && <Actividad onClose={handleCloseActividadModal} />}
     </>
   );

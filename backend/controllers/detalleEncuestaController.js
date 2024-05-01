@@ -9,15 +9,19 @@ import aprendiz from "../models/aprendiz.js";
 
 const nuevoDetalleEncuesta = async (req, res) => {
   //en postman se deben poner estas constates en ves de las del modelo
-  const { encuestaG } = req.body;
-
+  const  {id}  = req.params;
+  const {fecha} =req.body
   try {
-    console.log(encuestaG);
+    console.log(id);
     const fechaActual = new Date();
     console.log(fechaActual);
 
     // Busca la encuesta por su id
-    const encuestas = await encuesta.findById(encuestaG);
+    const encuestas = await encuesta.findById(id);
+    console.log(encuestas)
+    encuestas.activa =true
+    const guarda=await encuestas.save()
+    console.log(guarda+"esto guarda")
     if (!encuestas) {
       res.json({ msg: " la encuesta no existe " });
     }
@@ -29,6 +33,7 @@ const nuevoDetalleEncuesta = async (req, res) => {
     const nuevaPregunta = new detalleEncuesta({
       encuesta: encuestas,
       fichas: ficha,
+      fechaDesactivar:fecha
      });
     console.log("esta es la nueva pregunta " + nuevaPregunta);
 

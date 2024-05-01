@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import clienteAxios from "../config/clienteAxios";
 
-function Enviar({ onClose }) {
- 
 
+function Enviar({ onClose, id}) {
+  const [fecha,setFecha]=useState() 
+  console.log(fecha)
+  const handleSubmit = async e => {
+
+    e.preventDefault()
+
+    if ([fecha].includes('')) {
+        setAlerta({
+            msg: 'Todos los campos son obligatorios',
+            error: true,
+        })
+        setTimeout(() => {
+            setAlerta({})
+        }, 4000)
+        return
+    }
+
+    try {
+        const { data } = await clienteAxios.post(`/detalleEncuesta/${id}`, {
+            fecha,
+        })
+        localStorage.setItem('token', data.token)
+        setAuth(data)
+    } catch (error) {
+      console.log(error)
+    }
+}
   return (
     <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen">
@@ -42,12 +69,14 @@ function Enviar({ onClose }) {
                 className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                 required="required"
                 type="datetime-local"
+                onChange={e => setFecha(e.target.value)}
+
          />
             </div>
             <div className="flex justify-center">
               <button
                 className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                onClick={onClose}
+                onClick={handleSubmit}
               >
                 Aceptar
               </button>
