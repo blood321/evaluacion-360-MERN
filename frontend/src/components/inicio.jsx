@@ -11,12 +11,12 @@ const Inicio = () => {
                 <h2 className="text-[28px] font-semibold justify-center text-justify text-Principal_1">
                     "
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-Principal_1 to-Principal_2 font-extrabold text-[30px]">
-                        LAS OPINIONES{' '}
+                        las opiniones{' '}
                     </span>
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-Secundario_1 to-Secundario_2 ">
-                        de los Aprendices guían y enriquecen a los Instructores
+                    de los Aprendices enriquecen la labor de los Instructores,
                     </span>
-                    , Mejorando la Calidad de la Educación"
+                    , Mejorando la Calidad educativa."
                 </h2>
             </div>
         </>

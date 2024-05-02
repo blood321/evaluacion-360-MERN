@@ -34,7 +34,7 @@ const PreguntaEditable = ({ id, pregunta2 }) => {
         {editando ? (
           <div className="flex items-center  ">
             <input
-              className="p-1 mr-2 rounded-md flex-1 w-full  text-[19px]"
+              className="p-1 mr-2 border border-Principal_1 bg-gray-300 rounded-md flex-1 w-full  text-[19px]"
               type="text"
               value={pregunta}
               onChange={handleChange}
@@ -53,9 +53,9 @@ const PreguntaEditable = ({ id, pregunta2 }) => {
             </button>
           </div>
         ) : (
-          <div className="flex flex-col">
+          <div className="flex border border-Principal_1 p-1 rounded-lg bg-gray-300">
             <p className="py-2">{pregunta2}</p>
-            <div className="flex">
+            <div className="flex flex-grow justify-end">
               <button
                 class="middle none center mr-3 rounded-lg border border-Principal_1 py-3 px-6 font-sans text-xs font-bold uppercase text-Principal_1 transition-all hover:opacity-75 focus:ring focus:ring-Principal_1 shadow-md shadow-green-500/20  hover:shadow-lg hover:shadow-green-500/40  active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 onClick={() => setEditando(true)}

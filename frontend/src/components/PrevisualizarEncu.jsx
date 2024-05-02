@@ -1,5 +1,6 @@
 import React from "react";
 import { FaTrash, FaPencilAlt, FaLocationArrow } from "react-icons/fa";
+import { FiRefreshCcw } from "react-icons/fi";
 import { IoEyeSharp } from "react-icons/io5";
 import useEncuesta from "../hooks/useEncuesta";
 
@@ -16,7 +17,11 @@ const PrevisualizarEncu = ({
       <table className="w-full text-sm text-left rtl:text-right  dark:text-black font-semibold">
         <thead className="text-xs text-white uppercase bg-Principal_1 dark:bg-Secundario_1 dark:text-white">
           <tr>
-            <th scope="col" className="p-4"></th>
+            <th scope="col" className="p-4">
+              <button onClick={() => window.location.reload()}>
+                <FiRefreshCcw title="Refrescar"/>
+              </button>
+            </th>
             <th scope="col" className="px-6 py-3">
               Nombre de la Encuesta
             </th>
@@ -86,13 +91,11 @@ const PrevisualizarEncu = ({
 
                 <td className="flex justify-between px-5 py-4">
                   <a
-                    
                     onClick={() => onShowEnviarModal(encuestas._id)}
-
                     href="#"
                     className="font-medium text-Principal_1 dark:text-Principal_1 hover:underline pr-3"
                   >
-                    <FaLocationArrow />
+                    <FaLocationArrow title="Activar" />
                   </a>
 
                   <a
@@ -100,7 +103,7 @@ const PrevisualizarEncu = ({
                     href="#"
                     className="font-medium text-Secundario_1 dark:text-Secundario_2 hover:underline"
                   >
-                    <FaPencilAlt />
+                    <FaPencilAlt title="Editar"/>
                   </a>
 
                   <a
@@ -108,14 +111,14 @@ const PrevisualizarEncu = ({
                     href="#"
                     className="font-medium text-red-600 dark:text-red-500 hover:underline ms-3 "
                   >
-                    <FaTrash />
+                    <FaTrash title="Eliminar"/>
                   </a>
                   <a
                     onClick={onShowActividadModal}
                     href="#"
                     className="font-medium  dark:text-blak hover:underline ms-3 "
                   >
-                    <IoEyeSharp />
+                    <IoEyeSharp title="Ver Actividad"/>
                   </a>
                 </td>
               </tr>

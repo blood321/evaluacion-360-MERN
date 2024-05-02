@@ -1,35 +1,36 @@
 import React, { useState } from "react";
 import clienteAxios from "../config/clienteAxios";
 
+function Enviar({ onClose, id }) {
+  const [fecha, setFecha] = useState();
+  const [alerta, setAlerta] = useState({}); // Agregar el estado para la alerta
+  console.log(fecha);
 
-function Enviar({ onClose, id}) {
-  const [fecha,setFecha]=useState() 
-  console.log(fecha)
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    e.preventDefault()
-
-    if ([fecha].includes('')) {
-        setAlerta({
-            msg: 'Todos los campos son obligatorios',
-            error: true,
-        })
-        setTimeout(() => {
-            setAlerta({})
-        }, 4000)
-        return
+    if (!fecha) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
     }
 
     try {
-        const { data } = await clienteAxios.post(`/detalleEncuesta/${id}`, {
-            fecha,
-        })
-        localStorage.setItem('token', data.token)
-        setAuth(data)
+      const { data } = await clienteAxios.post(`/detalleEncuesta/${id}`, {
+        fecha,
+      });
+      localStorage.setItem("token", data.token);
+      setAuth(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-}
+  };
+
   return (
     <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen">
@@ -69,9 +70,11 @@ function Enviar({ onClose, id}) {
                 className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                 required="required"
                 type="datetime-local"
-                onChange={e => setFecha(e.target.value)}
-
-         />
+                onChange={(e) => setFecha(e.target.value)}
+              />
+              {alerta.error && (
+                <div className="text-red-500">{alerta.msg}</div>
+              )}
             </div>
             <div className="flex justify-center">
               <button
