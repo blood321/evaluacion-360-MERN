@@ -208,9 +208,7 @@ function Editar({ onClose, kuko }) {
                               </div>
                           </div>
                       </div>
-<<<<<<< HEAD
-                  </div>
-=======
+
                       <div className="mb-3 space-y-2 w-full text-xs">
                         <label className="font-semibold text-gray-600 py-2">
                           Temáticas
@@ -288,9 +286,7 @@ function Editar({ onClose, kuko }) {
                       </button>
                     </div>
                   </div>
-                </div>
->>>>>>> e49351a5461b00196ccb9431ddde24da3f2e16d7
-              </div>
+              
           )}
       </>
   )

@@ -23,7 +23,6 @@ const CrearPreguntas = ({ tematica }) => {
       setEncuestado("Jefes");
     }
   }, [location]);
-<<<<<<< HEAD
     console.log(pregunta)
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,52 +64,13 @@ const CrearPreguntas = ({ tematica }) => {
             {mostrarAlerta && (
                 <p className="text-red-500 mt-2 font-extrabold">Por favor, escribe una pregunta antes de crearla.</p>
             )}
-=======
-  console.log(pregunta);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    if ([pregunta].includes("")) {
-      setMostrarAlerta({
-        msg: "Todos los campos son necesarios ",
-        error: true,
-      });
-      return;
-    }
-    // Pasar los datos hacia el provider
-    await submitPregunta({ pregunta, tematica, encuestado });
-
-    setPregunta("");
-  };
-
-  return (
-    <form
-      className="bg-white/[0.2] rounded-md px-10 w-[400px] md:w-[480px]"
-      onSubmit={handleSubmit}
-    >
-      <div className="px-auto">
-        <h2 className="font-extrabold text-[25px] text-Principal_2/[0.9]">
-          Crear Preguntas
-        </h2>
-        <div className="flex p-3 items-center">
-          <input
-            type="text"
-            placeholder="Escribe tu pregunta aquí"
-            className="border-2 border-gray-300 p-2 mr-2 rounded-md w-[500px]"
-            value={pregunta}
-            onChange={(e) => setPregunta(e.target.value)}
-          />
-          <button class="middle none center mr-3 rounded-lg bg-gradient-to-tr from-Principal_1 to-Principal_2 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-Principal_1/20 transition-all hover:shadow-lg hover:shadow-Principal_1/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            Crear
-          </button>
->>>>>>> e49351a5461b00196ccb9431ddde24da3f2e16d7
         </div>
         {mostrarAlerta && (
           <p className="text-red-500 mt-2 font-extrabold">
             Por favor, escribe una pregunta antes de crearla.
           </p>
         )}
-      </div>
     </form>
   );
 };

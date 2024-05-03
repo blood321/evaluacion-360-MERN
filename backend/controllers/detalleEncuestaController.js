@@ -57,15 +57,12 @@ const obtenerDetallesEncuestas = async (req, res) => {
       return res.status(404).json({ msg: error.message });
     }
     const usuario = await aprendiz.findOne({ _id: id });
-    console.log(usuario + "ets");
     const fichaUsuario = await fichas.find({ aprendices: usuario }, "_id");
-    console.log(fichaUsuario);
 
     const instructoresResponder = await programacion.find(
       { fichas: fichaUsuario },
       "instructores"
     );
-    console.log(instructoresResponder);
 
     const encuestasID = await detalleEncuesta
       .find({ fichas: fichaUsuario })
