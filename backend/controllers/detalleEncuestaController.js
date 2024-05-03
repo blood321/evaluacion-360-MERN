@@ -33,7 +33,8 @@ const nuevoDetalleEncuesta = async (req, res) => {
     const nuevaPregunta = new detalleEncuesta({
       encuesta: encuestas,
       fichas: ficha,
-      fechaDesactivar:fecha
+      fechaDesactivar:fecha,
+      activa:true
      });
     console.log("esta es la nueva pregunta " + nuevaPregunta);
 
@@ -57,22 +58,21 @@ const obtenerDetallesEncuestas = async (req, res) => {
       return res.status(404).json({ msg: error.message });
     }
     const usuario = await aprendiz.findOne({ _id: id });
-    const fichaUsuario = await fichas.find({ aprendices: usuario }, "_id");
+    const fichaUsuario = await fichas.findOne({ aprendices: usuario }, "_id");
 
     const instructoresResponder = await programacion.find(
       { fichas: fichaUsuario },
       "instructores"
     );
 
-    const encuestasID = await detalleEncuesta
-      .find({ fichas: fichaUsuario })
-      .distinct("encuesta");
+    const encuestasID = await detalleEncuesta.find({ fichas: fichaUsuario }).distinct("encuesta");
+      console.log(encuestasID)
 
-    const buscarEncuestaParaGuardarEnRespuestas = await encuesta
-      .find({ _id: { $in: encuestasID } })
-      .select(
-        "-nombre -fechaCreado -tiempoResponder -preguntas -encuestado -activa -__v"
-      );
+    const buscarEncuestaParaGuardarEnRespuestas = await detalleEncuesta.findOne({encuesta:encuestasID},'_id')
+      
+      
+      console.log(  buscarEncuestaParaGuardarEnRespuestas)
+
 
     const mostrarPregunta = await encuesta
       .find({ activa: true, _id: { $in: encuestasID } })
@@ -88,10 +88,10 @@ const obtenerDetallesEncuestas = async (req, res) => {
               pregunta: preguntaId,
               aprendiz: usuario,
               instructor: instructorId,
-              encuesta: buscarEncuestaParaGuardarEnRespuestas[0],
+              encuesta: buscarEncuestaParaGuardarEnRespuestas.id,
             });
             const respug = await nuevaRespuesta.save();
-            console.log(respug);
+            
           }
         }
       }
@@ -105,13 +105,29 @@ const mostrasRespuestas = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const inpuestoss = await Respuesta.find({ aprendiz: id }).populate(
+    const respuestas = await Respuesta.find({ aprendiz: id }).populate(
       "pregunta instructor encuesta"
     );
-    res.json(inpuestoss);
+    res.json(respuestas);
   } catch (error) {
     console.log(error);
   }
 };
+const mostrarResultadosXencuestas=async(req,res)=>{
+  try {
+    const {id}=req.params
 
-export { nuevoDetalleEncuesta, obtenerDetallesEncuestas, mostrasRespuestas };
+    const Resultados=await  detalleEncuesta.find({encuesta:id})
+    res.json(Resultados)
+  } catch (error) {
+    console.log(error)
+  }
+}
+const mostrarRespuestasXdetalleEncuesta=async(req,res)=>{
+  const {id}= req.params
+  
+  const Respuestas = await Respuesta.find({ encuesta:id})
+  res.json(Respuestas)
+
+}
+export { nuevoDetalleEncuesta, obtenerDetallesEncuestas, mostrasRespuestas,mostrarResultadosXencuestas,mostrarRespuestasXdetalleEncuesta};
