@@ -50,91 +50,120 @@ const LoginAdmin = () => {
     const { msg } = alerta
 
     return (
-        <>
-            <Link to={'/'} className="flex items-end justify-end animate-fade-right animate-duration-[2000ms]">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-8 h-8 "
+        <div className="flex items-center justify-center flex-col py-14 mx-auto mt-9 p-3">
+            <div className="mb-7 p-">
+                <h1
+                    className="text-Secundario_1  font-black text-center  text-5xl text-[40px]  xl:text-[70px]
+                capitalize animate-fade-right animate-duration-[2000ms]"
                 >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
-                    />
-                </svg>
-            </Link>
-            <div className="flex flex-col items-center justify-center mt-8 md:mt-0 ">
-                <div>
-                    <img
-                        src="src/assets/img/logo2Principal.png"
-                        alt="Imagen de logotipo"
-                        className="w-[400px] h-[240px] animate-fade-down lg:animate-fade-right animate-duration-[2000ms]"
+                    Sesion <span className="text-Principal_1">Administrativa</span>
+                </h1>
+            </div>
+
+            {msg && <Alerta alerta={alerta} />}
+            <form
+                className=" rounded-3xl  xl:h-[400px] h-[430px]  p-4 xl:w-[330px] border-Principal_1  shadow-xl animate-fade-left animate-duration-[1000ms] bg-white"
+                onSubmit={handleSubmit}
+            >
+                <div className="flex items-center justify-center mx-auto my-2 md:mt15 md:mb-4 bg-gradient-to-r from-Principal_1 to-Principal_2 rounded-full w-10 h-10 hover:transform hover:scale-110 transition-transform duration-400 ease-in-out">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="white"
+                        className="w-8 h-8"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                        />
+                    </svg>
+                </div>
+
+                <label
+                    className="ml-1 text-Principal_1 block xl:mt-1 mt-4 mb-2 xl:text-[20px] text-[25px] font-bold"
+                    htmlFor="email"
+                >
+                    Correo
+                </label>
+                <div className="relative mb-2  ">
+                    <div className="absolute inset-y-0 start-0 flex items-center p-4 pointer-events-none   ">
+                        <svg
+                            className="w-4 h-4  dark:text-gray-200 "
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 20 16"
+                        >
+                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                        </svg>
+                    </div>
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Correo"
+                        className="w-full my-2 ps-10 p-2.5 pl-[60px] block rounded-xl border-2 focus:outline-none shadow-lg text-gray-200 mt-6d bg-gradient-to-r from-Principal_2 to-Principal_1"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
                 </div>
-                <form
-                    className=" rounded-3xl h-[420px] md:h-[350px] w-[350px] md:w-[270px] animate-fade-up p-4 border-white border-4 shadow-xl shadow-Principal_1 lg:animate-fade-right animate-duration-[2000ms] bg-gradient-to-r from-Principal_2 to-Principal_1"
-                    onSubmit={handleSubmit}
+                <label
+                    className="ml-1 text-Principal_1 block xl:mt-2 mt-2 mb-2 xl:text-[20px] text-[25px] font-bold"
+                    htmlFor="email"
                 >
-                    <div className="my-1 flex items-center justify-center ">
+                    Contraseña
+                </label>
+
+                <div className="flex flex-col items-center justify-center md:mt-1 mt-2">
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Contraseña"
+                        className="w-full my-2 ps-10 p-2.5 pl-[60px] blockborder-2 rounded-xl focus:outline-none shadow-lg  text-gray-200 mb-5 bg-gradient-to-r from-Principal_2 to-Principal_1  "
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                </div>
+                <div className="flex items-center justify-between py-2">
+                    <input
+                        type="submit"
+                        value="Ingresar"
+                        class="bg-gradient-to-r shadow-xl from-Secundario_1 to-Secundario_2 p-2 py-3 px-8 text-white font-bold text-center rounded-xl  hover:transform hover:scale-105 transition-transform duration-400 ease-in-out"
+                    />
+                    <Link
+                        className="block text-center w-full font-semibold px-2 text-slate-500 text-md animate-fade-right animate-duration-[1000ms]"
+                        to="/olvide-password"
+                    >
+                        ¿Olvidaste tu ? <span className="text-Principal_1 font-bold">Contraseña</span>
+                    </Link>
+                </div>
+                <div className="flex items-center justify-center p-2">
+                    <Link to={'/'} className="flex items-end justify-end animate-fade-right animate-duration-[2000ms]">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
-                            stroke="white"
-                            className="w-14 h-14 "
+                            stroke="currentColor"
+                            className="w-8 h-8 "
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z"
+                                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
                             />
                         </svg>
-                    </div>
-
-                    <div className="my-2 mt-4 flex items-center relative">
-                        <input
-                            id="email"
-                            type="email"
-                            placeholder="Correo"
-                            className="text-center w-full mt-2 p-1 border-2 rounded-full focus:outline-none border-white bg-white focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1 shadow-md"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="my-4">
-                        <input
-                            id="password"
-                            type="password"
-                            placeholder="Contraseña"
-                            className="text-center w-full mt-1 p-1 border-2 rounded-full focus:outline-none border-white bg-white mb-5 focus:border-Principal_2 focus:ring-1 focus:ring-Principal_2 shadow-md"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                    </div>
-                    <div className="flex items-center justify-center">
-                        <input
-                            type="submit"
-                            value="Ingresar"
-                            className="bg-Principal_3 mt-1 p-1 w-[150px] text-center text-Principal_1 border-2 border-white font-bold rounded-3xl hover:cursor-pointer hover:bg-gray-200  hover:text-Principal_1 hover:border-Principal_1 shadow-lg "
-                        />
-                    </div>
-                    <Link
-                        className="block text-center font-extrabold my-8 text-white capitalize text-sm"
-                        to="/olvide-password"
-                    >
-                        Olvide mi contraseña
+                                 
                     </Link>
-                </form>
-                {msg && <Alerta alerta={alerta} />}
-            </div>
+                </div>
+            </form>
+            <nav className="lg:flex p-4 justify-center"></nav>
+
             <Footer />
-        </>
+        </div>
     )
 }
 

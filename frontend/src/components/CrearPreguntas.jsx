@@ -44,12 +44,12 @@ const CrearPreguntas = ({ tematica }) => {
       };
     
     return (
-        <form               className="bg-white/[0.2] rounded-md  px-10 w-[400px] md:w-[480px]"
+        <form               className="bg-white/[0.2] rounded-md  px-8 w-[400px] md:w-[480px]"
         onSubmit={handleSubmit}
         >
 
-        <div className="px-auto">
-            <h2 className="font-extrabold text-[30px] text-Principal_2/[0.9] mb-3">Crear Preguntas</h2>
+        <div className="px-auto p-3">
+            <h2 className="font-extrabold text-[30px] text-Principal_2/[0.9] mb-2">Crear Preguntas</h2>
             <div className="flex items-center">
                 <input
                     type="text"
