@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const respuestaSchema = mongoose.Schema({
     respuesta: {
         type: String,
-        enum: ["Si", "No", "Tal vez", "No sé"],
+        enum: ["Si", "No", "Tal vez", "No sé",""],
+        default:""
     },
     pregunta: {
         type: mongoose.Schema.Types.ObjectId,

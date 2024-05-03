@@ -10,11 +10,11 @@ const CrearEncuestasAprendices = () => {
   const addMensaje = (mensaje) => {
     setPreguntas(mensaje);
   };
+const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null);
+const handleTematicaSeleccionada = (tematica) => {
+  setTematicaSeleccionada(tematica);
+};
 
-  const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null);
-  const handleTematicaSeleccionada = (tematica) => {
-    setTematicaSeleccionada(tematica);
-  };
   return (
     <div className="px-auto px-3">
       <div className="md:flex md:justify-between mt-2">
@@ -34,8 +34,8 @@ const CrearEncuestasAprendices = () => {
       {/* Componente Tematicas */}
       <div className="md:flex md:justify-between md:items-start mt-9">
         <Tematicas tematica={handleTematicaSeleccionada} />
-        <div className=" px-auto pr-56 ">
-          <Identificador addMensaje={preguntas} />
+        <div className="px-auto pr-56">
+        <Identificador addMensaje={preguntas} />
         </div>
       </div>
       <div className="md:flex md:justify-between md:items-start mt-4">

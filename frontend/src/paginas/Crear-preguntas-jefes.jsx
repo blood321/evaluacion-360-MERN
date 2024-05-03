@@ -66,7 +66,7 @@ const CrearPreguntasJefes = () => {
                 </div>
 
                 {/* Lista de preguntas */}
-                <div className="h-[300px] overflow-y-auto mt-6  w-full md:w-570 bg-gray-200/[0.9] font-semibold text-[20px] animate-fade-down animate-duration-[1000ms]">
+                <div className="rounded-md  h-[270px] overflow-y-auto mt-4 w-full md:w-570 bg-gray-200/[0.9] font-semibold text-[20px] animate-fade-down animate-duration-[1000ms]">
                 {preguntasFiltradas.length > 0 ? (
                         preguntasFiltradas.map((pregunta) => (
                             <PreguntaEditable

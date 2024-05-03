@@ -1,25 +1,43 @@
 import React, { useState, useEffect } from "react";
 import clienteAxios from "../config/clienteAxios";
 import usePreguntas from "../hooks/usePreguntas";
+import SelectMultiple from "./SelectMultiple";
+import useEncuestas from "../hooks/useEncuesta";
 
-function Editar({ onClose }) {
+function Editar({ onClose, kuko }) {
+  console.log(kuko)
+  const { mostrarAlerta, alerta, submitEncuesta, obtenerEncuesta ,encuestaedit} = useEncuestas();
+  console.log(encuestaedit+"esto se debe editar ")
+  useEffect(() => {
+    obtenerEncuesta(kuko)
+      .then(resultado => {
+        // Aquí puedes trabajar con el resultado obtenido
+        console.log(resultado+"RESULTADO DE CHAT GPT");
+      })
+  }, [])
+  
+
+
   // Obtener las preguntas usando el hook personalizado usePreguntas
   const { preguntas } = usePreguntas();
-  
   // Estado para controlar la visibilidad del modal
   const [showModal, setShowModal] = useState(true);
-  
+
   // Estado para almacenar las temáticas disponibles
   const [tematicas, setTematicas] = useState([]);
-  
+
   // Estado para almacenar la temática seleccionada
   const [tematicaSeleccionada, setTematicaSeleccionada] = useState("");
-  
+
   // Estado para almacenar las preguntas seleccionadas
   const [preguntasSeleccionadas, setPreguntasSeleccionadas] = useState([]);
-  
+
   // Estado para manejar errores de carga de temáticas
   const [error, setError] = useState(null);
+
+  // Estado para almacenar las preguntas filtradas por temática
+  const [preguntasFiltradasPorTematica, setPreguntasFiltradasPorTematica] =
+    useState([]);
 
   // Efecto para cargar las temáticas disponibles al montar el componente
   useEffect(() => {
@@ -29,7 +47,6 @@ function Editar({ onClose }) {
         const response = await clienteAxios("/tematica/listar-tematicas");
         // Actualizar el estado con las temáticas obtenidas
         setTematicas(response.data);
-        console.log(response);
       } catch (error) {
         // Manejar errores de carga de temáticas
         console.error("Error fetching tematicas:", error);
@@ -46,22 +63,17 @@ function Editar({ onClose }) {
     onClose();
     setShowModal(false);
   };
+
   // Función para manejar el evento de cancelación
   const handleCancel = () => {
     onClose();
     setShowModal(false);
-  }; 
+  };
+
   // Función para manejar el cambio de la temática seleccionada
   const handleTematicaChange = (event) => {
     setTematicaSeleccionada(event.target.value);
   };
-  // Filtrar las preguntas según la temática seleccionada
-  const preguntasFiltradas = preguntas.filter((pregunta) => {
-    // Verificar si la pregunta tiene la temática seleccionada
-    const tieneTematica = pregunta.tematica === tematicaSeleccionada;
-    console.log("estamos aquí", tieneTematica);
-    return tieneTematica; // Devolver true o false según si la pregunta tiene la temática seleccionada o no
-  });
 
   // Función para manejar el cambio de las preguntas seleccionadas
   const handlePreguntasChange = (event) => {
@@ -70,9 +82,17 @@ function Editar({ onClose }) {
       .map((option) => option.value);
     setPreguntasSeleccionadas(selectedPreguntas);
   };
-  
 
-  
+  // Efecto para actualizar las preguntas filtradas cuando cambia la temática seleccionada
+  useEffect(() => {
+    // Filtrar las preguntas según la temática seleccionada
+    const preguntasFiltradas = preguntas.filter((pregunta) => {
+      return pregunta.tematica === tematicaSeleccionada;
+    });
+    // Actualizar el estado con las preguntas filtradas
+    setPreguntasFiltradasPorTematica(preguntasFiltradas);
+  }, [tematicaSeleccionada, preguntas]);
+
   return (
       <>
           {showModal && (
@@ -188,7 +208,88 @@ function Editar({ onClose }) {
                               </div>
                           </div>
                       </div>
+<<<<<<< HEAD
                   </div>
+=======
+                      <div className="mb-3 space-y-2 w-full text-xs">
+                        <label className="font-semibold text-gray-600 py-2">
+                          Temáticas
+                        </label>
+                        <select
+                          className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                          required="required"
+                          value={tematicaSeleccionada}
+                          onChange={handleTematicaChange}
+                        >
+                          <option value="">Selecciona Temática</option>
+                          {/* Mapear las temáticas disponibles */}
+                          {tematicas.map((tematica) => (
+                            <option key={tematica._id} value={tematica._id}>
+                              {tematica.tematica}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Preguntas
+                      </label>
+                      <SelectMultiple
+                        preguntas={preguntasFiltradasPorTematica}
+                        value={preguntasSeleccionadas}
+                        onChange={handlePreguntasChange}
+                      />
+                      <p
+                        className="text-sm text-red-500 hidden mt-3"
+                        id="error"
+                      >
+                        Please fill out this field.
+                      </p>
+                    </div>
+
+                    <div className="flex-auto w-full mb-1 text-xs space-y-2">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Descripción
+                      </label>
+                      <textarea
+                        required=""
+                        name="message"
+                        id=""
+                        className="min-h-[100px] max-h-[300px] h-20 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
+                        placeholder="Descripcion Actual"
+                        spellCheck="false"
+                      ></textarea>
+                    </div>
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Fecha Limite
+                      </label>
+                      <input
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        required="required"
+                        type="datetime-local"
+                      />
+                    </div>
+
+                    <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
+                      <button
+                        onClick={handleCancel}
+                        className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        onClick={handleSave}
+                        className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                      >
+                        Guardar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+>>>>>>> e49351a5461b00196ccb9431ddde24da3f2e16d7
               </div>
           )}
       </>

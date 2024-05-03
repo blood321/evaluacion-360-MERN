@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
+import { redirect } from "react-router-dom";
 
 const EncuestasContext = createContext();
 
@@ -7,6 +8,7 @@ const EncuestasProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [cargando, setCargando] = useState(false);
   const [encuesta, setEncuesta] = useState([]);
+  const[encuestaedit,setEncuestaedit]=useState()
 
   useEffect(() => {
     const obtenerPreguntas = async () => {
@@ -27,11 +29,11 @@ const EncuestasProvider = ({ children }) => {
     }, 5000);
   };
 
-  const submitEncuesta = async (encuesta) => {
+  const submitEncuesta = async (Encuesta) => {
     if (encuesta.id) {
       await editarEncuesta(encuesta);
     } else {
-      await nuevaEncuesta(encuesta);
+      await nuevaEncuesta(Encuesta);
     }
   };
 
@@ -69,37 +71,39 @@ const EncuestasProvider = ({ children }) => {
     }
   };
 
-  const nuevaEncuesta = async (encuesta) => {
+  const nuevaEncuesta = async (Encuesta) => {
     try {
-      const { data } = await clienteAxios.post("/encuesta", encuesta);
-      setEncuesta([...encuesta, data]);
+      const { data } = await clienteAxios.post("/encuesta", Encuesta);
+    
+      // Actualiza el estado de la encuesta con la nueva encuesta
+      setEncuesta([...Encuesta, data]);
+    
       setAlerta({
-        msg: "Encuesta creado correctamente",
+        msg: "Encuesta creada correctamente",
         error: false,
       });
-
-      setTimeout(() => {
-        setAlerta({});
-        navigate("/proyectos");
-      }, 2000);
+    
+      // Actualiza la encuesta en el estado
+      const proyectosActualizados = Encuesta.map((proyectoState) =>
+        proyectoState._id === data._id ? data : proyectoState
+      );
+    
+      // Actualiza el estado de la encuesta con las encuestas actualizadas
+      setEncuesta(proyectosActualizados);
+    
     } catch (error) {
       console.log(error);
     }
+    
   };
 
-  const obtenerProyecto = async (id) => {
+  const obtenerEncuesta = async (id) => {
     setCargando(true);
     try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await clienteAxios(`/proyectos/${id}`, config);
-      setProyecto(data);
+      
+      const { data } = await clienteAxios(`/encuesta/${id}`, );
+      setEncuestaedit(data);
+      return data
     } catch (error) {
       console.log(error);
     } finally {
@@ -126,14 +130,16 @@ const EncuestasProvider = ({ children }) => {
     }
   };
 
+
   return (
     <EncuestasContext.Provider
       value={{
         encuesta,
+        encuestaedit,
         mostrarAlerta,
         alerta,
         submitEncuesta,
-        obtenerProyecto,
+        obtenerEncuesta,
         cargando,
         eliminarEncuesta,
       }}

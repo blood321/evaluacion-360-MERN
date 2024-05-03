@@ -70,7 +70,7 @@ console.log(preguntasFiltradas)
                 </div>
 
                 {/* Lista de preguntas */}
-                <div className="h-[300px] overflow-y-auto mt-6  w-full md:w-570 bg-gray-200/[0.9] font-semibold text-[20px] animate-fade-down animate-duration-[1000ms]">
+                <div className="rounded-md  h-[270px] overflow-y-auto mt-4 w-full md:w-570 bg-gray-200/[0.9] font-semibold text-[20px] animate-fade-down animate-duration-[1000ms]">
                     {preguntasFiltradas.length > 0 ? (
                         preguntasFiltradas.map((pregunta) => (
                             <PreguntaEditable
@@ -80,7 +80,7 @@ console.log(preguntasFiltradas)
                             />
                         ))
                     ) : (
-                        <p className=" text-2xl font-black text-center mt-6 bg-clip-text text-transparent bg-gradient-to-l from-Secundario_1 to-Secundario_2 p-9  ">
+                        <p className=" text-1xl font-black text-center mt-6 bg-clip-text text-transparent bg-gradient-to-l from-Secundario_1 to-Secundario_2 p-9  ">
                             No hay preguntas creadas aún. Seleccione una temática o cree una pregunta.
                         </p>
                     )}
