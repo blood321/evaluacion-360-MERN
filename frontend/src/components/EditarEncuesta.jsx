@@ -285,7 +285,6 @@ function Editar({ onClose, kuko }) {
                     </div>
                   </div>
                 </div>
->>>>>>> e49351a5461b00196ccb9431ddde24da3f2e16d7
               </div>
           )}
       </>
