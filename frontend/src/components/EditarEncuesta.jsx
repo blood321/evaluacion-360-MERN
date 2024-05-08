@@ -94,123 +94,34 @@ function Editar({ onClose, kuko }) {
   }, [tematicaSeleccionada, preguntas]);
 
   return (
-      <>
-          {showModal && (
-              <div className="fixed inset-0 flex items-center justify-center z-50">
-                  <div className="absolute inset-0 bg-black opacity-60"></div>
-                  <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-50">
-                      <div className="grid gap-8 grid-cols-1">
-                          <div className="flex flex-col">
-                              <div className="flex flex-col sm:flex-row items-center">
-                                  <h2 className="font-semibold text-lg mr-auto">
-                                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-Principal_1 to-Principal_2">
-                                          Editar Encuesta
-                                      </span>
-                                  </h2>
-                                  <div className="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0"></div>
-                              </div>
+    <>
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="absolute inset-0 bg-black opacity-60"></div>
+          <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-50">
+            <div className="grid gap-8 grid-cols-1">
+              <div className="flex flex-col">
+                <div className="flex flex-col sm:flex-row items-center">
+                  <h2 className="font-semibold text-lg mr-auto">
+                    Editar Encuesta
+                  </h2>
+                  <div className="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0"></div>
+                </div>
 
-                              <div className="mt-5">
-                                  <div className="form">
-                                      <div className="md:flex flex-row md:space-x-4 w-full text-xs">
-                                          <div className="mb-3 space-y-2 w-full text-xs">
-                                              <label className="font-semibold text-gray-600 py-2">
-                                                  Renombrar Encuesta
-                                              </label>
-                                              <input
-                                                  placeholder="nombre actual"
-                                                  className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                  required="required"
-                                                  type="text"
-                                              />
-                                          </div>
-                                          <div className="mb-3 space-y-2 w-full text-xs">
-                                              <label className="font-semibold text-gray-600 py-2">Temáticas
-                                              </label>
-                                              <select
-                                                  className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                                  required="required"
-                                                  value={tematicaSeleccionada}
-                                                  onChange={handleTematicaChange}
-                                              >
-                                                  <option value="">Selecciona Temática</option>
-                                                  {/* Mapear las temáticas disponibles */}
-                                                  {tematicas.map(tematica => (
-                                                      <option key={tematica._id} value={tematica._id}>
-                                                          {tematica.tematica}
-                                                      </option>
-                                                  ))}
-                                              </select>
-                                              <p className="text-sm text-red-500 hidden mt-3" id="error">
-                                                  Please fill out this field.
-                                              </p>
-                                          </div>
-                                      </div>
-
-                                      <div className="mb-3 space-y-2 w-full text-xs">
-                                          <label className="font-semibold text-gray-600 py-2">Preguntas</label>
-                                          <select
-                                              className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                              required="required"
-                                              multiple
-                                              value={preguntasSeleccionadas}
-                                              onChange={handlePreguntasChange}
-                                          >
-                                              <option value="">Selecciona Pregunta</option>
-                                              {/* Mapear las preguntas filtradas según la temática seleccionada */}
-                                              {preguntasFiltradas.map(pregunta => (
-                                                  <option key={pregunta._id} value={pregunta._id}>
-                                                      {pregunta.pregunta}
-                                                  </option>
-                                              ))}
-                                          </select>
-                                          <p className="text-sm text-red-500 hidden mt-3" id="error">
-                                              Please fill out this field.
-                                          </p>
-                                      </div>
-
-                                      <div className="flex-auto w-full mb-1 text-xs space-y-2">
-                                          <label className="font-semibold text-gray-600 py-2">Descripción</label>
-                                          <textarea
-                                              required=""
-                                              name="message"
-                                              id=""
-                                              className="min-h-[100px] max-h-[300px] h-20 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
-                                              placeholder="Descripcion Actual"
-                                              spellCheck="false"
-                                          ></textarea>
-                                      </div>
-                                      <div className="mb-3 space-y-2 w-full text-xs">
-                                          <label className="font-semibold text-gray-600 py-2">Fecha Limite</label>
-                                          <input
-                                              placeholder="fecha actual"
-                                              className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                              required="required"
-                                              type="datetime-local"
-                                          />
-                                      </div>
-
-                                      <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
-                                          <button
-                                              onClick={handleCancel}
-                                              className="mb-2 md:mb-0 bg-red-500  border-red-500  hover:bg-red-600 text-white  px-5 py-2 text-sm shadow-sm font-medium tracking-wider border  rounded-full hover:shadow-lg "
-                                          >
-                                              Cancelar
-                                          </button>
-                                          <button
-                                              onClick={handleSave}
-                                              className="mb-2 md:mb-0 bg-gradient-to-r from-Principal_1 to-Principal_2 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
-                                          >
-                                              Guardar
-                                          </button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                <div className="mt-5">
+                  <div className="form">
+                    <div className="md:flex flex-row md:space-x-4 w-full text-xs">
+                      <div className="mb-3 space-y-2 w-full text-xs">
+                        <label className="font-semibold text-gray-600 py-2">
+                          Renombrar Encuesta
+                        </label>
+                        <input
+                          placeholder="nombre actual"
+                          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                          required="required"
+                          type="text"
+                        />
                       </div>
-<<<<<<< HEAD
-                  </div>
-=======
                       <div className="mb-3 space-y-2 w-full text-xs">
                         <label className="font-semibold text-gray-600 py-2">
                           Temáticas
@@ -289,11 +200,13 @@ function Editar({ onClose, kuko }) {
                     </div>
                   </div>
                 </div>
->>>>>>> e49351a5461b00196ccb9431ddde24da3f2e16d7
               </div>
-          )}
-      </>
-  )
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default Editar;
