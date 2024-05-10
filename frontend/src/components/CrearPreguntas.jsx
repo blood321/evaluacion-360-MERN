@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import usePreguntas from "../hooks/usePreguntas";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import usePreguntas from "../hooks/usePreguntas";
 
 const CrearPreguntas = ({ tematica }) => {
   const [pregunta, setPregunta] = useState("");
   const [mostrarAlerta, setMostrarAlerta] = useState(false);
   const { submitPregunta } = usePreguntas();
-  const [encuestado, setEncuestado] = useState(""); // Estado para guardar el valor de 'encuestado'
+  const [encuestado, setEncuestado] = useState(""); 
 
-  // Utiliza useLocation para obtener la ruta actual
   const location = useLocation();
 
-  // Establece 'encuestado' basado en la ruta actual
   useEffect(() => {
     if (location.pathname === "/inicio-admin/Crear-preguntas-aprendices") {
       setEncuestado("Aprendiz");
@@ -67,9 +65,7 @@ const CrearPreguntas = ({ tematica }) => {
 
         </div>
         {mostrarAlerta && (
-          <p className="text-red-500 mt-2 font-extrabold">
-            Por favor, escribe una pregunta antes de crearla.
-          </p>
+          <p className="text-red-500 mt-2 font-extrabold">Por favor, escribe una pregunta antes de crearla.</p>
         )}
     </form>
   );
