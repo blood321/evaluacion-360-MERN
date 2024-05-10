@@ -1,14 +1,14 @@
-import Express  from "express";
+import Express from "express";
 import {
-    respuestaUsuario
-} from '../controllers/respuestaController.js'
-import checkAuth from '../middleware/checkAuth.js'
+  respuestaUsuario,
+  respuestaXEncuesta,
+  respuestasXInstructor
+} from "../controllers/respuestaController.js";
+import checkAuth from "../middleware/checkAuth.js";
 
+const router = Express.Router();
+router.route("/:id").put(respuestaUsuario);
 
-const router = Express.Router()
-router.route('/:id')
-    .put(respuestaUsuario)
-   
-
-
-export default router
+router.route('/respuestasDeEncuestas/:id').get(respuestaXEncuesta);
+router.route('/respuestasDeEncuestas/:id/instructor/:instructor').get(respuestasXInstructor)
+export default router;
