@@ -34,38 +34,88 @@ const respuestaXEncuesta = async (req, res) => {
     const respuestas = await respuesta
       .find({ encuesta: id })
       .populate("pregunta instructor");
-
-    const preguntaPonderada = respuestas.map((item) => ({
+    const instructorXnombre = respuestas.map((item) => ({
       id: item.instructor.id,
-      Instructor: item.instructor.nombre,
+      instructor: item.instructor.nombre,
+    }));
+    const instructorXrespuesta = respuestas.map((item) => ({
+      id: item.instructor.id,
+      respuesta: item.respuesta,
     }));
 
+   
     const objetosUnicosSet = new Set(
-      preguntaPonderada.map((objeto) => JSON.stringify(objeto))
+      instructorXnombre.map((objeto) => JSON.stringify(objeto))
     );
-
     const objetosUnicos = Array.from(objetosUnicosSet).map((objeto) =>
       JSON.parse(objeto)
     );
 
-    // Imprimimos el objeto resultante
+    const respuestasPorInstructor = {};
 
-    // Objeto para contar la frecuencia de cada instructor
+    instructorXrespuesta.forEach((respuesta) => {
+      const idInstructor = respuesta.id;
+      const respuestaActual = respuesta.respuesta;
+
+      // Si el ID del instructor no está en el objeto, se crea un nuevo array para almacenar las respuestas
+      if (!respuestasPorInstructor[idInstructor]) {
+        respuestasPorInstructor[idInstructor] = [];
+      }
+
+      // Se añade la respuesta al array correspondiente
+      respuestasPorInstructor[idInstructor].push(respuestaActual);
+    });
     const contador = {};
 
-    // Contar la frecuencia de cada instructor
-    preguntaPonderada.forEach((dato) => {
-      const { id, Instructor } = dato;
-      const clave = `${id}-${Instructor}`;
-      contador[clave] = (contador[clave] || 0) + 1;
+    instructorXnombre.forEach((dato) => {
+      const { id, instructor } = dato;
+      const clave = `${id}-${instructor}`;
+
+      if (contador[clave]) {
+        contador[clave].respuestas++;
+      } else {
+        contador[clave] = {
+          id: id,
+          instructor: instructor,
+          respuestas: 1,
+          respuestasAsociadas: [], // Inicialmente vacío
+        };
+      }
+
     });
 
-    // Crear un array de objetos con el nombre del instructor, su ID y el número de duplicados
     const resultado = Object.keys(contador).map((clave) => {
       const [id, instructor] = clave.split("-");
       return { id, instructor, respuestas: contador[clave] };
     });
-    res.json(resultado);
+
+    const resultadoFinal = resultado.map((instructor) => {
+      const respuestas = respuestasPorInstructor[instructor.id];
+      const respuestasValidas = respuestas.filter(
+        (respuesta) => respuesta !== ""
+      );
+      return {
+        id: instructor.id,
+        instructor: instructor.instructor,
+        totalRespuestas: respuestasValidas.length,
+        respuestas: respuestasValidas,
+       
+      };
+    });
+
+    // Iterar sobre cada objeto en el array
+for (const objeto of resultadoFinal) {
+  console.log(`Instructor: ${objeto.instructor}`);
+  console.log(`Total de respuestas: ${objeto.totalRespuestas}`);
+  console.log('Respuestas:');
+  
+  // Iterar sobre el array de respuestas dentro de cada objeto
+  for (const respuesta of objeto.respuestas) {
+    console.log(respuesta);
+  }
+  
+  console.log('-------------------------');
+}
   } catch (error) {
     console.log(error);
   }
@@ -90,9 +140,9 @@ const respuestasXInstructor = async (req, res) => {
     pregunta: item.pregunta.pregunta,
     resultado: item.respuesta,
   }));
-  const caja = {};
+  // const caja = {};
   const resultadosPosibles = {};
-  simplificado.forEach(dato => {
+  simplificado.forEach((dato) => {
     const pregunta = dato.pregunta;
     if (!resultadosPosibles.hasOwnProperty(pregunta)) {
       resultadosPosibles[pregunta] = 1;
@@ -100,26 +150,41 @@ const respuestasXInstructor = async (req, res) => {
       resultadosPosibles[pregunta]++;
     }
   });
-  
-  simplificado.forEach(dato => {
-    const pregunta = dato.pregunta;
-    const resultado = parseInt(dato.resultado); 
-  
-    if (caja.hasOwnProperty(pregunta)) {
-      caja[pregunta] += resultado;
-    } else {
-      caja[pregunta] = resultado;
-    }
+
+  // simplificado.forEach(dato => {
+  //   const pregunta = dato.pregunta;
+  //   const resultado = parseInt(dato.resultado);
+
+  //   console.log(pregunta+ "  Resultado "+resultado)
+  //   if (caja.hasOwnProperty(pregunta)) {
+  //     caja[pregunta] += [resultado] ;
+  //   } else {
+  //     caja[pregunta] = resultado;
+  //   }
+  // });
+  const contador = {};
+
+  // Contar la frecuencia de cada instructor
+  simplificado.forEach((dato) => {
+    const { pregunta } = dato;
+    const clave = `${pregunta}`;
+    contador[clave] = (contador[clave] || 0) + 1;
   });
-  
-  Object.keys(caja).forEach(pregunta => {
-    const sumaResultados = caja[pregunta];
-    const totalResultadosPosibles = resultadosPosibles[pregunta];
-    const promedio = sumaResultados / totalResultadosPosibles;
-    caja[pregunta] = promedio;
+
+  // Crear un array de objetos con el nombre del instructor, su ID y el número de duplicados
+  const resultado = Object.keys(contador).map((clave) => {
+    const [pregunta] = clave.split("-");
+    return { pregunta, respuestas: contador[clave] };
   });
-  
-  res.json(caja);
+
+  res.json(resultado);
+  // Object.keys(caja).forEach(pregunta => {
+  //   const sumaResultados = caja[pregunta];
+  //   const totalResultadosPosibles = resultadosPosibles[pregunta];
+  //   const promedio = sumaResultados / totalResultadosPosibles;
+
+  //   caja[pregunta] = promedio;
+  // });
 };
 export {
   respuestaUsuario,

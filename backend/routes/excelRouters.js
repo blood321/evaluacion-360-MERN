@@ -1,5 +1,5 @@
 import Express from "express";
-import { subirAprendices, subirFichas } from "../controllers/exelController.js";
+import { subirAprendices, subirFichas, sacarReportes } from "../controllers/exelController.js";
 import multer from 'multer';
 
 // Corregir la ruta del destino de la carga de archivos
@@ -13,4 +13,8 @@ router.route("/aprendices")
 router.route("/fichas")
   .post(upload.single('file'), subirFichas);
 
+router.route('/Reporte/:id')
+ .get(sacarReportes)
+
 export default router;
+

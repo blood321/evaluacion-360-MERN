@@ -12,36 +12,28 @@ const nuevoDetalleEncuesta = async (req, res) => {
   const { id } = req.params;
   const { fecha } = req.body;
   try {
-    console.log(id);
-    const fechaActual = new Date();
-    console.log(fechaActual);
-
     // Busca la encuesta por su id
     const encuestas = await encuesta.findById(id);
-    console.log(encuestas);
     encuestas.activa = true;
-    const guarda = await encuestas.save();
-    console.log(guarda + "esto guarda");
     if (!encuestas) {
       res.json({ msg: " la encuesta no existe " });
     }
-    //busca la ficha por su idf
+    await encuestas.save();
+    //busca la ficha por su id las cuales  tiene una fecha anterior a la fecha y hora actual.
     const ficha = await fichas.find({ fichaFin: { $lt: new Date() } }, "_id");
-    console.log(ficha);
 
-    // // Crea la nueva pregunta con los datos proporcionados
-    const nuevaPregunta = new detalleEncuesta({
+    // // Crea el nuevo detalle de la encuesta  con los datos proporcionados
+    const nuevoDEtalle = new detalleEncuesta({
       encuesta: encuestas,
       fichas: ficha,
       fechaDesactivar: fecha,
       activa: true,
     });
-    console.log("esta es la nueva pregunta " + nuevaPregunta);
 
     // Guarda la pregunta en la base de datos
-    const preguntaGuardada = await nuevaPregunta.save();
+    const detalleGuardado = await nuevoDEtalle.save();
 
-    // res.status(201).json(preguntaGuardada);
+    res.status(201).json(detalleGuardado);
   } catch (error) {
     console.error(error);
     res
@@ -49,56 +41,60 @@ const nuevoDetalleEncuesta = async (req, res) => {
       .json({ mensaje: "Error al crear el borrador de la encuesta" });
   }
 };
-const obtenerDetallesEncuestas = async (req, res) => {
+const generarRespuestas = async (req, res) => {
+  //ID del aprendiz
   const { id } = req.params;
   try {
+    //se vefifica si el usuario ya tiene respuestas creadas para el detalle de la encuesta
     const respuestasExistentes = await Respuesta.findOne({ aprendiz: id });
     if (respuestasExistentes) {
       const error = new Error("El usuario ya tiene respuestas creadas");
       return res.status(404).json({ msg: error.message });
     }
+    //si lo las tiene busca el usuario
     const usuario = await aprendiz.findOne({ _id: id });
-    console.log("esre es el usuario"+usuario)
+    //busca la ficha a la que pertenece el aprendiz
     const fichaUsuario = await fichas.findOne({ aprendices: usuario }, "_id");
-    console.log("esta es la ficha del usuario "+ fichaUsuario)
+    //busca a los instructores que le hayan dado calse al aprendiz
     const instructoresResponder = await programacion.find(
-      { fichas: fichaUsuario},
+      { fichas: fichaUsuario },
       "instructores"
     );
-      console.log(instructoresResponder+"estos son los instructores ")
-
+    // se busca la encuesta activa y asociada al la ficha
     const encuestasID = await detalleEncuesta
-      .find({ fichas: fichaUsuario, activa:true })
+      .find({ fichas: fichaUsuario, activa: true })
       .distinct("encuesta");
-    console.log(encuestasID +"este es el id de la encuesta");
-
+    console.log(encuestasID + "este es el id de la encuesta");
+    //se busca el id del detalle de la encuesta que este ligada al paso anterior, el detalle de la encuesta tambiem debe estar activa
     const buscarEncuestaParaGuardarEnRespuestas = await detalleEncuesta.findOne(
       { encuesta: encuestasID, activa: true },
       "_id"
     );
 
-    console.log(buscarEncuestaParaGuardarEnRespuestas + "esto busco");
-
+    //se busca las preguantas que tiene la encuesta
     const mostrarPregunta = await encuesta
       .find({ activa: true, _id: { $in: encuestasID } })
       .select(
         "-_id -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa"
       );
-    console.log("preguntas" + mostrarPregunta);
 
+    // Itera sobre cada instrucción en la lista de instructores a responder
     for (const instruccion of instructoresResponder) {
+      // Itera sobre cada identificador de instructor en la lista de instructores de la instrucción actual
       for (const instructorId of instruccion.instructores) {
+        // Itera sobre cada pregunta en la lista de preguntas a mostrar
         for (const pregunta of mostrarPregunta) {
+          // Itera sobre cada identificador de pregunta en la lista de preguntas de la pregunta actual
           for (const preguntaId of pregunta.preguntas) {
-            
+            // Crea una nueva instancia del modelo Respuesta con los datos correspondientes
             const nuevaRespuesta = new Respuesta({
-              pregunta: preguntaId,
-              aprendiz: usuario,
-              instructor: instructorId,
-              encuesta: buscarEncuestaParaGuardarEnRespuestas.id,
+              pregunta: preguntaId, // Asigna el identificador de la pregunta
+              aprendiz: usuario, // Asigna el usuario actual como el aprendiz
+              instructor: instructorId, // Asigna el identificador del instructor
+              encuesta: buscarEncuestaParaGuardarEnRespuestas.id, // Asigna el identificador de la encuesta
             });
-            const X = await nuevaRespuesta.save();
-            console.log(X+"estas son las respuestas ");
+            // Guarda la nueva respuesta en la base de datos
+            await nuevaRespuesta.save();
           }
         }
       }
@@ -112,9 +108,11 @@ const obtenerDetallesEncuestas = async (req, res) => {
   }
 };
 const mostrasRespuestas = async (req, res) => {
+  //id del aprendz 
   const { id } = req.params;
 
   try {
+    //muestra  las respuestas que debe responder el aprendiz
     const respuestas = await Respuesta.find({ aprendiz: id }).populate(
       "pregunta instructor encuesta"
     );
@@ -140,7 +138,7 @@ const mostrarRespuestasXdetalleEncuesta = async (req, res) => {
 };
 export {
   nuevoDetalleEncuesta,
-  obtenerDetallesEncuestas,
+  generarRespuestas,
   mostrasRespuestas,
   mostrarResultadosXencuestas,
   mostrarRespuestasXdetalleEncuesta,

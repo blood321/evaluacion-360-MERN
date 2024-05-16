@@ -1,7 +1,7 @@
-import Proyecto from "../models/Proyecto.js";
+/* import Proyecto from "../models/Proyecto.js";
 import Tarea from "../models/Tarea.js";
 
-const nuevoProyecto = async (req, res) => {
+const nuevoProyecto  = async (req, res) => {
     const proyecto = new Proyecto(req.body)
     proyecto.creador = req.usuario._id
 
@@ -105,3 +105,4 @@ export {
   eliminarColaborador,
 //   obtenerTareas,
 };
+ */
