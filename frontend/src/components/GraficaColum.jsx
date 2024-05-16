@@ -1,9 +1,10 @@
+// GraficaColumn.js
 import React, { useEffect } from 'react';
 import * as echarts from 'echarts';
 
 function GraficaColumn() {
   useEffect(() => {
-    const chartDom = document.getElementById('main');
+    const chartDom = document.getElementById('main-column');
     const myChart = echarts.init(chartDom);
     const option = {
       tooltip: {
@@ -14,14 +15,14 @@ function GraficaColumn() {
       },
       grid: {
         left: '3%',
-        right: '4%',
-        bottom: '3%',
+        right: '3%',
+        bottom: '2%',
         containLabel: true
       },
       xAxis: [
         {
           type: 'category',
-          data: ['Bueno', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: ['malo', 'regular', 'bueno', 'promedio', 'exelente'],
           axisTick: {
             alignWithLabel: true
           }
@@ -36,8 +37,8 @@ function GraficaColumn() {
         {
           name: 'Direct',
           type: 'bar',
-          barWidth: '60%',
-          data: [10, 52, 200, 334, 390, 330, 220]
+          barWidth: '50%',
+          data: [10, 52, 200, 334, 390]
         }
       ]
     };
@@ -50,7 +51,7 @@ function GraficaColumn() {
     };
   }, []);
 
-  return <div id="main" style={{ display: 'flex', width: '300px', height: '200px' }} />;
+  return <div id="main-column" style={{ display: 'flex', width: '420px', height: '250px' }} />;
 }
 
 export default GraficaColumn;

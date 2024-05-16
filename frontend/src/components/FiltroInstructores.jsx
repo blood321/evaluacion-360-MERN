@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import GraficaColumn from "./GraficaColum";
+import GraficaPie from "./GraficaPie";
 
 const FiltroInstructores = () => {
   const [showGraph, setShowGraph] = useState(false); // Add state to control the visibility of the graph
@@ -27,7 +28,12 @@ const FiltroInstructores = () => {
                   <td className="p-3">SISTEMAS</td>
                   <td className="p-3">
                     <div className="flex">
-                      <button className="flex" type="button" title="Ver Resultados" onClick={handleButtonClick}>
+                      <button
+                        className="flex"
+                        type="button"
+                        title="Ver Resultados"
+                        onClick={handleButtonClick}
+                      >
                         <a
                           href="#"
                           className="text-Secundario_3 hover:text-gray-100 mr-1"
@@ -82,9 +88,16 @@ const FiltroInstructores = () => {
           `}
         </style>
       </div>
-      <div className="w-1/2">
-        {showGraph && <GraficaColumn />}
-      </div>
+      <div className="grid grid-cols-2 grid-rows-2 gap-4">
+  <div className="border border-blue-600 rounded-md p-4">
+    <div className="flex flex-row">{showGraph && <GraficaColumn />}</div>
+  </div>
+  <div className="border border-red-600 rounded-md p-4">
+    <div className="flex flex-row">{showGraph && <GraficaPie />}</div>
+  </div>
+</div>
+
+
     </div>
   );
 };
