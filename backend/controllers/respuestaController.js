@@ -12,7 +12,6 @@ const respuestaUsuario = async (req, res) => {
       aprendiz: id,
       encuesta: encuesta,
     });
-    console.log(respuestasubir);
     if (!respuestasubir) {
       const error = new Error("no encontrado");
       return res.status(404).json({ msg: error.message });
@@ -43,7 +42,6 @@ const respuestaXEncuesta = async (req, res) => {
       respuesta: item.respuesta,
     }));
 
-   
     const objetosUnicosSet = new Set(
       instructorXnombre.map((objeto) => JSON.stringify(objeto))
     );
@@ -52,7 +50,7 @@ const respuestaXEncuesta = async (req, res) => {
     );
 
     const respuestasPorInstructor = {};
-
+ 
     instructorXrespuesta.forEach((respuesta) => {
       const idInstructor = respuesta.id;
       const respuestaActual = respuesta.respuesta;
@@ -81,7 +79,6 @@ const respuestaXEncuesta = async (req, res) => {
           respuestasAsociadas: [], // Inicialmente vacío
         };
       }
-
     });
 
     const resultado = Object.keys(contador).map((clave) => {
@@ -99,23 +96,23 @@ const respuestaXEncuesta = async (req, res) => {
         instructor: instructor.instructor,
         totalRespuestas: respuestasValidas.length,
         respuestas: respuestasValidas,
-       
       };
     });
+    console.log(respuestasPorInstructor)
 
     // Iterar sobre cada objeto en el array
-for (const objeto of resultadoFinal) {
-  console.log(`Instructor: ${objeto.instructor}`);
-  console.log(`Total de respuestas: ${objeto.totalRespuestas}`);
-  console.log('Respuestas:');
-  
-  // Iterar sobre el array de respuestas dentro de cada objeto
-  for (const respuesta of objeto.respuestas) {
-    console.log(respuesta);
-  }
-  
-  console.log('-------------------------');
-}
+    for (const objeto of resultadoFinal) {
+      console.log(`Instructor: ${objeto.instructor}`);
+      console.log(`Total de respuestas: ${objeto.totalRespuestas}`);
+      console.log("Respuestas:");
+
+      // Iterar sobre el array de respuestas dentro de cada objeto
+      for (const respuesta of objeto.respuestas) {
+        console.log(respuesta);
+      }
+
+      console.log("-------------------------");
+    }
   } catch (error) {
     console.log(error);
   }
