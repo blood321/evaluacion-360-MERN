@@ -1,105 +1,78 @@
 import React, { useState } from "react";
+import { FaTrash, FaPencilAlt, FaLocationArrow } from "react-icons/fa";
+import { FiRefreshCcw } from "react-icons/fi";
+import { IoEyeSharp } from "react-icons/io5";
 import GraficaColumn from "./GraficaColum";
 import GraficaPie from "./GraficaPie";
 
-const FiltroInstructores = () => {
-  const [showGraph, setShowGraph] = useState(false); // Add state to control the visibility of the graph
+const PrevisualizarEncu = ({ onShowActividadModal }) => {
+  const [showGraph, setShowGraph] = useState(false);
 
-  const handleButtonClick = () => {
-    setShowGraph(true); // Change the state to true when the button is clicked
+  const handleToggleGraph = () => {
+    setShowGraph((prevState) => !prevState);
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/2">
-        <div className="  flex  font-Roboto  w-[500px] h-[560px]">
-          <div className="">
-            <table className="table text-Principal_3 border-separate text-sm">
-              <thead className=" text-Secundario_1  ">
-                <tr>
-                  <th className="p-3">Nombre</th>
-                  <th className="p-3 text-left">Equipo Ejecutor</th>
-                  <th className="p-3 text-left"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="bg-gray-800">
-                  <td className="p-3">Felix</td>
-                  <td className="p-3">SISTEMAS</td>
-                  <td className="p-3">
-                    <div className="flex">
-                      <button
-                        className="flex"
-                        type="button"
-                        title="Ver Resultados"
-                        onClick={handleButtonClick}
-                      >
-                        <a
-                          href="#"
-                          className="text-Secundario_3 hover:text-gray-100 mr-1"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25M9 16.5v.75m3-3v3M15 12v5.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                            />
-                          </svg>
-                        </a>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    <div className="relative p-7 overflow-x-auto sm:rounded-lg">
+      <table className="w-full text-sm text-left rtl:text-right dark:text-black font-semibold">
+        <thead className="text-xs text-white uppercase bg-Principal_1 dark:bg-Secundario_1 dark:text-white">
+          <tr>
+            <th scope="col" className="p-4">
+              <button onClick={() => window.location.reload()}>
+                <FiRefreshCcw title="Refrescar" />
+              </button>
+            </th>
+            <th scope="col" className="px-6 py-3">
+              nombre
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Equipo ejecutor
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Action
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr className="border-b dark:bg-white dark:border-gray-700 hover:bg-Principal_1 dark:hover:bg-gray-300 font-semibold">
+            <td className="w-4 p-4"></td>
+            <th
+              scope="row"
+              className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-Principal_1"
+            >
+              Encuesta Nombre
+            </th>
+            <td className="px-6 py-4">Fecha Creado</td>
+            <td className="flex justify-between px-5 py-4">
+              <a
+                onClick={handleToggleGraph}
+                href="#"
+                className="font-medium dark:text-black hover:underline ms-3"
+              >
+                <IoEyeSharp title="Ver Actividad" />
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      {showGraph && (
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 mt-4">
+          <div className="border border-white rounded-lg p-7 bg-gray-500 bg-opacity-40 shadow-lg">
+            <div className="flex flex-row">
+              <GraficaColumn />
+            </div>
+          </div>
+          <div className="border border-white rounded-lg p-7 bg-gray-500 bg-opacity-40 shadow-lg">
+            <div className="flex flex-row">
+              <GraficaPie />
+            </div>
           </div>
         </div>
-
-        <style>
-          {`
-            .table {
-              border-spacing: 0 3px;
-            }
-
-            i {
-              font-size: 1rem !important;
-            }
-
-            .table tr {
-              border-radius: 50px;
-            }
-
-            tr td:nth-child(n+3),
-            tr th:nth-child(n+3) {
-              border-radius: 0 3rem 3rem 0;
-            }
-
-            tr td:nth-child(1),
-            tr th:nth-child(1) {
-              border-radius: 3rem 0 0 3rem;
-            }
-          `}
-        </style>
-      </div>
-      <div className="grid grid-cols-2 grid-rows-2 gap-4">
-  <div className="border border-blue-600 rounded-md p-4">
-    <div className="flex flex-row">{showGraph && <GraficaColumn />}</div>
-  </div>
-  <div className="border border-red-600 rounded-md p-4">
-    <div className="flex flex-row">{showGraph && <GraficaPie />}</div>
-  </div>
-</div>
-
-
+      )}
     </div>
   );
 };
 
-export default FiltroInstructores;
+export default PrevisualizarEncu;
