@@ -33,89 +33,41 @@ const respuestaXEncuesta = async (req, res) => {
     const respuestas = await respuesta
       .find({ encuesta: id })
       .populate("pregunta instructor");
-    const instructorXnombre = respuestas.map((item) => ({
-      id: item.instructor.id,
-      instructor: item.instructor.nombre,
-    }));
-    const instructorXrespuesta = respuestas.map((item) => ({
-      id: item.instructor.id,
-      respuesta: item.respuesta,
-    }));
-
-    const objetosUnicosSet = new Set(
-      instructorXnombre.map((objeto) => JSON.stringify(objeto))
-    );
-    const objetosUnicos = Array.from(objetosUnicosSet).map((objeto) =>
-      JSON.parse(objeto)
-    );
-
+  
     const respuestasPorInstructor = {};
- 
-    instructorXrespuesta.forEach((respuesta) => {
-      const idInstructor = respuesta.id;
-      const respuestaActual = respuesta.respuesta;
-
-      // Si el ID del instructor no está en el objeto, se crea un nuevo array para almacenar las respuestas
+  
+    respuestas.forEach((item) => {
+      const idInstructor = item.instructor.id;
+      const pregunta = item.pregunta.pregunta;
+      const respuesta = item.respuesta;
+  
       if (!respuestasPorInstructor[idInstructor]) {
-        respuestasPorInstructor[idInstructor] = [];
-      }
-
-      // Se añade la respuesta al array correspondiente
-      respuestasPorInstructor[idInstructor].push(respuestaActual);
-    });
-    const contador = {};
-
-    instructorXnombre.forEach((dato) => {
-      const { id, instructor } = dato;
-      const clave = `${id}-${instructor}`;
-
-      if (contador[clave]) {
-        contador[clave].respuestas++;
-      } else {
-        contador[clave] = {
-          id: id,
-          instructor: instructor,
-          respuestas: 1,
-          respuestasAsociadas: [], // Inicialmente vacío
+        respuestasPorInstructor[idInstructor] = {
+          id: idInstructor,
+          instructor: item.instructor.nombre,
+          totalRespuestas: 0,
+          respuestas: {}
         };
       }
-    });
-
-    const resultado = Object.keys(contador).map((clave) => {
-      const [id, instructor] = clave.split("-");
-      return { id, instructor, respuestas: contador[clave] };
-    });
-
-    const resultadoFinal = resultado.map((instructor) => {
-      const respuestas = respuestasPorInstructor[instructor.id];
-      const respuestasValidas = respuestas.filter(
-        (respuesta) => respuesta !== ""
-      );
-      return {
-        id: instructor.id,
-        instructor: instructor.instructor,
-        totalRespuestas: respuestasValidas.length,
-        respuestas: respuestasValidas,
-      };
-    });
-    console.log(respuestasPorInstructor)
-
-    // Iterar sobre cada objeto en el array
-    for (const objeto of resultadoFinal) {
-      console.log(`Instructor: ${objeto.instructor}`);
-      console.log(`Total de respuestas: ${objeto.totalRespuestas}`);
-      console.log("Respuestas:");
-
-      // Iterar sobre el array de respuestas dentro de cada objeto
-      for (const respuesta of objeto.respuestas) {
-        console.log(respuesta);
+  
+      if (!respuestasPorInstructor[idInstructor].respuestas[pregunta]) {
+        respuestasPorInstructor[idInstructor].respuestas[pregunta] = [];
       }
-
-      console.log("-------------------------");
-    }
+  
+      respuestasPorInstructor[idInstructor].respuestas[pregunta].push(respuesta);
+      respuestasPorInstructor[idInstructor].totalRespuestas++;
+    });
+  
+    const resultadoFinal = Object.values(respuestasPorInstructor);
+  
+    res.json(resultadoFinal);
   } catch (error) {
-    console.log(error);
+    // Manejo de errores
+    console.error(error);
+    res.status(500).json({ mensaje: "Hubo un error en el servidor" });
   }
+  
+ 
 };
 const respuestaXEquipoEjecutor = async (req, res) => {
   const { id } = req.params;
