@@ -54,51 +54,41 @@ const generarRespuestas = async (req, res) => {
     //si lo las tiene busca el usuario
     const usuario = await aprendiz.findOne({ _id: id });
     //busca la ficha a la que pertenece el aprendiz
-    const fichaUsuario = await fichas.findOne({ aprendices: usuario }, "_id");
+    const fichaUsuario = await fichas.findOne({ aprendices: usuario }).distinct("_id")
     //busca a los instructores que le hayan dado calse al aprendiz
-    const instructoresResponder = await programacion.find(
-      { fichas: fichaUsuario },
-      "instructores"
-    );
+    
+    const instructoresResponder = await programacion.find({ ficha:fichaUsuario},).distinct("instructor")
     // se busca la encuesta activa y asociada al la ficha
-    const encuestasID = await detalleEncuesta
-      .find({ fichas: fichaUsuario, activa: true })
-      .distinct("encuesta");
-    console.log(encuestasID + "este es el id de la encuesta");
+    const encuestasID = await detalleEncuesta.find({ activa: true }).distinct("encuesta");
     //se busca el id del detalle de la encuesta que este ligada al paso anterior, el detalle de la encuesta tambiem debe estar activa
-    const buscarEncuestaParaGuardarEnRespuestas = await detalleEncuesta.findOne(
-      { encuesta: encuestasID, activa: true },
-      "_id"
-    );
-
-    //se busca las preguantas que tiene la encuesta
-    const mostrarPregunta = await encuesta
-      .find({ activa: true, _id: { $in: encuestasID } })
-      .select(
-        "-_id -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa"
-      );
-
+    const mostrarPregunta = await encuesta.find({_id:encuestasID}).select("-_id -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa -descripcion" );
     // Itera sobre cada instrucción en la lista de instructores a responder
-    for (const instruccion of instructoresResponder) {
-      // Itera sobre cada identificador de instructor en la lista de instructores de la instrucción actual
-      for (const instructorId of instruccion.instructores) {
-        // Itera sobre cada pregunta en la lista de preguntas a mostrar
-        for (const pregunta of mostrarPregunta) {
+console.log(instructoresResponder)
+
+
+  for (const key in instructoresResponder) {
+    if (Object.hasOwnProperty.call(instructoresResponder, key)) {
+      const element = instructoresResponder[key];
+      
+      for (const pregunta of mostrarPregunta) {
           // Itera sobre cada identificador de pregunta en la lista de preguntas de la pregunta actual
           for (const preguntaId of pregunta.preguntas) {
             // Crea una nueva instancia del modelo Respuesta con los datos correspondientes
             const nuevaRespuesta = new Respuesta({
               pregunta: preguntaId, // Asigna el identificador de la pregunta
               aprendiz: usuario, // Asigna el usuario actual como el aprendiz
-              instructor: instructorId, // Asigna el identificador del instructor
-              encuesta: buscarEncuestaParaGuardarEnRespuestas.id, // Asigna el identificador de la encuesta
+              instructor: element, // Asigna el identificador del instructor
+              encuesta: encuestasID, // Asigna el identificador de la encuesta
             });
             // Guarda la nueva respuesta en la base de datos
-            await nuevaRespuesta.save();
+           await nuevaRespuesta.save();
           }
         }
-      }
     }
+  }
+        // Itera sobre cada pregunta en la lista de preguntas a mostrar
+        
+     
 
     // Después de que todos los bucles hayan terminado, envía la respuesta una sola vez
     res.json({ message: "Respuestas guardadas exitosamente" });
@@ -108,7 +98,7 @@ const generarRespuestas = async (req, res) => {
   }
 };
 const mostrasRespuestas = async (req, res) => {
-  //id del aprendz 
+  //id del aprendz
   const { id } = req.params;
 
   try {

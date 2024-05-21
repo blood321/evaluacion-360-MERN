@@ -7,7 +7,7 @@ function GraficaPie() {
     const myChart = echarts.init(chartDom);
     const option = {
       title: {
-        text: "Pepito Perez",
+        text: "pregunta 1",
         subtext: "Porcentaje de tiempo dedicado a cada actividad",
         left: "center",
         textStyle: {
@@ -36,11 +36,11 @@ function GraficaPie() {
           center: ["50%", "50%"],
           selectedMode: "single",
           data: [
-            { value: 335, name: "Si" },
-            { value: 210, name: "No" },
-            { value: 434, name: "Tal Vez" },
-            { value: 335, name: "Poco" },
-            { value: 200, name: "Mucho" },
+            { value: 0, name: "Si" },
+            { value: 4, name: "No" },
+            { value: 12, name: "Tal Vez" },
+            { value: 0, name: "Poco" },
+            { value: 16, name: "Mucho" },
           ],
           emphasis: {
             itemStyle: {
