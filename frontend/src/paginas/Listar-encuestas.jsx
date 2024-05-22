@@ -77,7 +77,7 @@ const ListarEncuestas = () => {
       {showDeleteModal && (
         <Eliminar onClose={handleCloseDeleteModal} kuko={id} />
       )}
-      {showEditarModal && <Editar onClose={handleCloseEditarModal} kuko={id} />}
+      {showEditarModal && <Editar onClose={handleCloseEditarModal} id={id} />}
       {showEnviarModal && <Enviar onClose={handleCloseEnviarModal} id={id} />}
       {showActividadModal && <Actividad onClose={handleCloseActividadModal} />}
     </>
