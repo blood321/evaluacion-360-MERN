@@ -11,7 +11,7 @@ const EncuestasProvider = ({ children }) => {
   const[encuestaedit,setEncuestaedit]=useState()
 
   useEffect(() => {
-    const obtenerPreguntas = async () => {
+    const obtenerENcuestas = async () => {
       try {
         const { data } = await clienteAxios("/encuesta");
         setEncuesta(data);
@@ -19,7 +19,7 @@ const EncuestasProvider = ({ children }) => {
         console.log(error);
       }
     };
-    obtenerPreguntas();
+    obtenerENcuestas();
   }, []);
 
   const mostrarAlerta = (alerta) => {
