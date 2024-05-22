@@ -100,7 +100,7 @@ const Responder = () => {
                   <div className="mx-auto md:w-full h-[250px] md:h-full mb-9 overflow-y-auto flex-col justify-center items-center">
                       <div className="flex flex-col justify-center items-center">
                           {instructores.map(item => (
-                              <div kay={item._id} className="flex md:flex-row p-3">
+                              <div key={item._id} className="flex md:flex-row p-3">
                                   <div className="mb-1 mt-4 flex items-center p-2 md:shadow-lg shadow-2xl shadow-green-800 rounded-2xl overflow-hidden border-2 border-Principal_1 border-x-Principal_2">
                                       <img
                                           src={Instructor}
