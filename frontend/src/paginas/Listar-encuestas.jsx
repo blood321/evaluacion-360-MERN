@@ -11,7 +11,7 @@ const ListarEncuestas = () => {
   const [showEnviarModal, setShowEnviarModal] = useState(false);
   const [showActividadModal, setShowActividadModal] = useState(false);
   const [id, setId] = useState();
-  console.log(id + "este es el id que busco ");
+  
   // Función para mostrar el modal de eliminación
   const handleShowDeleteModal = (mensaje) => {
     setShowDeleteModal(true);
@@ -77,7 +77,7 @@ const ListarEncuestas = () => {
       {showDeleteModal && (
         <Eliminar onClose={handleCloseDeleteModal} kuko={id} />
       )}
-      {showEditarModal && <Editar onClose={handleCloseEditarModal} kuko={id} />}
+      {showEditarModal && <Editar onClose={handleCloseEditarModal} id={id} />}
       {showEnviarModal && <Enviar onClose={handleCloseEnviarModal} id={id} />}
       {showActividadModal && <Actividad onClose={handleCloseActividadModal} />}
     </>

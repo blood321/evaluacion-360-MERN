@@ -4,12 +4,12 @@ import usePreguntas from "../hooks/usePreguntas";
 import SelectMultiple from "./SelectMultiple";
 import useEncuestas from "../hooks/useEncuesta";
 
-function Editar({ onClose, kuko }) {
-  console.log(kuko);
+function Editar({ onClose, id }) {
+  console.log(id);
   const { mostrarAlerta, alerta, submitEncuesta, obtenerEncuesta, encuestaedit } = useEncuestas();
   console.log(encuestaedit + "esto se debe editar ");
   useEffect(() => {
-    obtenerEncuesta(kuko)
+    obtenerEncuesta(id)
       .then(resultado => {
         // Aquí puedes trabajar con el resultado obtenido
         console.log(resultado + "RESULTADO DE CHAT GPT");

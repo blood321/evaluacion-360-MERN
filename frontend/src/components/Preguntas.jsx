@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Preguntas = ({ pregunta, onPrevious, onNext }) => {
     return (
@@ -11,12 +11,15 @@ const Preguntas = ({ pregunta, onPrevious, onNext }) => {
                 >
                     &larr; Pregunta Anterior
                 </button>
-                <button onClick={onNext} className="bg-Principal_1 rounded-lg  p-2 text-sm   text-white">
+                <button
+                    onClick={onNext}
+                    className="bg-Principal_1 rounded-lg p-2 text-sm text-white"
+                >
                     Siguiente Pregunta &rarr;
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Preguntas
+export default Preguntas;
