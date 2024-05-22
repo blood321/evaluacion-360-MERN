@@ -6,15 +6,9 @@ import useEncuestas from "../hooks/useEncuesta";
 
 function Editar({ onClose, id }) {
   console.log(id);
-  const { mostrarAlerta, alerta, submitEncuesta, obtenerEncuesta, encuestaedit } = useEncuestas();
-  console.log(encuestaedit + "esto se debe editar ");
-  useEffect(() => {
+  const { mostrarAlerta, alerta, submitEncuesta, obtenerEncuesta } = useEncuestas();
     obtenerEncuesta(id)
-      .then(resultado => {
-        // Aquí puedes trabajar con el resultado obtenido
-        console.log(resultado + "RESULTADO DE CHAT GPT");
-      });
-  }, []);
+     
 
   // Obtener las preguntas usando el hook personalizado usePreguntas
   const { preguntas } = usePreguntas();
