@@ -16,7 +16,7 @@ const Responder = () => {
   const [instructores, setInstructores] = useState([]);
   const [indice, setIndice] = useState(0);
   const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({});
-
+  
   const preguntasConID = respuestas
     ? respuestas.map((respuesta) => ({
         pregunta: respuesta.pregunta.pregunta,
@@ -114,8 +114,8 @@ const Responder = () => {
                                               <input
                                                   type="radio"
                                                   name={item.instructor.nombre}
-                                                  value="No sé"
-                                                  //   checked={item.respuesta == "No sé"}
+                                                  value="1"
+                                                 // checked={item.respuesta == "1"}
                                                   onChange={e => Respuesta(item._id, e.target.value)}
                                               />
                                               No sé
