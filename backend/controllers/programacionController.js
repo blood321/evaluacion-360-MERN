@@ -2,12 +2,12 @@ import programacion from "../models/programacionMov3.js";
 
 const crearProgramacion =async(req,res)=>{
     
-    const programacionG =new programacion(req.body)
+    const Programacion =new programacion(req.body)
   
     try {
-        const proyectoAlmacenado= await programacionG.save()
+        const programacionG= await Programacion.save()
 
-        res.json(proyectoAlmacenado)
+        res.json(programacionG)
         
     } catch (error) {
         console.log(error)

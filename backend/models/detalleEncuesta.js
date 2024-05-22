@@ -19,6 +19,10 @@ const detalleEncuestaSchema=mongoose.Schema({
     fechaDesactivar:{
         type: Date,
      
+    },
+    activa:{
+        type:Boolean,
+        
     }
 
    

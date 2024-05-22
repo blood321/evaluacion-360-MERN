@@ -1,24 +1,144 @@
-import respuesta from "../models/respuestas.js"
+import { trusted } from "mongoose";
+import respuesta from "../models/respuestas.js";
+import encuesta from "../models/encuesta.js";
+import detalleEncuesta from "../models/detalleEncuesta.js";
+import papelera from "../models/papelera.js";
+import aprendiz from "../models/aprendiz.js";
+const respuestaUsuario = async (req, res) => {
+  const { instructor, pregunta, encuesta } = req.body;
+  const { id } = req.params;
 
-const respuestaUsuario=async (req,res)=>{
-    const{instructor,pregunta,encuesta}=req.body
-    const{id}=req.params
-
-    try {
-        const respuestasubir = await respuesta.findOne({instructor:instructor, pregunta:pregunta, aprendiz:id,encuesta:encuesta})
-        if (!respuestasubir) {
-            const error = new Error("no encontrado")
-            return res.status(404).json({ msg: error.message})
-        }
-        respuestasubir.respuesta=req.body.respuesta
-        respuestasubir.respondio=true
-        
-console.log(respuestasubir)
-        const a= await respuestasubir.save()
-         res.json(a)
-    } catch (error) {
-        console.log(error)
+  try {
+    const respuestasubir = await respuesta.findOne({
+      instructor: instructor,
+      pregunta: pregunta,
+      aprendiz: id,
+      encuesta: encuesta,
+    });
+    if (!respuestasubir) {
+      const error = new Error("no encontrado");
+      return res.status(404).json({ msg: error.message });
     }
-}
 
-export {respuestaUsuario}
+    respuestasubir.respuesta = req.body.respuesta;
+    respuestasubir.respondio = true;
+    respuestasubir.aprendiz = null;
+
+    const respondido = await respuestasubir.save();
+    const borrador  = new papelera({
+      aprendiz:id,
+      detalleEncuesta:encuesta,
+      pregunta:pregunta,
+      respuesta:req.body.respuesta,
+
+    })
+    borrador.save()
+    console.log(borrador)
+    res.json(respondido);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+
+
+const respuestaXEncuesta = async (req, res) => {
+  const { id } = req.params;
+  //se requiere el id de la encuesta
+  const activaciones = await detalleEncuesta.find(
+    { encuesta: id },
+    "-fichas -encuesta -fechaDesactivar -activa -__v"
+  );
+  res.json(activaciones);
+};
+const respuestasXDetalleEncuesta = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const respuestas = await respuesta
+      .find({ encuesta: id })
+      .populate("pregunta instructor");
+
+    const respuestasPorInstructor = {};
+
+    respuestas.forEach((item) => {
+      const idInstructor = item.instructor.id;
+      const pregunta = item.pregunta.pregunta;
+
+      if (!respuestasPorInstructor[idInstructor]) {
+        respuestasPorInstructor[idInstructor] = {
+          id: idInstructor,
+          instructor: item.instructor.nombre,
+          totalRespuestas: 0,
+        };
+      }
+
+      respuestasPorInstructor[idInstructor].totalRespuestas++;
+    });
+
+    const resultadoFinal = Object.values(respuestasPorInstructor);
+
+    res.json(resultadoFinal);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const respuestasXInstructor = async (req, res) => {
+  const { id, instructor } = req.params;
+  try {
+    const respuestas = await respuesta
+      .find({ encuesta: id, instructor: instructor })
+      .populate("pregunta instructor");
+
+    const respuestasPorInstructor = {};
+
+    respuestas.forEach((item) => {
+      const idInstructor = item.instructor.id;
+      const pregunta = item.pregunta.pregunta;
+      const respuesta = item.respuesta;
+
+      if (!respuestasPorInstructor[idInstructor]) {
+        respuestasPorInstructor[idInstructor] = {
+          id: idInstructor,
+          instructor: item.instructor.nombre,
+          totalRespuestas: 0,
+          respuestas: {},
+        };
+      }
+
+      if (!respuestasPorInstructor[idInstructor].respuestas[pregunta]) {
+        respuestasPorInstructor[idInstructor].respuestas[pregunta] = [];
+      }
+
+      respuestasPorInstructor[idInstructor].respuestas[pregunta].push(
+        respuesta
+      );
+      respuestasPorInstructor[idInstructor].totalRespuestas++;
+    });
+
+    const resultadoFinal = Object.values(respuestasPorInstructor);
+
+    res.json(resultadoFinal);
+  } catch (error) {
+    // Manejo de errores
+    console.error(error);
+    res.status(500).json({ mensaje: "Hubo un error en el servidor" });
+  }
+};
+const respuestaXEquipoEjecutor = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const respuestasDeEquipo = await equipoEjecutor.find({ _id: id });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export {
+  respuestaUsuario,
+  respuestaXEncuesta,
+  respuestaXEquipoEjecutor,
+  respuestasXInstructor,
+  respuestasXDetalleEncuesta,
+};

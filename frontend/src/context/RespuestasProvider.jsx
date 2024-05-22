@@ -25,7 +25,7 @@ console.log(respuestas)
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios(`detalleEncuesta/responde/661c3536e01e0a1bfe605f65`, config);
+        const { data } = await clienteAxios(`detalleEncuesta/responde/6647bd10495ba6569548f1d4`, config);
         setRespuestas(data);
       } catch (error) {
         console.log(error);

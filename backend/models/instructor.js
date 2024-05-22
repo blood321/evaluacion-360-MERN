@@ -12,12 +12,6 @@ const instructorSchema=mongoose.Schema({
         required:true,
      
     },
-  
-
-   
-    
-  
-
 })
 
 const instructor =mongoose.model('instructor',instructorSchema)

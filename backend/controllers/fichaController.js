@@ -6,9 +6,9 @@ const nuevaFicha =async (req,res)=>{
     const ficha =new fichas(req.body)
   
     try {
-        const proyectoAlmacenado= await ficha.save()
+        const ficahaGuardada= await ficha.save()
 
-        res.json(proyectoAlmacenado)
+        res.json(ficahaGuardada)
         
     } catch (error) {
         console.log(error)
@@ -17,10 +17,6 @@ const nuevaFicha =async (req,res)=>{
    
     
 }
-// const preguntasCreadas =async (req,res)=>{
-//     const preguntasC =await preguntas.find().where('creador').equeals(req.Usuario)
-//     res.json(preguntasC)
-// }
 
 
 export {nuevaFicha}
