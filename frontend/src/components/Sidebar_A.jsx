@@ -136,15 +136,7 @@ const Sidebar_A = () => {
                             <FaChevronRight color="green" />
                         </div>
                     </Link>
-                    <Link to="Resultados">
-                        <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer transition-transform hover:translate-x-4">
-                            <div className="flex items-center gap-[10px]">
-                                <FaStream color="green" />
-                                <h2 className=" font-normal text-[14px] leading-[20px]">Resultados</h2>
-                            </div>
-                            <FaChevronRight color="green" />
-                        </div>
-                    </Link>
+                   
                     <Link to="Excel">
                         <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer transition-transform hover:translate-x-4">
                             <div className="flex items-center gap-[10px]">
@@ -157,15 +149,7 @@ const Sidebar_A = () => {
                         </div>
                     </Link>
                 </div>
-                <div className="pt-[20px]  ">
-                    <div className="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer transition-transform hover:translate-x-4">
-                        <div className="flex items-center gap-[10px] ">
-                            <FaWrench color="green" />
-                            <h2 className=" font-normal text-[14px] leading-[20px]">Configuracion</h2>
-                        </div>
-                        <FaChevronRight color="green" />
-                    </div>
-                </div>
+                
             </div>
         </div>
     )

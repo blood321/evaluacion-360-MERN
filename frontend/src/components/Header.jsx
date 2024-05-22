@@ -26,11 +26,6 @@ function Header() {
                     </span>
                 </h2>
 
-                <input
-                    type="search"
-                    placeholder="Buscar Encuesta"
-                    className="rounded-lg lg:w-96 block p-2 border focus:outline-none border-Principal_1 focus:border-Principal_1 focus:ring-1 focus:ring-Principal_1"
-                />
                 <nav className="flex items-center gap-4">
                     {modalVisible && (
                         <Modal

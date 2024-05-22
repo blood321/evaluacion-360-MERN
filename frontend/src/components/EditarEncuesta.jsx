@@ -4,17 +4,11 @@ import usePreguntas from "../hooks/usePreguntas";
 import SelectMultiple from "./SelectMultiple";
 import useEncuestas from "../hooks/useEncuesta";
 
-function Editar({ onClose, kuko }) {
-  console.log(kuko);
-  const { mostrarAlerta, alerta, submitEncuesta, obtenerEncuesta, encuestaedit } = useEncuestas();
-  console.log(encuestaedit + "esto se debe editar ");
-  useEffect(() => {
-    obtenerEncuesta(kuko)
-      .then(resultado => {
-        // Aquí puedes trabajar con el resultado obtenido
-        console.log(resultado + "RESULTADO DE CHAT GPT");
-      });
-  }, []);
+function Editar({ onClose, id }) {
+  console.log(id);
+  const { mostrarAlerta, alerta, submitEncuesta, obtenerEncuesta } = useEncuestas();
+    obtenerEncuesta(id)
+     
 
   // Obtener las preguntas usando el hook personalizado usePreguntas
   const { preguntas } = usePreguntas();
