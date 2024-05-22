@@ -56,7 +56,7 @@ const LoginAdmin = () => {
           className="text-Secundario_1  font-black text-center  text-5xl text-[40px]  xl:text-[70px]
                 capitalize animate-fade-right animate-duration-[2000ms]"
         >
-          Sesion <span className="text-Principal_1">Administrativa</span>
+          Sesión <span className="text-Principal_1">Administrativa</span>
         </h1>
       </div>
 
