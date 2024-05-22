@@ -9,13 +9,13 @@ const Preguntas = ({ pregunta, onPrevious, onNext }) => {
                     onClick={onPrevious}
                     className="bg-Principal_2 rounded-lg p-2 text-sm mr-2 items-center justify-center text-white"
                 >
-                 Anterior
+                    &larr; Pregunta Anterior
                 </button>
                 <button
                     onClick={onNext}
                     className="bg-Principal_1 rounded-lg p-2 text-sm text-white"
                 >
-                    Siguiente
+                    Siguiente Pregunta &rarr;
                 </button>
             </div>
         </div>
