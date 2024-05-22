@@ -10,7 +10,7 @@ function Enviar({ onClose, id }) {
     
     if (!fecha) {
       setAlerta({
-        msg: "Todos los campos son obligatorios",
+        msg: "El campo de fecha es obligatorio",
         error: true,
       });
       setTimeout(() => {

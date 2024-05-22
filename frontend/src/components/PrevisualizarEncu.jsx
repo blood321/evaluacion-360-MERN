@@ -51,7 +51,7 @@ const PrevisualizarEncu = ({
             encuesta.map((encuestas) => (
               <tr
                 className=" border-b dark:bg-white dark:border-gray-700 hover:bg-Principal_1 dark:hover:bg-gray-300 font-semibold"
-                key={encuesta._id}
+                key={encuesta._id} encuesta={encuestas}
               >
                 <td className="w-4 p-4">
                   <div className="flex items-center">

@@ -16,7 +16,6 @@ const Responder = () => {
   const [instructores, setInstructores] = useState([]);
   const [indice, setIndice] = useState(0);
   const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({});
-  console.log(respuestasSeleccionadas);
 
   const preguntasConID = respuestas
     ? respuestas.map((respuesta) => ({
