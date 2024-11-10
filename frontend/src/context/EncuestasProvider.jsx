@@ -11,7 +11,7 @@ const EncuestasProvider = ({ children }) => {
   const[encuestaedit,setEncuestaedit]=useState()
 
   useEffect(() => {
-    const obtenerPreguntas = async () => {
+    const obtenerENcuestas = async () => {
       try {
         const { data } = await clienteAxios("/encuesta");
         setEncuesta(data);
@@ -19,7 +19,7 @@ const EncuestasProvider = ({ children }) => {
         console.log(error);
       }
     };
-    obtenerPreguntas();
+    obtenerENcuestas();
   }, []);
 
   const mostrarAlerta = (alerta) => {
@@ -100,7 +100,6 @@ const EncuestasProvider = ({ children }) => {
   const obtenerEncuesta = async (id) => {
     setCargando(true);
     try {
-      
       const { data } = await clienteAxios(`/encuesta/${id}`, );
       setEncuestaedit(data);
       return data
@@ -120,10 +119,7 @@ const EncuestasProvider = ({ children }) => {
         (proyectoState) => proyectoState._id !== id
       );
       setEncuesta(proyectosActualizados);
-      setAlerta({
-        msg: data.msg,
-        error: false,
-      });
+     
  
     } catch (error) {
       console.log(error);

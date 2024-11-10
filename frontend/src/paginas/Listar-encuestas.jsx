@@ -11,7 +11,6 @@ const ListarEncuestas = () => {
   const [showEnviarModal, setShowEnviarModal] = useState(false);
   const [showActividadModal, setShowActividadModal] = useState(false);
   const [id, setId] = useState();
-  console.log(id + "este es el id que busco ");
   // Función para mostrar el modal de eliminación
   const handleShowDeleteModal = (mensaje) => {
     setShowDeleteModal(true);
@@ -25,7 +24,6 @@ const ListarEncuestas = () => {
 
   // Función para mostrar el modal editar
   const handleShowEditarModal = (mensaje) => {
-    console.log(mensaje + "este es el mensaje ");
     setShowEditarModal(true);
     setId(mensaje);
   };

@@ -7,7 +7,6 @@ import usePreguntas from '../hooks/usePreguntas'
 const CrearPreguntasAprendices = () => {
     const {preguntas }=usePreguntas()
     const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null)
- console.log(tematicaSeleccionada)
     const handleTematicaSeleccionada = tematica => {
         setTematicaSeleccionada(tematica)
     }
@@ -34,8 +33,6 @@ const CrearPreguntasAprendices = () => {
           (espaginaJefes ? pregunta.encuestado === "Jefes":null)
       )
       });
-    
-console.log(preguntasFiltradas)
 
     return (
         <div className="px-auto px-3 ">

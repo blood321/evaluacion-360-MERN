@@ -29,7 +29,7 @@ function Eliminar({ onClose, kuko }) {
               </svg>
 
               <h2 className="text-xl font-bold py-4">¡AVISO!</h2>
-              <p className="text-sm text-gray-500 px-8">¿Estas Seguro Que Deseas Eliminar Esta Encuesta?{kuko}</p>
+              <p className="text-sm text-gray-500 px-8">¿Estas Seguro Que Deseas Eliminar Esta Encuesta?</p>
               
             </div>
              

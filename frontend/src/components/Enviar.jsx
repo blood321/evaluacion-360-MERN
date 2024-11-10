@@ -4,21 +4,21 @@ import clienteAxios from "../config/clienteAxios";
 function Enviar({ onClose, id }) {
   const [fecha, setFecha] = useState();
   const [alerta, setAlerta] = useState({}); // Agregar el estado para la alerta
-  console.log(fecha);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (!fecha) {
       setAlerta({
-        msg: "Todos los campos son obligatorios",
+        msg: "El campo de fecha es obligatorio",
         error: true,
       });
       setTimeout(() => {
         setAlerta({});
-      }, 4000);
+      }, 2000);
       return;
     }
+    onClose();
 
     try {
       const { data } = await clienteAxios.post(`/detalleEncuesta/${id}`, {
