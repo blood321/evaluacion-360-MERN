@@ -6,7 +6,6 @@ import usePreguntas from '../hooks/usePreguntas'
 
 const CrearPreguntasAprendices = () => {
     const {preguntas }=usePreguntas()
-    console.log(preguntas+"hiaihihihi")
     const [tematicaSeleccionada, setTematicaSeleccionada] = useState(null)
  console.log(tematicaSeleccionada)
     const handleTematicaSeleccionada = tematica => {

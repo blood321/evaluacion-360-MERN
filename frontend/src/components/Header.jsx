@@ -47,7 +47,7 @@ function Header() {
                     >
                         Cerrar Sesión
                     </button>
-                </nav>
+                </nav>  
             </div>
         </header>
     )
