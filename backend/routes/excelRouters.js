@@ -18,6 +18,6 @@ router.route("/fichas").post(upload.single("file"), subirFichas);
 
 router.route("/Reporte/:id").get(sacarReportes);
 
-router.route('/subirProgramacion').post(upload.single("file"),subirProgramacion)
+// router.route('/subirProgramacion').post(upload.single("file"),subirProgramacion)
 
 export default router;

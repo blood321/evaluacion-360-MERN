@@ -40,7 +40,6 @@ const PreguntasProvider = ({ children }) => {
     }
   };
   const editarPregunta = async (pregunta) => {
-    console.log(pregunta+"esta es la que edita ")
     try {
      
       const { data } = await clienteAxios.put(`/pregunta/${pregunta.id}`,

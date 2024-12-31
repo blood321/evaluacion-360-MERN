@@ -10,7 +10,7 @@ import Instructor from "../models/instructor.js";
 const subirAprendices = async (req, res) => {
   try {
     const file = req.file;
-    const excel = xlsx.readFile(file);
+    const excel = xlsx.readFile('./subidos/ProPRIMESEPT2024.xlsx');
     var nombreHoja = excel.SheetNames; //regresa un array }
     let datos = xlsx.utils.sheet_to_json(excel.Sheets[nombreHoja[0]]);
     for (let index = 0; index < datos.length; index++) {

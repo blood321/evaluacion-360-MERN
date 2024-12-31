@@ -1,4 +1,5 @@
 import { NavBarUser } from '../components/NavBarUser'
+
 import logo2Principal from '../assets/img/logo2Principal.png'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
