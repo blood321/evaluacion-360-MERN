@@ -6,7 +6,6 @@ const PreguntasContext = createContext();
 
 const PreguntasProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
-  const [pregunta, setPregunta] = useState({});
   const [cargando, setCargando] = useState(false);
   const [preguntas, setPreguntas] = useState([]);
 
@@ -120,21 +119,14 @@ const PreguntasProvider = ({ children }) => {
       console.log(error);
     }
   };
-
- 
-
   return (
     <PreguntasContext.Provider
       value={{
         preguntas,
         mostrarAlerta,
-        alerta,
         submitPregunta,
         obtenerProyecto,
-        
-        cargando,
         eliminarPregunta,
-      
       }}
     >
       {children}

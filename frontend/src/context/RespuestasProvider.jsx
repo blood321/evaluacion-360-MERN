@@ -9,13 +9,13 @@ const RespuestasProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [proyecto, setProyecto] = useState({});
   const [cargando, setCargando] = useState(false);
- 
-console.log(respuestas)
+
+  console.log(respuestas);
   const navigate = useNavigate();
 
   useEffect(() => {
     const obtenerRespuestas = async (id) => {
-      console.log(id)
+      console.log(id);
       try {
         const token = localStorage.getItem("token");
         if (!token) return;
@@ -25,7 +25,10 @@ console.log(respuestas)
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios(`detalleEncuesta/responde/661c3536e01e0a1bfe605f65`, config);
+        const { data } = await clienteAxios(
+          `detalleEncuesta/responde/661c3536e01e0a1bfe605f65`,
+          config
+        );
         setRespuestas(data);
       } catch (error) {
         console.log(error);
@@ -34,9 +37,6 @@ console.log(respuestas)
     obtenerRespuestas();
   }, []);
 
- 
-
- 
   const editarRespuesta = async (proyecto) => {
     try {
       const token = localStorage.getItem("token");
@@ -52,23 +52,14 @@ console.log(respuestas)
         proyecto,
         config
       );
-
-    
     } catch (error) {
       console.log(error);
     }
   };
-  
-  
-
- 
-
   return (
     <RespuestasContext.Provider
       value={{
-        respuestas,
         editarRespuesta,
-        
       }}
     >
       {children}

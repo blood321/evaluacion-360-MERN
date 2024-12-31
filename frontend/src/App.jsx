@@ -3,7 +3,7 @@ import Authlayout from "./layouts/Authlayout";
 import RutaProtegida from "./layouts/RutaProtegida";
 import OlvidePassword from "./paginas/OlvidePassword";
 import NuevoPassword from "./paginas/NuevoPassword";
-import NuevoProyecto from "./paginas/NuevoProyecto";
+
 import Aloguin from "./paginas/Aloguin";
 import Aviso from "./paginas/Aviso";
 import Responder from "./paginas/Respoder";
@@ -20,7 +20,7 @@ import Resultados from "./paginas/Resultados.jsx";
 import ListarEncuestas from "./paginas/Listar-encuestas.jsx";
 import Excel from "./paginas/Excel.jsx";
 import { AuthProvider } from "./context/AuthProvider";
-import { ProyectosProvider } from "./context/ProyectosProvider";
+
 import { PreguntasProvider } from "./context/preguntasProvider.jsx";
 import { EncuestasProvider } from "./context/EncuestasProvider.jsx";
 import { RespuestasProvider } from "./context/RespuestasProvider.jsx";
@@ -29,7 +29,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <PreguntasProvider>
-          <ProyectosProvider>
+          
             <EncuestasProvider>
               <RespuestasProvider>
                 <Routes>
@@ -90,7 +90,7 @@ function App() {
                     />
                     <Route path="Excel" element={<Excel />} />
                     <Route path="resultados" element={<Resultados />} />
-                    <Route path="crear-proyecto" element={<NuevoProyecto />} />
+                    
                     <Route
                       path="/inicio-admin/Listar-encuestas/:id"
                       element={<CrearEncuestasAprendices />}
@@ -99,7 +99,6 @@ function App() {
                 </Routes>
               </RespuestasProvider>
             </EncuestasProvider>
-          </ProyectosProvider>
         </PreguntasProvider>
       </AuthProvider>
     </BrowserRouter>

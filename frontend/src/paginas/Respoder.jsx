@@ -23,30 +23,25 @@ const Responder = () => {
         _id: respuesta.pregunta._id,
       }))
     : [];
-
   const preguntasUnicas = [
     ...new Set(preguntasConID.map((pregunta) => pregunta.pregunta)),
   ];
-
   const obtenerIDPreguntaActual = () => {
     const preguntaActual = preguntasConID.find(
       (pregunta) => pregunta.pregunta === preguntasUnicas[indice]
     );
     return preguntaActual ? preguntaActual._id : null;
   };
-
   const filtrarInstructores = (idPregunta) => {
     const instructoresFiltrados = respuestas.filter((respuesta) => {
       return respuesta.pregunta._id === idPregunta;
     });
     setInstructores(instructoresFiltrados);
   };
-
   useEffect(() => {
     const idPreguntaActual = obtenerIDPreguntaActual();
     filtrarInstructores(idPreguntaActual);
   }, [indice]);
-
   const cambiarPalabra = (direccion) => {
     if (direccion === "adelante") {
       if (indice < preguntasUnicas.length - 1) {
@@ -58,7 +53,6 @@ const Responder = () => {
       }
     }
   };
-
   const Respuesta = (preguntaId, valor) => {
     setRespuestasSeleccionadas((prevState) => ({
       ...prevState,
@@ -74,7 +68,7 @@ const Responder = () => {
           </header>
           <div className="mx-auto mt-20 md:mt-20 p-3 px-5 md:flex ">
               <section className="mt-4 mx-auto w-full rounded-md shadow-lg shadow-green-800 bg-white overflow-hidden md:grid md:grid-cols-3 md:grid-rows-[450px] md:w-auto md:h-[450px] md:rounded-3xl md:mx-auto">
-                  {/* Contenido de la sección */} {/* Contenido de la sección */}
+
                   <div className="bg-gradient-to-r from-Principal_1 to-Principal_2 h-[200px] px-10 text-center rounded-b-3xl md:w-[350px] md:h-full md:rounded-3xl md:mb-6 flex flex-col md:flex-col justify-center items-center md:grid-row">
                       <h2 className="text-Principal_3 text-3xl font-bold items-center md:mb-2">NOMBRE ENCUESTA</h2>
                       <div className="mt-4 md:mt-20">
@@ -120,7 +114,6 @@ const Responder = () => {
                                               />
                                               No sé
                                           </label>
-
                                           <label>
                                               <input
                                                   type="radio"
@@ -131,7 +124,6 @@ const Responder = () => {
                                               />
                                               Tal vez
                                           </label>
-
                                           <label>
                                               <input
                                                   type="radio"
@@ -142,7 +134,6 @@ const Responder = () => {
                                               />
                                               Si
                                           </label>
-
                                           <label>
                                               <input
                                                   type="radio"
