@@ -10,27 +10,20 @@ const RespuestasProvider = ({ children }) => {
   const [proyecto, setProyecto] = useState({});
   const [cargando, setCargando] = useState(false);
 
-  console.log(respuestas);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    const obtenerRespuestas = async (id) => {
-      console.log(id);
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
+    const obtenerRespuestas = async (id) => {      try { 
+
         const { data } = await clienteAxios(
-          `detalleEncuesta/responde/661c3536e01e0a1bfe605f65`,
-          config
+          `/detalleEncuesta/responde/661c3536e01e0a1bfe605f65`,
         );
         setRespuestas(data);
+        localStorage.setItem("userData", JSON.stringify(data))
       } catch (error) {
+      
+
         console.log(error);
       }
     };
@@ -60,6 +53,7 @@ const RespuestasProvider = ({ children }) => {
     <RespuestasContext.Provider
       value={{
         editarRespuesta,
+        respuestas
       }}
     >
       {children}

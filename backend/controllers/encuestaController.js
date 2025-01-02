@@ -2,7 +2,6 @@ import encuesta from "../models/encuesta.js";
 import tematicas from "../models/tematica.js";
 
 const nuevaEncuesta = async (req, res) => {
-
   const encuestaNueva = new encuesta(req.body);
 
   try {

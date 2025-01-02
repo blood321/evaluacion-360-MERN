@@ -1,18 +1,15 @@
 import programacion from "../models/programacionMov3.js";
 
-const crearProgramacion =async(req,res)=>{
-    
-    const Programacion =new programacion(req.body)
-  
-    try {
-        const programacionG= await Programacion.save()
+const crearProgramacion = async (req, res) => {
+  const Programacion = new programacion(req.body);
 
-        res.json(programacionG)
-        
-    } catch (error) {
-        console.log(error)
-    }
-   
-}
+  try {
+    const programacionG = await Programacion.save();
 
-export  {crearProgramacion}
+    res.json(programacionG);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { crearProgramacion };

@@ -51,26 +51,32 @@ const generarRespuestas = async (req, res) => {
       const error = new Error("El usuario ya tiene respuestas creadas");
       return res.status(404).json({ msg: error.message });
     }
-    //si lo las tiene busca el usuario
+    //si no las tiene busca el usuario
     const usuario = await aprendiz.findOne({ _id: id });
     //busca la ficha a la que pertenece el aprendiz
-    const fichaUsuario = await fichas.findOne({ aprendices: usuario }).distinct("_id")
+    const fichaUsuario = await fichas
+      .findOne({ aprendices: usuario })
+      .distinct("_id");
     //busca a los instructores que le hayan dado calse al aprendiz
-    
-    const instructoresResponder = await programacion.find({ ficha:fichaUsuario},).distinct("instructor")
+
+    const instructoresResponder = await programacion
+      .find({ ficha: fichaUsuario })
+      .distinct("instructor");
     // se busca la encuesta activa y asociada al la ficha
-    const encuestasID = await detalleEncuesta.find({ activa: true }).distinct("encuesta");
+    const encuestasID = await detalleEncuesta
+      .find({ activa: true })
+      .distinct("encuesta");
     //se busca el id del detalle de la encuesta que este ligada al paso anterior, el detalle de la encuesta tambiem debe estar activa
-    const mostrarPregunta = await encuesta.find({_id:encuestasID}).select("-_id -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa -descripcion" );
+    const mostrarPregunta = await encuesta
+      .find({ _id: encuestasID })
+      .select(
+        "-_id -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa -descripcion"
+      );
     // Itera sobre cada instrucción en la lista de instructores a responder
-console.log(instructoresResponder)
-
-
-  for (const key in instructoresResponder) {
-    if (Object.hasOwnProperty.call(instructoresResponder, key)) {
-      const element = instructoresResponder[key];
-      
-      for (const pregunta of mostrarPregunta) {
+    for (const key in instructoresResponder) {
+      if (Object.hasOwnProperty.call(instructoresResponder, key)) {
+        const element = instructoresResponder[key];
+        for (const pregunta of mostrarPregunta) {
           // Itera sobre cada identificador de pregunta en la lista de preguntas de la pregunta actual
           for (const preguntaId of pregunta.preguntas) {
             // Crea una nueva instancia del modelo Respuesta con los datos correspondientes
@@ -81,15 +87,12 @@ console.log(instructoresResponder)
               encuesta: encuestasID, // Asigna el identificador de la encuesta
             });
             // Guarda la nueva respuesta en la base de datos
-           await nuevaRespuesta.save();
+            await nuevaRespuesta.save();
           }
         }
+      }
     }
-  }
-        // Itera sobre cada pregunta en la lista de preguntas a mostrar
-        
-     
-
+    // Itera sobre cada pregunta en la lista de preguntas a mostrar
     // Después de que todos los bucles hayan terminado, envía la respuesta una sola vez
     res.json({ message: "Respuestas guardadas exitosamente" });
   } catch (error) {
@@ -100,13 +103,36 @@ console.log(instructoresResponder)
 const mostrasRespuestas = async (req, res) => {
   //id del aprendz
   const { id } = req.params;
-
   try {
     //muestra  las respuestas que debe responder el aprendiz
     const respuestas = await Respuesta.find({ aprendiz: id }).populate(
       "pregunta instructor encuesta"
     );
-    res.json(respuestas);
+    const preguntasFrontend = {};
+    for (let index = 0; index < respuestas.length; index++) {}
+
+    respuestas.forEach((item) => {
+      const idrespuesta = item.id;
+      const Pregunta = item.pregunta;
+      const Instructor = item.instructor
+     
+
+      if(!preguntasFrontend[Pregunta.pregunta]){
+        preguntasFrontend[Pregunta.pregunta] = [];
+      }
+
+      console.log(preguntasFrontend[Pregunta.pregunta])
+      if(preguntasFrontend[Pregunta.pregunta]){
+        preguntasFrontend[Pregunta.pregunta].push({
+          id: idrespuesta,
+          instructor: Instructor.nombre,
+          respuesta:""
+          
+        });
+      }
+
+    });
+    res.json(preguntasFrontend)
   } catch (error) {
     console.log(error);
   }
