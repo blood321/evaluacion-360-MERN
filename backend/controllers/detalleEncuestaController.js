@@ -115,6 +115,7 @@ const mostrasRespuestas = async (req, res) => {
       const idrespuesta = item.id;
       const Pregunta = item.pregunta;
       const Instructor = item.instructor
+      const respuesta = item.respuesta;
      
 
       if(!preguntasFrontend[Pregunta.pregunta]){
@@ -126,7 +127,7 @@ const mostrasRespuestas = async (req, res) => {
         preguntasFrontend[Pregunta.pregunta].push({
           id: idrespuesta,
           instructor: Instructor.nombre,
-          respuesta:""
+          respuesta:respuesta
           
         });
       }

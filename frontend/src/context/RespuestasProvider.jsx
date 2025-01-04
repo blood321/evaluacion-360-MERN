@@ -13,22 +13,28 @@ const RespuestasProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const obtenerRespuestas = async (id) => {      try { 
+    const obtenerRespuestas = async () => {      try { 
 
         const { data } = await clienteAxios(
           `/detalleEncuesta/responde/661c3536e01e0a1bfe605f65`,
         );
-        setRespuestas(data);
-        localStorage.setItem("userData", JSON.stringify(data))
-      } catch (error) {
+        const arrayResultante = Object.entries(data).flatMap(([pregunta, instructores]) =>
+          instructores.map((instructor) => ({ ...instructor, pregunta }))
+        );
+        
+
+
+      if (localStorage.getItem("respuestas")) {
+        console.log("ya existe")
+      }else{
+        localStorage.setItem("respuestas", JSON.stringify(data));
+        } }catch (error) {
       
 
         console.log(error);
       }
     };
     obtenerRespuestas();
-  }, []);
 
   const editarRespuesta = async (proyecto) => {
     try {

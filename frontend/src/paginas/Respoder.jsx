@@ -7,60 +7,57 @@ import logoSena from "../assets/img/logoSena.png";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import useRespuesta from "../hooks/useRespuesta";
+import preguntas from "../../../backend/models/preguntas";
+import { set } from "mongoose";
 
 const Responder = () => {
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  
-  console.log(userData);
-  const id = useParams();
-  const { respuestas } = useRespuesta();
-  const [preguntaActual, setPreguntaActual] = useState(0);
+  const n = localStorage.getItem("respuestas");
+  const cambiar = JSON.parse(n);
+  const preguntas = Object.entries(cambiar); // Convertimos el objeto en un array de [pregunta, instructores]
+  const [i, setPreguntas] = useState(preguntas);
+  const [currentIndex, setCurrentIndex] = useState(0); // Estado para rastrear la pregunta actual
   const [modalVisible, setModalVisible] = useState(false);
-  const [instructores, setInstructores] = useState([]);
-  const [indice, setIndice] = useState(0);
-  const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({});
-  const preguntasConID = respuestas
-    ? respuestas.map((respuesta) => ({
-        pregunta: respuesta.pregunta.pregunta,
-        _id: respuesta.pregunta._id,
-      }))
-    : [];
-  const preguntasUnicas = [
-    ...new Set(preguntasConID.map((pregunta) => pregunta.pregunta)),
-  ];
-  const obtenerIDPreguntaActual = () => {
-    const preguntaActual = preguntasConID.find(
-      (pregunta) => pregunta.pregunta === preguntasUnicas[indice]
-    );
-    return preguntaActual ? preguntaActual._id : null;
-  };
-  const filtrarInstructores = (idPregunta) => {
-    const instructoresFiltrados = respuestas.filter((respuesta) => {
-      return respuesta.pregunta._id === idPregunta;
-    });
-    setInstructores(instructoresFiltrados);
-  };
-  useEffect(() => {
-    const idPreguntaActual = obtenerIDPreguntaActual();
-    filtrarInstructores(idPreguntaActual);
-  }, [indice]);
-  const cambiarPalabra = (direccion) => {
-    if (direccion === "adelante") {
-      if (indice < preguntasUnicas.length - 1) {
-        setIndice((prevIndice) => prevIndice + 1);
-      }
-    } else {
-      if (indice > 0) {
-        setIndice((prevIndice) => prevIndice - 1);
-      }
+  const handleNext = () => {
+    if (currentIndex < preguntas.length - 1) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
     }
   };
-  const Respuesta = (preguntaId, valor) => {
-    setRespuestasSeleccionadas((prevState) => ({
-      ...prevState,
-      [preguntaId]: valor,
-    }));
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+    }
   };
+  const handleChangeRespuesta = (preguntaIndex, index, nuevaRespuesta) => {
+    // Crear una copia de las preguntas para actualizar solo la respuesta de la pregunta actual
+
+    const preguntasActualizadas = [...i];
+
+    // Actualizar la respuesta solo en la pregunta y en el instructor correcto
+    preguntasActualizadas[preguntaIndex][1][index].respuesta = nuevaRespuesta;
+    console.log(JSON.stringify(preguntasActualizadas));
+    // Actualizar el estado con las respuestas modificadas
+    setPreguntas(preguntasActualizadas);
+
+    const transformToObject = (list) => {
+      return list.reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {});
+    };
+
+    const transformedData = transformToObject(preguntasActualizadas);
+    localStorage.setItem("respuestas", JSON.stringify(transformedData));
+
+    // Actualizar el localStorage con el nuevo estado de las preguntas
+  };
+  useEffect(() => {
+    const n = localStorage.getItem("respuestas");
+    if (n) {
+      const cambiar = JSON.parse(n);
+      const preguntasFormateadas = Object.entries(cambiar); // Formateamos las preguntas
+      setPreguntas(preguntasFormateadas);
+    }
+  }, []);
 
   return (
     <>
@@ -81,12 +78,16 @@ const Responder = () => {
             </div>
           </div>
           <div className="mx-auto md:w-[370px] md:h-full md:flex md:justify-center md:items-center flex flex-col ">
-            <div className="mb-10">
-              <Preguntas
-                pregunta={preguntasUnicas[indice]}
-                onNext={() => cambiarPalabra("adelante")}
-                onPrevious={() => cambiarPalabra("atras")}
-              />
+            <div className="mb-10"></div>
+            <div>
+              {" "}
+              {
+                <Preguntas
+                  pregunta={i[currentIndex][0]}
+                  onNext={handleNext}
+                  onPrevious={handlePrevious}
+                />
+              }
             </div>
 
             <button
@@ -96,68 +97,62 @@ const Responder = () => {
               Enviar Encuesta
             </button>
           </div>
-          <div className="mx-auto md:w-full h-[250px] md:h-full mb-9 overflow-y-auto flex-col justify-center items-center">
-            <div className="flex flex-col justify-center items-center">
-              {instructores.map((item) => (
-                <div key={item._id} className="flex md:flex-row p-3">
-                  <div className="mb-1 mt-4 flex items-center p-2 md:shadow-lg shadow-2xl shadow-green-800 rounded-2xl overflow-hidden border-2 border-Principal_1 border-x-Principal_2">
-                    <img
-                      src={Instructor}
-                      alt="Instructor 1"
-                      className="instructor__photo max-w-[70px] h-[70px] rounded-full"
+        </section>
+        {i[currentIndex][1].map(({ id, instructor, respuesta }, index) => (
+          <div key={id} className="flex flex-col justify-center items-center">
+            <div className="flex md:flex-row p-3">
+              <div className="mb-1 mt-4 flex items-center p-2 md:shadow-lg shadow-2xl shadow-green-800 rounded-2xl overflow-hidden border-2 border-Principal_1 border-x-Principal_2">
+                <img
+                  src={Instructor}
+                  className="instructor__photo max-w-[70px] h-[70px] rounded-full"
+                />
+                <h2 className="font-bold text-lg ml-4">{instructor}</h2>
+                <div className="flex flex-col ml-2 text-[15px]">
+                  <label>
+                    <input
+                      type="radio"
+                      value="1"
+                      onChange={(e) =>
+                        handleChangeRespuesta(
+                          currentIndex,
+                          index,
+                          e.target.value
+                        )
+                      }
+                      checked={respuesta === "1"}
                     />
-                    <h2 className="font-bold text-lg ml-4">
-                      {item.instructor.nombre}
-                    </h2>
-                    <div className="flex flex-col ml-2 text-[15px]">
-                      {/* Puedes agregar más contenido aquí si es necesario */}
-                      <label>
-                        <input
-                          type="radio"
-                          name={item.instructor.nombre}
-                          value="1"
-                          // checked={item.respuesta == "1"}
-                          onChange={(e) => Respuesta(item._id, e.target.value)}
-                        />
-                        No sé
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name={item.instructor.nombre}
-                          value="Tal vez"
-                          //      checked={item.respuesta === "Tal vez"}
-                          //  onChange={}
-                        />
-                        Tal vez
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name={item.instructor.nombre}
-                          value="Si"
-                          //             checked={item.respuesta === "Si"}
-                          onChange={(e) => Respuesta(item._id, e.target.value)}
-                        />
-                        Si
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name={item.instructor.nombre}
-                          value="No"
-                          //    checked={item.respuesta === "No"}
-                          onChange={(e) => Respuesta(item._id, e.target.value)}
-                        />
-                        No
-                      </label>
-                    </div>
-                  </div>
+                    rara vez
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Tal vez"
+                      //      checked={item.respuesta === "Tal vez"}
+                      //  onChange={}
+                    />
+                    Tal vez
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Si"
+                      //             checked={item.respuesta === "Si"}
+                    />
+                    Si
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="No"
+                      //    checked={item.respuesta === "No"}
+                    />
+                    No
+                  </label>
                 </div>
-              ))}{" "}
+              </div>
             </div>
           </div>
-        </section>
+        ))}
       </div>
       {modalVisible && (
         <Modal
