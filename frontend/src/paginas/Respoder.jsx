@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import useRespuesta from "../hooks/useRespuesta";
 import preguntas from "../../../backend/models/preguntas";
 import { set } from "mongoose";
-
+import clienteAxios from "../config/clienteAxios";
 const Responder = () => {
   const n = localStorage.getItem("respuestas");
   const cambiar = JSON.parse(n);
@@ -50,6 +50,13 @@ const Responder = () => {
 
     // Actualizar el localStorage con el nuevo estado de las preguntas
   };
+  const handleEnviarEncuestas = async() => {
+    console.log(i);
+    const { data } = await clienteAxios.put(
+      `/respuesta/n`,i
+    );
+    console.log(data);
+  }
   useEffect(() => {
     const n = localStorage.getItem("respuestas");
     if (n) {
@@ -58,7 +65,7 @@ const Responder = () => {
       setPreguntas(preguntasFormateadas);
     }
   }, []);
-
+  console.log(i);
   return (
     <>
       <header className="flex justify-between items-center fixed top-0 left-0 right-0 p-5 md:px-10 md:w-full md:mx-auto md:mt-4">
@@ -92,7 +99,7 @@ const Responder = () => {
 
             <button
               className={`py-2 px-4  mx-auto bg-gray-300 text-gray-600 rounded-md flex-col`}
-              // onClick={handleEnviarEncuestas}
+              onClick={handleEnviarEncuestas}
             >
               Enviar Encuesta
             </button>
@@ -110,6 +117,57 @@ const Responder = () => {
                 <div className="flex flex-col ml-2 text-[15px]">
                   <label>
                     <input
+                      name={id}
+                      type="radio"
+                      value="2"
+                      onChange={(e) =>
+                        handleChangeRespuesta(
+                          currentIndex,
+                          index,
+                          e.target.value
+                        )
+                      }
+                      checked={respuesta === "2"}
+                    />
+                    rara vez
+                  </label>
+                  <label>
+                    <input
+                      name={id}
+                      type="radio"
+                      value="3"
+                      onChange={(e) =>
+                        handleChangeRespuesta(
+                          currentIndex,
+                          index,
+                          e.target.value
+                        )
+                      }
+                      checked={respuesta === "3"}
+
+                    />
+                    Tal vez
+                  </label>
+                  <label>
+                    <input
+                      name={id}
+                      type="radio"
+                      value="4"
+                      onChange={(e) =>
+                        handleChangeRespuesta(
+                          currentIndex,
+                          index,
+                          e.target.value
+                        )
+                      }
+                      checked={respuesta === "4"}
+
+                    />
+                    Si
+                  </label>
+                  <label>
+                    <input
+                      name={id}
                       type="radio"
                       value="1"
                       onChange={(e) =>
@@ -120,31 +178,6 @@ const Responder = () => {
                         )
                       }
                       checked={respuesta === "1"}
-                    />
-                    rara vez
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      value="Tal vez"
-                      //      checked={item.respuesta === "Tal vez"}
-                      //  onChange={}
-                    />
-                    Tal vez
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      value="Si"
-                      //             checked={item.respuesta === "Si"}
-                    />
-                    Si
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      value="No"
-                      //    checked={item.respuesta === "No"}
                     />
                     No
                   </label>

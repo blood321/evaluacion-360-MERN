@@ -1,48 +1,44 @@
 import { trusted } from "mongoose";
-import respuesta from "../models/respuestas.js";
+import Respuesta from "../models/respuestas.js";
 import encuesta from "../models/encuesta.js";
 import detalleEncuesta from "../models/detalleEncuesta.js";
 import papelera from "../models/papelera.js";
 import aprendiz from "../models/aprendiz.js";
 const respuestaUsuario = async (req, res) => {
-  const { instructor, pregunta, encuesta } = req.body;
-  const { id } = req.params;
+  const data = req.body;
+  console.log(data);
+  data.forEach(async (element) => {
+    element[1].forEach(async (item) => {
+      const { respuesta, id } = item;
+      console.log(typeof respuesta);
+      try {
+        const respuestasubir = await Respuesta.findOne({_id: id});
+        if (!respuestasubir) {
+          const error = new Error("no encontrado");
+          return res.status(404).json({ msg: error.message });
+        }
+        respuestasubir.respuesta = respuesta;
+        respuestasubir.respondio = true;
+        respuestasubir.aprendiz = null;
 
-  try {
-    const respuestasubir = await respuesta.findOne({
-      instructor: instructor,
-      pregunta: pregunta,
-      aprendiz: id,
-      encuesta: encuesta,
+        const respondido = await respuestasubir.save();
+        const borrador = new papelera({
+          aprendiz: id,
+          detalleEncuesta: encuesta,
+          pregunta: pregunta,
+          respuesta: req.body.respuesta,
+        });
+        borrador.save();
+        // console.log(borrador);
+        res.json(respondido);
+      } catch (error) {
+        console.log(error);
+      }
+
+      // Imprime cada ID
     });
-    if (!respuestasubir) {
-      const error = new Error("no encontrado");
-      return res.status(404).json({ msg: error.message });
-    }
-
-    respuestasubir.respuesta = req.body.respuesta;
-    respuestasubir.respondio = true;
-    respuestasubir.aprendiz = null;
-
-    const respondido = await respuestasubir.save();
-    const borrador  = new papelera({
-      aprendiz:id,
-      detalleEncuesta:encuesta,
-      pregunta:pregunta,
-      respuesta:req.body.respuesta,
-
-    })
-    borrador.save()
-    console.log(borrador)
-    res.json(respondido);
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
-
-
-
-
 
 const respuestaXEncuesta = async (req, res) => {
   const { id } = req.params;
