@@ -7,9 +7,8 @@ import logoSena from "../assets/img/logoSena.png";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import useRespuesta from "../hooks/useRespuesta";
-import preguntas from "../../../backend/models/preguntas";
-import { set } from "mongoose";
 import clienteAxios from "../config/clienteAxios";
+
 const Responder = () => {
   const n = localStorage.getItem("respuestas");
   const cambiar = JSON.parse(n);
