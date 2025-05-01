@@ -8,7 +8,7 @@ import logoSena from '../assets/img/logoSena.png'
 
 const Aviso = () => {
   const id = useParams();
-  console.log(id);
+
   const [nombre, setNombre] = useState("");
   const [iden, setIden] = useState("");
 

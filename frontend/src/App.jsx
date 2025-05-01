@@ -29,76 +29,73 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <PreguntasProvider>
-          
-            <EncuestasProvider>
-              <RespuestasProvider>
-                <Routes>
-                  <Route path="/" element={<Authlayout />}>
-                    <Route index element={<Aloguin />} />
-                    <Route
-                      path="olvide-password"
-                      element={<OlvidePassword />}
-                    />
-                    <Route
-                      path="olvide-password/:id"
-                      element={<NuevoPassword />}
-                    />
-                  </Route>
+          <EncuestasProvider>
+            <RespuestasProvider>
+              <Routes>
+                <Route path="/" element={<Authlayout />}>
+                  <Route index element={<Aloguin />} />
+                  <Route path="olvide-password" element={<OlvidePassword />} />
+                  <Route
+                    path="olvide-password/:id"
+                    element={<NuevoPassword />}
+                  />
+                </Route>
 
-                  <Route path="/Login" element={<LoginAdmin />} />
-                  <Route path="login-adm" element={<LoginAdmin />} />
-                  <Route path="aviso/:id" element={<Aviso />} />
+                <Route path="/Login" element={<LoginAdmin />} />
+                <Route path="login-adm" element={<LoginAdmin />} />
+                <Route path="aviso/:id" element={<Aviso />} />
 
-                  <Route path="responder/:id" element={<Responder />} />
+                <Route path="responder/:id" element={<Responder />} />
+
+                <Route
+                  path="inicio-administrador"
+                  element={<RutanoProtegida />}
+                >
+                  <Route index element={<Inicio />} />
+                </Route>
+
+                <Route path="inicio-admin" element={<RutaProtegida />}>
+                  <Route index element={<Inicio />} />
+                  <Route
+                    path="crear-encuestas-aprendices"
+                    element={<CrearEncuestasAprendices />}
+                  />
+                  <Route
+                    path="crear-encuestas-companeros"
+                    element={<CrearEncuestasCompaneros />}
+                  />
+                  <Route
+                    path="crear-encuestas-jefes"
+                    element={<CrearEncuestasjefes />}
+                  />
+                  <Route
+                    path="crear-preguntas-aprendices"
+                    element={<CrearPreguntasAprendices />}
+                  />
+                  <Route
+                    path="crear-preguntas-companeros"
+                    element={<CrearPreguntasCompaneros />}
+                  />
+                  <Route
+                    path="crear-preguntas-jefes"
+                    element={<CrearPreguntasJefes />}
+                  />
+                  <Route
+                    path="listar-encuestas"
+                    element={<ListarEncuestas />}
+                  />
+                  <Route path="Excel" element={<Excel />} />
+                  <Route path="resultados" element={<Resultados />} />
 
                   <Route
-                    path="inicio-administrador"
-                    element={<RutanoProtegida />}
-                  >
-                    <Route index element={<Inicio />} />
-                  </Route>
-
-                  <Route path="inicio-admin" element={<RutaProtegida />}>
-                    <Route index element={<Inicio />} />
-                    <Route
-                      path="crear-encuestas-aprendices"
-                      element={<CrearEncuestasAprendices />}
-                    />
-                    <Route
-                      path="crear-encuestas-companeros"
-                      element={<CrearEncuestasCompaneros />}
-                    />
-                    <Route
-                      path="crear-encuestas-jefes"
-                      element={<CrearEncuestasjefes />}
-                    />
-                    <Route
-                      path="crear-preguntas-aprendices"
-                      element={<CrearPreguntasAprendices />}
-                    />
-                    <Route
-                      path="crear-preguntas-companeros"
-                      element={<CrearPreguntasCompaneros />}
-                    />
-                    <Route
-                      path="crear-preguntas-jefes"
-                      element={<CrearPreguntasJefes />}
-                    />
-                    <Route
-                      path="listar-encuestas"
-                      element={<ListarEncuestas />}
-                    />
-                    <Route path="Excel" element={<Excel />} />
-                    <Route path="resultados" element={<Resultados />} />
-                    
-                    <Route
-                      path="/inicio-admin/Listar-encuestas/:id"
-                      element={<CrearEncuestasAprendices />}
-                    />
-                  </Route>
-                </Routes>
-              </RespuestasProvider>
-            </EncuestasProvider>
+                    path="/inicio-admin/Listar-encuestas/:id"
+                    element={<CrearEncuestasAprendices />}
+                  />
+                </Route>
+                
+              </Routes>
+            </RespuestasProvider>
+          </EncuestasProvider>
         </PreguntasProvider>
       </AuthProvider>
     </BrowserRouter>

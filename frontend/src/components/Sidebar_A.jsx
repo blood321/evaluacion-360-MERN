@@ -144,8 +144,6 @@ const Sidebar_A = () => {
                                 <h2 className=" font-normal text-[14px] leading-[20px]">Subir</h2>
                             </div>
                             <FaChevronRight color="green" />
-                         
-
                         </div>
                     </Link>
                 </div>

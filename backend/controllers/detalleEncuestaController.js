@@ -14,10 +14,10 @@ const nuevoDetalleEncuesta = async (req, res) => {
   try {
     // Busca la encuesta por su id
     const encuestas = await encuesta.findById(id);
-    encuestas.activa = true;
     if (!encuestas) {
       res.json({ msg: " la encuesta no existe " });
     }
+    encuestas.activa = true;
     await encuestas.save();
     //busca la ficha por su id las cuales  tiene una fecha anterior a la fecha y hora actual.
     const ficha = await fichas.find({ fichaFin: { $lt: new Date() } }, "_id");
@@ -57,7 +57,7 @@ const generarRespuestas = async (req, res) => {
     const fichaUsuario = await fichas
       .findOne({ aprendices: usuario })
       .distinct("_id");
-    //busca a los instructores que le hayan dado calse al aprendiz
+    //busca a los instructores que le hayan dado clase al aprendiz
 
     const instructoresResponder = await programacion
       .find({ ficha: fichaUsuario })

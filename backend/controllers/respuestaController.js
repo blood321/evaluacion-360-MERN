@@ -84,7 +84,7 @@ const respuestasXDetalleEncuesta = async (req, res) => {
 const respuestasXInstructor = async (req, res) => {
   const { id, instructor } = req.params;
   try {
-    const respuestas = await respuesta
+    const respuestas = await Respuesta
       .find({ encuesta: id, instructor: instructor })
       .populate("pregunta instructor");
 
