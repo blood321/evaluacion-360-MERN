@@ -73,6 +73,8 @@ const generarRespuestas = async (req, res) => {
         "-_id -fechaCreado -tematica -__v -encuestado -nombre -tiempoResponder -activa -descripcion"
       );
     // Itera sobre cada instrucción en la lista de instructores a responder
+
+    
     for (const key in instructoresResponder) {
       if (Object.hasOwnProperty.call(instructoresResponder, key)) {
         const element = instructoresResponder[key];
@@ -92,6 +94,9 @@ const generarRespuestas = async (req, res) => {
         }
       }
     }
+
+
+
     // Itera sobre cada pregunta en la lista de preguntas a mostrar
     // Después de que todos los bucles hayan terminado, envía la respuesta una sola vez
     res.json({ message: "Respuestas guardadas exitosamente" });
@@ -109,26 +114,26 @@ const mostrasRespuestas = async (req, res) => {
       "pregunta instructor encuesta"
     );
     const preguntasFrontend = {};
-    for (let index = 0; index < respuestas.length; index++) {}
+    for (let index = 0; index < respuestas.length; index++) { }
 
     respuestas.forEach((item) => {
       const idrespuesta = item.id;
       const Pregunta = item.pregunta;
       const Instructor = item.instructor
       const respuesta = item.respuesta;
-     
 
-      if(!preguntasFrontend[Pregunta.pregunta]){
+
+      if (!preguntasFrontend[Pregunta.pregunta]) {
         preguntasFrontend[Pregunta.pregunta] = [];
       }
 
       console.log(preguntasFrontend[Pregunta.pregunta])
-      if(preguntasFrontend[Pregunta.pregunta]){
+      if (preguntasFrontend[Pregunta.pregunta]) {
         preguntasFrontend[Pregunta.pregunta].push({
           id: idrespuesta,
           instructor: Instructor.nombre,
-          respuesta:respuesta
-          
+          respuesta: respuesta
+
         });
       }
 
@@ -141,7 +146,6 @@ const mostrasRespuestas = async (req, res) => {
 const mostrarResultadosXencuestas = async (req, res) => {
   try {
     const { id } = req.params;
-
     const Resultados = await detalleEncuesta.find({ encuesta: id });
     res.json(Resultados);
   } catch (error) {
